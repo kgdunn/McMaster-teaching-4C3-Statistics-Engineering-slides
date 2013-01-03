@@ -1,0 +1,10 @@
+.*\.tmproj
+wiki-import
+hg_version.txt
+.*\.aux
+.*\.pdf
+.*\.nav
+.*\.out
+.*\.snm
+.*\.toc
+.*\.log

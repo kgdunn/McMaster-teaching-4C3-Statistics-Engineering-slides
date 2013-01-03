@@ -1,0 +1,92 @@
+\documentclass[handout, 11pt]{beamer}
+%\documentclass[11pt]{beamer}
+
+%\begin{exampleblock}{Title here}
+%	\centering{Text here}
+%\end{exampleblock}
+% \tiny\scriptsize\footnotesize\small\normalsize\large\Large\LARGE\huge\Huge
+
+\input{preamble.tex}
+
+\newdateformat{mydate}{\THEYEAR} % \twodigit{\THEDAY}-\twodigit{\THEMONTH}-\THEYEAR
+\mydate
+\title[]{\LARGE Separation Processes}
+\subtitle[]{\Large ChE 4C3 \\ \vspace{0.5cm} \includegraphics[width=0.2\textwidth]{\imagedir/teaching/logos/4C3-logo-2013.png} \vspace{-1.5cm} }\author[]{}
+\institute[]{}
+\date[]{\copyright~ Kevin Dunn, \today \\ \vspace{1cm}{\footnotesize {\tt kevin.dunn@mcmaster.ca}\\ \href{http://learnche.mcmaster.ca/4C3}{http://learnche.mcmaster.ca/4C3}\\ \vspace{1cm}}
+
+{\footnotesize Overall revision number: \hgversion (\monthname~\THEYEAR)} %\twodigit{\THEDAY}-\twodigit{\THEMONTH}-
+}
+
+\global\let\hgversion
+
+\ifeof18
+	\newcommand{\hgversion}{Unknown version}
+\else
+    % Windows users: download http://en.wikipedia.org/wiki/UnxUtils to get "grep" and "cut"
+	\immediate\write18{hg log -l1|grep changeset| cut -b 11-16 | tr -d ' ' > hg_version.txt}
+	\immediate\openin 10=hg_version.txt
+	\immediate\read 10 to \localline
+	\global\let\hgversion\localline
+	\closein10\relax
+	% http://stackoverflow.com/questions/2671079/how-can-i-save-shell-output-to-a-variable-in-latex
+	% http://stackoverflow.com/questions/2485651/print-current-mercurial-revision-hash
+	% http://tex.stackexchange.com/questions/16790/write18-capturing-shell-script-output-as-command-variable
+\fi
+
+\begin{document}
+	
+\begin{frame} \titlepage \end{frame}
+
+\begin{frame}\frametitle{Copyright, sharing, and attribution notice}
+
+	{\footnotesize This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, 
+	please visit \href{http://creativecommons.org/licenses/by-sa/3.0/}{http://creativecommons.org/licenses/by-sa/3.0/}}
+	\vspace{-1.0cm}
+	\begin{flushright}
+		\includegraphics[width=0.2\textwidth]{\imagedir/common/creative-commons-by-sa.png}
+	\end{flushright}	
+	\vspace{-0.2cm}
+	\begin{exampleblock}{}
+		{\small This license allows you: }
+		\begin{itemize}
+			\item	{\color{myGreen}{\textbf{to share}}} - to copy, distribute and transmit the work
+			\item	{\color{myOrange}{\textbf{to adapt}}} - but you must distribute the new result under the same or similar license to this one
+			\item	{\color{myRed}{\textbf{commercialize}}} - you \underline{\emph{are allowed}} to use this work for commercial purposes 
+			\item	{\color{blue}{\textbf{attribution}}} - but you must attribute the work as follows:
+			\begin{itemize}
+				\item	``Portions of this work are the copyright of Kevin Dunn'', \emph{or}
+				\item	``This work is the copyright of Kevin Dunn'' \\{\tiny (when used without modification)}
+			\end{itemize} 
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}\frametitle{}
+	We appreciate:
+	\begin{itemize}
+		%\addtolength{\itemsep}{-0.2\baselineskip}
+		\item	if you let us know about {\color{myRed}{\textbf{any errors}}} in the slides
+		\item	{\color{myGreen}{\textbf{any suggestions to improve the notes}}}
+		%\item	emailing us to ask about different licensing terms
+	\end{itemize}
+	\vskip24pt
+	
+	\begin{exampleblock}{}
+		All of the above can be done by writing to
+		\begin{center}
+			{\Large \tt kevin.dunn@mcmaster.ca}
+		\end{center}
+		or anonymous messages can be sent to Kevin Dunn at
+		\begin{center}
+			{\Large \href{http://learnche.mcmaster.ca/feedback-questions}{http://learnche.mcmaster.ca/feedback-questions}}
+		\end{center}
+	\end{exampleblock}
+	\vskip12pt
+	{\scriptsize If reporting errors/updates, please quote the current revision number: \textbf{\tt \hgversion}}
+\end{frame}
+
+\input{\jobname}
+
+\end{document}
+
