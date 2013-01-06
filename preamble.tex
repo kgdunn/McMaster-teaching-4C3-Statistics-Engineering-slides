@@ -21,11 +21,17 @@
 %\usepackage{rotating} % Rotated text
 
 \usepackage{etoolbox}  % For selective compiling: figure sources might be on different machines
+
+\providetoggle{hrymak}          % usage: \iftoggle{hrymak}{}{}
+\settoggle{hrymak}{true}
+
 \providetoggle{instructor}
 \providetoggle{student}
+
+\settoggle{instructor}{true}    % usage: \iftoggle{instructor}{}{}
+\settoggle{student}{false}      % usage: \iftoggle{student}{}{}
+
 \providetoggle{unixmac}
-\settoggle{instructor}{true}    %\iftoggle{instructor}{}{}
-\settoggle{student}{false}      %\iftoggle{student}{}{}
 \settoggle{unixmac}{true}
 \iftoggle{unixmac}
 {
