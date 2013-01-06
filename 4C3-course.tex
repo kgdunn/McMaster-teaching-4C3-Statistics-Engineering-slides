@@ -11,7 +11,7 @@
 \newdateformat{mydate}{\THEYEAR} % \twodigit{\THEDAY}-\twodigit{\THEMONTH}-\THEYEAR
 \mydate
 \title[]{\LARGE Statistics for Engineers}
-\subtitle[]{\Large ChE 4C3 \\ \vspace{0.5cm} \includegraphics[width=0.2\textwidth]{\imagedir/teaching/logos/4C3-logo-2013.png} \vspace{-1.5cm} }\author[]{}
+\subtitle[]{\iftoggle{hrymak}{}{\Large ChE 4C3 \\} \vspace{0.5cm} \includegraphics[width=0.2\textwidth]{\imagedir/teaching/logos/4C3-logo-2013.png} \vspace{-1.5cm} }\author[]{}
 \institute[]{}
 \date[]{\copyright~ Kevin Dunn, \today \\ \vspace{1cm}
 \iftoggle{hrymak}{}{{\footnotesize {\tt kevin.dunn@mcmaster.ca}\\ \href{http://learnche.mcmaster.ca/4C3}{http://learnche.mcmaster.ca/4C3}\\} \vspace{1cm}}
@@ -71,6 +71,7 @@
 		\item	{\color{myGreen}{\textbf{any suggestions to improve the notes}}}
 		%\item	emailing us to ask about different licensing terms
 	\end{itemize}
+	
 	\vskip24pt
 	
 	\begin{exampleblock}{}
@@ -85,6 +86,8 @@
 	\end{exampleblock}
 	\vskip12pt
 	{\scriptsize If reporting errors/updates, please quote the current revision number: \textbf{\tt \hgversion}}
+	\vskip24pt
+	Please note that all material is provided ``as-is'' and no liability will be accepted for your usage of the material.
 \end{frame}
 
 \input{\jobname}
