@@ -13,6 +13,7 @@
 		\end{itemize}
 		\item	\emph{Manager}: effectively summarize the (a) number and (b) types of defects on 17 aluminum grades for the past 12 months \pause 
 		\item	\emph{Yourself}: 24 different measurements vs time (5 readings per minute, over 300 minutes) for each batch we produce; how can we visualize these 36,000 data points? 
+		\item	Tiffany's example
 	\end{itemize}
 \end{frame}
 
@@ -34,7 +35,7 @@
 		\item	The human eye and brain are excellent at pattern recognition, sorting through signal and noise. \pause 
 		\item	We can easily cope with bad plots; but good plots save time and show a clearer, more honest picture. 
 		\item	Cliches: ``Let the data speak for themselves'', ``Plot the data'' 
-		\item	We will look at: \textbf{how} 
+		\item	We will look at: \textbf{how} and show examples of bad plots
 	\end{itemize}
 \end{frame}
 
@@ -85,7 +86,6 @@
 \end{frame}
 
 \begin{frame}\frametitle{Time-series plots}
-	
 	Use separate, parallel axes rather; and minimal ink 
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/visualization/3_correlated_variables_-_better.png}
@@ -94,16 +94,15 @@
 \end{frame}
 
 \begin{frame}\frametitle{Time-series plots}
-	
 	\textbf{Sparklines}
 	\begin{itemize}
-		\item	Read the website link (in the notes) 
+		\item	Read more about them from \href{http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR}{this website} (link also in the notes) 
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=1in]{\imagedir/visualization/3-correlated-variables-as-sparklines.png}
 	\end{center}
 	\begin{itemize}
-		\item	Used for financial trends (example) 
+		\item	Used for financial trends (see Google Finance, for example) 
 		\item	Built into Excel 2010 
 		\item	Good for iPods, cell phones, tablet computers: 
 		\begin{itemize}
@@ -113,12 +112,11 @@
 \end{frame}
 
 \begin{frame}\frametitle{Time-series plots}
-	
 	Example of sparklines in everyday use:
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/classification/12leadECG.jpg}
 	\end{center}
-	Figure from \href{http://en.wikipedia.org/wiki/File:12leadECG.jpg}{Wikipedia}
+	\see{\href{http://en.wikipedia.org/wiki/File:12leadECG.jpg}{Wikipedia: File:12leadECG.jpg}}
 \end{frame}
 
 \begin{frame}\frametitle{Time-series plots}
@@ -205,7 +203,7 @@
 		\end{center}
 	\end{exampleblock}
 	\begin{itemize}
-		\item	Rather \textcolor{red}{use a table} for a handful of data points: 
+		\item	Rather {\color{myOrange}{use a table}} for a handful of data points: 
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/visualization/profit-by-region.png}
@@ -266,7 +264,7 @@
 
 \begin{frame}\frametitle{Box plots}
 	\begin{itemize}
-		\item	Video of data source 
+		\item	Video of data source: sawmill in Québec
 	\end{itemize}
 \end{frame}
 
@@ -315,15 +313,15 @@
 \end{frame}
 
 \begin{frame}\frametitle{Scatter plots}
-	
 	However, not all scatter plots show causal phenomenon. 
 	\begin{center}
 		\includegraphics[height=0.80\textheight]{\imagedir/visualization/scatterplot-white-hairs-vs-BMD.png}
 	\end{center}
 \end{frame}
 
+% But there are several cases where they do: lead in water vs number of crimes committed
+
 \begin{frame}\frametitle{Scatter plots}
-	
 	Strive for graphical excellence by:
 	\begin{itemize}
 		\item	making each axis as tight as possible 
@@ -334,7 +332,6 @@
 \end{frame}
 
 \begin{frame}\frametitle{Scatter plots}
-	
 	There is an unfounded fear that others won't understand your 2D scatter plot. 
 	\begin{itemize}
 		\item	Tufte study (VDQI): no scatter plots in a sample (1974 to 1980) of Western dailies 
@@ -350,9 +347,26 @@
 	\end{block}
 \end{frame}
 
+\begin{frame}\frametitle{Here's an example}
+	\begin{columns}[t]
+		\column{0.60\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/visualization/MotherJones-Lead-Crime-correlation.png}
+			\end{center}
+		\column{0.40\textwidth}
+			\begin{itemize}
+				\item	Why did the author use a time-series plot to show correlation?
+				\item	Would the plot be more informative as 2D-scatter plot?
+				\item	What if you were to repeat this analysis for multiple regions/countries/cities. How would you show (visualize) the correlations effectively?
+			\end{itemize}
+	\end{columns}
+	\vspace{-3pt}
+	\see{Read the full story for more interesting details and geographic visualizations: \href{http://www.motherjones.com/environment/2013/01/lead-crime-link-gasoline}{http://www.motherjones.com/environment/2013/01/lead-crime-link-gasoline}}
+\end{frame}
+
 \begin{frame}\frametitle{Scatter plots}
 	\begin{itemize}
-		\item	Add box plots or histograms to aide interpretation: 
+		\item	Add box plots or histograms to assist interpretation: 
 	\end{itemize}
 	\begin{center}
 		\includegraphics[height=0.80\textheight]{\imagedir/visualization/scatterplot-with-histograms.png}
@@ -431,16 +445,24 @@
 	\end{center}
 \end{frame}
 
-\todo{SDL project examples}
-\begin{frame}\frametitle{Pie charts}
-	
-	Other bad examples:
-	* Gratitous-pie-chart-www.theglobeandmail.com-with-this-budget-ontario-is-banking-on-the-near-impossible-article1510634
-	* SDL project reports
-	
-/Users/kevindunn/Desktop/Screen Shot 2012-12-21 at 14.28.38 .png
-/Users/kevindunn/Desktop/another-really-bad-visualization.png
-/Users/kevindunn/Desktop/not-an-effective-visualization.png
+\begin{frame}\frametitle{Tables vs pie charts: plenty of bad examples}
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/visualization/Gratitous-pie-chart-www.theglobeandmail.com-with-this-budget-ontario-is-banking-on-the-near-impossible-article1510634.png}
+			\end{center}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/visualization/worst-examples/not-an-effective-visualization-SDL-4N4-2012.png}
+			\end{center}
+		\column{0.5\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/visualization/worst-examples/another-really-bad-visualization-SDL-4N4-2012.png}
+			\end{center}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/visualization/worst-examples/idiotic-pie-chart-SDL-4N4-2012.png}
+			\end{center}
+	\end{columns}
+	\see{\href{http://www.theglobeandmail.com/news/politics/with-this-budget-ontario-is-banking-on-the-near-impossible/article4312189/}{Globe and Mail, March 2010} (top left); SDL reports, 4N4, 2012 (all others)}
 \end{frame}
 
 \begin{frame}\frametitle{Tables}
