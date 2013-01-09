@@ -12,9 +12,43 @@
 			\item	efficiently summarize the yield from all batches run in 2010? \pause 
 		\end{itemize}
 		\item	\emph{Manager}: effectively summarize the (a) number and (b) types of defects on 17 aluminum grades for the past 12 months \pause 
-		\item	\emph{Yourself}: 24 different variables being measured \emph{vs} time (5 readings per minute, over 300 minutes) for each batch we produce; how can we visualize these 36,000 data points? 
 		\item	Tiffany's example
+		\item	\emph{Yourself}: 24 different variables being measured \emph{vs} time (5 readings per minute, over 300 minutes) for each batch we produce; how can we visualize these 36,000 data points? 
+		\begin{itemize}
+			\item	see next slides
+		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Batch systems: large quantities of valuable data}
+	\begin{columns}[t]
+		\column{0.50\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/batch/batch-system.png}
+			\end{center}
+			\see{From Cecilia Rodrigues' M.A.Sc thesis, 2006, McMaster University, used with permission}
+			
+		\column{0.50\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/batch/flickr-batch-reactor-2516220152_074fbbb489_o.jpg}
+			\end{center}
+			\see{Flickr: \href{http://www.flickr.com/photos/polapix/2516220152/}{\#2516220152}}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Batch systems: large quantities of valuable data}
+	\begin{columns}[t]
+		\column{0.60\textwidth}
+			Data from a single batch
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/examples/fmc/fmc-phases-4-trajectories.png}
+			\end{center}
+		\column{0.40\textwidth}
+			Data from many batches
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/examples/fmc/unaligned-data.png}
+			\end{center}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{References}
@@ -256,11 +290,11 @@
 	
 	A graphical display of the ``5-number summary'' for 1 variable 
 	\begin{itemize}
-		\item	minimum sample value 
+		\item	whisker = minimum sample value [\emph{or}: median $- 1.5\cdot\text{IQR}$]
 		\item	25th percentile (1st quartile) 
 		\item	50th percentile (median) 
 		\item	75th percentile (3rd quartile) 
-		\item	maximum sample value 
+		\item	whisker = maximum sample value [\emph{or}: median $+ 1.5\cdot\text{IQR}$]
 	\end{itemize}
 	
 	\emph{Notes}: 
@@ -272,10 +306,24 @@
 	Box plots are effective for comparing similar variables (same units of measurement)
 \end{frame}
 
+\begin{frame}\frametitle{Box plots: compared to a pure normal distribution}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/visualization/wikipedia-Boxplot_vs_PDF.svg.png}
+	\end{center}
+	\vspace{-16pt}
+	\see{\href{http://en.wikipedia.org/wiki/File:Boxplot_vs_PDF.svg}{Wikipedia} has some really great illustrations to explain statistical concepts}
+\end{frame}
+
 \begin{frame}\frametitle{Box plots}
 	\begin{itemize}
 		\item	Video of data source: sawmill in Québec
 	\end{itemize}
+	
+	\vfill
+	Thickness measured at 6 locations; target = 1650 mils
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/examples/board-thickness/board_measurement_locations.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Box plots}
@@ -290,9 +338,12 @@
 	\begin{itemize}
 		\item	use the mean instead of the median 
 		\item	outliers shown as dots, where an outlier is most commonly defined as any point 1.5 IQR distance units above and below the median. 
-		\item	use the 2nd percentile (instead of $\text{median} - 1.5\text{IQR}$) 
-		\item	use the 98th percentile (instead of $\text{median} + 1.5\text{IQR}$) 
+		\item	use the 2nd percentile (instead of $\text{median} - 1.5\cdot\text{IQR}$) 
+		\item	use the 98th percentile (instead of $\text{median} + 1.5\cdot\text{IQR}$) 
 		\item	add the density histogram onto the box plot: \emph{violin plot} 
+		\begin{itemize}
+			\item	Now we can see some of the distortion at positions 1 and 3 (next slide)
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
