@@ -1,14 +1,3 @@
-\begin{frame}\frametitle{Learning for this course}
-	\begin{itemize}
-		\item 3 hour classes per week (\emph{eat in})
-		\item Course videos or course audio at home (\emph{take out})
-		\item Work in groups on assignments (\emph{group lunch})
-		\item TA office hours (\emph{pick up})
-		\item \emph{My office hours}: Ask questions from me before/after class
-		\item Best time for TA office hours?
-	\end{itemize}
-\end{frame}
-
 \begin{frame}\frametitle{What we will cover}
 	\includegraphics[width=\textwidth]{\imagedir/mindmaps/univariate-section-mapping.png}
 \end{frame}
@@ -39,7 +28,9 @@
 \end{frame}
 
 \begin{frame}\frametitle{Concepts}
-	\includegraphics[height=0.9\textheight]{\imagedir/mindmaps/univariate-section-concepts.png}
+	\begin{center}
+		\includegraphics[height=0.9\textheight]{\imagedir/mindmaps/univariate-section-concepts.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Variability}
@@ -132,7 +123,9 @@
 			\item you incur additional cost (energy/time/materials) to process it
 		\end{itemize}
 	\end{itemize}
-	\includegraphics[width=0.8\textwidth]{\imagedir/univariate/feedback-control-variance-reduction.svg.png}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/feedback-control-variance-reduction.svg.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{This course is about variability}
@@ -150,14 +143,16 @@
 	\textbf{Histogram: summary of the variation in a measured variable}
 
 	Shows \emph{number} of samples that occur in a \emph{category}: called a \textbf{frequency distribution}
-
-	\includegraphics[width=0.6\textwidth]{\imagedir/univariate/histogram-children-by-gender.png}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{\imagedir/univariate/histogram-children-by-gender.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Histograms}
 	Continuous variables: create category bins (usually equal-size)
-
-	\includegraphics[width=0.8\textwidth]{\imagedir/univariate/histogram-package-mass.png}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/histogram-package-mass.png}
+	\end{center}
 	\begin{itemize}
 		\item Overfilling to achieve the 1 kg spec. If we reduce variation: \emph{boss gives us a raise!}
 	\end{itemize}
@@ -194,8 +189,9 @@
 \end{frame}
 
 \begin{frame}\frametitle{Frequency distribution}
-	\includegraphics[width=0.8\textwidth]{\imagedir/univariate/frequency-histogram.png}
-
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/frequency-histogram.png}
+	\end{center}
 	\textbf{Relative frequency}:
 	\begin{itemize}
 		\item does not require knowing $N$
@@ -235,7 +231,9 @@
 
 	In engineering: usually have plenty of data; that often is our population.
 
-	\includegraphics[width=0.9\textwidth]{\imagedir/univariate/batch-yields.png}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{\imagedir/univariate/batch-yields.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
@@ -385,8 +383,9 @@
 	Each outcome is equally as likely to occur as all the others. The classic example is dice: each face is equally as likely.
 
 	Probability distribution for an event with 4 possible outcomes:
-
-	\includegraphics[width=0.5\textwidth]{\imagedir/univariate/histogram-4-cuts.png}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{\imagedir/univariate/histogram-4-cuts.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Normal distribution}
@@ -446,8 +445,9 @@
 \begin{frame}\frametitle{Normal distribution}
 
 	$ p(x) = \displaystyle \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{\displaystyle (x-\mu)^2}{\displaystyle 2\sigma^2}} $
-
-	\includegraphics[width=0.85\textwidth]{\imagedir/univariate/normal-distribution-standardized.png}
+	\begin{center}
+		\includegraphics[width=0.85\textwidth]{\imagedir/univariate/normal-distribution-standardized.png}
+	\end{center}
 	\begin{itemize}
 		\item $x$: variable of interest
 		\item $p(x)$ probability of obtaining that $x$
@@ -502,9 +502,9 @@
 	\begin{itemize}
 		\item Is this sample normally distributed?
 	\end{itemize}
-
-	\includegraphics[width=0.85\textwidth]{\imagedir/univariate/check-if-normal.png}
-
+	\begin{center}
+		\includegraphics[width=0.85\textwidth]{\imagedir/univariate/check-if-normal.png}
+	\end{center}
 	``Normally distributed'' is a widely used assumption. How do we check for it? Use a \textbf{q-q plot}
 \end{frame}
 
@@ -515,7 +515,9 @@
 		\item We use this to construct a q-q plot
 	\end{itemize}
 
-	\includegraphics[width=0.80\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
+	\begin{center}
+		\includegraphics[width=0.80\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Checking for normality: q-q plots}
@@ -589,8 +591,9 @@
 	4. Usually we unscale the $y$-axis
 
 	5. The \texttt{car} library: adds 95\% confidence bounds that should contain the data points
-
-	\includegraphics[width=0.8\textwidth]{\imagedir/univariate/qqplot-from-R.png}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/qqplot-from-R.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Summary so far}
@@ -631,7 +634,9 @@
 			\item Area outside $\pm 2\sigma$ is about 5\% (2.275 outside each tail)
 		\end{itemize}
 	\end{itemize}
-	\includegraphics[width=0.65\textwidth]{\imagedir/univariate/normal-distribution-standardized.png}
+	\begin{center}
+		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/normal-distribution-standardized.png}
+	\end{center}
 	\begin{itemize}
 		\item Independence
 		\item $z$-value: $z = \dfrac{x - \text{mean}}{\text{standard deviation}}$
@@ -696,8 +701,9 @@
 		\item$-c_n < z < +c_n$
 		\item$c_n$ = \texttt{qnorm(1-0.05/2)}\pause
 	\end{itemize}
-
-	\includegraphics[width=0.70\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
+	\begin{center}
+		\includegraphics[width=0.70\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Example}
@@ -733,12 +739,13 @@
 \end{frame}
 
 \begin{frame}\frametitle{t-distribution}
-
-	\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison.png}
-
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison.png}
+	\end{center}
 	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom.
-
-	\includegraphics[width=0.9\textwidth]{\imagedir/univariate/t-distribution-derivation.png}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{\imagedir/univariate/t-distribution-derivation.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Bale example (continued)}
@@ -935,7 +942,9 @@
 	\begin{itemize}
 		\item Sometimes we really don't need a test:
 	\end{itemize}
-	\includegraphics[width=0.8\textwidth]{\imagedir/univariate/system-comparison-boxplot-plots-obvious.png}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/system-comparison-boxplot-plots-obvious.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Tests for differences and similarity}
@@ -1002,8 +1011,9 @@
 		\item $\phi = -0.3$
 		\item $a_k \sim \mathcal{N}\left(\mu=0, \sigma^2=6.7^2\right)$
 	\end{itemize}
-
-	\includegraphics[width=0.6\textwidth]{\imagedir/univariate/system-comparison-autocorrelation-scatterplot.png}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{\imagedir/univariate/system-comparison-autocorrelation-scatterplot.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Method 2: No reference set}
@@ -1045,8 +1055,9 @@
 \begin{frame}\frametitle{Coating example. Independent?}
 
 	Testing a new coating, B, to repel moisture. Coating is applied to hydrophobic packaging sheets to enhance the moisture barrier property. We take 1 sheet, divide into 16 squares, apply A and B. Independent?
-
-	\includegraphics[width=0.65\textwidth]{\imagedir/univariate/sheet-coating-application.png}
+	\begin{center}
+		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/sheet-coating-application.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Coating example. Independent?}
@@ -1214,9 +1225,9 @@
 \begin{frame}\frametitle{Example}
 
 	Axial and Radial impellers give different mixing times. The objective is to have the \emph{shortest} mixing times possible.
-
-	\includegraphics[width=0.55\textwidth]{\imagedir/univariate/Mixing_-_flusso_assiale_e_radiale.jpg}
-
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{\imagedir/univariate/Mixing_-_flusso_assiale_e_radiale.jpg}
+	\end{center}
 	For these two cases
 
 	(a) $-453 \text{min} < \mu_\text{Axial} - \mu_\text{Radial} < 284 \text{min} $
@@ -1270,13 +1281,15 @@
 \end{frame}
 
 \begin{frame}\frametitle{Example: BOD}
-
-	\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-raw-data-alternative.png}
+	\begin{center}
+		\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-raw-data-alternative.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Example: BOD}
-
-	\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-raw-data.png}
+	\begin{center}
+		\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-raw-data.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Paired tests}
@@ -1456,7 +1469,8 @@
 \end{frame}
 
 \begin{frame}\frametitle{Paired tests: BOD example}
-
-	\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-plot.png}
+	\begin{center}
+		\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-plot.png}
+	\end{center}
 \end{frame}
 
