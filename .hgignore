@@ -8,3 +8,4 @@ hg_version.txt
 .*\.snm
 .*\.toc
 .*\.log
+.*\.vrb
