@@ -315,16 +315,30 @@
 \end{frame}
 
 \begin{frame}\frametitle{Box plots}
-	\begin{itemize}
-		\item	Video of data source: sawmill in Québec
-	\end{itemize}
+	\begin{columns}[c]
+		\column{0.30\textwidth}
+			Video of data source: sawmill in Québec
+			\begin{itemize}
+				\item	4 degrees of rotation of log as it moves through the saws
+			\end{itemize}
+		\column{0.70\textwidth}
+			\vspace{-24pt}
+			\begin{center}
+				\includegraphics[height=\textheight]{\imagedir/examples/lumber-monitoring/lumber-profile.png}
+			\end{center}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Box plots}
 	
-	\vfill
-	Thickness measured at 6 locations; target = 1650 mils
+	Thickness measured at 6 locations; target = 1680 mils
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/examples/board-thickness/board_measurement_locations.png}
 	\end{center}
+	\vfill
+	Actual 2x6 thickness = 1500 mils; extra for the lumber to dry out
 \end{frame}
+
 
 \begin{frame}\frametitle{Box plots}
 	\begin{center}
@@ -420,8 +434,11 @@
 				\item	Would the plot be more informative as 2D-scatter plot?
 				\item	What if you were to repeat this analysis for multiple regions/countries/cities. How would you show (visualize) the correlations effectively?
 			\end{itemize}
+			\hrule
+			\vspace{4pt}
+			{\hfill Pb(CH$_2$CH$_3$)$_4$}
 	\end{columns}
-	\vspace{-3pt}
+	\vspace{-8pt}
 	\see{Read the full story for more interesting details and geographic visualizations: \href{http://www.motherjones.com/environment/2013/01/lead-crime-link-gasoline}{http://www.motherjones.com/environment/2013/01/lead-crime-link-gasoline}}
 \end{frame}
 
@@ -461,6 +478,7 @@
 		\includegraphics[width=\textwidth]{\imagedir/visualization/table-car-payments.png}
 	\end{center}
 	\begin{itemize}
+		\item	\textbf{categorical objects}: the cars
 		\item	Note the rows are in \emph{default} alphabetical order. 
 		\item	We can make the table ``tell a story'' if we reorder the rows by some other variable. 
 		\begin{itemize}
@@ -471,11 +489,13 @@
 
 \begin{frame}\frametitle{Tables}
 	\begin{itemize}
-		\item	Compare defect types (number of defects) for different product grades (categories): 
+		\item	Compare defect types (columns) for different product grades (rows)
+		\item	Categorical variables appear in the \textbf{rows} and \textbf{columns} here
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/visualization/table-defect-counts.png}
 	\end{center}
+	\vspace{-12pt}
 	\begin{itemize}
 		\item	Which defects cost us the most money? 
 	\end{itemize}
@@ -504,6 +524,9 @@
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/visualization/where-MACC-alumni-work.png}
 	\end{center}
+	\hrule
+	\vspace{4pt}
+	I cannot explain the pitfalls of pie charts as well as Stephen Few does: \href{http://www.perceptualedge.com/articles/08-21-07.pdf}{Save the pies for dessert} (please read)
 \end{frame}
 
 \begin{frame}\frametitle{Tables vs pie charts: plenty of bad examples}
@@ -546,6 +569,11 @@
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/visualization/two-treatments-table.png}
 	\end{center}
+	\begin{itemize}
+		\item	Coating A or B are applied to different products
+		\item	K-series, P-series, S-series
+		\item	How does the coating affect corrosion and surface roughness?
+	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Tables}
