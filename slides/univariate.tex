@@ -140,9 +140,9 @@
 \end{frame}
 
 \begin{frame}\frametitle{Histograms}
-	\textbf{Histogram: summary of the variation in a measured variable}
+	{\color{purple}{\textbf{Histogram}}}: summary of the variation in a measured variable
 
-	Shows \emph{number} of samples that occur in a \emph{category}: called a \textbf{frequency distribution}
+	Shows \emph{number} of samples that occur in a \emph{category}: called a {\color{purple}{\textbf{frequency distribution}}}
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{\imagedir/univariate/histogram-children-by-gender.png}
 	\end{center}
@@ -192,7 +192,7 @@
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/frequency-histogram.png}
 	\end{center}
-	\textbf{Relative frequency}:
+	{\color{purple}{\textbf{Relative frequency}}}
 	\begin{itemize}
 		\item	does not require knowing $N$
 		\item	can be compared to other distributions
@@ -221,11 +221,11 @@
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
-	\textbf{Population}
+	{\color{purple}{\textbf{Population}}}
 
 	Large collection of \emph{potential} measurements (not necessary to be infinite, a large $N$ works well)
 
-	\textbf{Sample}
+	{\color{purple}{\textbf{Sample}}}
 
 	Collection of observations that have actually occurred ($n$ samples)
 
@@ -237,7 +237,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
-	\textbf{Probability}
+	{\color{purple}{\textbf{Probability}}}
 
 	Area under relative frequency distribution curve equals 1.
 
@@ -252,17 +252,17 @@
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
-	\textbf{Parameter}
+	{\color{purple}{\textbf{Parameter}}}
 	\begin{itemize}
 		\item	Value that describes the population's \emph{distribution} (fixed)
 	\end{itemize}
 
-	\textbf{Statistic}
+	{\color{purple}{\textbf{Statistic}}}
 	\begin{itemize}
-		\item	An estimate of one of the population's parameters (estimate - it varies)
+		\item	An estimate of one of the population's parameters (estimate implies that it varies)
 	\end{itemize}
 
-	\textbf{Mean}
+	{\color{purple}{\textbf{Mean}}}
 	\begin{itemize}
 		\item	Measure of location (position)
 	\end{itemize}
@@ -280,7 +280,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
-	\textbf{Variance (spread)}
+	{\color{purple}{\textbf{Variance (spread)}}}
 	\begin{itemize}
 		\item	Measure of spread, or variability
 		\item	Population variance:
@@ -301,12 +301,12 @@
 	\end{array}
 	$
 
-	\textbf{Degrees of freedom}: the denominator term, $n-1$
+	{\color{purple}{\textbf{Degrees of freedom}}}: the denominator term, $n-1$
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
 	\begin{block}
-		{Outlier}
+		{\color{purple}{{\textbf{Outlier}}}}
 		\begin{center}
 			\emph{A point that is unusual, given the context of the surrounding data}
 		\end{center}
@@ -318,7 +318,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
-	\textbf{Median (location)}
+	{\color{purple}{\textbf{Median (location)}}}
 	\begin{itemize}
 		\item	One alternative measure of location.
 		\item	Robust statistic: insensitive (robust) to outliers in the data
@@ -328,10 +328,13 @@
 			\item	breakdown of the mean: $1/n$\% - only 1 bad data point required
 		\end{itemize}
 	\end{itemize}
+	\begin{exampleblock}{Why should you care?}
+		Always use the median and MAD (described next) where possible.
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
-	\textbf{Median absolute deviation, MAD (spread)}
+	{\color{purple}{\textbf{Median absolute deviation, MAD (spread)}}}
 	\begin{itemize}
 		\item	A robust measure of spread
 	\end{itemize}
@@ -342,7 +345,7 @@
 		\item	Breakdown of standard deviation: $1/n$\%
 	\end{itemize}
 	\begin{itemize}
-		\item	Read the paper by Rousseeuw:
+		\item	Read the paper by Rousseeuw (especially grad students):
 		\iftoggle{hrymak}{
 			\begin{itemize}
 				\item	\href{http://literature.connectmv.com/item/173}{http://literature.connectmv.com/item/173}
@@ -406,7 +409,7 @@
 
 \begin{frame}\frametitle{Central limit theorem}
 	\begin{block}
-		{Central limit theorem}
+		{\color{purple}{Central limit theorem}}
 		\begin{center}
 			The average of a sequence of values from \emph{any distribution} will approach the normal distribution, provided the original distribution has finite variance.
 		\end{center}
@@ -415,18 +418,26 @@
 	\includegraphics[width=\textwidth]{\imagedir/univariate/CLT-derivation.png}
 
 	\textbf{Assumption}: the samples used to compute the average are independent.
+	\vspace{4pt}
+	\hrule
+	\vspace{4pt}
+	How is this theorem relevant with engineering data?
+	\begin{itemize}
+		\item	In many cases we are using averages from our raw data
+		\item	These raw data are almost never normally distributed
+		\item	But using the assumption that these averages are normally distributed is powerful
+	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Central limit theorem: throwing dice}
-
+\begin{frame}\frametitle{Central limit theorem: throwing dice {\color{myGreen}{(independent events)}}}
 	\includegraphics[width=\textwidth]{\imagedir/univariate/simulate-CLT.png}
 \end{frame}
 
 \begin{frame}\frametitle{Independence}
 
-	The assumption of independence is widely used. It is a condition for the central limit theorem.
+	The assumption of {\color{purple}{independence}} is widely used. It is a condition for the central limit theorem.
 	\begin{block}
-		{Independence}
+		{\color{purple}{Independence}}
 		\begin{center}
 			The samples are \emph{randomly} taken from a population. If two samples are independent, there is no possible relationship between them.
 		\end{center}
@@ -438,15 +449,19 @@
 		\item	The snowfall, recorded in inches, for the last 30 days.
 		\item	Snowfall, recorded on 3 January for every year since 1976: independent or not?
 		\item	The impurity values in the last 10 batches of product produced.
-		\item	Exercise in the notes about independence (pump failures)
+		\item	Exercise in the notes about independence (pump failures).
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Independence}
 
 	Which one of these series have independent values in time?
-
-	\includegraphics[width=\textwidth]{\imagedir/univariate/simulate-independence.png}
+	\begin{columns}[t]
+		\column{1.2\textwidth}
+			\includegraphics[width=1.\textwidth]{\imagedir/univariate/simulate-independence.png}
+		\column{0.20\textwidth}
+	\end{columns}
+	
 \end{frame}
 
 \begin{frame}\frametitle{Normal distribution}
@@ -492,7 +507,8 @@
 	\begin{itemize}
 		\item	Used for tables of normal distribution, and cumulative area
 		\item	We will use software instead in the course
-		\item	The standard form is: $ z = \displaystyle \frac{x - \mu}{\sigma} $
+		\item	The {\color{purple}{standard form}} is defined as $ z = \displaystyle \frac{x - \mu}{\sigma} $
+		\item	$z \sim \mathcal{N}(\mu, \sigma^2)$ \hfill {\color{myOrange}{$\longleftarrow$ do not use the standard deviation in here}}
 		\item	$z \sim \mathcal{N}(0.0, 1.0)$.
 		\item	Units of $z$ if $x$ were measured in \texttt{kg}, for example? 
 		\item	Standardization allows us to straightforwardly compare 2 variables that have different means and spreads
@@ -500,10 +516,25 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}\frametitle{Statistical tables (graphical)}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/univariate/Statistical-tables/show-pnorm-and-qnorm.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Statistical tables (tabular)}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/univariate/Statistical-tables/cumulative-normal-table.png}
+	\end{center}
+\end{frame}
+
 \begin{frame}\frametitle{In-class exercise}
 	\begin{enumerate}
 		\item	Assume x = biological activity of a drug, $x \sim \mathcal{N}(26.9, 9.3)$. Probability of $x \leq 30.0$?
-		\item	Assume x = yield from batch process, $x \sim \mathcal{N}(85 \text{~g/L}, 16 \text{~g/L})$. Proportion of yield values between 77 and 93 g/L ?
+		\vspace{24pt}
+		\item	Assume x = yield from batch process:
+				$$x \sim \mathcal{N}(85 \text{~g/L}, 16\, \text{g}^2\text{.L}^{-2})$$
+				What is the proportion of yield values between 77 and 93 g/L?
 	\end{enumerate}
 \end{frame}
 
