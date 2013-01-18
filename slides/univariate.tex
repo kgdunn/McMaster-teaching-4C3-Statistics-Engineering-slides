@@ -34,16 +34,21 @@
 \end{frame}
 
 \begin{frame}\frametitle{Variability}
-	\textbf{Life is pretty boring without variability} (and this course would be unnecessary)
-	\includegraphics[width=\textwidth]{\imagedir/concepts/variation/variation-none.png}
+	\textbf{Life is pretty boring without variability} 
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/concepts/variation/variation-none.png}
+	\end{center}
+	(and this course would be unnecessary)
 \end{frame}
 
 \begin{frame}\frametitle{Variability}
 	We have plenty of variability in our recorded data:
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/concepts/variation/variation-some.png}
+	\end{center}
 	\begin{itemize}
 		\item	Other unaccounted for sources, often called \textbf{\emph{error}}
 	\end{itemize}
-	\includegraphics[width=\textwidth]{\imagedir/concepts/variation/variation-some.png}
 \end{frame}
 
 \begin{frame}\frametitle{Variability}
@@ -131,10 +136,10 @@
 \begin{frame}\frametitle{This course is about variability}
 	\begin{enumerate}
 		\item	Visualizing: \emph{show} the variability
-		\item	This class: \emph{quantify} variability, then \emph{compare} variability
+		\item	This section: \emph{quantify} variability, then \emph{compare} variability
 		\item	Section 3: construct monitoring charts to \emph{track} variability
-		\item	Section 4: variation in one variable \emph{affects} another (least squares)
-		\item	Section 5: intentionally \emph{introduce} variation to learn about process (DOE)
+		\item	Section 4: how variation in one variable \emph{affects} another (least squares)
+		\item	Section 5: we intentionally \emph{introduce} variation to learn more about the process (DOE)
 		\item	Section 6: dealing with multiple variables, simultaneously extracting information (latent variables)
 	\end{enumerate}
 \end{frame}
@@ -315,6 +320,12 @@
 		\item	4024, 5152, 2314, 6360, 4915, 9552, 2415, 6402, 6261
 		\item	4, 61, 12, 64, 4024, 52, -8, 67, 104, 24
 	\end{itemize}
+	
+	\vspace{12pt}
+	\begin{itemize}
+		\item	$\bar{x} = 440.4$  and $s = 1260$
+		\item	Median = 56.5 and MAD = 57
+	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Nomenclature}
@@ -355,7 +366,10 @@
 				\item	\href{http://learnche.mcmaster.ca/media/mcmaster/Rousseeuw-tutorial.pdf}{http://learnche.mcmaster.ca/media/mcmaster/Rousseeuw-tutorial.pdf}
 			\end{itemize}
 		}
-		
+	\end{itemize}
+	\begin{itemize}
+		\item	Another robust estimate of spread: the IQR (inter-quartile range)
+		\item	but not as robust as the MAD
 	\end{itemize}
 \end{frame}
 
@@ -562,17 +576,19 @@
 
 \begin{frame}\frametitle{Checking for normality: q-q plots}
 
-	\emph{Approach}: compare
-	\begin{enumerate}
-		\item	the theoretical distribution against
-		\item	the actual data
-	\end{enumerate}
-
-	1. Create N observations: normally distributed.
+	\textbf{Approach}: {\color{myOrange}{compare}}
 	\begin{itemize}
-		\item	Sort the data from smallest to largest
-		\item	First point: 1/N x 100 percentile
-		\item	Second point: 2/N x 100 percentile
+		\item	the theoretical distribution against
+		\item	the actual data. 
+	\end{itemize}
+	Let's say you have $N$ \emph{actual} observations you want to check.
+	
+	\vspace{16pt}
+	1. Select $N$ observations that really are normally distributed:
+	\begin{itemize}
+		\item	Sort from lowest to highest
+		\item	The first point is the 1/$N$ x 100 percentile
+		\item	The second point is the 2/$N$ x 100 percentile
 		\item	Mid-point: 0.5 x 100 = 50th percentile
 		\item	Last point: 1.0 x 100 = 100th percentile
 		\item	Calculate the theoretical points along the distribution function
@@ -583,35 +599,29 @@
 	
 	\begin{lstlisting}[R]
 	N = 10
-	index <- seq(1, N)
-	P <- (index - 0.5) / N
+	index <- seq(1, N)       #    1,    2, ...   10
+	P <- (index - 0.5) / N   # 0.05, 0.15, ... 0.95 
 	theoretical.quantity <- qnorm(P)
 	# [1] -1.64 -1.04 -0.674 -0.385 -0.126
 	#      0.125  0.385  0.6744 1.036  1.64
 	\end{lstlisting}
+	\begin{center}
+		\includegraphics[width=.7\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Checking for normality: q-q plots}
-	2. Do the same for the actual data.
+	2. Do the same now for the actual data points
 	\begin{itemize}
 		\item	Standardize data first: subtract mean, divide by standard deviation
-		\item	Sort the data
-		\item	These points should now match the theoretical points from step 1.
+		\item	Sort the data from lowest to highest
+		\item	These points should now match the theoretical points from step 1 if they are normally distributed. \emph{{\color{myGreen}{Example}}}:
 	\end{itemize}
-	\vfill
-\end{frame}
-
-\begin{frame}[fragile]\frametitle{Checking for normality: q-q plots}
-	2. Do the same for the actual data.
-	\begin{itemize}
-		\item	Standardize data first: subtract mean, divide by standard deviation
-		\item	Sort the data
-		\item	These points should now match the theoretical points from step 1. 	\end{itemize}
 	
 	\begin{lstlisting}[R]
 	yields <- c(86.2, 85.7, 71.9, ... 86.9, 78.4)
 	mean.yield <- mean(yields)          # 80.0
-	sd.yield <- sd(yields)		    # 8.35
+	sd.yield <- sd(yields)              # 8.35
 
 	yields.z <- (yields - mean.yield)/sd.yield
 	#[1] 0.734  0.674 -0.978  1.82 ... -0.140 0.818 -0.2
@@ -628,7 +638,7 @@
 
 	3. Plot theoretical quantities against the actual quantities.
 	\begin{itemize}
-		\item	Should form a 45 degree line.
+		\item	\small They should form a 45 degree line if truly from this distribution
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.69\textwidth]{\imagedir/univariate/qqplot-derivation.png}
@@ -636,12 +646,30 @@
 \end{frame}
 
 \begin{frame}\frametitle{Checking for normality: q-q plots}
-
-	4. Usually we unscale the $y$-axis
-
-	5. The \texttt{car} library: adds 95\% confidence bounds that should contain the data points
+	\begin{enumerate}
+		\setcounter{enumii}{4}
+		\item	Usually we unscale the $y$-axis (the axis with actual data) so we can see the original data values
+		\item	The \texttt{car} library: adds 95\% confidence bounds that should contain the data points
+	\end{enumerate}
+	\vspace{-8pt}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/univariate/qqplot-from-R.png}
+		
+		\begin{columns}[t]
+			\column{0.35\textwidth}
+				\texttt{qqplot(...)}\\
+				\texttt{qqline(...)}
+			\column{0.35\textwidth}
+				\texttt{library(car)}\\
+				\texttt{qqPlot(...)}
+		\end{columns}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Example: 4N4 exam grades}
+	\begin{center}
+		\includegraphics[width=.84\textwidth]{\imagedir/univariate/qqplot-4N4-2012-grades.png}
 	\end{center}
 \end{frame}
 
@@ -656,24 +684,6 @@
 	\end{itemize}
 \end{frame}
 
-%\begin{frame}\frametitle{Administrative}
-	% \begin{itemize}
-	% 	\item	Looking for assignment group members?
-	% 	\item	TA office hours
-	% 	\begin{itemize}
-	% 		\item	Tuesday, 4-5 pm, Yasser
-	% 		\item	Wednesday, 5-6pm, Pedro
-	% 		\item	Thursday, 10-11 am, Yasser
-	% 		\item	Thursday, 4-5pm, Pedro
-	% 	\end{itemize}
-	% 	\item	DOE projects:
-	% 	\begin{itemize}
-	% 		\item	Intention of project is posted on website
-	% 		\item	Hand-in proposal by 05 March 2012 (or earlier)
-	% 	\end{itemize}
-	% \end{itemize}
-%\end{frame}
-
 \begin{frame}\frametitle{Recap}
 	\begin{itemize}
 		\item	Probability: cumulative area under the distribution curve
@@ -686,10 +696,11 @@
 	\begin{center}
 		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/normal-distribution-standardized.png}
 	\end{center}
-	\vspace{-12pt}
+	\vspace{-16pt}
 	\begin{itemize}
 		\item	Independence
 		\item	$z$-value: $z = \dfrac{x - \text{mean}}{\text{standard deviation}}$
+		\vspace{8pt}
 		\begin{itemize}
 			\item	\textbf{Does not} change the distribution's characteristics
 			\item	e.g. positive skew in $x$ will still show in $z$
@@ -706,12 +717,12 @@
 	\begin{enumerate}
 		\item	Estimate of population mean: $\bar{x} = \displaystyle \dfrac{1}{n} \sum_i^{i=n}{x_i}$
 		\item	Estimate of population variance: $s^2 =\displaystyle \frac{1}{n-1}\sum_i^{i=n}{(x_i - \bar{x})^2}$
-		\item	\textbf{New:} $\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$.
+		\item	\textbf{New:} $\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$  \hfill{\color{myGreen}{$\longleftarrow$ really powerful statement}}
 	\end{enumerate}
 
 	\emph{Interpretation}
 
-	Repeated estimates of mean are unbiased (tends towards $\mu$) and variance of that estimate is decreased. \emph{Computer demo.}
+	Repeated estimates of mean are unbiased (tends towards $\mu$ {\color{myOrange}{$\leftarrow$ of the distribution sampled from!}}) and variance of that estimate is decreased. \emph{Computer demo.}
 \end{frame}
 
 \begin{frame}\frametitle{Central limit theorem: extended}
@@ -719,7 +730,6 @@
 		\item	$x \sim \mathcal{N}\left(\mu, \sigma^2 \right)$
 		\item	$\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$
 	\end{itemize}
-
 	\includegraphics[width=\textwidth]{\imagedir/univariate/explain-confidence-interval.png}
 \end{frame}
 
@@ -732,7 +742,7 @@
 		\item	$s=3.81$
 		\item	Assume we know the population $\sigma=3.5$
 	\end{itemize}
-
+	\myhrule
 	1. Distribution of the sample mean? Parameters of that distribution? 
 	\begin{itemize}
 		\item$\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$ 
@@ -748,7 +758,7 @@
 	3. The $z$-value is \emph{not known} (why?). So rather find lower and upper bounds that will contain 95\% of all possible $z$-values.
 	\begin{itemize}
 		\item	$-c_n < z < +c_n$
-		\item	$c_n$ = \texttt{qnorm(1-0.05/2)}
+		\item	$c_n$ = \texttt{qnorm(1-0.05/2)}       \qquad\# $c_n$ is 1.96
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.80\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
