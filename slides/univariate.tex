@@ -942,7 +942,7 @@
 \begin{frame}\frametitle{Variance is known}
 	\begin{itemize}
 		\item	$z = \dfrac{\bar{x} - \mu}{\sigma/\sqrt{n}}$
-		\item	z is normally distributed
+		\item	z is normally distributed \textbf{if} the $x_i$ used to calculate $\bar{x}$ are independent 
 	\end{itemize}
 
 	$
@@ -1091,23 +1091,22 @@
 	\end{itemize}
 
 	\textbf{Aim}: is $\mu_B > \mu_A$ ? In other words, is $\mu_B - \mu_A > 0$?
-
-	1. Assume data for case A and for case B are normally distributed
-
-	2. Assume data for sample A and sample B have $\sigma_A = \sigma_B = \sigma$
-
-	3. Define: sample A is from $\mathcal{N}\left(\mu_A, \sigma^2\right)$; sample B is from $\mathcal{N}\left(\mu_B, \sigma^2\right)$
-
-	4. From CLT (assumes data in A and data in B are independent):
-	\begin{itemize}
-		\item	$\mathcal{V}\left\{\bar{x}_A\right\} = \dfrac{\sigma^2_A}{n_A}$
-		\item	$\mathcal{V}\left\{\bar{x}_B\right\} = \dfrac{\sigma^2_B}{n_B}$
-	\end{itemize}
+	\begin{enumerate}
+		\item	Assume data for case A and for case B are normally distributed
+		\item	Assume data for sample A and sample B have $\sigma_A = \sigma_B = \sigma$
+		\item	Define: sample A is from $\mathcal{N}\left(\mu_A, \sigma^2\right)$; sample B is from $\mathcal{N}\left(\mu_B, \sigma^2\right)$
+		\item	From CLT (assumes data in A and data in B are independent):  {\color{myOrange}{\small $\longleftarrow$ but, but ... we know that's not true!}}
+			\begin{itemize}
+				\item	$\mathcal{V}\left\{\bar{x}_A\right\} = \dfrac{\sigma^2_A}{n_A}$
+				\item	$\mathcal{V}\left\{\bar{x}_B\right\} = \dfrac{\sigma^2_B}{n_B}$
+			\end{itemize}
+	\end{enumerate}
+	
 \end{frame}
 
 \begin{frame}\frametitle{Method 2: No reference set}
 
-	5. Assume: $\bar{x}_A$ and $\bar{x}_B$ are independent
+	5. Assume: $\bar{x}_A$ and $\bar{x}_B$ are independent, then {\scriptsize (from your prior stats course you should know that)}
 	\begin{itemize}
 		\item	$\mathcal{V}\left\{\bar{x}_B - \bar{x}_A\right\} = \dfrac{\sigma^2}{n_A} + \dfrac{\sigma^2}{n_B} = \sigma^2 \left(\dfrac{1}{n_A} + \dfrac{1}{n_B}\right)$
 	\end{itemize}
@@ -1213,11 +1212,11 @@
 \begin{frame}\frametitle{Method 2a: No reference set, external $\sigma$}
 
 	If we have some \textbf{population estimate} for $\sigma$ (external estimate)
-
+	
 	$
 	\begin{array}{rcl}
 		z &=& \dfrac{(\bar{x}_B - \bar{x}_A) - (\mu_B - \mu_A)}{\sqrt{\sigma^2 \left( \dfrac{1}{n_A} + \dfrac{1}{n_B}\right)}} \\
-		z &=& \dfrac{(82.93-79.89) - (\mu_B - \mu_A)}{\sqrt{6.61^2 \left( \dfrac{1}{10} + \dfrac{1}{10}\right)}} \\
+		z &=& \dfrac{(82.93-79.89) - (\mu_B - \mu_A)}{\sqrt{6.61^2 \left( \dfrac{1}{10} + \dfrac{1}{10}\right)}} \genfrac{}{}{0pt}{0}{}{\genfrac{}{}{0pt}{0}{}{{\color{myOrange}{\leftarrow \,\text{used 300 samples for ``$\sigma$''}}}}} \\
 		z &=& \dfrac{3.04 - 0}{2.956} = 1.03
 	\end{array}
 	$
@@ -1227,8 +1226,8 @@
 	Chance of $\bar{x}_B - \bar{x}_A > 3.04$ is about 15\%. System B's performance could have been obtained by pure luck in 15\% of cases.
 	\begin{itemize}
 		\item	Confidence interval at 95\% level:
-		\item$3.04 - 1.96 \sqrt{6.61^2 \times \frac{2}{10}} < \mu_B - \mu_A < 3.04 - 1.96 \sqrt{6.61^2 \times \frac{2}{10}}$
-		\item$-2.75 < \mu_B - \mu_A < 8.83$
+		\item	$3.04 - 1.96 \sqrt{6.61^2 \times \frac{2}{10}} < \mu_B - \mu_A < 3.04 - 1.96 \sqrt{6.61^2 \times \frac{2}{10}}$
+		\item	{\color{myOrange}{$-2.75 < \mu_B - \mu_A < 8.83$}}
 	\end{itemize}
 \end{frame}
 
@@ -1242,17 +1241,19 @@
 	$
 	\begin{array}{rcccl}
 		s_P^2 &=& \dfrac{(n_A -1) s_A^2 + (n_B-1)s_B^2}{n_A - 1 + n_B - 1} \\
-		&=& \dfrac{9\times 6.81^2 + 9 \times 6.70^2}{18} = 45.63
+		s_P^2 &=& \dfrac{9\times 6.81^2 + 9 \times 6.70^2}{18} = 45.63
 	\end{array}
 	$
-
+	
+	\vspace{8pt}
 	$
 	\begin{array}{rcccl}
 		z &=& \dfrac{(82.93 - 79.89) - (\mu_B - \mu_A)}{\sqrt{s_P^2 \left(\dfrac{1}{10} + \dfrac{1}{10}\right)}} \\
-		&=& \dfrac{3.04 - 0}{\sqrt{45.63 \times 2/10}} = 1.01
+		z &=& \dfrac{3.04 - 0}{\sqrt{45.63 \times 2/10}} = 1.01
 	\end{array}
 	$
 
+	\vspace{8pt}
 	Probability of $z < 1.01$? The area from $-\infty$ up to 1.01 is 83.7\% using the \textbf{\emph{t distribution}}.
 
 	Chance of $\bar{x}_B - \bar{x}_A > 3.04$ is about 16\%. System B's performance could have been obtained by pure luck in 16\% of cases.
@@ -1290,6 +1291,27 @@
 	Method 2 used only experimental (recent) data, but requires randomization (insurance policy - not always cheap)
 \end{frame}
 
+\begin{frame}\frametitle{What happens if the samples are not independent? [600-level]}
+	Actual engineering data often violate the assumption of independence. 
+	
+	Simulate sequences of lag-1 autocorrelated data, $x_{k+1} = \phi x_{k} + a_k$ with $a_k \sim \mathcal{N}\left(\mu=0, \sigma^2 = 25.0 \right)$ with length of $n=100$ samples
+	\begin{itemize}
+		\item[A]	Positively correlated: use $\phi > 0.7$
+		\item[B]	Negatively correlated: use $\phi < -0.6$
+		\item[C]	No correlation, i.e. totally independent data: $\phi = 0.0$
+	\end{itemize}
+	
+	What happens to the standard deviation of $\bar{x}$? (simulate many sequences; calculate $\bar{x}$ then stddev of these $\bar{x}$ values)
+	
+	\myhrule
+	\emph{Solution}
+	\begin{itemize}
+		\item[A]	estimate of $s = 1.66$
+		\item[B]	estimate of $s = 0.32$
+		\item[C]	estimate of $s = 0.52$ {\color{myOrange}{{\scriptsize (close to the theoretical $\sqrt{\sigma^2/n} = \sqrt{25/100} = 0.5$)}}}
+	\end{itemize}
+\end{frame}
+
 \begin{frame}\frametitle{Example}
 
 	Axial and Radial impellers give different mixing times. The objective is to have the \emph{shortest} mixing times possible.
@@ -1297,7 +1319,7 @@
 		\includegraphics[width=0.55\textwidth]{\imagedir/univariate/Mixing_-_flusso_assiale_e_radiale.jpg}
 	\end{center}
 	\vspace{-6pt}
-	For these two cases
+	For these two different cases
 
 	(a) $-453 \text{min} < \mu_\text{Axial} - \mu_\text{Radial} < 284 \text{min} $
 
