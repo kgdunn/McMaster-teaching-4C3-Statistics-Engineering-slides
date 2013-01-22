@@ -790,7 +790,12 @@
 		\item	This $z$ value follows the $t$-distribution:
 		\begin{itemize}
 			\item	because we have used an \emph{estimate} of $\sigma$
-			\item	but we have to make an assumption: the $x_i$ values are normally distributed
+			\vspace{6pt}
+			\item	Note: $z = \dfrac{\bar{x} - \mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(\mu, \sigma^2/n)$
+			\vspace{6pt}
+			\item	However: $z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}} \sim t\left(\nu\right)$
+			\vspace{6pt}
+			\item	\textbf{if we make a new assumption}: the $x_i$ values are normally distributed
 		\end{itemize}
 		\item	Note that we use $s/\sqrt{n}$ instead of $\sigma/\sqrt{n}$ in the equation for $z$
 	\end{itemize}
@@ -816,7 +821,7 @@
 		\begin{itemize}
 			\item	$t$-distribution, with 8 degrees of freedom
 		\end{itemize}
-		\item	Check that the data follow a normal distribution (assumption)
+		\item	Check that $x_i$ raw data follow a normal distribution (assumption)
 		\item	Find lower and upper bounds for interval that spans 95\% of the area of this distribution. 
 		\begin{itemize}
 			\item	\texttt{qt(0.025, df=8) = - 2.31} and \texttt{qt(0.975, df=8) = +2.31}
@@ -850,7 +855,7 @@
 	\emph{Alternatively} you could have said:
 	\begin{itemize}
 		\item	the sample mean from the last year of data is 532 ppm
-		\item	the sample standard deviation from the last year of data is 102 ppm
+		\item	the sample standard deviation from the last year of data is 102 ppm [can be back-calculated if we were told $n$]
 		\item	the last year of data are normally distributed
 	\end{itemize}
 
@@ -870,23 +875,23 @@
 	$
 	\begin{itemize}
 		\item	$c_t = 2.31$ for the 95\% confidence interval
-		\item	LB = 20.0 - 2.92 = 17.1
-		\item	UB = 20.0 + 2.92 = 22.9
+		\item	LB = $20.0 - 2.92 = 17.1$
+		\item	UB = $20.0 + 2.92 = 22.9$
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Interpreting the confidence interval}
+\begin{frame}\frametitle{Interpreting the {\color{purple}{confidence interval (CI)}}}
 	\begin{itemize}
-		\item	The CI \textbf{does not} imply that $\bar{x}$ lies in the interval from LB to UB, i.e. the CI is not about $\bar{x}$
+		\item	The CI {\color{myOrange}{\textbf{does not imply}}} that $\bar{x}$ lies in the interval from LB to UB, i.e. the CI is not about $\bar{x}$; it's about $\mu$
 		\item	\textbf{Incorrect} to say: (sample) average viscosity is 20 units and lies inside the range of 17.1 to 22.9 with a 95\% probability
 		\item	The CI \textbf{does imply} that $\mu$ is expected to lie within that interval
-		\item	The CI is a range of possible values for $\mu$, not for $\bar{x}$ 
+		\item	The {\color{myGreen}{\textbf{CI is a range}}} of possible values for $\mu$, not for $\bar{x}$ 
 		\item	UB and LB are a function of the data sample
 		\item	If we take a different sample of data, we will get different bounds
 		\item	How should the confidence level (probability) be interpreted?
 		\begin{itemize}
 			\item	\textbf{IT IS}: Probability that the \emph{CI range} contains the true population viscosity, $\mu$
-			\item	\textbf{IT IS NOT}: Probability that the true population viscosity, $\mu$ is within the given range
+			\item	\textbf{IT IS NOT}: Probability that the true population viscosity, $\mu$ is within the given range {\color{myOrange}{[{\scriptsize $\mu$ doesn't have a probability; it is 100\% fixed}]}}
 			\item	If confidence level is 95\%, then 5\% of the time the interval \emph{will not contain} the true mean
 			\item	Collect 20 sets of samples, 19 times out of 20 the CI range will contain the true mean
 		\end{itemize}
@@ -924,7 +929,7 @@
 	Make 2 assumptions (always check these!)
 	\begin{enumerate}
 		\item	$n$ independent points
-		\item	from the normal distribution
+		\item	from the normal distribution \hfill {\color{myOrange}{$\longleftarrow$ not required if $\sigma$ known}}
 	\end{enumerate}
 
 	There are 2 cases:
@@ -981,12 +986,16 @@
 
 \begin{frame}\frametitle{Other confidence intervals}
 	\begin{itemize}
-		\item	Population variance: $\text{LB} < \sigma^2 < \text{UB}$
-		\item	Ratio of two variances: \emph{do these 2 samples have same variance}?
-		\item	For proportions:
+		\item	They exist for population variances: $\text{LB} < \sigma^2 < \text{UB}$
+		\begin{itemize}
+			\item	ratio of two variances: \emph{do these 2 samples have same variance}?
+		\end{itemize}
+		
+		\vspace{12pt}
+		\item	They exist for proportions:
 		\begin{itemize}
 			\item	proportion of \emph{packaged pizzas with N or more pepperoni slices is between 86 and 92\%}
-			\item	political polls: \emph{party XYZ has 35\% of the vote, margin or error is 3\%; accurate 19 times out of 20}
+			\item	political polls: \emph{party XYZ has 35\% of the vote, the margin of error is 3\%; accurate 19 times out of 20}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1021,6 +1030,8 @@
 
 \begin{frame}\frametitle{Data acquired}
 	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-wikitable.png}
+	
+	\vspace{12pt}
 	$\bar{x}_B - \bar{x}_A = 82.93 - 79.89 = 3.04$
 \end{frame}
 
@@ -1028,8 +1039,11 @@
 	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-boxplot-plots.png}
 \end{frame}
 
-\begin{frame}\frametitle{Data acquired}
+\begin{frame}\frametitle{Data acquired: in context}
 	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-sequence-plot.png}
+	
+	\vspace{0pt}
+	Always request contextual data, if available: extremely valuable. {\color{myOrange}{Let's see why.}}
 \end{frame}
 
 \begin{frame}\frametitle{Method 1: Compare to reference set}
