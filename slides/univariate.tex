@@ -884,7 +884,7 @@
 	\begin{itemize}
 		\item	The CI {\color{myOrange}{\textbf{does not imply}}} that $\bar{x}$ lies in the interval from LB to UB, i.e. the CI is not about $\bar{x}$; it's about $\mu$
 		\item	\textbf{Incorrect} to say: (sample) average viscosity is 20 units and lies inside the range of 17.1 to 22.9 with a 95\% probability
-		\item	The CI \textbf{does imply} that $\mu$ is expected to lie within that interval
+		\item	The CI \textbf{does imply} that $\mu$ is expected to lie within that interval with a given level of confidence
 		\item	The {\color{myGreen}{\textbf{CI is a range}}} of possible values for $\mu$, not for $\bar{x}$ 
 		\item	UB and LB are a function of the data sample
 		\item	If we take a different sample of data, we will get different bounds
@@ -898,7 +898,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Interpreting the confidence interval}
+\begin{frame}\frametitle{Interpreting the confidence interval at different \% values}
 
 	\begin{center}
 		\begin{tabular}{c|cc}
@@ -959,7 +959,7 @@
 \begin{frame}\frametitle{Variance is unknown}
 	\begin{itemize}
 		\item	$z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}}$
-		\item	$z$ is $t$-distributed
+		\item	$z$ is $t$-distributed \textbf{if} the $x_i$ used to calculate $\bar{x}$ are independent \textbf{and} normal
 	\end{itemize}
 
 	$
