@@ -1021,7 +1021,7 @@
 	An engineer needs to verify that new feedback controller (B) on a batch reactor leads to improved yields. Compare with yields from feedback controller A.
 	\begin{itemize}
 		\item	There are 10 sequential runs with system A, then 10 runs with system B.
-		\item	System B will cost us \$100,000 to install, and \$20,000 in annual software license fees.
+		\item	System B will cost us \$400,000 to install, and \$40,000 in annual software license fees.
 		\item	A significant difference means \textbf{long-run implementation} of B will lead to an improved yield (not due to chance)
 	\end{itemize}
 
@@ -1095,7 +1095,7 @@
 		\item	Assume data for case A and for case B are normally distributed
 		\item	Assume data for sample A and sample B have $\sigma_A = \sigma_B = \sigma$
 		\item	Define: sample A is from $\mathcal{N}\left(\mu_A, \sigma^2\right)$; sample B is from $\mathcal{N}\left(\mu_B, \sigma^2\right)$
-		\item	From CLT (assumes data in A and data in B are independent):  {\color{myOrange}{\small $\longleftarrow$ but, but ... we know that's not true!}}
+		\item	From CLT (assumes data in A and data in B are independent):  {\color{myOrange}{\small $\longleftarrow$ but, but ... we know that's not true here!}}
 			\begin{itemize}
 				\item	$\mathcal{V}\left\{\bar{x}_A\right\} = \dfrac{\sigma^2_A}{n_A}$
 				\item	$\mathcal{V}\left\{\bar{x}_B\right\} = \dfrac{\sigma^2_B}{n_B}$
@@ -1106,7 +1106,7 @@
 
 \begin{frame}\frametitle{Method 2: No reference set}
 
-	5. Assume: $\bar{x}_A$ and $\bar{x}_B$ are independent, then {\scriptsize (from your prior stats course you should know that)}
+	5. Assume: $\bar{x}_A$ and $\bar{x}_B$ are independent, then {\scriptsize from your prior stats course you should know that ...}
 	\begin{itemize}
 		\item	$\mathcal{V}\left\{\bar{x}_B - \bar{x}_A\right\} = \dfrac{\sigma^2}{n_A} + \dfrac{\sigma^2}{n_B} = \sigma^2 \left(\dfrac{1}{n_A} + \dfrac{1}{n_B}\right)$
 	\end{itemize}
@@ -1119,15 +1119,15 @@
 	\textbf{Question}: what is the probability of getting a $z$ \textbf{\emph{smaller}} than this?
 \end{frame}
 
-\begin{frame}\frametitle{Coating example. Independent?}
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
 
-	Testing a new coating, B, to repel moisture. Coating is applied to hydrophobic packaging sheets to enhance the moisture barrier property. We take 1 sheet, divide into 16 squares, apply A and B. Independent?
+	Testing a new coating, B, to repel moisture. Coating is applied to packaging sheets to enhance the moisture barrier property. We take 1 sheet, divide into 16 squares, apply coating A and coating B as shown. Are 16 measured hydrophobicity values independent?
 	\begin{center}
 		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/sheet-coating-application.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Coating example. Independent?}
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
 	\begin{itemize}
 		\item	Sheet may not be uniform
 		\begin{itemize}
@@ -1145,21 +1145,21 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Cheaper raw material. Independent?}
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
 
 	Aim: Testing an alternative, cheaper raw material in our process. Do not want the final product to change.
 	\begin{itemize}
 		\item	The dispensing system must be modified for raw material B, requiring production line to be shut down for 15 hours.
 	\end{itemize}
 	\begin{itemize}
-		\item	The new supplier has given us 8 representative batches to test; each test takes 3 hours. Run these 8 batches over the weekend: set up dispenser on Friday night (15 hours), run tests from Saturday noon to Sunday noon, then return the line back to normal for Monday's shift.
+		\item	The new supplier has given us 8 representative batches to test; each test takes 3 hours. Run these 8 batches over the weekend: set up dispenser on Friday night (15 hours), run tests from Saturday noon to Sunday noon (8 x 3 = 24hrs), then return the line back to normal for Monday's shift.
 	\end{itemize}
 	\begin{itemize}
 		\item\textbf{\emph{How}} do we violate the assumptions of independence when comparing 8 batches of material A (taken from Thursday and Friday) to the 8 batches from material B (Saturday and Sunday)?
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Cheaper raw material. Independent?}
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
 	\begin{itemize}
 		\item	The 8 tests are run sequentially; \emph{any changes} in conditions between these 8 runs and the 8 runs from material A will be confounded
 		\begin{itemize}
@@ -1171,10 +1171,12 @@
 	\end{itemize}
 	\begin{itemize}
 		\item	Expensive and impractical to randomize in this case.
-		\item	Suboptimal: \texttt{A A A A B B B B A A A A B B B B}
+		\item	Suboptimal: Run \texttt{A A A A B B B B A A A A B B B B}
 		\begin{itemize}
-			\item	Run \texttt{A A A A B B B B} twice, mixing up the conditions.
+			\item	Run \texttt{A A A A B B B B} once
+			\item	Run \texttt{B B B B A A A A} next
 		\end{itemize}
+		\item	Use a split-plot experimental design
 	\end{itemize}
 
 	\textcolor{red}{Randomization is the insurance (cost) we require to avoid being misled.}
@@ -1301,7 +1303,7 @@
 		\item[C]	No correlation, i.e. totally independent data: $\phi = 0.0$
 	\end{itemize}
 	
-	What happens to the standard deviation of $\bar{x}$? (simulate many sequences; calculate $\bar{x}$ then stddev of these $\bar{x}$ values)
+	What happens to the standard deviation of $\bar{x}$? (simulate many sequences; calculate $\bar{x}$ then stddev, $s$, of these $\bar{x}$ values)
 	
 	\myhrule
 	\emph{Solution}
