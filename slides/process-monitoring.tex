@@ -1,0 +1,897 @@
+\begin{frame}\frametitle{}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/monitoring/SPC-position-23-Jan-2013.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{In context}
+	
+	Sections covered so far: 
+	\begin{enumerate}
+		\item	Visualizing data 
+		\item	Univariate statistics 
+		\item	Combine those two areas: create a system to visually monitor any process 
+	\end{enumerate}
+	
+	\textbf{AIM}: rapid problem detection
+	\begin{itemize}
+		\item	then comes diagnosis (cover this later) 
+		\item	and process adjustment (not covered) 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Examples}
+	
+	Systems you may have seen: 
+	\begin{itemize}
+		\item	hospital (monitoring patients) 
+		\item	stock market charts (intraday trading) 
+		\item	processing/manufacturing facility 
+	\end{itemize}
+	
+	Examples: 
+	\begin{itemize}
+		\item	\emph{Co-worker}: are our product dimensions (or some other production quality measurement) stable? 
+		\item	\emph{Yourself}: how can we quickly detect a slow drift in the process? 
+		\item	\emph{Manager}: track the hourly average profit, and process throughput and react to any problems. 
+		\item	\emph{Potential customer}: what is your process capability? We are looking for Cpk of at least 1.6. 
+	\end{itemize}
+	
+	Note: process monitoring is mostly \textbf{reactive} and not \emph{proactive}. So it is suited to \emph{incremental} process improvement.
+\end{frame}
+
+\begin{frame}\frametitle{What we will cover}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/Control-charts-section-mapping.png}
+	
+	\textbf{Concepts}: ARL, LCL, UCL, Cpk, Shewhart charts, EWMA, CUSUM, Type I and II errors, false alarms, real-time application
+\end{frame}
+
+\begin{frame}\frametitle{What is process monitoring about?}
+	\begin{itemize}
+		\item	We know that quality is not optional; customers move onto suppliers that provide quality products 
+		\item	Quality is not a cost-benefit trade-off either 
+		\begin{itemize}
+			\item	Example: car sales in North America: the steady rise of the Asian manufacturers; starting to change ... 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Process monitoring: relationship to feedback control}
+	\begin{itemize}
+		\item	Also called ``Statistical Process Control'' (SPC) 
+		\item	We will avoid this term due to potential confusion: 
+		\item	Monitoring is \emph{similar} to (feedback) control: 
+		\begin{itemize}
+			\item	continually applied 
+			\item	check for deviations (error) 
+		\end{itemize}
+		\item	Monitoring is \emph{different} to (feedback) control: 
+		\begin{itemize}
+			\item	no action taken, unless required 
+			\item	i.e. adjustments are \textbf{infrequent} 
+			\item	usually \textbf{manual} 
+			\item	adjust due to \textbf{special causes} 
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Process monitoring: make \emph{permanent} adjustments to reduce variability 
+		\item	Feedback control: \emph{temporarily} compensates for the problem all the time 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Control charts}
+	
+	Used to display and detect this unusual variability
+	\begin{itemize}
+		\item	it is most often a time-series plot, or sequence 
+		\item	a target value may be shown 
+		\item	one or more limit lines are shown 
+		\item	displayed in real-time, or pretty close to real-time 
+	\end{itemize}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/demo-of-monitoring-chart.png}
+\end{frame}
+
+\begin{frame}\frametitle{Control charts: demonstration}
+	
+	\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/Flotation_cell.jpg}
+\end{frame}
+
+\begin{frame}\frametitle{General approach}
+	\begin{itemize}
+		\item	\textbf{Phase 1}: building and testing from off-line data 
+		\begin{itemize}
+			\item	very iterative: remove outliers 
+			\item	calculate limits, test if they are useful, repeat 
+			\item	you will spend most of your time here 
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	\textbf{Phase 2}: using the control chart 
+		\begin{itemize}
+			\item	on new, unseen data 
+			\item	implemented with computer hardware and software 
+			\item	usually for real-time display 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Step 0: Decide what to monitor?}
+	
+	\emph{Discuss these in groups}: what would you monitor 
+	\begin{itemize}
+		\item	Waste water treatment process 
+		\item	Tablet/pharmaceutical manufacturing 
+		\item	Oil and gas (e.g. a distillation column) 
+		\item	Food-processing unit (e.g. a fryer) 
+		\item	Mineral processing plant (e.g. a flotation cell) 
+		\item	Plastics processing (e.g. a twin-screw extruder) 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{In-control vs out-of-control}
+	\begin{block}
+		{In-control} 
+		\begin{center}
+			``In-control'': behaviour of the process is stable over time. Also called \emph{common cause} operation. 
+		\end{center}
+	\end{block}
+	
+	\emph{The opposite is}: out of control, assignable causes, special causes, destabilizing event, off-target.
+\end{frame}
+
+\begin{frame}\frametitle{Shewhart chart}
+	\begin{itemize}
+		\item	Named for \emph{Walter Shewhart} from Bell Telephone and Western Electric, parts manufacturing, 1920's 
+		\item	A chart for monitoring variable's \emph{location} 
+	\end{itemize}
+	
+	It has: 
+	\begin{itemize}
+		\item	lower control limit (LCL) 
+		\item	upper control limit (UCL) 
+		\item	a target 
+	\end{itemize}
+	
+	No action is required as long as the variable plotted remains within limits.
+	
+	\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/demo-of-monitoring-chart.png}
+\end{frame}
+
+\begin{frame}\frametitle{Shewhart chart: Derivation}
+	
+	\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/explain-Shewhart-data-source.png}
+	\begin{itemize}
+		\item	Take a subgroup of samples, of size $n$ ($n=5$ in the picture here) 
+		\item	Calculate $\bar{x}$ from the $n$ values 
+		\item	What is the distribution of $\bar{x}$? 
+		\begin{itemize}
+			\item	$\bar{x} \sim \mathcal{N}(\mu, \sigma^2/n)$ 
+		\end{itemize}
+		\item	Define: $\sigma_{\bar{X}} = \sigma/\sqrt{n}$ 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Shewhart chart: Derivation}
+	\begin{itemize}
+		\item	\textbf{Thin line}: single process measurements have $\mu = 6$ and $\sigma = 2$ 
+		\item	\textbf{Thick line}: $\sigma_{\overline{x}} = 2/\sqrt{5}$ = 0.894, because $n=5$ 
+		\begin{itemize}
+			\item	Upper bound = $\mu + 3 \times \sigma_{\overline{x}} = 6 + 3\times 0.894 = 8.68$ 
+			\item	Lower bound = $\mu - 3 \times \sigma_{\overline{x}} = 6 - 3\times 0.894 = 3.318$ 
+		\end{itemize}
+	\end{itemize}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/Explain-shewhart.png}
+\end{frame}
+
+\begin{frame}\frametitle{Shewhart chart: Derivation}
+	\begin{itemize}
+		\item	z-value: $z = \dfrac{\bar{x} - \mu}{\sigma_{\bar{X}}}$ 
+	\end{itemize}
+	\begin{itemize}
+		\item	Confidence interval for $\mu$: $\bar{x} - c_n\sigma_{\bar{X}} < \mu < \bar{x} + c_n\sigma_{\bar{X}}$ 
+	\end{itemize}
+	\begin{itemize}
+		\item	By convention we use $c_n = 3.0$ 
+		\item	Area between LCL and UCL: 99.73\% 
+		\item	A chance of 1 in 370 that a data point, $\bar{x}$, will lie outside these bounds 
+		\item	The bounds are for $\bar{x}$, not for individual, raw $x$ values 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Shewhart chart: using estimates}
+	
+	But, we don't know population parameters
+	\begin{itemize}
+		\item	For $\mu$: use $\overline{\overline{x}} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{ \overline{x}_k}$ 
+		\item	For $\mu$: or just use known target value 
+		\item	For $\mu$: or use the median of a long sequence of data 
+		\item	For $\sigma$: 
+		\begin{itemize}
+			\item	Define: $\overline{S} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{s_k}$ 
+			\item	Define: $s_k$ = standard deviation of $n$ values 
+			\item	For $\sigma$: use $\dfrac{\overline{S}}{a_n}$, where $a_n$ is a correction factor 
+		\end{itemize}
+	\end{itemize}
+	
+	\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/table-for-an-values.png}	
+	$ 
+	\begin{array}{rcccl}
+		\text{LCL} = \overline{\overline{x}} - 3 \cdot \dfrac{\overline{S}}{a_n\sqrt{n}} && && \text{UCL} = \overline{\overline{x}} + 3 \cdot \dfrac{\overline{S}}{a_n\sqrt{n}} 
+	\end{array}
+	$
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+	
+	We measure 5 colour values on each rubber bale: 
+	\begin{itemize}
+		\item	e.g. bale 1 raw values: [231, 251, 235, 241, 227] 
+		\begin{itemize}
+			\item	$\bar{x}_1$ = 237 is our new data point for the Shewhart chart 
+			\item	$s_1 = 9.38$ 
+		\end{itemize}
+		\item	e.g. bale 2 raw values: [252, 253, 247, 232, 244] 
+		\begin{itemize}
+			\item	$\bar{x}_2$ = 245.6 
+			\item	$s_2 = 8.44$ 
+		\end{itemize}
+	\end{itemize}
+	
+	Data from 20 such $\bar{x}_k$ calculations:
+	
+	\texttt{[245, 239, 239, 241, 241, 241, 238, 238, 236, 248, }
+	
+	\texttt{ 233, 236, 246, 253, 227, 231, 237, 228, 239, 240]}
+	
+	Calculated for you: $\bar{\bar{x}} = 238.8$ and $\bar{S} = 9.28$
+	
+	\textbf{Phase 1} workflow: 
+	\begin{itemize}
+		\item	Calculate: LCL and UCL 
+		\item	Any points outside limits? 
+		\item	If so, exclude and repeat. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+	\begin{itemize}
+		\item	LCL = $238.8 - 3 \cdot \dfrac{9.28}{(0.94)(\sqrt{5})} = 225.6$ 
+		\item	UCL = $238.8 + 3 \cdot \dfrac{9.28}{(0.94)(\sqrt{5})} = 252.0$ 
+		\item	Sample with value of 253 exceeds these limits 
+		\item	After excluding it: 
+		\begin{itemize}
+			\item	new $\bar{\bar{x}} = 238.0$, and new $\bar{S} = 9.68$ 
+			\item	new LCL = 224, new UCL = 252 
+		\end{itemize}
+	\end{itemize}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/Bale-image-colour.png}
+\end{frame}
+
+\begin{frame}\frametitle{Assessing the chart's performance: error probability}
+	\begin{itemize}
+		\item	\textbf{Type I error}: $\bar{x}$ typical of normal operation, but falls outside UCL or LCL limits 
+		\begin{itemize}
+			\item	Theoretical derivation: that happens 1 in 370 times (99.73\% inside limits) 
+			\item	Also called $\alpha = 0.0027$ when using $\pm 3 \sigma_{\bar{x}}$ limits $(0 <\alpha < 1)$ 
+			\item	\emph{Synonyms}: false alarm, false positive (diseases), producer's risk (acceptance sampling), false reject rate 
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	\textbf{Type II error}: $\bar{x}$ is not stable, but falls within UCL and LCL limits 
+		\begin{itemize}
+			\item	Called $\beta$: is a function of the degree of difference (next) 
+			\item	\emph{Synonyms}: false negative, consumer's risk, false acceptance rate 
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Asymmetrical risks: airport screening, disease diagnosis, trial by jury, making drugs 
+	\end{itemize}
+	\begin{itemize}
+		\item	In pseudo-math: 
+	\end{itemize}
+	$ 
+	\begin{array}{rcl}
+		\alpha &=& Pr\left(\overline{x}\,\,\text{is in control, but lies outside the limits}\right)\\
+		\beta &=& Pr\left(\overline{x}\,\,\text{is not in control, but lies inside the limits}\right) 
+	\end{array}
+	$
+\end{frame}
+
+\begin{frame}\frametitle{Assessing the chart's performance: type II error}
+	
+	Assume $\bar{x}$ from shifted distribution: $\mu$ to $\mu + \Delta\sigma$
+	
+	\textbf{Question}: probability this new $\bar{x}$ will fall within existing LCL and UCL?
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/show-shift-beta-error.png}
+\end{frame}
+
+\begin{frame}\frametitle{Assessing the chart's performance: type II error}
+	
+	\includegraphics[width=0.7\textwidth]{\imagedir/monitoring/type-II-error-shift.png}
+	\begin{itemize}
+		\item	$\beta$ is a function of the process shift, $\Delta$ 
+		\item	Table is for $n=4$ and UCL and LCL at the $\pm 3 \sigma_{\bar{X}}$ limits 
+		\item	\texttt{beta <- pnorm(3 - delta*sqrt(n)) - pnorm(-3 - delta*sqrt(n))} 
+		\item	Interpretation: Shewhart chart not good at detecting a change in the location! 
+		\item	Surprising, given that we use Shewhart chart for this purpose. 
+		\item	E.g: a $0.75\sigma$ only be detected around 6.7\% of the time 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Adjusting the chart's performance}
+	\begin{block}
+		{Key point} 
+		\begin{center}
+			Control chart limits are not set in stone. Adjust them! 
+		\end{center}
+	\end{block}
+	Nothing makes a control chart more useless to operators than frequent false alarms.
+	\begin{itemize}
+		\item	$\alpha$: simply move LCL and UCL up and down (not incorrect to do this!) 
+		\item	$\beta$: as you increase UCL, $\alpha \rightarrow 0$, but $\beta \rightarrow 1$ 
+		\item	\textbf{You cannot simultaneously have low type I and type II error} 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Average run length (ARL)}
+	\begin{itemize}
+		\item	ARL = average number of sequential samples we expect before seeing a point outside limits 
+		\item	ARL = $\dfrac{1}{\alpha}$ 
+		\item	ARL for in control process, with 3-sigma limits? 
+		\begin{itemize}
+			\item	$\alpha$ = 0.0027 (0.27\% of false alarms) 
+			\item	ARL = 1/0.0027 = 370 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Extensions: Western Electric Rules}
+	\begin{itemize}
+		\item	Basic Shewhart chart is not too sensitive to process shifts. Raise an alarm when these \emph{improbable} events occur: 
+		\begin{itemize}
+			\item	2 out of 3 points lie beyond $2\sigma$ on the same side of the centre line 
+			\item	4 out of 5 points lie beyond $1\sigma$ on the same side of the centre line 
+			\item	8 successive points lie on the same side of the center line 
+		\end{itemize}
+	\end{itemize}
+	
+	The theoretical ARL is reduced by using these rules
+	\begin{itemize}
+		\item	\textbf{Adding robustness}: use robust methods in phase 1: see notes for a journal reference. 
+	\end{itemize}
+	\begin{itemize}
+		\item	\textbf{Warning limits}: 
+		\begin{itemize}
+			\item	warning at $\pm 2 \sigma$ (orange coloured lines or background) 
+			\item	action at $\pm 3\sigma$ (red coloured lines or background) 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Mistakes to avoid}
+	\begin{enumerate}
+		\item	Adding product specification to the monitoring chart: 
+		\begin{itemize}
+			\item	don't use spec limits instead of LCL and UCL 
+			\item	we are monitoring for stability, not defects (out-of-spec product) 
+		\end{itemize}
+		\item	Variables with heavy autocorrelation: you get much longer ARL when a fault occurs 
+		\begin{itemize}
+			\item	use EWMA chart (next section) 
+		\end{itemize}
+		\item	Shewhart charts on \textbf{highly correlated quality variables} 
+		\begin{itemize}
+			\item	an important topic - introduced in latent variable section 
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{CUSUM charts}
+	\begin{itemize}
+		\item	Shewhart chart takes a long time to detect shift in the mean, away from target, $T$ 
+		\item	CUSUM formula: 
+	\end{itemize}
+	$ 
+	\begin{array}{rcl}
+		S_0 &=& (x_0 - T) \\
+		S_1 &=& (x_0 - T) + (x_1 - T) = S_0 + (x_1 - T) \\
+		S_2 &=& (x_0 - T) + (x_1 - T) + (x_2 - T) = S_1 + (x_2 - T) \\
+	\end{array}
+	$
+	\begin{block}
+		{CUSUM formula:} 
+		\begin{center}
+			$ 
+			\begin{array}{rcl}
+				S_t &=& S_{t-1} + (x_t - T) 
+			\end{array}
+			$ 
+		\end{center}
+	\end{block}
+	\begin{itemize}
+		\item	For process shifts: we are adding $\Delta$ to every $x_t$ 
+		\item	Accumulates: creates a steep up or down slope 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{CUSUM charts: in-control}
+	\begin{itemize}
+		\item	$\mu=20$ and $\sigma=3$ 
+	\end{itemize}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/CUSUM-no-shift.png}
+\end{frame}
+
+\begin{frame}\frametitle{CUSUM charts: out-of-control}
+	\begin{itemize}
+		\item	Shift of 1.2 units at t=150 
+	\end{itemize}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/CUSUM-with-shift.png}
+\end{frame}
+
+\begin{frame}\frametitle{Using a CUSUM chart}
+	\begin{itemize}
+		\item	Type I and II error set by the angle and distance of the V-mask 
+		\item	Implemented by computers 
+		\item	If a fault is detected, reset $S_t$ to a new value and restart chart 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA charts: what is a moving average?}
+	\begin{enumerate}
+		\item	Shewhart: each subgroup is independent (unrelated), no ``memory'' 
+		\item	CUSUM: infinite build up of errors, all the way back to t=0 
+		\item	Moving average chart: has a ``window'' of memory: 
+	\end{enumerate}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/explain-moving-average-data-source.png}
+	
+	$ 
+	\begin{array}{rcl}
+		\\
+		\bar{x}_t &=& \dfrac{1}{n}x_{t-1} + \dfrac{1}{n}x_{t-2} + \ldots + \dfrac{1}{n}x_{t-n} 
+	\end{array}
+	$
+\end{frame}
+
+\begin{frame}\frametitle{EWMA derivation}
+	\begin{itemize}
+		\item	Exponentially weighted MA: 
+		\begin{itemize}
+			\item	heavier weights for recent observations 
+			\item	small weights further back 
+		\end{itemize}
+	\end{itemize}
+	
+	$ 
+	\begin{array}{rcl}
+		x_t &=& \text{new data at time step } t\\
+		\hat{x}_t &=& \hat{x}_{t-1} + \lambda e_{t-1} \\
+		e_t &=& x_t - \hat{x}_t \\
+		\\
+		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda e_{t} \\
+		\\
+	\end{array}
+	$
+	
+	To start if off:
+	\begin{itemize}
+		\item	$\hat{x}_0 = T$ 
+		\item	$e_0 = 0$ 
+		\item	$\hat{x}_1 = T$ 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA derivation}
+	
+	$ 
+	\begin{array}{rcl}
+		x_t &=& \text{new data at time step } t\\
+		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda e_{t} \\
+		e_t &=& x_t - \hat{x}_t \\
+		\\
+		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda \left(x_t - \hat{x}_t\right) \\
+		\hat{x}_{t+1} &=& \lambda x_t + \left(1-\lambda \right)\hat{x}_{t} 
+	\end{array}
+	$
+	\begin{itemize}
+		\item	Shows that EWMA is a one-step ahead predictor for $\hat{x}_{t+1}$ 
+		\begin{enumerate}
+			\item	$x_t$: current point, weighted by $\lambda$ 
+			\item	$\hat{x}_{t}$: historical data, weighted by $\left(1-\lambda \right)$ 
+		\end{enumerate}
+	\end{itemize}
+	\begin{itemize}
+		\item	$\hat{x}_{t+1} = \sum_{i=0}^{i=t}{w_i x_i} = w_0x_0 + w_1x_1 + w_2x_2 + \ldots $ 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA derivation}
+	
+	\includegraphics[height=0.9\textheight]{\imagedir/monitoring/EWMA-derivation.png}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA derivation}
+	
+	\includegraphics[height=0.7\textheight]{\imagedir/monitoring/EWMA-derivation-part2.png}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA derivation}
+	
+	\includegraphics[height=0.65\textheight]{\imagedir/monitoring/explain-weights.png}
+	\begin{itemize}
+		\item	As $\lambda \rightarrow 0$: smoother chart, uses more history, less current data 
+		\item	As $\lambda \rightarrow 1$: chart uses more current data (Shewhart-like) 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA limits}
+	
+	$ 
+	\begin{array}{rcl}
+		\text{LCL} &=& \bar{\bar{x}} - 3 \cdot \sigma_{\text{Shewhart}}\sqrt{\dfrac{\lambda}{2-\lambda}} \\
+		\text{UCL} &=& \bar{\bar{x}} + 3 \cdot \sigma_{\text{Shewhart}} \sqrt{\dfrac{\lambda}{2-\lambda}} 
+	\end{array}
+	$
+	\begin{itemize}
+		\item	$\sigma_{\text{Shewhart}}$: standard deviation from the Shewhart chart. 
+	\end{itemize}
+	
+	\textbf{Nice implementation}: show both Shewhart and EWMA on the same chart 
+	\begin{itemize}
+		\item	Get the usual Shewhart monitoring, but 
+		\item	EWMA gives a one-step ahead prediction as well 
+		\item	Used for slow-moving processes with long gaps between samples 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA example}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/EWMA-plot-from-Hunter-article.png}
+	
+	From: Hunter, ``The Exponentially Weighted Moving Average'', \emph{Journal of Quality Technology}, \textbf{18}, p 203-210, 1986.
+\end{frame}
+
+\begin{frame}\frametitle{Other charts}
+	\begin{itemize}
+		\item	The \emph{S chart}: monitor variance 
+		\item	The \emph{R chart}: precursor to the \emph{S chart} (not common anymore) 
+		\item	\emph{np chart} and \emph{p chart}: monitoring proportions of pass/fail or good/bad ratings 
+		\item	\emph{Exponentially weight moving variance} (EWMV): used for monitoring product variability 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{What should we monitor?}
+	
+	Recall the aim is to \textbf{react early} to bad, or unusual operation: 
+	\begin{itemize}
+		\item	implies monitoring variables in near real-time 
+		\item	laboratory measurements are good, but take longer to acquire 
+		\item	don't wait for bad production to be over, catch it early 
+	\end{itemize}
+	\begin{block}
+		{Key points} 
+		\begin{center}
+			\begin{itemize}
+				\item	Apply monitoring at every step in the manufacturing line/system 
+				\item	Obtain low variability early on; don't wait to the end 
+			\end{itemize}
+		\end{center}
+	\end{block}
+	
+	Problem isn't how to monitor, rather, \textcolor{red}{what do we monitor?}
+\end{frame}
+
+\begin{frame}\frametitle{What should we monitor?}
+	
+	Measurements from real-time systems are: 
+	\begin{itemize}
+		\item	available more frequently (less delay) than lab measurements 
+		\item	often are more precise 
+		\item	more meaningful to the operating staff 
+		\item	contains ``fingerprint'' of problem (helps for diagnosis) 
+	\end{itemize}
+	
+	Variables don't need to be from on-line sensors: could also be a calculation
+	
+	\emph{Lab measurements} have long time delay: 
+	\begin{itemize}
+		\item	process already shifted by the time lab values detect a problem 
+		\item	harder to find cause-and-effect for diagnosis 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Monitoring in today's context}
+	
+	We don't measure a single number in many cases:
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/pharma-spectra.png}
+	
+	460 spectra (lines) measured at 650 evenly spaced wavelengths ($x$-axis). The $y$-axis is the absorbance at each wavelength.
+	
+	How do we monitor this?
+\end{frame}
+
+\begin{frame}\frametitle{Monitoring in today's context}
+	
+	Image data: very common situation now 
+	\begin{itemize}
+		\item	many easy measurements for liquids and gases; solids: use image data 
+		\item	medical imaging 
+	\end{itemize}
+	
+	\includegraphics[width=0.4\textwidth]{\imagedir/monitoring/image-data.png}
+	\begin{itemize}
+		\item	Very high redundancy: neighbouring pixels are similar (spatially and in time) 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Monitoring in industrial practice}
+	\begin{itemize}
+		\item	Widely used in industry, at all levels 
+		\item	Management: monitor plants, geographic region, countries (e.g. hourly sales by region) 
+		\begin{itemize}
+			\item	Dashboards, ERP, BI, KPI 
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Challenges for you: 
+		\begin{itemize}
+			\item	Getting the data out 
+			\item	Real-time use of the data (value of data decays exponentially) 
+			\item	Training is time consuming 
+			\item	Bandwidth/network/storage 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]\frametitle{General workflow}
+	\begin{enumerate}
+		\item	Identify variable(s) to monitor. 
+		\item	Retrieve historical data (computer systems, or lab data, or paper records) 
+		\item	Import data and just plot it. 
+		\begin{itemize}
+			\item	Any time trends, outliers, spikes, missing data gaps? 
+		\end{itemize}
+		\item	Locate regions of stable, common-cause operation. 
+		\begin{itemize}
+			\item	Remove spikes and outliers 
+			\item	Cleaned data is your phase 1 data 
+		\end{itemize}
+		\item	Split phase 1 data into a 60\% and 40\% split. 
+		\begin{itemize}
+			\item	The 60\% split is for calculating model limits 
+			\item	The 40\% is for testing later on. 
+		\end{itemize}
+		\item	Keep outlier data as a separate testing set: to validate detection 
+		\item	Calculate control limits (UCL, LCL), using formula, using 60\% data chunk 
+		\item	Test your chart on \textbf{new, unused} data. \emph{How does my chart work?} 
+		\begin{itemize}
+			\item	Quantify type I error on cleaned 40\% chunk 
+			\item	Quantify type II error on outlier data 
+		\end{itemize}
+		\item	Adjust the limits 
+		\item	Repeat this step, as needed to achieve levels of error 
+		\item	Run chart on your desktop computer for a couple of days 
+		\begin{itemize}
+			\item	Confirm unusual events with operators; would they have reacted to it? False alarm? 
+			\item	Refine your limits 
+		\end{itemize}
+		\item	Not an expert system - will not diagnose problems: 
+		\begin{itemize}
+			\item	use your engineering judgement; look at patterns; knowledge of other process events 
+		\end{itemize}
+		\item	Demonstrate to your colleagues and manager 
+		\begin{itemize}
+			\item	But go with dollar values. 
+		\end{itemize}
+		\item	Installation and operator training will take time 
+		\item	Listen to your operators 
+		\begin{itemize}
+			\item	make plots interactive - click on unusual point, it drills-down to give more context 
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Industrial case study: Dofasco}
+	\begin{itemize}
+		\item	ArcelorMittal in Hamilton (formerly called Dofasco) has used multivariate process monitoring tools since 1990's 
+		\item	Over 100 applications used daily 
+		\item	Most well known is their casting monitoring application, Caster SOS (Stable Operation Supervisor) 
+		\item	It is a multivariate monitoring system 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: slabs of steel}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/Casting-plant-environment.png}
+	
+	\emph{All screenshots with permission of Dr. John MacGregor}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: casting}
+	\begin{columns}
+		\column{5cm} 
+		\includegraphics[width=\textwidth]{\imagedir/monitoring/Casting-schematic.png} \column{5cm} 
+		\includegraphics[width=\textwidth]{\imagedir/monitoring/Casting-hot-slab.png} 
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: breakout}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/Casting-breakout.png}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: monitoring for breakouts}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/Dofasco-monitoring-chart.png}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: monitoring for breakouts}
+	
+	\includegraphics[width=0.7\textwidth]{\imagedir/monitoring/Dofasco-monitoring-chart.png}
+	\begin{itemize}
+		\item	Stability Index 1 and 2: one-sided monitoring chart 
+		\item	Warning limits and the action limits. 
+		\item	A two-sided chart in the middle 
+		\item	Lots of other operator-relevant information 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: an alarm}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/Dofasco-monitoring-chart-with-alarm.png}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: economics of monitoring}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/Breakouts-dofasco-economics.png}
+	\begin{itemize}
+		\item	Implemented system in 1997; multiple upgrades since then 
+		\item	Economic savings: more than \$ 1 million/year 
+		\begin{itemize}
+			\item	each breakout costs around \$200,000 to \$500,000 
+			\item	process shutdowns and/or equipment damage 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Process capability: centered process}
+	
+	Process capability ratio (PCR) can be calculated for any attribute.
+	
+	$ 
+	\begin{array}{rcl}
+		\\
+		\text{PCR} &=& \dfrac{\text{Upper specification limit} - \text{Lower specification limit}}{6\sigma} 
+	\end{array}
+	$
+	\begin{itemize}
+		\item	Use an estimate for $\sigma$ 
+		\item	LSL is not LCL; and USL is not UCL from Shewhart chart 
+		\item	LSL and USL are set by customers, or internal criteria 
+	\end{itemize}
+	
+	Strong assumptions used for PCR: 
+	\begin{itemize}
+		\item	assumes the attribute has normal distribution (check with \texttt{qqPlot}) 
+		\item	assumes centered system between LSL and USL 
+		\item	assumes PCR calculated when process was stable 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{PCR interpretation: process ``width''}
+	
+	Let mean=80, LSL=65, USL=95 and $\hat{\sigma} = 10$
+	
+	Implies: PCR = 0.5 
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/explain-PCR-half.png}
+	\begin{itemize}
+		\item	z for LSL = (65 - 80)/10 = -1.5 
+		\item	z for USL = (95 - 80)/10 = 1.5 
+		\item	Shaded area probability = \texttt{pnorm(-1.5) + (1-pnorm(1.5))} = 13.4\% 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{PCR interpretation: process ``width''}
+	
+	Let mean=80, LSL=65, USL=95 and $\hat{\sigma} = 10/4 = 2.5$
+	
+	Implies: PCR = 2.0
+	
+	\includegraphics[width=0.7\textwidth]{\imagedir/monitoring/explain-PCR-two.png}
+	\begin{itemize}
+		\item	z for LSL = (65 - 80)/2.5 = -6 
+		\item	z for USL = (95 - 80)/2.5 = 6 
+		\item	Shaded area probability = about 0 (1.973175e-09 x 100) 
+		\item	Process width: $12 \sigma$ 
+		\item	Why is it called process capability? 
+		\begin{itemize}
+			\item	If you cannot make your variance (standard deviation) smaller, your process is not capable 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{PCR interpretation: uncentered process}
+	\begin{itemize}
+		\item	Processes not often centered between LSL and USL 
+	\end{itemize}
+	
+	$ \text{PCR}_\text{k} = \text{C}_\text{pk} = \min \left( \dfrac{\text{Upper specification limit} - \bar{\bar{x}}}{3\sigma}; \dfrac{\bar{\bar{x}} - \text{Lower specification limit}}{3\sigma} \right) $
+	\begin{itemize}
+		\item	$\bar{\bar{x}}$ from Shewhart chart 
+		\item	One-sided limit: taken on the worst side! 
+		\item	Cpk = 1.3: minimum requirement 
+		\item	Cpk = 1.7: requested for safety and other critical applications. 
+		\item	Cpk = 2.0: termed a 6-sigma process: it can move $6\sigma$ units left or right 
+	\end{itemize}
+	
+	\textbf{Note}: Cpk and Cp are only useful for a process which is stable
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+	
+	A tank uses small air bubbles to keep solid particles in suspension. If too much air is blown into the tank, then excessive foaming and loss of valuable solid product occurs; if too little air is blown into the tank the particles sink and drop out of suspension.
+	
+	\includegraphics[height=0.5\textheight]{\imagedir/monitoring/tank-suspension.png}
+	
+	Which monitoring chart would you use to ensure the airflow is always near target?
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+	
+	Describe how a monitoring chart could be used to prevent over-control of a batch-to-batch process. (A batch-to-batch process is one where a batch of materials is processed, followed by another batch, and so on).
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+	
+	\textbf{Final exam, 2010}
+	
+	The most recent estimate of the process capability ratio for a key quality variable was 1.30, and the average quality value was 64.0. Your process operates closer to the lower specification limit of 56.0. The upper specification limit is 93.0.
+	
+	$\quad$
+	
+	What are the two parameters of the system you could adjust, and by how much, to achieve a capability ratio of 1.67, required by recent safety regulations. Assume you can adjust these parameters independently.
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+	
+	The following values are the particle size of the most recent 20 shipments from a supplier, taken from their certificates of analysis:
+	
+	\texttt{50.9, 52.9, 51.6, 50.8, 54.6, 52.9, 53.1 }
+	
+	\texttt{48.4, 51.6, 53.1, 53.8, 52.4, 53.1, 50.8}
+	
+	\texttt{54.6, 52.9, 50.0, 53.8, 54.6, 52.2}
+	
+	$\qquad$
+	
+	Calculate the supplier's capability, given their lower specification limit of $45 \mu m$ and their upper limit at $59 \mu m$.
+	
+	$\qquad$
+	
+	Clearly state all assumptions you make during the calculations (median = $52.9 \mu m$, sd = $1.64 \mu m$)
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+	
+	Plastic sheets are manufactured on your blown film line. The Cp value is 1.7. You sell the plastic sheets to your customers with specification of 2 mm $\pm$ 0.4 mm.
+	\begin{itemize}
+		\item	List three important assumptions you must make to interpret the Cp value. 
+		\item	What is the theoretical process standard deviation, $\sigma$? 
+		\item	What would be the Shewhart chart limits for this system using subgroups of size $n=4$? 
+		\item	Illustrate your answer from part 2 and 3 of this question on a diagram of the normal distribution. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Answer}
+	
+	\includegraphics[width=\textwidth]{\imagedir/monitoring/plastic-sheet-control-specification-limits.png}
+\end{frame}
+
