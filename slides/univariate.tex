@@ -874,7 +874,7 @@
 	\end{array}
 	$
 	\begin{itemize}
-		\item	$c_t = 2.31$ for the 95\% confidence interval
+		\item	$c_t = 2.31$ for the 95\% confidence interval with 8 degrees of freedom
 		\item	LB = $20.0 - 2.92 = 17.1$
 		\item	UB = $20.0 + 2.92 = 22.9$
 	\end{itemize}
@@ -1460,7 +1460,7 @@
 
 \begin{frame}\frametitle{Paired tests}
 
-	1. \textbf{Sequentially}
+	1. \textbf{Sequentially} {\color{myOrange}{(don't ever do this!)}}
 
 	$
 	\begin{array}{cccccccccc}
@@ -1471,7 +1471,7 @@
 
 	$\qquad$
 
-	2. \textbf{Randomly}
+	2. \textbf{Randomly} {\color{myOrange}{(commonality between pairs will not cancel)}}
 
 	$
 	\begin{array}{cccccccccc}
@@ -1482,7 +1482,7 @@
 
 	$\qquad$
 
-	3. \textbf{Paired} (run 10 experiments in random order)
+	3. \textbf{Paired} (but, run the 10 experiments in random order!)
 
 	$
 	\begin{array}{cccccccccc}
@@ -1521,10 +1521,18 @@
 	\textbf{Question}: is the difference is significant, or is it essentially zero?
 	\begin{enumerate}
 		\item	Calculate the $n$ differences: $w = [w_1, w_2, \ldots, w_n]$
+		\begin{itemize}
+			\item	$w_i = x_{A,i} - x_{B,i}$  \qquad\emph{or}\qquad $w_i = x_{B,i} - x_{A,i}$
+			\item	just be consistent in your calculation \emph{and} then your interpretation
+		\end{itemize}
 		\item	Assume these $n$ differences are independent
 		\item	Calculate the mean $\overline{w}$ and standard deviation $s_{\overline{w}}$
 		\item	$\overline{w}$ should be normally distributed (CLT): $\bar{w} \sim \mathcal{N}\left(\mu_w, \sigma_w^2/n \right)$
-		\item	Testing: $\mu_w = \mu_A - \mu_B$
+		\item	We are testing: 
+		\begin{itemize}
+			\item	$\mu_w = \mu_A - \mu_B$  (if you calculated $w_i = x_{A,i} - x_{B,i}$)
+			\item	$\mu_w = \mu_B - \mu_A$  (if you calculated $w_i = x_{B,i} - x_{A,i}$)
+		\end{itemize}
 	\end{enumerate}
 \end{frame}
 
