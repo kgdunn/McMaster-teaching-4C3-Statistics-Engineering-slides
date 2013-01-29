@@ -795,7 +795,7 @@
 			\vspace{6pt}
 			\item	However: $z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}} \sim t\left(\nu\right)$
 			\vspace{6pt}
-			\item	\textbf{if we make a new assumption}: the $x_i$ values are normally distributed
+			\item	\textbf{but we must make a new assumption} if we use $s$: the $x_i$ (raw data) values are normally distributed
 		\end{itemize}
 		\item	Note that we use $s/\sqrt{n}$ instead of $\sigma/\sqrt{n}$ in the equation for $z$
 	\end{itemize}
@@ -924,18 +924,18 @@
 
 \begin{frame}\frametitle{Summary: CI for a mean}
 
-	Let $\bar{x} \sim \mathcal{N}(\mu, \sigma^2/n)$
-
-	Make 2 assumptions (always check these!)
+	Make 2 assumptions about the raw data: (\emph{always check these}!) 
 	\begin{enumerate}
-		\item	$n$ independent points
+		\item	$n$ independent points \hfill {\color{myOrange}{$\longleftarrow$ this assumption is always required}}
 		\item	from the normal distribution \hfill {\color{myOrange}{$\longleftarrow$ not required if $\sigma$ known}}
 	\end{enumerate}
 
+	\vspace{12pt}
+
 	There are 2 cases:
 	\begin{enumerate}
-		\item	$\sigma$ known
-		\item	$\sigma$ unknown, use $s$
+		\item[(a)]	$\sigma$ is known, $\bar{x} \sim \mathcal{N}(\mu, \sigma^2/n)$, only requires assumption 1
+		\item[(b)]	$\sigma$ unknown, use $s$, and if both assumptions are met, then $\bar{x} \sim t(\nu = n-1)$
 	\end{enumerate}
 \end{frame}
 
