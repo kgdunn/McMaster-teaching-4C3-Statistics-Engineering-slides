@@ -13,7 +13,8 @@
 		\item	Combine those two areas: create a system to visually monitor any process
 	\end{enumerate}
 
-	\textbf{AIM}: rapid problem detection
+	\vspace{24pt}
+	\textbf{AIM}: {\color{myOrange}{\textbf{rapid problem detection}}}
 	\begin{itemize}
 		\item	then comes diagnosis (cover this later)
 		\item	and process adjustment (not covered)
@@ -54,33 +55,11 @@
 \begin{frame}\frametitle{What is process monitoring about?}
 	\begin{itemize}
 		\item	We know that quality is not optional; customers move onto suppliers that provide quality products
-		\item	Quality is not a cost-benefit trade-off either
+		\item	Quality is generally not a cost-benefit trade-off
 		\begin{itemize}
+			\item	Customer's value quality; but it is a long-term benefit
 			\item	Example: car sales in North America: the steady rise of the Asian manufacturers; starting to change ...
 		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Process monitoring: relationship to feedback control}
-	\begin{itemize}
-		\item	Also called ``Statistical Process Control'' (SPC)
-		\item	We will avoid this term due to potential confusion:
-		\item	Monitoring is \emph{similar} to (feedback) control:
-		\begin{itemize}
-			\item	continually applied
-			\item	check for deviations (error)
-		\end{itemize}
-		\item	Monitoring is \emph{different} to (feedback) control:
-		\begin{itemize}
-			\item	no action taken, unless required
-			\item	i.e. adjustments are \textbf{infrequent}
-			\item	usually \textbf{manual}
-			\item	adjust due to \textbf{special causes}
-		\end{itemize}
-	\end{itemize}
-	\begin{itemize}
-		\item	Process monitoring: make \emph{permanent} adjustments to reduce variability
-		\item	Feedback control: \emph{temporarily} compensates for the problem all the time
 	\end{itemize}
 \end{frame}
 
@@ -88,12 +67,16 @@
 
 	Used to display and detect this unusual variability
 	\begin{itemize}
-		\item	it is most often a time-series plot, or sequence
-		\item	a target value may be shown
+		\item	it is most often a time-series plot, or sequence plot
+		\item	a target value should be shown
 		\item	one or more limit lines are shown
 		\item	displayed in real-time, or pretty close to real-time
+		\item	usually applied on many important process variables
+		\item	displayed in the units of the variable
 	\end{itemize}
 
+	\vspace{12pt}
+	\emph{Example}:
 	\includegraphics[width=\textwidth]{\imagedir/monitoring/demo-of-monitoring-chart.png}
 \end{frame}
 
@@ -105,8 +88,32 @@
 	\see{\href{http://en.wikipedia.org/wiki/File:Flotation_cell.jpg}{Wikipedia}}
 \end{frame}}
 
+\begin{frame}\frametitle{Process monitoring: relationship to feedback control}
+	\begin{itemize}
+		\item	Also called ``Statistical Process Control'' (SPC)
+		\item	We will avoid this term due to potential confusion
+		\item	Monitoring is \emph{similar} to (feedback) control:
+		\begin{itemize}
+			\item	it is continually applied
+			\item	we check for deviations (error)
+		\end{itemize}
+		\item	Monitoring is \emph{different} to (feedback) control:
+		\begin{itemize}
+			\item	no action taken, unless required
+			\item	i.e. adjustments are \textbf{infrequent}
+			\item	action taken is usually \textbf{manual}
+			\item	adjust due to \textbf{special causes}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Process monitoring: make {\color{myOrange}{\emph{permanent}}} adjustments to reduce variability
+		\item	Feedback control: {\color{myOrange}{\emph{temporarily}}} compensates for the problem all the time
+	\end{itemize}
+\end{frame}
+
 \begin{frame}\frametitle{General approach}
 	\begin{itemize}
+		\item	\textbf{Phase 0}: decide what to monitor
 		\item	\textbf{Phase 1}: building and testing from off-line data
 		\begin{itemize}
 			\item	very iterative: remove outliers
@@ -124,7 +131,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Step 0: Decide what to monitor?}
+\begin{frame}\frametitle{Phase 0: Decide what to monitor?}
 
 	\emph{Discuss these in groups}: what would you monitor
 	\begin{itemize}
@@ -140,7 +147,7 @@
 \begin{frame}\frametitle{In-control vs out-of-control}
 	\begin{exampleblock}{}
 		\begin{center}
-			``{\color{purple}{In-control}}'': behaviour of the process is stable over time. Also called \emph{common cause} operation.
+			``{\color{purple}{In-control}}'': behaviour of the process is stable over time. Also called {\color{purple}{\emph{common cause}}} operation.
 		\end{center}
 	\end{exampleblock}
 	\vspace{24pt}
@@ -163,30 +170,34 @@
 	\end{itemize}
 
 	\vspace{12pt}
-	No action is required as long as the variable plotted remains within limits.
-
+	No action taken if the variable plotted remains within limits.
+	\\
+	{\color{myOrange}{\textbf{Do not tamper with the process if you are in control!}}}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/demo-of-monitoring-chart.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Shewhart chart: Derivation}
+\begin{frame}\frametitle{Shewhart chart: Derivation for the limits (LCL and UCL)}
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/explain-Shewhart-data-source.png}
 	\end{center}
 	
 	\begin{itemize}
 		\item	Take a subgroup of samples, of size $n$ {\small ($n=5$ in the picture here)}
+		\item	You are free to select the value of $n$, the subgroup size
 		\item	Calculate $\bar{x}$ from the $n$ values
 		\item	What is the distribution of $\bar{x}$?
 		\begin{itemize}
 			\item	$\bar{x} \sim \mathcal{N}(\mu, \sigma^2/n)$
 		\end{itemize}
-		\item	Define: $\sigma_{\bar{X}} = \sigma/\sqrt{n}$
+		\item	Define: $\sigma_{\bar{X}} = \sigma/\sqrt{n}$ = std deviation of my subgroup average
+		\item	Assume we know $\mu$ (that's the target line) and $\sigma$
+		\item	$\sigma$ is used to find the LCL and UCL
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Shewhart chart: Derivation}
+\begin{frame}\frametitle{Shewhart chart: Derivation for the limits (LCL and UCL)}
 	\begin{itemize}
 		\item	\textbf{Thin line}: single process measurements have $\mu = 6$ and $\sigma = 2$
 		\item	\textbf{Thick line}: $\sigma_{\overline{x}} = 2/\sqrt{5}$ = 0.894, because $n=5$
@@ -201,7 +212,7 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Shewhart chart: Derivation}
+\begin{frame}\frametitle{Shewhart chart: Derivation (theoretical process)}
 	\begin{itemize}
 		\item	$z$-value: $z = \dfrac{\bar{x} - \mu}{\sigma_{\bar{X}}}$
 	\end{itemize}
@@ -214,6 +225,11 @@
 		\item	A chance of 1 in 370 that a data point, $\bar{x}$, will lie outside these bounds
 		\item	The bounds are for $\bar{x}$, not for individual, raw $x$ values
 	\end{itemize}
+	\begin{exampleblock}{Critical limitation}
+		All of the above assumed we knew $\mu$ and $\sigma$
+	\end{exampleblock}
+
+	
 \end{frame}
 
 \begin{frame}\frametitle{Shewhart chart: using estimates}
@@ -222,11 +238,11 @@
 	\begin{itemize}
 		\item	For $\mu$: use $\overline{\overline{x}} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{ \overline{x}_k}$
 		\item	For $\mu$: or just use known target value
-		\item	For $\mu$: or use the median of a long sequence of data
+		\item	For $\mu$: or use the {\color{myOrange}{\textbf{median}}} of a long sequence of data
 		\item	For $\sigma$:
 		\begin{itemize}
-			\item	Define: $\overline{S} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{s_k}$
 			\item	Define: $s_k$ = standard deviation of $n$ values
+			\item	Define: $\overline{S} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{s_k}$
 			\item	For $\sigma$: use $\dfrac{\overline{S}}{a_n}$, where $a_n$ is a correction factor
 		\end{itemize}
 	\end{itemize}
@@ -253,8 +269,7 @@
 		\end{itemize}
 		\item	e.g. bale 2 raw values: [252, 253, 247, 232, 244]
 		\begin{itemize}
-			\item	$\bar{x}_2$ = 245.6
-			\item	$s_2 = 8.44$
+			\item	$\bar{x}_2$ = 245.6 and $s_2 = 8.44$
 		\end{itemize}
 	\end{itemize}
 
@@ -265,13 +280,26 @@
 	\texttt{ 233, 236, 246, 253, 227, 231, 237, 228, 239, 240]}
 
 	Calculated for you: $\bar{\bar{x}} = 238.8$ and $\bar{S} = 9.28$
+	
+	\myhrule
+	\begin{columns}[t]
+		\column{0.50\textwidth}
+			\textbf{Phase 1} workflow: {\color{myOrange}{\emph{build}}} the monitoring chart
+			\begin{itemize}
+				\item	Calculate: LCL and UCL
+				\item	Any points outside limits?
+				\item	If so, exclude these outliers and recalculate limits.
+			\end{itemize}
+		\column{0.50\textwidth}
+			\textbf{Phase 2} workflow: {\color{myOrange}{\emph{using}}} the monitoring chart
+			\begin{itemize}
+				\item	Obtain $n$ new data points
+				\item	Calculate the subgroup average, $\bar{x}$
+				\item	Add this $\bar{x}$ point to the plot
+			\end{itemize}
+	\end{columns}
 
-	\textbf{Phase 1} workflow:
-	\begin{itemize}
-		\item	Calculate: LCL and UCL
-		\item	Any points outside limits?
-		\item	If so, exclude and repeat.
-	\end{itemize}
+	
 \end{frame}
 
 \begin{frame}\frametitle{Example}
