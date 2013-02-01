@@ -548,9 +548,22 @@
 		\end{tabular}
 	\end{table}
 	\begin{itemize}
-		\item	Regression SS (RegSS) = $\sum{(\hat{y}_i - \overline{\mathrm{y}})^2}$ {\small (from the mean to the prediction)}
-		\item	Residual SS (RSS) = $\sum{(y_i - \hat{y}_i)^2}$ {\small(from the prediction to the data point)}
-		\item	Total SS (TSS) = $\sum{(y_i - \overline{\mathrm{y}})^2}$ {\small(from the data point to the mean)}
+		\item	Regression SS (RegSS) = $\sum{(\hat{y}_i - \overline{\mathrm{y}})^2}$ 
+			\begin{itemize}
+				\item	from the mean to the prediction
+			\end{itemize}
+			
+		\vspace{12pt}
+		\item	Residual SS (RSS) = $\sum{(y_i - \hat{y}_i)^2}$
+		\begin{itemize}
+			\item	from the prediction to the data point
+		\end{itemize} 
+		
+		\vspace{12pt}
+		\item	Total SS (TSS) = $\sum{(y_i - \overline{\mathrm{y}})^2}$ 
+		\begin{itemize}
+			\item	from the data point to the mean
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -562,6 +575,7 @@
 		\item	$y_i = b_0 + b_1 x_i + e_i$, for any values of $b_0$ and $b_1$, and the models fits the data without error
 	\end{enumerate}
 
+	\vspace{12pt}
 	Do the following:
 	\begin{itemize}
 		\item	draw a generic plot
@@ -572,7 +586,10 @@
 
 \begin{frame}\frametitle{Exercise: what did we learn}
 	\begin{itemize}
-		\item	No linear model (just noise around a baseline): $y_i = \overline{y} + e_i = b_0 + e_i$); ratio = $\dfrac{\text{RegSS}}{\text{TSS}} = 0$
+		\item	No linear model (just noise around a baseline): 
+		$$y_i = \overline{y} + e_i = b_0 + e_i$$
+		
+		\item	ratio = $\dfrac{\text{RegSS}}{\text{TSS}} = 0$
 		\item	Perfect predictions: $\dfrac{\text{RegSS}}{\text{TSS}} = 1$
 		\item	$\dfrac{\text{RegSS}}{\text{TSS}} = R^2$
 	\end{itemize}
@@ -602,7 +619,8 @@
 		\item	$-1 \leq r(x,y) \leq +1$
 		\item	$0 \leq R^2 \leq +1 $
 	\end{itemize}
-
+	
+	\vspace{12pt}
 	Just tells us how far we are between predicting from \textbf{no variation} to \textbf{predictions without error}
 \end{frame}
 
@@ -619,11 +637,12 @@
 \end{frame}
 
 \begin{frame}\frametitle{Meaning of $R^2$}
-	\begin{itemize}
-		\item	How \textbf{good} a model is \emph{for a particular purpose} is almost never related to the $R^2$ value.
-	\end{itemize}
+	\begin{exampleblock}{}
+		How \textbf{good} a model is \emph{for a particular purpose} is almost never related to the $R^2$ value.
+	\end{exampleblock}
 
-	Goodness of a model is better assessed by:
+	\vspace{12pt}
+	Goodness of a model is better judged by:
 	\begin{itemize}
 		\item	your engineering judgment: does the interpretation of model parameters make sense?
 		\item	use the standard error, $S_E$ (next section)
@@ -670,8 +689,10 @@
 		\item	We can calculate $b_0$ and $b_1$
 		\item	We can calculate model predictions
 	\end{itemize}
-
-	Now we want to know more. Learn from the data.
+	
+	
+	\vspace{12pt}
+	Now we want to know more. Let's learn from the data.
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
@@ -679,8 +700,7 @@
 		\item	Model structure: $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$
 		\item	$b_0 = \hat{\beta}_0$ and $b_1= \hat{\beta}_1$
 	\end{itemize}
-	\begin{block}
-		{Assumption 1}
+	\begin{block}{Assumption 1}
 		\begin{center}
 			Model is linear
 		\end{center}
@@ -692,8 +712,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
-	\begin{block}
-		{Assumption 2}
+	\begin{block}{Assumption 2}
 		\begin{center}
 			Variance of \emph{y} is constant at all values of \emph{x}
 		\end{center}
@@ -711,8 +730,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
-	\begin{block}
-		{Assumption 3}
+	\begin{block}{Assumption 3}
 		\begin{center}
 			Errors are normally distributed: $e_i \sim \mathcal{N}(0, \sigma_\epsilon^2)$
 		\end{center}
@@ -731,8 +749,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
-	\begin{block}
-		{Assumption 4}
+	\begin{block}{Assumption 4}
 		\begin{center}
 			Each error is independent of the other
 		\end{center}
@@ -751,8 +768,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
-	\begin{block}
-		{Assumption 5}
+	\begin{block}{Assumption 5}
 		\begin{center}
 			Assume $x$ are fixed and independent of the error
 		\end{center}
@@ -765,8 +781,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
-	\begin{block}
-		{Assumption 6}
+	\begin{block}{Assumption 6}
 		\begin{center}
 			All $y_i$ values are independent of each other.
 		\end{center}
@@ -792,6 +807,7 @@
 		\item	Calculate the confidence interval for $\beta_0$ and $\beta_1$
 	\end{enumerate}
 
+	\vspace{12pt}
 	\textbf{Objective}: Calculate a suitable $\mathcal{V}\{\beta_0\}$ and $\mathcal{V}\{\beta_1\}$
 \end{frame}
 
@@ -921,7 +937,7 @@
 
 \begin{frame}\frametitle{Example}
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{\imagedir/least-squares/cameras-road-deaths.jpg}
+		\includegraphics[width=0.85\textwidth]{\imagedir/least-squares/cameras-road-deaths.jpg}
 	\end{center}
 	\begin{itemize}
 		\item	What is the causal direction (line of reasoning) that the plot's author is wanting you to follow?
@@ -949,41 +965,6 @@
 
 		4. The $S_E = 3.9K$. Satisfied with the model's prediction ability?
 	\end{columns}
-\end{frame}
-
-\begin{frame}\frametitle{Administrative}
-	\begin{itemize}
-		\item	Midterm
-		\begin{itemize}
-			\item	Grading will be completed by next week.
-			\item	If you didn't write the midterm, final exam counts 45\% + 15\% = 60\%
-		\end{itemize}
-	\end{itemize}
-	\begin{itemize}
-		\item	Final exam: Saturday, 07 April, from 09:00, IWC2
-	\end{itemize}
-	\begin{itemize}
-		\item	Course feedback
-		\begin{itemize}
-			\item	Thanks for interesting feedback. Some minor changes coming
-			\begin{itemize}
-				\item	Different hand in time: at 16:00
-				\item	More examples on the board and with R
-			\end{itemize}
-			\item	Some things cannot change: classroom and time slot
-			\item	Course grades now available
-		\end{itemize}
-	\end{itemize}
-	\begin{itemize}
-		\item	Assignments 4 returned
-	\end{itemize}
-	\begin{itemize}
-		\item	DoE outlines
-		\begin{itemize}
-			\item	More than one factor changes
-			\item	One or more $y$-variables
-		\end{itemize}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Review so far}
@@ -1043,7 +1024,7 @@
 		\item	We could assume $\hat{y}_i \pm 2S_E$
 	\end{itemize}
 	\begin{center}
-		\includegraphics[height=0.9\textheight]{\imagedir/least-squares/show-naive-predictions.png}
+		\includegraphics[height=0.80\textheight]{\imagedir/least-squares/show-naive-predictions.png}
 	\end{center}
 \end{frame}
 
@@ -1059,7 +1040,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Prediction interval for y}
+\begin{frame}\frametitle{Prediction interval for y: \emph{has curvature}}
 	\begin{center}
 		\includegraphics[height=0.9\textheight]{\imagedir/least-squares/show-anscome-solution-with-yhat-bounds.png}
 	\end{center}
@@ -1073,15 +1054,21 @@
 		\item	Training and testing data
 	\end{itemize}
 
+	\vspace{12pt}
 	The residuals contain the clues to problems with the model.
 \end{frame}
 
 \begin{frame}\frametitle{Normally distributed errors}
 
-	AIM: normally distributed errors
+	\begin{exampleblock}{Aim}
+		\begin{center}
+			Ensure the residuals are normally distributed
+		\end{center}
+	\end{exampleblock}
 
 	If non-normal: $S_E$ and other variances such as $\mathcal{V}(b_1)$ are inflated.
 
+	\vspace{12pt}
 	\textbf{Detecting it}:
 	\begin{itemize}
 		\item	Use a q-q plot: should match 45 degree line
@@ -1116,7 +1103,7 @@
 	$
 	\begin{array}{rcccl}
 		\text{Before}: \qquad & b_1 = -0.173 & \qquad -0.255 \leq \beta_1 \leq -0.0898 \\
-		& S_E = 9789\\
+		& S_E = 9789\\ \\
 		\text{After}: \qquad & b_1 = -0.155 & \qquad -0.230 \leq \beta_1 \leq -0.0807 \\
 		&S_E = 8655
 	\end{array}
@@ -1597,14 +1584,13 @@
 \end{frame}
 
 \begin{frame}\frametitle{Interpretation of the model coefficients}
-	\begin{block}
-		{Model}
+	\begin{block}{Model}
 		\begin{center}
 			$y = b_1x_1 + b_2x_2$
 		\end{center}
 	\end{block}
 	\begin{center}
-		\includegraphics[width=0.75\textwidth]{\imagedir/least-squares/least-squares-two-x-variables.png}
+		\includegraphics[width=0.65\textwidth]{\imagedir/least-squares/least-squares-two-x-variables.png}
 	\end{center}
 \end{frame}
 
@@ -1642,20 +1628,19 @@
 	\end{center}
 	\see{\href{http://en.wikipedia.org/wiki/File:Mixing_-_flusso_assiale_e_radiale.jpg}{Wikipedia article}}
 
-	Yield = \emph{f}(temperature, impeller type); impeller = [radial, axial]
+	Yield = \emph{f}\,(temperature, impeller type); impeller = [radial, axial]
 	\begin{itemize}
 		\item	Build two models: one for radial, one for axial
 		\begin{itemize}
 			\item	Not efficient use of the data
 			\item	Temperature effect is the same, independent of impeller
-			\item	Fewer degrees of freedom
+			\item	Fewer degrees of freedom in each model
 			\item	Increases $S_E$
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Integer variables in the model}
-
 	$$
 	\begin{array}{lr}
 		y &= \beta_0 + \beta_1 T + \gamma d + \varepsilon \\
@@ -1705,7 +1690,7 @@
 
 \begin{frame}\frametitle{Integer variables in the model}
 	\begin{center}
-		\includegraphics[width=0.9\textheight]{\imagedir/least-squares/least-squares-two-x-variables-one-integer.png}
+		\includegraphics[width=0.85\textheight]{\imagedir/least-squares/least-squares-two-x-variables-one-integer.png}
 	\end{center}
 	\begin{itemize}
 		\item	Example: assume the 95\% confidence interval for impeller parameter was: $ -32 \mu\text{g} \leq \gamma \leq 21 \mu\text{g}$; i.e. no significant effect on yield
@@ -1749,7 +1734,10 @@
 		\end{itemize}
 	\end{itemize}
 
-	For unusual data: $\text{Leverage} \times \text{Discrepancy} = \text{Influence on the model} $
+	\vspace{12pt}
+	\begin{exampleblock}{For unusual data: }
+		$$\text{Leverage} \times \text{Discrepancy} = \text{Influence on the model} $$
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}\frametitle{Model A}
@@ -1808,15 +1796,24 @@
 \end{frame}
 
 \begin{frame}\frametitle{Influence}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/least-squares/cooks-distances-slides.png}
-	\end{center}
+	\begin{columns}[t]
+		\column{1.1\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/least-squares/cooks-distances-slides.png}
+			\end{center}
+		\column{0.01\textwidth}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{Combining all measures of influence}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/least-squares/influence-plots-slides.png}
-	\end{center}
+	\begin{columns}[t]
+		\column{1.1\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/least-squares/influence-plots-slides.png}
+			\end{center}
+		\column{0.01\textwidth}
+	\end{columns}
+	
 	\begin{itemize}
 		\item	\texttt{library(car)}
 		\item	\texttt{model <- lm(y \string~ x)}
@@ -1832,6 +1829,8 @@
 			\item	Useful for automated model building
 			\item	Human reviewer not trained in understanding plots
 		\end{itemize}
+		
+		\vspace{12pt}
 		\item	Enrichment: \emph{Logistic modelling}
 		\begin{itemize}
 			\item	\emph{y}-variable is discrete (yes/no or pass/fail)
@@ -1877,7 +1876,7 @@
 			\item	Observations: 1, 3, 5, 7, ... 729 to build
 			\item	Observations: 2, 4, 6, 8, ... 730 to test
 		\end{itemize}
-		\item	\textbf{B}
+		\item	or \textbf{B}
 		\begin{itemize}
 			\item	Observations: 1 to 365 (2006 data) to build
 			\item	Observations: 366 to 730 (2007 data) to test
@@ -1892,8 +1891,9 @@
 		\item	The function (model), $f(x)$, is unspecified
 		\item	The model is usually a smooth function
 	\end{itemize}
+	\vspace{-12pt}
 	\begin{center}
-		\includegraphics[height=0.7\textheight]{\imagedir/least-squares/Income-Prestige-raw-data.png}
+		\includegraphics[height=0.8\textheight]{\imagedir/least-squares/Income-Prestige-raw-data.png}
 	\end{center}
 \end{frame}
 
@@ -1938,8 +1938,8 @@
 	\begin{itemize}
 		\item	Point 13 is influential
 		\begin{itemize}
-			\item	slope = -0.0059 with point 13
-			\item	slope = -0.0078 without it
+			\item	slope = $-0.0059$ with point 13
+			\item	slope = $-0.0078$ without it
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -1956,7 +1956,7 @@
 		\item	CI: $-0.0082 \leq \beta_1 \leq -0.0036$
 	\end{itemize}
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{\imagedir/least-squares/bootstrap-example-slide2.png}
+		\includegraphics[width=0.75\textwidth]{\imagedir/least-squares/bootstrap-example-slide2.png}
 	\end{center}
 \end{frame}
 
