@@ -1,57 +1,57 @@
 \begin{frame}\frametitle{Least squares models in context ...}
 	\begin{itemize}
-		\item	A new development: we start looking at more than one variable at a time. 
-		\item	We will use confidence intervals and visualization heavily though 
+		\item	A new development: we start looking at more than one variable at a time.
+		\item	We will use confidence intervals and visualization heavily though
 	\end{itemize}
 	\begin{itemize}
-		\item	Some of the most important classes are this section: we develop the base for DOE and almost all modelling tools you will see in your career. 
+		\item	Some of the most important classes are this section: we develop the base for DOE and almost all modelling tools you will see in your career.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Usage examples}
 	\begin{itemize}
-		\item	\textbf{Quantify} relationship between 2 variables: 
+		\item	\textbf{Quantify} relationship between 2 variables:
 		\begin{itemize}
-			\item	\emph{Manager}: How does yield from the lactic acid batch fermentation relate to the purity of sucrose? 
-			\item	\emph{Engineer}: The yield can be predicted from sucrose purity with an error of plus/minus 8\% 
-			\item	\emph{Manager}: And how about the relationship between yield and glucose purity? 
-			\item	\emph{Engineer}: Over the range of our historical data, there is no discernible relationship. 
+			\item	\emph{Manager}: How does yield from the lactic acid batch fermentation relate to the purity of sucrose?
+			\item	\emph{Engineer}: The yield can be predicted from sucrose purity with an error of plus/minus 8\%
+			\item	\emph{Manager}: And how about the relationship between yield and glucose purity?
+			\item	\emph{Engineer}: Over the range of our historical data, there is no discernible relationship.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Usage examples}
 	\begin{itemize}
-		\item	\textbf{Assess} relationship between 2 variables: 
+		\item	\textbf{Assess} relationship between 2 variables:
 		\begin{itemize}
-			\item	\emph{Engineer 1}: the theoretical equation for the melt index is non-linearly related to the viscosity 
-			\item	\emph{Engineer 2}: the linear model does not show any evidence of that, but the model's prediction ability does improve slightly when we use a non-linear transformation in the least-squares model. 
+			\item	\emph{Engineer 1}: the theoretical equation for the melt index is non-linearly related to the viscosity
+			\item	\emph{Engineer 2}: the linear model does not show any evidence of that, but the model's prediction ability does improve slightly when we use a non-linear transformation in the least-squares model.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Where are we headed}
 	\begin{itemize}
-		\item	You've seen the least squares model hundreds of times: 
-		
+		\item	You've seen the least squares model hundreds of times:
+
 		$$\mathrm{y} = \beta_0 + \beta_1 \mathrm{x} + \epsilon$$
-		
+
 		\begin{itemize}
-			\item	What are confidence intervals for $\beta_0$ and $\beta_1$? 
-			\item	Why do we even care about these confidence intervals? 
-			\item	What does $R^2$ really mean? 
-			\item	How to judge predictions from the model? $\hat{y} \pm \_\_\_$ 
+			\item	What are confidence intervals for $\beta_0$ and $\beta_1$?
+			\item	Why do we even care about these confidence intervals?
+			\item	What does $R^2$ really mean?
+			\item	How to judge predictions from the model? $\hat{y} \pm \_\_\_$
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{What we will cover}
 	\begin{enumerate}
-		\item	Covariance 
-		\item	Correlation 
-		\item	Bivariate least squares (2 variables) 
-		\item	Multiple linear regression (2+ variables) 
-		\item	Advanced linear modelling topics 
+		\item	Covariance
+		\item	Correlation
+		\item	Bivariate least squares (2 variables)
+		\item	Multiple linear regression (2+ variables)
+		\item	Advanced linear modelling topics
 	\end{enumerate}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/mindmaps/least-squares-section-mapping.png}
@@ -60,33 +60,33 @@
 
 \begin{frame}\frametitle{References and readings}
 	\begin{itemize}
-		\item	\textbf{Recommended}: John Fox, \emph{Applied Regression Analysis and Generalized Linear Models} 
-		\item	\textbf{Recommended}: Draper and Smith, \emph{Applied Regression Analysis} 
-		\item	Box, Hunter and Hunter, \emph{Statistics for Experimenters}, portions of Chapter 10 (2nd edition) 
-		\item	Montgomery and Runger, \emph{Applied Statistics and Probability for Engineers} 
+		\item	\textbf{Recommended}: John Fox, \emph{Applied Regression Analysis and Generalized Linear Models}
+		\item	\textbf{Recommended}: Draper and Smith, \emph{Applied Regression Analysis}
+		\item	Box, Hunter and Hunter, \emph{Statistics for Experimenters}, portions of Chapter 10 (2nd edition)
+		\item	Montgomery and Runger, \emph{Applied Statistics and Probability for Engineers}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Covariance}
 	\begin{itemize}
-		\item	Consider measurements from a gas cylinder: temperature (K) and pressure (kPa). 
-		\item	Ideal gas law applies under moderate condition: $pV = nRT$ 
+		\item	Consider measurements from a gas cylinder: temperature (K) and pressure (kPa).
+		\item	Ideal gas law applies under moderate condition: $pV = nRT$
 		\begin{itemize}
-			\item	Fixed volume, $V = 20 \times 10^{-3} \text{m}^3$ = 20 L 
-			\item	Moles of gas, $n = 14.1$ mols of chlorine gas, (1 kg gas) 
-			\item	Gas constant, $R = 8.314$ J/(mol.K) 
+			\item	Fixed volume, $V = 20 \times 10^{-3} \text{m}^3$ = 20 L
+			\item	Moles of gas, $n = 14.1$ mols of chlorine gas, (1 kg gas)
+			\item	Gas constant, $R = 8.314$ J/(mol.K)
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	Simplify the ideal gas law to: $p=\beta_1 T$, where $\beta_1 = \dfrac{nR}{V} > 0$ 
+		\item	Simplify the ideal gas law to: $p=\beta_1 T$, where $\beta_1 = \dfrac{nR}{V} > 0$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Covariance}
-	
+
 	Raw data measured:
 	\begin{table}
-		[ht] \centering 
+		[ht] \centering
 		\begin{tabular}
 			{l c c c} \hline\hline &Cylinder & Cylinder & Room \\
 			[0.5ex] &temperature (K) & pressure (kPa) & humidity (\%) \\
@@ -102,33 +102,33 @@
 			& 381& 2200& 49\\
 			\hline \textbf{Mean}& 327& 1910& 46.1\\
 			\textbf{Variance} & 1320 & 43267 & 8.1\\
-			\hline 
+			\hline
 		\end{tabular}
 	\end{table}
 \end{frame}
 
 \begin{frame}\frametitle{Covariance}
 	\begin{itemize}
-		\item	Formal definition: 
+		\item	Formal definition:
 	\end{itemize}
 	$$ \text{Cov}\left\{x, y\right\} = \mathcal{E}\left\{ (x - \overline{x}) (y - \overline{y})\right\} \qquad \text{where} \qquad \mathcal{E}\left\{ z \right\} = \overline{z} $$
-	
+
 	\begin{enumerate}
-		\item	Calculate deviation variables: $T - \overline{T}$ and $p - \overline{p}$ 
+		\item	Calculate deviation variables: $T - \overline{T}$ and $p - \overline{p}$
 		\begin{itemize}
-			\item	Subtracting off mean centers the vector at zero 
+			\item	Subtracting off mean centers the vector at zero
 		\end{itemize}
-		\item	Multiply the centered vectors: $(T - \overline{T}) (p - \overline{p})$ 
+		\item	Multiply the centered vectors: $(T - \overline{T}) (p - \overline{p})$
 		\begin{itemize}
-			\item	\texttt{16740 10080 5400 1440 180 60 1620 5700 10920 15660} 
+			\item	\texttt{16740 10080 5400 1440 180 60 1620 5700 10920 15660}
 		\end{itemize}
-		\item	Calculate the expected value (mean): 6780 
-		\item	Covariance has units: 6780 [K.kPa] 
+		\item	Calculate the expected value (mean): 6780
+		\item	Covariance has units: 6780 [K.kPa]
 	\end{enumerate}
-	
+
 	\vspace{12pt}
 	\begin{itemize}
-		\item	Covariance between temperature and humidity is 202 [K.\%] 
+		\item	Covariance between temperature and humidity is 202 [K.\%]
 		\begin{itemize}
 			\item	\emph{Awkward units}!
 		\end{itemize}
@@ -137,43 +137,43 @@
 
 \begin{frame}\frametitle{Covariance}
 	\begin{itemize}
-		\item	Covariance with itself is the variance: 
+		\item	Covariance with itself is the variance:
 		$$\text{Cov}\left\{x, x\right\} = \mathcal{V}(x) = \mathcal{E}\left\{ (x - \overline{x}) (x - \overline{x})\right\}$$
-		
-		\item	(Co)variance of a centered vector = (co)variance of the uncentered vector 
-		\item	What does $x^Tx$ represent? 
+
+		\item	(Co)variance of a centered vector = (co)variance of the uncentered vector
+		\item	What does $x^Tx$ represent?
 	\end{itemize}
 	\begin{itemize}
-		\item	Go through the examples in the notes 
+		\item	Go through the examples in the notes
 		\begin{itemize}
-			\item	$x$=hours worked per week and $y$=take home pay 
-			\item	$x$=age of married partner 1 and $y$=age of married partner 2 
-			\item	$x$=cigarettes smoked per month and $y$=age at death 
-			\item	$x$=temperature on top tray of distillation column and $y$=top product purity 
+			\item	$x$=hours worked per week and $y$=take home pay
+			\item	$x$=age of married partner 1 and $y$=age of married partner 2
+			\item	$x$=cigarettes smoked per month and $y$=age at death
+			\item	$x$=temperature on top tray of distillation column and $y$=top product purity
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	Covariance and correlation describe overall tendency, outliers don't follow the expected pattern. 
+		\item	Covariance and correlation describe overall tendency, outliers don't follow the expected pattern.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Correlation}
 	\begin{itemize}
-		\item	(Co)variance depends on units: e.g. different covariance for grams vs kilograms 
-		\item	Correlation removes the scaling effect: 
+		\item	(Co)variance depends on units: e.g. different covariance for grams vs kilograms
+		\item	Correlation removes the scaling effect:
 	\end{itemize}
-	
+
 	$$r(x, y) = \dfrac{\mathcal{E}\left\{ (x - \overline{x}) (y - \overline{y})\right\}}{\sqrt{\mathcal{V}\left\{x\right\}\mathcal{V}\left\{y\right\}}} = \dfrac{\text{Cov}\left\{x, y\right\}}{\sqrt{\mathcal{V}\left\{x\right\}\mathcal{V}\left\{y\right\}}}$$
 	\begin{itemize}
-		\item	Divides by the units of $x$ and $y$: dimensionless result 
-		\item	$-1 \leq r(x,y) \leq 1$ 
+		\item	Divides by the units of $x$ and $y$: dimensionless result
+		\item	$-1 \leq r(x,y) \leq 1$
 	\end{itemize}
 	\begin{itemize}
-		\item	Gas cylinder example: 
+		\item	Gas cylinder example:
 		\begin{itemize}
-			\item	\emph{r}(temperature, pressure) = 0.997 
-			\item	\emph{r}(pressure, temperature) = 0.997 
-			\item	\emph{r}(temperature, humidity) = 0.380 
+			\item	\emph{r}(temperature, pressure) = 0.997
+			\item	\emph{r}(pressure, temperature) = 0.997
+			\item	\emph{r}(temperature, humidity) = 0.380
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -193,84 +193,84 @@
 
 \begin{frame}\frametitle{Formal definitions for covariance and correlation}
 	\begin{itemize}
-		\item	$\mathcal{E}\{x\} = \overline{x}$ 
-		\item	$\mathcal{E}\{x+y\} = \mathcal{E}\{x\} + \mathcal{E}\{y\} = \overline{x} + \overline{y}$ 
-		\item	$\mathcal{V}\{x\} = \mathcal{E}\{(x-\overline{x})^2\}$ 
-		\item	$\mathcal{V}\{cx\} = c^2\mathcal{V}\{x\}$ 
-		\item	$\mathcal{V}\{x+y\} \neq \mathcal{V}\{x\} + \mathcal{V}\{y\}$, in general 
-		\item	$\mathcal{V}\{x+y\} = \mathcal{V}\{x\} + \mathcal{V}\{y\}$, only if $x$ and $y$ are independent 
-		\item	Go through the other definitions on your own. They build on these. 
+		\item	$\mathcal{E}\{x\} = \overline{x}$
+		\item	$\mathcal{E}\{x+y\} = \mathcal{E}\{x\} + \mathcal{E}\{y\} = \overline{x} + \overline{y}$
+		\item	$\mathcal{V}\{x\} = \mathcal{E}\{(x-\overline{x})^2\}$
+		\item	$\mathcal{V}\{cx\} = c^2\mathcal{V}\{x\}$
+		\item	$\mathcal{V}\{x+y\} \neq \mathcal{V}\{x\} + \mathcal{V}\{y\}$, in general
+		\item	$\mathcal{V}\{x+y\} = \mathcal{V}\{x\} + \mathcal{V}\{y\}$, only if $x$ and $y$ are independent
+		\item	Go through the other definitions on your own. They build on these.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Introduction to least squares: relating 2 variables}
 	\begin{itemize}
-		\item	Linear least squares model is a useful tool 
-		\item	It is the basis for a number of algorithms in data analysis 
+		\item	Linear least squares model is a useful tool
+		\item	It is the basis for a number of algorithms in data analysis
 		\begin{itemize}
-			\item	DOE 
-			\item	Latent variable methods 
-			\item	Almost all other advanced methods build on its concepts 
+			\item	DOE
+			\item	Latent variable methods
+			\item	Almost all other advanced methods build on its concepts
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	We consider only 2 variables: $\mathrm{x}$ and $\mathrm{y}$. 
+		\item	We consider only 2 variables: $\mathrm{x}$ and $\mathrm{y}$.
 	\end{itemize}
 	\begin{enumerate}
-		\item	Model definition 
-		\item	Building (fitting) the model 
-		\item	Interpret model parameters and model outputs 
-		\item	Software 
+		\item	Model definition
+		\item	Building (fitting) the model
+		\item	Interpret model parameters and model outputs
+		\item	Software
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Model definition}
-	
+
 	We have 2 vectors of data, $\mathrm{x}$ and $\mathrm{y}$. Presume the relationship between them:
-	
-	$$ 
+
+	$$
 	\begin{array}{rcl}
 		\mathcal{E}\left\{\mathrm{y}\right\} &=& \beta_0 + \beta_1 \mathrm{x} \\
-		\mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \epsilon 
+		\mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \epsilon
 	\end{array}
 	$$
 	\begin{itemize}
-		\item	$\beta_0$, $\beta_1$ and $\epsilon$: are \emph{population} parameters, 
-		\item	$\epsilon$ term: 
+		\item	$\beta_0$, $\beta_1$ and $\epsilon$: are \emph{population} parameters,
+		\item	$\epsilon$ term:
 		\begin{itemize}
-			\item	unmodelled components of the linear model 
-			\item	measurement error 
-			\item	other random variation 
+			\item	unmodelled components of the linear model
+			\item	measurement error
+			\item	other random variation
 		\end{itemize}
 	\end{itemize}
-	
+
 	\textbf{Important}: error is from $y$, not from $x$.
 \end{frame}
 
 \begin{frame}\frametitle{Model definition}
-	
-	Use \textbf{any method} to obtain an estimate of these parameters: 
+
+	Use \textbf{any method} to obtain an estimate of these parameters:
 	\begin{itemize}
-		\item	$b_0 = \hat{\beta_0}$ 
-		\item	$b_1 = \hat{\beta_1}$ 
-		\item	$e = \hat{\epsilon}$ 
+		\item	$b_0 = \hat{\beta_0}$
+		\item	$b_1 = \hat{\beta_1}$
+		\item	$e = \hat{\epsilon}$
 	\end{itemize}
-	
+
 	So we can write:
-	
+
 	$$
 	\begin{array}{rcl}
 		y_i &=& b_0 + b_1 x_i + e_i \\
-		\hat{y}_i &=& b_0 + b_1 x_i 
+		\hat{y}_i &=& b_0 + b_1 x_i
 	\end{array}
 	$$
 \end{frame}
 
 \begin{frame}\frametitle{Model definition}
 	\begin{itemize}
-		\item	Calculate the estimates $b_0$ and $b_1$ 
-		\item	We want: $\mathcal{E}\left\{e\right\} = 0$ 
-		\item	Then for a new x-observation, $x_i$, we can predict $\hat{y}_i =b_0 + b_1x_{i}$ 
+		\item	Calculate the estimates $b_0$ and $b_1$
+		\item	We want: $\mathcal{E}\left\{e\right\} = 0$
+		\item	Then for a new x-observation, $x_i$, we can predict $\hat{y}_i =b_0 + b_1x_{i}$
 	\end{itemize}
 	\begin{center}
 		\includegraphics[height=0.67\textheight]{\imagedir/least-squares/least-squares-picture.png}
@@ -278,63 +278,66 @@
 \end{frame}
 
 \begin{frame}\frametitle{Minimizing errors}
-	
+
 	How do we calculate $b_0$ and $b_1$?
-	
+
 	\textbf{Given}: that we have $n$ pairs of data collected: $(x_i, y_i)$
-	
+
 	\textbf{Aim}: make the $e_i$ values small in some way and hopefully also have $\mathcal{E}\left\{e\right\} = 0$
+
+	\vspace{24pt}
+	Some options we could use:
 	\begin{enumerate}
-		\item	$\sum_{i=1}^{n}{(e_i)^2}$: the standard least squares objective function 
-		\item	$\sum_{i=1}^{n}{(e_i)^4}$ 
-		\item	sum of perpendicular distances to the L/S line 
-		\item	$\sum_{i=1}^{n}{\|e_i\|}$ (aka least absolute deviations, $\ell$-1 norm problem) 
-		\item	$\text{median}\left\{ e_i^2 \right\}$: least median of squared errors model (one type of robust least squares model) 
+		\item	$\sum_{i=1}^{n}{(e_i)^2}$: the standard least squares objective function
+		\item	$\sum_{i=1}^{n}{(e_i)^4}$
+		\item	sum of perpendicular distances to the L/S line
+		\item	$\sum_{i=1}^{n}{\|e_i\|}$ (aka least absolute deviations, $\ell$-1 norm problem)
+		\item	$\text{median}\left\{ e_i^2 \right\}$: least median of squared errors model (one type of robust least squares model)
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Why minimize the sum of squares ?}
-	
-	The least squares model: 
+
+	The least squares model:
 	\begin{itemize}
-		\item	has the lowest possible variance for $b_0$ and $b_1$ when certain assumptions are met (more later) 
-		\item	computationally tractable by hand 
-		\item	very fast on computers 
-		\item	easy to prove various mathematical properties 
-		\item	intuitive: penalize deviations quadratically 
+		\item	has the lowest possible variance for $b_0$ and $b_1$ when certain assumptions are met (more later)
+		\item	computationally tractable by hand
+		\item	very fast on computers
+		\item	easy to prove various mathematical properties
+		\item	intuitive: penalize deviations quadratically
 	\end{itemize}
-	
+
 	Other forms: multiple solutions, unstable, high variance solutions, mathematical proofs are difficult
 \end{frame}
 
 \begin{frame}\frametitle{Solving the model}
-	
+
 	Has to be an optimization problem: \textbf{\emph{minimizing}} the sum of squared errors
 	\begin{itemize}
-		\item	Easy to solve! Unconstrained optimization problem (know this from an undergrad optimization course) 
+		\item	Easy to solve! Unconstrained optimization problem (know this from an undergrad optimization course)
 	\end{itemize}
-	
-	$$ 
+
+	$$
 	\begin{array}{rcl}
 		\min_{\displaystyle b_0, b_1} f(b_0, b_1) &=& \sum_{i=1}^{n}{(e_i)^2} \\
-		&=& \sum_{i=1}^{n}{\left(y_i - b_0 - b_1 x_i\right)^2} 
+		&=& \sum_{i=1}^{n}{\left(y_i - b_0 - b_1 x_i\right)^2}
 	\end{array}
 	$$
 \end{frame}
 
 \begin{frame}\frametitle{Solving the model: grid search}
-	
-	Gas cylinder example: $p = \beta_0 + \beta_1 T$ 
+
+	Gas cylinder example: $p = \beta_0 + \beta_1 T$
 	\begin{itemize}
-		\item	We know that $\beta_0 = 0$ from theoretical principles 
-		\item	Solve for $\beta_1$ by trial and error. Initial guess? 
-		\item	$b_1 \approx \beta_1 = \dfrac{nR}{V} = \dfrac{(14.1 \,\, \text{mol})(8.314 \,\,\text{J/(mol.K)})}{20 \times 10^{-3} \,\,\text{m}^3} = 5.861 \,\,\text{kPa/K}$ 
+		\item	We know that $\beta_0 = 0$ from theoretical principles
+		\item	Solve for $\beta_1$ by trial and error. Initial guess?
+		\item	$b_1 \approx \beta_1 = \dfrac{nR}{V} = \dfrac{(14.1 \,\, \text{mol})(8.314 \,\,\text{J/(mol.K)})}{20 \times 10^{-3} \,\,\text{m}^3} = 5.861 \,\,\text{kPa/K}$
 	\end{itemize}
 	\begin{enumerate}
-		\item	Construct equally spaced points between 5.0 and 6.5, 
-		\item	Set $b_1 = $ guessed value 
-		\item	Calculate the objective function 
-		\item	Plot $b_1$ value vs objective function 
+		\item	Construct equally spaced points between 5.0 and 6.5,
+		\item	Set $b_1 = $ guessed value
+		\item	Calculate the objective function
+		\item	Plot $b_1$ value vs objective function
 	\end{enumerate}
 \end{frame}
 
@@ -349,184 +352,181 @@
 		\includegraphics[height=0.7\textheight]{\imagedir/least-squares/least-squares-objective-function-annotated.png}
 	\end{center}
 	\begin{itemize}
-		\item	objective function shape is a bowl 
-		\item	a unique minimum can always be found 
-		\item	because the objective function is convex 
+		\item	objective function shape is a bowl
+		\item	a unique minimum can always be found
+		\item	because the objective function is convex
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Solving the model: analytically}
-	\begin{block}{Least squares objective function} 
-		$$ f(b_0, b_1) = \sum_{i=1}^{n}{\left(y_i - b_0 - b_1 x_i\right)^2} $$ 
+	\begin{block}{Least squares objective function}
+		$$ f(b_0, b_1) = \sum_{i=1}^{n}{\left(y_i - b_0 - b_1 x_i\right)^2} $$
 	\end{block}
-	
-	At the optimal point we know that: 
+
+	At the optimal point we know that:
 	\begin{itemize}
-		\item	The partial derivatives wrt $b_0$ and $b_1$ are zero 
-		\item	This represents 2 equations in 2 unknowns 
+		\item	The partial derivatives wrt $b_0$ and $b_1$ are zero
+		\item	This represents 2 equations in 2 unknowns
 		\item	Take the 2nd derivative to confirm that the optimum is indeed a minimum $\left(\dfrac{
-		\partial^2 f}{ 
+		\partial^2 f}{
 		\partial^2 b_0} > 0 \quad \text{and} \quad \dfrac{
-		\partial^2 f}{ 
-		\partial^2 b_1} > 0\right)$ 
+		\partial^2 f}{
+		\partial^2 b_1} > 0\right)$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Solving the model: analytically}
-	
-	$$ 
+
+	$$
 	\begin{array}{rcl}
-		\dfrac{
-		\partial f(b_0, b_1)}{
-		\partial{b_0}} &=& -2 \sum_i^{n}{(y_i - b_0 - b_1 x_i)} = 0 \\
-		\dfrac{
-		\partial f(b_0, b_1)}{
-		\partial{b_1}} &=& -2 \sum_i^{n}{(x_i)(y_i - b_0 - b_1 x_i)} = 0 \\
+		\dfrac{\partial f(b_0, b_1)}{\partial{b_0}} &=& -2 \sum_i^{n}{(y_i - b_0 - b_1 x_i)} = 0 \\
+		\dfrac{\partial f(b_0, b_1)}{\partial{b_1}} &=& -2 \sum_i^{n}{(x_i)(y_i - b_0 - b_1 x_i)} = 0 \\
 	\end{array}
 	$$
-	
+
+	\vspace{12pt}
 	Least squares optimum for $f(b_0, b_1)$:
-	
-	$$ 
+
+	$$
 	\begin{array}{rcl}
 		b_0 &=& \overline{\mathrm{y}} - b_1\overline{\mathrm{x}} \\
-		b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} } 
+		b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} }
 	\end{array}
 	$$
 \end{frame}
 
 \begin{frame}\frametitle{Remarks}
-	\begin{block}{Least squares solution} 
-		$$ 
+	\begin{block}{Least squares solution}
+		$$
 			\begin{array}{rcl}
 				b_0 &=& \overline{\mathrm{y - b_1\overline{\mathrm{x}}}} \\
-				b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} } 
+				b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} }
 			\end{array}
-		$$ 
+		$$
 	\end{block}
 	\begin{enumerate}
-		\item	$\sum_i{e_i} = 0$ 
-		\item	The straight line equation passes through $(\overline{\mathrm{x}}, \overline{\mathrm{y}})$ without error 
-		\item	Prove to yourself that $\sum_i{(x_i e_i)} = \mathrm{x}^T\mathrm{e} = 0$ 
+		\item	$\sum_i{e_i} = 0$
+		\item	The straight line equation passes through $(\overline{\mathrm{x}}, \overline{\mathrm{y}})$ without error
+		\item	Prove to yourself that $\sum_i{(x_i e_i)} = \mathrm{x}^T\mathrm{e} = 0$
 		\begin{itemize}
-			\item	The residuals are uncorrelated with the input variables, $\mathrm{x}$ 
-			\item	There is no information in the residuals that is in the $\mathrm{x}$'s 
+			\item	The residuals are uncorrelated with the input variables, $\mathrm{x}$
+			\item	There is no information in the residuals that is in the $\mathrm{x}$'s
 		\end{itemize}
-		\item	Prove and interpret that $\sum_i{(\hat{y}_i e_i)} = \hat{\mathrm{y}}^T\mathrm{e} = 0$ 
+		\item	Prove and interpret that $\sum_i{(\hat{y}_i e_i)} = \hat{\mathrm{y}}^T\mathrm{e} = 0$
 		\begin{itemize}
-			\item	The fitted values are uncorrelated with the residuals 
+			\item	The fitted values are uncorrelated with the residuals
 		\end{itemize}
-		\item	Estimate of $b_0$ depends on $b_1$: the estimates are correlated 
+		\item	Estimate of $b_0$ depends on $b_1$: the estimates are correlated
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Questions}
-	\begin{block}{Least squares solution} 
-			$$ 
+	\begin{block}{Least squares solution}
+			$$
 			\begin{array}{rcl}
 				b_0 &=& \overline{\mathrm{y - b_1\overline{\mathrm{x}}}} \\
-				b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} } 
+				b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} }
 			\end{array}
 			$$
 	\end{block}
 	\begin{enumerate}
-		\item	Units of $b_1$ ? 
+		\item	Units of $b_1$ ?
 		\begin{itemize}
-			\item	The units of $\mathrm{y}$ divided by the units of $\mathrm{x}$ 
+			\item	The units of $\mathrm{y}$ divided by the units of $\mathrm{x}$
 		\end{itemize}
-		\item	Gas cylinder example. Let $\hat{p}_i = b_0 + b_1 T_i$: 
+		\item	Gas cylinder example. Let $\hat{p}_i = b_0 + b_1 T_i$:
 		\begin{itemize}
-			\item	What is the interpretation of coefficient $b_1$? 
-			\item	What is the interpretation of coefficient $b_0$? 
+			\item	What is the interpretation of coefficient $b_1$?
+			\item	What is the interpretation of coefficient $b_0$?
 		\end{itemize}
-		\item	How could the denominator term for $b_1$ equal zero? And what would that mean? 
+		\item	How could the denominator term for $b_1$ equal zero? And what would that mean?
 		\begin{itemize}
-			\item	As long as there is variation in the x-data that we will obtain a solution 
+			\item	As long as there is variation in the x-data that we will obtain a solution
 		\end{itemize}
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Example}
 	\begin{columns}
-		\column{5cm} 
+		\column{5cm}
 			\begin{enumerate}
-				\item	Calculate model parameter estimates: $y = b_0 + b_1 x$ from the given data 
-				\item	Calculate predicted value $\hat{y}_i$ when $x_i = 5.5$ 
+				\item	Calculate model parameter estimates: $y = b_0 + b_1 x$ from the given data
+				\item	Calculate predicted value $\hat{y}_i$ when $x_i = 5.5$
 			\end{enumerate}
 			\begin{center}
-				\includegraphics[width=\textwidth]{\imagedir/least-squares/show-anscombe-problem-1.png} 
+				\includegraphics[width=\textwidth]{\imagedir/least-squares/show-anscombe-problem-1.png}
 			\end{center}
-		\column{5cm} 
+		\column{5cm}
 			\begin{center}
-				\includegraphics[height=0.8\textheight]{\imagedir/least-squares/regression-exercise.png} 
+				\includegraphics[height=0.8\textheight]{\imagedir/least-squares/regression-exercise.png}
 			\end{center}
 	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Least squares model \textcolor{red}{analysis}}
-	
-	Assume we have calculated values for $b_0$ and $b_1$ from the data. Now: 
+\begin{frame}\frametitle{Least squares model \textcolor{myOrange}{analysis}}
+
+	Assume we have calculated values for $b_0$ and $b_1$ from the data. Now:
 	\begin{enumerate}
-		\item	how well does the model perform? 
-		\item	what part of the data is error 
+		\item	how well does the model perform?
+		\item	what part of the data is error
 		\begin{itemize}
-			\item	noise 
+			\item	noise
 		\end{itemize}
-		\item	what part of the data is systematic 
+		\item	what part of the data is systematic
 		\begin{itemize}
-			\item	signal 
+			\item	signal
 		\end{itemize}
-		\item	confidence interval for the model coefficients: $b_0$ and $b_1$ 
+		\item	confidence interval for the model coefficients: $b_0$ and $b_1$
 		\begin{itemize}
-			\item	intercept: $-2.3 \leq \beta_0 \leq +3.2$ 
-			\item	slope = rate constant (1/seconds): $0.55 \leq \beta_1 \leq 1.07$ 
+			\item	intercept: $-2.3 \leq \beta_0 \leq +3.2$
+			\item	slope = rate constant (1/seconds): $0.55 \leq \beta_1 \leq 1.07$
 		\end{itemize}
-		\item	prediction interval for the y-variable 
+		\item	prediction interval for the y-variable
 		\begin{itemize}
-			\item	e.g. the predicted yield is $8 \pm 1.7$ kg 
+			\item	e.g. the predicted yield is $8 \pm 1.7$ kg
 		\end{itemize}
 	\end{enumerate}
-	
+
 	But, we need to \textbf{make assumptions} about the data first.
 \end{frame}
 
 \begin{frame}\frametitle{The variance breakdown}
-	
-	\textbf{Life is pretty boring without variability} (and this course would be unnecessary)
+
+	\emph{Recall}: \textbf{life is pretty boring without variability} (and this course would be unnecessary)
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{\imagedir/concepts/variation/variation-none.png}
 	\end{center}
-	
-	Analysis of variance (ANOVA) - just a tool to show the breakdown of variability in the $y$ vector: 
+
+	Analysis of variance (ANOVA) - just a tool to show the breakdown of variability in the $y$ vector:
 	\begin{enumerate}
-		\item	doing nothing, no model: implies $\hat{y} = \overline{y}$ 
-		\item	the model: $\hat{y}_i = b_0 + b_1 x_i$ 
-		\item	how much variance is left over in the errors $e_i$ 
+		\item	doing nothing, no model: implies $\hat{y} = \overline{y}$
+		\item	the model: $\hat{y}_i = b_0 + b_1 x_i$
+		\item	how much variance is left over in the errors $e_i$
 	\end{enumerate}
 	\begin{itemize}
-		\item	All 3 add up to the total variance: 
-		\item	Variance = deviation from the mean 
-		\item	Variance for first portion is 0, by definition 
-		\item	Total variance of $y$ = model's variance + error variance 
+		\item	All 3 add up to the total variance:
+		\item	Variance = deviation from the mean
+		\item	Variance for first portion is 0, by definition
+		\item	Total variance of $y$ = model's variance + error variance
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{The variance breakdown: geometrically}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/least-squares/ANOVA-graphically.png}
+		\includegraphics[width=0.95\textwidth]{\imagedir/least-squares/ANOVA-graphically.png}
 	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{The variance breakdown: geometrically}
-	
+
 	For a fixed value of $x_i$, and for any $y_i$ (above or below):
-	
-	$$ 
+
+	$$
 	\begin{array}{rcl}
 		(y_i - \overline{\mathrm{y}}) &=& (\hat{y}_i - \overline{\mathrm{y}}) + (y_i - \hat{y}_i) \\
 		(y_i - \overline{\mathrm{y}})^2 &=& (\hat{y}_i - \overline{\mathrm{y}})^2 + 2(\hat{y}_i - \overline{\mathrm{y}})(y_i - \hat{y}_i) + (y_i - \hat{y}_i)^2 \\
 		\sum{(y_i - \overline{\mathrm{y}})^2} &=& \sum{(\hat{y}_i - \overline{\mathrm{y}})^2} + \sum{(y_i - \hat{y}_i)^2} \\
-		\text{Total SS (TSS)} &=& \text{Regression SS (RegSS)} + \text{Residual SS (RSS)} 
+		\text{Total SS (TSS)} &=& \text{Regression SS (RegSS)} + \text{Residual SS (RSS)}
 	\end{array}
 	$$
 	\begin{center}
@@ -535,130 +535,130 @@
 \end{frame}
 
 \begin{frame}\frametitle{The variance breakdown: table form}
-	
-	\newpage 
+
+	\newpage
 	\begin{table}
-		[ht] \centering 
+		[ht] \centering
 		\begin{tabular}
 			{lllll} \hline\ \textbf{Variance of} & \textbf{Distance} &\textbf{DOF} &\textbf{SSQ} &\textbf{Mean square} \\
 			\hline Regression & $\hat{y}_i - \overline{\mathrm{y}}$ & $k$ ($k$=2) & RegSS & RegSS/$k$ \\
 			Error & $y_i - \hat{y}_i$ & $n-k$ & RSS & RSS/($n-k$) \\
 			\hline \hline Total & $y_i - \overline{\mathrm{y}}$ & $n$ & TSS & TSS/$n$ \\
-			\hline 
+			\hline
 		\end{tabular}
 	\end{table}
 	\begin{itemize}
-		\item	Regression SS (RegSS) = $\sum{(\hat{y}_i - \overline{\mathrm{y}})^2}$ (from the mean to the prediction) 
-		\item	Residual SS (RSS) = $\sum{(y_i - \hat{y}_i)^2}$ (from the prediction to the data point) 
-		\item	Total SS (TSS) = $\sum{(y_i - \overline{\mathrm{y}})^2}$ (from the data point to the mean) 
+		\item	Regression SS (RegSS) = $\sum{(\hat{y}_i - \overline{\mathrm{y}})^2}$ {\small (from the mean to the prediction)}
+		\item	Residual SS (RSS) = $\sum{(y_i - \hat{y}_i)^2}$ {\small(from the prediction to the data point)}
+		\item	Total SS (TSS) = $\sum{(y_i - \overline{\mathrm{y}})^2}$ {\small(from the data point to the mean)}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Exercise}
-	
+
 	For each of these cases:
 	\begin{enumerate}
-		\item	$y_i = b_0 + e_i$, i.e. where $b_0 = \overline{y}$ and $b_1 = 0$ 
-		\item	$y_i = b_0 + b_1 x_i + e_i$, for any values of $b_0$ and $b_1$, and the models fits the data without error 
+		\item	$y_i = b_0 + e_i$, i.e. where $b_0 = \overline{y}$ and $b_1 = 0$
+		\item	$y_i = b_0 + b_1 x_i + e_i$, for any values of $b_0$ and $b_1$, and the models fits the data without error
 	\end{enumerate}
-	
+
 	Do the following:
 	\begin{itemize}
-		\item	draw a generic plot 
-		\item	create an ANOVA table with fake values 
-		\item	write down the value of the ratio $\dfrac{\text{RegSS}}{\text{TSS}}$ 
+		\item	draw a generic plot
+		\item	create an ANOVA table with fake values
+		\item	write down the value of the ratio $\dfrac{\text{RegSS}}{\text{TSS}}$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Exercise: what did we learn}
 	\begin{itemize}
-		\item	No linear model (just noise around a baseline): $y_i = \overline{y} + e_i = b_0 + e_i$); ratio = $\dfrac{\text{RegSS}}{\text{TSS}} = 0$ 
-		\item	Perfect predictions: $\dfrac{\text{RegSS}}{\text{TSS}} = 1$ 
-		\item	$\dfrac{\text{RegSS}}{\text{TSS}} = R^2$ 
+		\item	No linear model (just noise around a baseline): $y_i = \overline{y} + e_i = b_0 + e_i$); ratio = $\dfrac{\text{RegSS}}{\text{TSS}} = 0$
+		\item	Perfect predictions: $\dfrac{\text{RegSS}}{\text{TSS}} = 1$
+		\item	$\dfrac{\text{RegSS}}{\text{TSS}} = R^2$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Derivation of $R^2$}
 	\begin{itemize}
-		\item	$R^2 = \dfrac{\text{RegSS}}{\text{TSS}} = \dfrac{\sum_i{ \left(\hat{y}_i - \overline{\mathrm{y}}\right)^2}}{\sum_i{ \left(y_i - \overline{\mathrm{y}}\right)^2}}$ 
-		\item	RegSS = variance we can explain with the model 
-		\item	TSS = total variance we started off with 
-		\item	TSS = RegSS + RSS, so $R^2 = 1-\dfrac{\text{RSS}}{\text{TSS}}$ also 
+		\item	$R^2 = \dfrac{\text{RegSS}}{\text{TSS}} = \dfrac{\sum_i{ \left(\hat{y}_i - \overline{\mathrm{y}}\right)^2}}{\sum_i{ \left(y_i - \overline{\mathrm{y}}\right)^2}}$
+		\item	RegSS = variance we can explain with the model
+		\item	TSS = total variance we started off with
+		\item	TSS = RegSS + RSS, so $R^2 = 1-\dfrac{\text{RSS}}{\text{TSS}}$ also
 	\end{itemize}
-	
-	If 
+
+	If
 	\begin{itemize}
-		\item	$R^2 = 0$: requires $\hat{y}_i = \overline{\mathrm{y}}$: predicting a flat line = $\mathrm{y}$ data 
-		\item	$R^2 = 1$: requires $\hat{y}_i = y_i$: no error in predictions 
+		\item	$R^2 = 0$: requires $\hat{y}_i = \overline{\mathrm{y}}$: predicting a flat line = $\mathrm{y}$ data
+		\item	$R^2 = 1$: requires $\hat{y}_i = y_i$: no error in predictions
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Meaning of $R^2$}
-	
+
 	$R^2$ name: square of the correlation between $\mathrm{x}$ and $\mathrm{y}$.
-	
+
 	$$ r(x, y) = \dfrac{\mathcal{E}\left\{ (x - \overline{x}) (y - \overline{y})\right\}}{\sqrt{\mathcal{V}\left\{x\right\}\mathcal{V}\left\{y\right\}}} = \dfrac{\text{Cov}\left\{x, y\right\}}{\sqrt{\mathcal{V}\left\{x\right\}\mathcal{V}\left\{y\right\}}} $$
 	\begin{itemize}
-		\item	$-1 \leq r(x,y) \leq +1$ 
-		\item	$0 \leq R^2 \leq +1 $ 
+		\item	$-1 \leq r(x,y) \leq +1$
+		\item	$0 \leq R^2 \leq +1 $
 	\end{itemize}
-	
+
 	Just tells us how far we are between predicting from \textbf{no variation} to \textbf{predictions without error}
 \end{frame}
 
 \begin{frame}\frametitle{Meaning of $R^2$}
 	\begin{itemize}
-		\item	$R^2$ is just for the data used to build the model 
-		\item	\textbf{No guarantee at all} as to future performance 
-		\item	It is widely \textbf{abused} as a way to measure ``\emph{how good is my model}'' 
+		\item	$R^2$ is just for the data used to build the model
+		\item	\textbf{No guarantee at all} as to future performance
+		\item	It is widely \textbf{abused} as a way to measure ``\emph{how good is my model}''
 		\begin{enumerate}
-			\item	``the $R^2$ value is really high, 90\%, this is a good model'' 
-			\item	``Wow, that's a really low $R^2$, this model can't be right - it's no good'' 
+			\item	``the $R^2$ value is really high, 90\%, this is a good model''
+			\item	``Wow, that's a really low $R^2$, this model can't be right - it's no good''
 		\end{enumerate}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Meaning of $R^2$}
 	\begin{itemize}
-		\item	How \textbf{good} a model is \emph{for a particular purpose} is almost never related to the $R^2$ value. 
+		\item	How \textbf{good} a model is \emph{for a particular purpose} is almost never related to the $R^2$ value.
 	\end{itemize}
-	
+
 	Goodness of a model is better assessed by:
 	\begin{itemize}
-		\item	your engineering judgment: does the interpretation of model parameters make sense? 
-		\item	use the standard error, $S_E$ (next section) 
-		\item	use testing data to verify the model's predictive performance, 
-		\item	using cross-validation/randomization tools (more later) 
+		\item	your engineering judgment: does the interpretation of model parameters make sense?
+		\item	use the standard error, $S_E$ (next section)
+		\item	use testing data to verify the model's predictive performance,
+		\item	using cross-validation/randomization tools (more later)
 	\end{itemize}
-	
+
 	$R^2$ can be arbitrarily inflated by adding terms to the model. Use adjusted $R^2$ to account for this:
-	
+
 	$$ R^2_\text{adj} = 1 - \dfrac{\text{RSS}/(n-k)}{\text{TSS}/(n-1)} $$
-	
+
 	where $k=2$ for the case of estimating a model $y_i = b_0 + b_1 x_i$
 \end{frame}
 
 \begin{frame}\frametitle{Judging the standard error, $S_E$}
-	
-	A better way to judge model's predictive performance: 
+
+	A better way to judge model's predictive performance:
 	\begin{itemize}
-		\item	mean square error = $\text{RSS}/(n-k)$ 
-		\item	standard error = $S_E = \sqrt{\text{mean square error}} = \sqrt{\text{RSS}/(n-k)}$ 
-		\item	The standard deviation of the errors, accounting for degrees of freedom 
-		\item	$S_E^2 = \frac{\displaystyle \text{RSS}}{\displaystyle n-k} = \frac{e^Te}{\displaystyle n-k}$ 
-		\item	This is related to the model's objective function: minimizing RSS 
+		\item	mean square error = $\text{RSS}/(n-k)$
+		\item	standard error = $S_E = \sqrt{\text{mean square error}} = \sqrt{\text{RSS}/(n-k)}$
+		\item	The standard deviation of the errors, accounting for degrees of freedom
+		\item	$S_E^2 = \frac{\displaystyle \text{RSS}}{\displaystyle n-k} = \frac{e^Te}{\displaystyle n-k}$
+		\item	This is related to the model's objective function: minimizing RSS
 	\end{itemize}
-	
-	Assume our model predicts 
+
+	Assume our model predicts
 	\begin{itemize}
-		\item	$\hat{y}_i$ = batch yield [kg] 
-		\item	$x_i$ = raw material purity		
-		\item	What does a standard error of 3.4 kg mean? 
+		\item	$\hat{y}_i$ = batch yield [kg]
+		\item	$x_i$ = raw material purity
+		\item	What does a standard error of 3.4 kg mean?
 		\begin{itemize}
-			\item	If errors are normally distributed: 
+			\item	If errors are normally distributed:
 			\begin{itemize}
-				\item	About 2/3 of predictions lie within $\pm 3.4$ kg 
-				\item	About 95\% of predictions lie within $\pm 2 \times 3.4$ kg 
+				\item	About 2/3 of predictions lie within $\pm 3.4$ kg
+				\item	About 95\% of predictions lie within $\pm 2 \times 3.4$ kg
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
@@ -666,43 +666,43 @@
 
 \begin{frame}\frametitle{Confidence intervals for $b_0$ and $b_1$}
 	\begin{itemize}
-		\item	We have made no assumptions about the data 
-		\item	We can calculate $b_0$ and $b_1$ 
-		\item	We can calculate model predictions 
+		\item	We have made no assumptions about the data
+		\item	We can calculate $b_0$ and $b_1$
+		\item	We can calculate model predictions
 	\end{itemize}
-	
+
 	Now we want to know more. Learn from the data.
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
 	\begin{itemize}
-		\item	Model structure: $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$ 
-		\item	$b_0 = \hat{\beta}_0$ and $b_1= \hat{\beta}_1$ 
+		\item	Model structure: $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$
+		\item	$b_0 = \hat{\beta}_0$ and $b_1= \hat{\beta}_1$
 	\end{itemize}
 	\begin{block}
-		{Assumption 1} 
+		{Assumption 1}
 		\begin{center}
-			Model is linear 
+			Model is linear
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	Implies $\epsilon$ is the error of $\mathrm{y}$ ($\beta_0 + \beta_1 \mathrm{x}$ terms are fixed) 
-		\item	Means your $\mathrm{x}$ variable has much less uncertainty than the $\mathrm{y}$ variable 
+		\item	Implies $\epsilon$ is the error of $\mathrm{y}$ ($\beta_0 + \beta_1 \mathrm{x}$ terms are fixed)
+		\item	Means your $\mathrm{x}$ variable has much less uncertainty than the $\mathrm{y}$ variable
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
 	\begin{block}
-		{Assumption 2} 
+		{Assumption 2}
 		\begin{center}
-			Variance of \emph{y} is constant at all values of \emph{x} 
+			Variance of \emph{y} is constant at all values of \emph{x}
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	Constant error variance assumption 
-		\item	Practice: variability of $\mathrm{y}$ often non-constant 
+		\item	Constant error variance assumption
+		\item	Practice: variability of $\mathrm{y}$ often non-constant
 		\begin{itemize}
-			\item	measurement accuracy deteriorates at extreme conditions of x and y 
+			\item	measurement accuracy deteriorates at extreme conditions of x and y
 		\end{itemize}
 	\end{itemize}
 	\begin{center}
@@ -712,15 +712,15 @@
 
 \begin{frame}\frametitle{Assumptions required}
 	\begin{block}
-		{Assumption 3} 
+		{Assumption 3}
 		\begin{center}
-			Errors are normally distributed: $e_i \sim \mathcal{N}(0, \sigma_\epsilon^2)$ 
+			Errors are normally distributed: $e_i \sim \mathcal{N}(0, \sigma_\epsilon^2)$
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	Implies that $y_i \sim \mathcal{N}(\beta_0 + \beta_1x_i, \sigma_\epsilon^2)$ (from first linearity assumption) 
-		\item	Practice: not always certain 
-		\item	But at least it is easy to test with a q-q plot 
+		\item	Implies that $y_i \sim \mathcal{N}(\beta_0 + \beta_1x_i, \sigma_\epsilon^2)$ (from first linearity assumption)
+		\item	Practice: not always certain
+		\item	But at least it is easy to test with a q-q plot
 	\end{itemize}
 \end{frame}
 
@@ -732,15 +732,15 @@
 
 \begin{frame}\frametitle{Assumptions required}
 	\begin{block}
-		{Assumption 4} 
+		{Assumption 4}
 		\begin{center}
-			Each error is independent of the other 
+			Each error is independent of the other
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	Often violated in practice 
-		\item	Observations taken in time on a slow processes 
-		\item	E.g. if you have a positive error now, your next sample is also likely to have a positive error (autocorrelation) 
+		\item	Often violated in practice
+		\item	Observations taken in time on a slow processes
+		\item	E.g. if you have a positive error now, your next sample is also likely to have a positive error (autocorrelation)
 	\end{itemize}
 \end{frame}
 
@@ -752,156 +752,156 @@
 
 \begin{frame}\frametitle{Assumptions required}
 	\begin{block}
-		{Assumption 5} 
+		{Assumption 5}
 		\begin{center}
-			Assume $x$ are fixed and independent of the error 
+			Assume $x$ are fixed and independent of the error
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	Closely tied to first assumption 
-		\item	Most engineering cases we sample the $\mathrm{x}$ and $\mathrm{y}$ 
-		\item	This assumption requires that our error variance does not change as we sample $\mathrm{x}$ 
+		\item	Closely tied to first assumption
+		\item	Most engineering cases we sample the $\mathrm{x}$ and $\mathrm{y}$
+		\item	This assumption requires that our error variance does not change as we sample $\mathrm{x}$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Assumptions required}
 	\begin{block}
-		{Assumption 6} 
+		{Assumption 6}
 		\begin{center}
-			All $y_i$ values are independent of each other. 
+			All $y_i$ values are independent of each other.
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	Closely tied to 4th assumption 
-		\item	Is the same as assumption 4 if the $\mathrm{x}$ are constant 
-		\item	Violated in cases where data are collected in time order and $y_i$ are autocorrelated 
+		\item	Closely tied to 4th assumption
+		\item	Is the same as assumption 4 if the $\mathrm{x}$ are constant
+		\item	Violated in cases where data are collected in time order and $y_i$ are autocorrelated
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Confidence intervals for $b_0$ and $b_1$}
-	
+
 	To construct a confidence interval, we must know the distribution
-	
-	$ 
+
+	$$
 	\begin{array}{lcr}
-		b_0 \sim \mathcal{N}(\beta_0, \mathcal{V}\{\beta_0\}) &\qquad\text{and}\qquad& b_1 \sim \mathcal{N}(\beta_1,\mathcal{V}\{\beta_1\}) 
+		b_0 \sim \mathcal{N}(\beta_0, \mathcal{V}\{\beta_0\}) &\qquad\text{and}\qquad& b_1 \sim \mathcal{N}(\beta_1,\mathcal{V}\{\beta_1\})
 	\end{array}
-	$
+	$$
 	\begin{enumerate}
-		\item	Create $z$-value for $b_0$ and $b_1$ 
-		\item	Calculate the confidence interval for $\beta_0$ and $\beta_1$ 
+		\item	Create $z$-value for $b_0$ and $b_1$
+		\item	Calculate the confidence interval for $\beta_0$ and $\beta_1$
 	\end{enumerate}
-	
+
 	\textbf{Objective}: Calculate a suitable $\mathcal{V}\{\beta_0\}$ and $\mathcal{V}\{\beta_1\}$
 \end{frame}
 
 \begin{frame}\frametitle{Variance of $b_1$}
-	
+
 	Details are in your notes. Strongly encouraged to go through the derivation.
 	\begin{itemize}
-		\item	Recall the standard error: 
+		\item	Recall the standard error:
 	\end{itemize}
-	
-	$ S_E^2 = \mathcal{V}\{e_i\} = \mathcal{V}\{y_i\} = \dfrac{\sum{e_i^2}}{n-k} \qquad \text{or}\qquad S_E = \sqrt{ \dfrac{\sum{e_i^2}}{n-k} } $
+
+	$$ S_E^2 = \mathcal{V}\{e_i\} = \mathcal{V}\{y_i\} = \dfrac{\sum{e_i^2}}{n-k} \qquad \text{or}\qquad S_E = \sqrt{ \dfrac{\sum{e_i^2}}{n-k} } $$
 	\begin{itemize}
-		\item	The variance of $b_1 = \mathcal{V}\{b_1\}$: 
+		\item	The variance of $b_1 = \mathcal{V}\{b_1\}$:
 	\end{itemize}
-	$ \mathcal{V}\{b_1\} = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} $
+	$$ \mathcal{V}\{b_1\} = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} $$
 	\begin{itemize}
-		\item	Apart from the numerator, how could you decrease the variance your model's $b_1$ coefficient? 
+		\item	Apart from the numerator, how could you decrease the variance your model's $b_1$ coefficient?
 		\begin{itemize}
-			\item	Use samples that are far from the mean of the $\mathrm{x}$-data 
-			\item	Use more samples 
+			\item	Use samples that are far from the mean of the $\mathrm{x}$-data
+			\item	Use more samples
 		\end{itemize}
-		\item	The numerator term: this is the standard error $S_E^2$ term we saw earlier. 
+		\item	The numerator term: this is the standard error $S_E^2$ term we saw earlier.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Variance of $b_0$}
-	
+
 	Variance of $b_0$:
-	
-	$ \mathcal{V}\{b_0\} = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right) $
-	
+
+	$$ \mathcal{V}\{b_0\} = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right) $$
+
 	\textbf{Summary of important equations}:
 	\begin{enumerate}
-		\item	$\mathcal{V}\{\beta_0\} \approx \mathcal{V}\{b_0\} = S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right)$ 
-		\item	$\mathcal{V}\{\beta_1\} \approx \mathcal{V}\{b_1\} = S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}$ 
-		\item	$\mathcal{V}\{y_i\} = \mathcal{V}\{e_i\} \approx S_E^2 = \dfrac{\sum{e_i^2}}{n-k}$ 
+		\item	$\mathcal{V}\{\beta_0\} \approx \mathcal{V}\{b_0\} = S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right)$
+		\item	$\mathcal{V}\{\beta_1\} \approx \mathcal{V}\{b_1\} = S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}$
+		\item	$\mathcal{V}\{y_i\} = \mathcal{V}\{e_i\} \approx S_E^2 = \dfrac{\sum{e_i^2}}{n-k}$
 	\end{enumerate}
 	\begin{itemize}
-		\item	$S_E$ standard deviation of the error (residuals) 
-		\item	$S_E(b_0)$ standard deviation of $b_0$ 
-		\item	$S_E(b_1)$ standard deviation of $b_1$ 
+		\item	$S_E$ standard deviation of the error (residuals)
+		\item	$S_E(b_0)$ standard deviation of $b_0$
+		\item	$S_E(b_1)$ standard deviation of $b_1$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Confidence intervals for $b_0$ and $b_1$}
-	
+
 	Finally! Construct confidence intervals for the least squares model parameters:
-	
-	$ 
+
+	$$
 	\begin{array}{rcccl}
 		- c_t &\leq& \dfrac{b_0 - \beta_0}{S_E(b_0)} &\leq & +c_t \\
-		b_0 - c_t S_E(b_0) &\leq& \beta_0 &\leq& b_0 + c_t S_E(b_0) 
+		b_0 - c_t S_E(b_0) &\leq& \beta_0 &\leq& b_0 + c_t S_E(b_0)
 	\end{array}
-	$
-	
-	$\qquad$
-	
-	$ 
+	$$
+
+	\vspace{24pt}
+
+	$$
 	\begin{array}{rcccl}
 		- c_t &\leq& \dfrac{b_1 - \beta_1}{S_E(b_1)} &\leq & +c_t\\
-		b_1 - c_t S_E(b_1) &\leq& \beta_1 &\leq& b_1 + c_t S_E(b_1) 
+		b_1 - c_t S_E(b_1) &\leq& \beta_1 &\leq& b_1 + c_t S_E(b_1)
 	\end{array}
+	$$
+	\begin{itemize}
+		\item	Use $t$-distribution: we used estimates of the variance
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+
+	Confidence interval for $\beta_0$ and $\beta_1$ from previous example. Already calculated:
+	\begin{itemize}
+		\item	$b_0$ = 3.0
+		\item	$b_1$ = 0.5
+		\item	$S_E$ = 1.237
+		\begin{itemize}
+			\item	\texttt{predictions = b0 + x*b1}
+			\item	\texttt{8.001 7.000 9.501 7.501 8.501 10.001 6.00 5.000 9.001 6.500 5.501}
+			\item	\texttt{error = y - predictions}
+			\item	\texttt{SE = sqrt(sum(error\^ 2) / (N-2))}
+		\end{itemize}
+		\item	$c_t = 2.26$ at 95\% confidence
+		\begin{itemize}
+			\item	\texttt{qt(0.975, df=(11-2))}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+	\begin{itemize}
+		\item	$S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} = \dfrac{1.237^2}{110} = 0.0139$
+		\item	$S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right) = \left(\dfrac{1}{11} + \dfrac{9^2}{110} \right)1.237^2 = 1.266$
+	\end{itemize}
+	\begin{itemize}
+		\item	For $\beta_0$:
+	\end{itemize}
 	$
-	\begin{itemize}
-		\item	Use $t$-distribution: we used estimates of the variance 
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Example}
-	
-	Confidence interval for $\beta_0$ and $\beta_1$ from previous example. Already calculated: 
-	\begin{itemize}
-		\item	$b_0$ = 3.0 
-		\item	$b_1$ = 0.5 
-		\item	$S_E$ = 1.237 
-		\begin{itemize}
-			\item	\texttt{predictions = b0 + x*b1} 
-			\item	\texttt{8.001 7.000 9.501 7.501 8.501 10.001 6.00 5.000 9.001 6.500 5.501} 
-			\item	\texttt{error = y - predictions} 
-			\item	\texttt{SE = sqrt(sum(error\^ 2) / (N-2))} 
-		\end{itemize}
-		\item	$c_t = 2.26$ at 95\% confidence 
-		\begin{itemize}
-			\item	\texttt{qt(0.975, df=(11-2))} 
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Example}
-	\begin{itemize}
-		\item	$S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} = \dfrac{1.237^2}{110} = 0.0139$ 
-		\item	$S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right) = \left(\dfrac{1}{11} + \dfrac{9^2}{110} \right)1.237^2 = 1.266$ 
-	\end{itemize}
-	\begin{itemize}
-		\item	For $\beta_0$: 
-	\end{itemize}
-	$ 
 	\begin{array}{rccclrcccl}
 		- c_t &\leq& \dfrac{b_0 - \beta_0}{S_E(b_0)} &\leq & +c_t \\
 		3.0 - 2.26 \times \sqrt{1.266} &\leq& \beta_0 &\leq& 3.0 + 2.26 \times \sqrt{1.266} \\
-		0.457 &\leq& \beta_0 &\leq& 5.54 
+		0.457 &\leq& \beta_0 &\leq& 5.54
 	\end{array}
 	$
 \end{frame}
 
 \begin{frame}\frametitle{Example}
 	\begin{itemize}
-		\item	For $\beta_1$: 
+		\item	For $\beta_1$:
 	\end{itemize}
-	$ 
+	$
 	\begin{array}{rccclrcccl}
 		- c_t &\leq& \dfrac{b_1 - \beta_1}{S_E(b_1)} &\leq & +c_t \\
 		0.5 - 2.26 \times \sqrt{0.0139} &\leq& \beta_1 &\leq& 0.5 + 2.26 \times \sqrt{0.0139}\\
@@ -924,123 +924,123 @@
 		\includegraphics[width=0.9\textwidth]{\imagedir/least-squares/cameras-road-deaths.jpg}
 	\end{center}
 	\begin{itemize}
-		\item	What is the causal direction (line of reasoning) that the plot's author is wanting you to follow? 
-		\item	Interpret the software output: $y = 15.7 - 0.70 \text{cameras}$ 
+		\item	What is the causal direction (line of reasoning) that the plot's author is wanting you to follow?
+		\item	Interpret the software output: $y = 15.7 - 0.70 \text{cameras}$
 		\begin{itemize}
-			\item	$9.61 \leq \beta_0 \leq 21.8$ 
-			\item	$-1.8 \leq \beta_1 \leq 0.36$ 
+			\item	$9.61 \leq \beta_0 \leq 21.8$
+			\item	$-1.8 \leq \beta_1 \leq 0.36$
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Example}
-	
+
 	Thermocouples produce an almost linear voltage (millivolt) response at different temperatures. (Data are on the course website). Temperatures usually recorded to an accuracy of $\pm 0.5$K with inexpensive thermocouples.
 	\begin{columns}
-		\column{5cm} 
+		\column{5cm}
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/thermocouple.png} \column{5cm} 1. Calculate and interpret model parameter estimates, $y = b_0 + b_1 x$, from the given data
 		\begin{itemize}
-			\item	Model calculated is $\hat{T} = 278.6 + 135.3 V$. Interpretation? 
+			\item	Model calculated is $\hat{T} = 278.6 + 135.3 V$. Interpretation?
 		\end{itemize}
-		
+
 		2. Temperature prediction at 1.00 mV?
-		
+
 		3. The $R^2 = 0.996$. What can you say about the model?
-		
-		4. The $S_E = 3.9K$. Satisfied with the model's prediction ability? 
+
+		4. The $S_E = 3.9K$. Satisfied with the model's prediction ability?
 	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{Administrative}
 	\begin{itemize}
-		\item	Midterm 
+		\item	Midterm
 		\begin{itemize}
-			\item	Grading will be completed by next week. 
-			\item	If you didn't write the midterm, final exam counts 45\% + 15\% = 60\% 
+			\item	Grading will be completed by next week.
+			\item	If you didn't write the midterm, final exam counts 45\% + 15\% = 60\%
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	Final exam: Saturday, 07 April, from 09:00, IWC2 
+		\item	Final exam: Saturday, 07 April, from 09:00, IWC2
 	\end{itemize}
 	\begin{itemize}
-		\item	Course feedback 
+		\item	Course feedback
 		\begin{itemize}
-			\item	Thanks for interesting feedback. Some minor changes coming 
+			\item	Thanks for interesting feedback. Some minor changes coming
 			\begin{itemize}
-				\item	Different hand in time: at 16:00 
-				\item	More examples on the board and with R 
+				\item	Different hand in time: at 16:00
+				\item	More examples on the board and with R
 			\end{itemize}
-			\item	Some things cannot change: classroom and time slot 
-			\item	Course grades now available 
+			\item	Some things cannot change: classroom and time slot
+			\item	Course grades now available
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	Assignments 4 returned 
+		\item	Assignments 4 returned
 	\end{itemize}
 	\begin{itemize}
-		\item	DoE outlines 
+		\item	DoE outlines
 		\begin{itemize}
-			\item	More than one factor changes 
-			\item	One or more $y$-variables 
+			\item	More than one factor changes
+			\item	One or more $y$-variables
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Review so far}
-	
-	$ 
+
+	$$
 	\begin{array}{rcl}
 		\mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \epsilon \\
 		y_i &=& b_0 + b_1 x_i + e_i \\
 		\\
 	\end{array}
-	$
-	
+	$$
+
 	Solve an optimization problem:
-	
-	$ 
+
+	$$
 	\begin{array}{rcl}
 		\min_{\displaystyle b_0, b_1} f(b_0, b_1) &=& \sum_{i=1}^{n}{(e_i)^2} \\
 		&=& \sum_{i=1}^{n}{\left(y_i - b_0 - b_1 x_i\right)^2} \\
 		\\
 	\end{array}
-	$
-	
-	$ 
+	$$
+
+	$$
 	\begin{array}{rcl}
 		b_0 &=& \overline{\mathrm{y}} - b_1\overline{\mathrm{x}} \\
 		b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} } \\
 		\\
 	\end{array}
-	$
+	$$
 	\begin{itemize}
-		\item	$S_E = \sqrt{\text{RSS}/(n-k)} = \sqrt{\dfrac{ e^Te}{n-k}}$ 
+		\item	$S_E = \sqrt{\text{RSS}/(n-k)} = \sqrt{\dfrac{ e^Te}{n-k}}$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Review of assumptions}
 	\begin{enumerate}
-		\item	Model is linear 
-		\item	Variance of y is constant at all values of x 
-		\item	Errors are normally distributed 
-		\item	Each error is independent of the other 
-		\item	Assume x are fixed and independent of the error 
-		\item	All $y_i$ values are independent of each other 
+		\item	Model is linear
+		\item	Variance of y is constant at all values of x
+		\item	Errors are normally distributed
+		\item	Each error is independent of the other
+		\item	Assume x are fixed and independent of the error
+		\item	All $y_i$ values are independent of each other
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Analysis}
 	\begin{enumerate}
-		\item	$\mathcal{V}\{b_0\} = S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right)$ 
-		\item	$\mathcal{V}\{b_1\} = S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}$ 
-		\item	$\mathcal{V}\{y_i\} = \mathcal{V}\{e_i\} \approx S_E^2 = \dfrac{\sum{e_i^2}}{n-k}$ 
+		\item	$\mathcal{V}\{b_0\} = S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right)$
+		\item	$\mathcal{V}\{b_1\} = S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}$
+		\item	$\mathcal{V}\{y_i\} = \mathcal{V}\{e_i\} \approx S_E^2 = \dfrac{\sum{e_i^2}}{n-k}$
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Continuing on}
 	\begin{itemize}
-		\item	Predict a new y-value: $\hat{y}_i = b_0 + b_1 x_i$ 
-		\item	We could assume $\hat{y}_i \pm 2S_E$ 
+		\item	Predict a new y-value: $\hat{y}_i = b_0 + b_1 x_i$
+		\item	We could assume $\hat{y}_i \pm 2S_E$
 	\end{itemize}
 	\begin{center}
 		\includegraphics[height=0.9\textheight]{\imagedir/least-squares/show-naive-predictions.png}
@@ -1048,14 +1048,14 @@
 \end{frame}
 
 \begin{frame}\frametitle{Prediction interval for y}
-	
-	$\mathcal{V}\{\hat{y}_i\} = S_E^2 \left(1 + \dfrac{1}{n} + \dfrac{(x_i - \overline{\mathrm{x}})^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}\right)$
+
+	$$\mathcal{V}\{\hat{y}_i\} = S_E^2 \left(1 + \dfrac{1}{n} + \dfrac{(x_i - \overline{\mathrm{x}})^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}\right)$$
 	\begin{itemize}
-		\item	Example in the notes 
-		\item	General shape: quadratic shape 
-		\item	Smallest prediction error at the model center 
-		\item	Prediction error expands progressively wider as one moves away from the model center 
-		\item	Makes intuitive sense 
+		\item	Example in the notes
+		\item	General shape: quadratic shape
+		\item	Smallest prediction error at the model center
+		\item	Prediction error expands progressively wider as one moves away from the model center
+		\item	Makes intuitive sense
 	\end{itemize}
 \end{frame}
 
@@ -1067,45 +1067,45 @@
 
 \begin{frame}\frametitle{Investigating a linear model}
 	\begin{itemize}
-		\item	Transformations of data 
-		\item	Leverage, outliers, influence and discrepancy 
-		\item	Multiple linear regression, MLR 
-		\item	Training and testing data 
+		\item	Transformations of data
+		\item	Leverage, outliers, influence and discrepancy
+		\item	Multiple linear regression, MLR
+		\item	Training and testing data
 	\end{itemize}
-	
+
 	The residuals contain the clues to problems with the model.
 \end{frame}
 
 \begin{frame}\frametitle{Normally distributed errors}
-	
+
 	AIM: normally distributed errors
-	
+
 	If non-normal: $S_E$ and other variances such as $\mathcal{V}(b_1)$ are inflated.
-	
-	\textbf{Detecting it}: 
+
+	\textbf{Detecting it}:
 	\begin{itemize}
-		\item	Use a q-q plot: should match 45 degree line 
+		\item	Use a q-q plot: should match 45 degree line
 		\begin{itemize}
-			\item	Most accurate way 
+			\item	Most accurate way
 		\end{itemize}
-		\item	A histogram is somewhat helpful 
+		\item	A histogram is somewhat helpful
 		\begin{itemize}
-			\item	Human eye not good at picking up heavy tails 
+			\item	Human eye not good at picking up heavy tails
 		\end{itemize}
-		\item	Do \emph{not} plot the residuals in time-order to try detect if normally distributed 
+		\item	Do \emph{not} plot the residuals in time-order to try detect if normally distributed
 		\begin{itemize}
-			\item	Human eye not good at picking up heavy tails 
+			\item	Human eye not good at picking up heavy tails
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Normally distributed errors}
-	
-	\textbf{Dealing with it}: 
+
+	\textbf{Dealing with it}:
 	\begin{itemize}
-		\item	Remove any outlying observation(s) (after investigation) 
-		\item	Transform the y-variable 
-		\item	Add additional explanatory terms to the model (see this in MLR later) 
+		\item	Remove any outlying observation(s) (after investigation)
+		\item	Transform the y-variable
+		\item	Add additional explanatory terms to the model (see this in MLR later)
 	\end{itemize}
 \end{frame}
 
@@ -1113,12 +1113,12 @@
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{\imagedir/least-squares/non-normal-errors-outliers.png}
 	\end{center}
-	$ 
+	$
 	\begin{array}{rcccl}
 		\text{Before}: \qquad & b_1 = -0.173 & \qquad -0.255 \leq \beta_1 \leq -0.0898 \\
 		& S_E = 9789\\
 		\text{After}: \qquad & b_1 = -0.155 & \qquad -0.230 \leq \beta_1 \leq -0.0807 \\
-		&S_E = 8655 
+		&S_E = 8655
 	\end{array}
 	$
 \end{frame}
@@ -1134,63 +1134,63 @@
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/residual-pattern-non-contant-error.png}
 	\end{center}
 	\begin{itemize}
-		\item	Variability in y is non-constant as x or y change. 
-		\item	Increases $S_E$, undermining confidence intervals 
-		\item	Not usually too problematic (LS is pretty robust) 
+		\item	Variability in y is non-constant as x or y change.
+		\item	Increases $S_E$, undermining confidence intervals
+		\item	Not usually too problematic (LS is pretty robust)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Non-constant error variance}
-	
+
 	\textbf{Detecting it}:
 	\begin{itemize}
-		\item	plot $\hat{y}$ against residuals (y-axis) 
-		\item	plot $x$ against residuals 
+		\item	plot $\hat{y}$ against residuals (y-axis)
+		\item	plot $x$ against residuals
 	\end{itemize}
-	
-	\textbf{Dealing with it}: 
+
+	\textbf{Dealing with it}:
 	\begin{itemize}
-		\item	Use weighted least squares: $f(\mathrm{b}) = \sum_i^n{(w_ie_i)^2}$ 
-		\item	Weights inversely proportional to the variance 
-		\item	See: \emph{Draper and Smith} (p 224 to 229, 3rd edition) 
+		\item	Use weighted least squares: $f(\mathrm{b}) = \sum_i^n{(w_ie_i)^2}$
+		\item	Weights inversely proportional to the variance
+		\item	See: \emph{Draper and Smith} (p 224 to 229, 3rd edition)
 	\end{itemize}
-	
-	\textbf{Everything OK when}: 
+
+	\textbf{Everything OK when}:
 	\begin{itemize}
-		\item	no visible structure in the above plots 
+		\item	no visible structure in the above plots
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Lack of independence in the data}
 	\begin{itemize}
-		\item	\textbf{Serious issue}: 
+		\item	\textbf{Serious issue}:
 		\begin{itemize}
-			\item	independence required to use CLT 
-			\item	CLT is used for confidence intervals of $\beta_0$ and $\beta_1$ 
+			\item	independence required to use CLT
+			\item	CLT is used for confidence intervals of $\beta_0$ and $\beta_1$
 		\end{itemize}
-		\item	Not-independent: \emph{autocorrelated}, e.g. a slow-moving process. 
-		\item	Dealing with it: topic is called time-series analysis; many good textbooks, e.g. Box and Jenkins. 
-		\item	We will use a very simple method here 
+		\item	Not-independent: \emph{autocorrelated}, e.g. a slow-moving process.
+		\item	Dealing with it: topic is called time-series analysis; many good textbooks, e.g. Box and Jenkins.
+		\item	We will use a very simple method here
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Lack of independence in the data}
-	
+
 	\textbf{Detecting it}: time-ordered plot of residuals
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/residual-pattern-unmodelled-dynamics-slides.png}
 	\end{center}
-	Look for patterns: 
+	Look for patterns:
 	\begin{itemize}
-		\item	slow drifts 
-		\item	rapid criss-crossing of the zero axis 
-		\item	cycles (e.g. daily cycle) 
+		\item	slow drifts
+		\item	rapid criss-crossing of the zero axis
+		\item	cycles (e.g. daily cycle)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Lack of independence in the data}
-	
-	\textbf{Dealing with it}: sub-sample the data, every $k^\text{th}$ sample 
+
+	\textbf{Dealing with it}: sub-sample the data, every $k^\text{th}$ sample
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/demonstrate-autocorrelation.png}
 	\end{center}
@@ -1198,18 +1198,18 @@
 
 \begin{frame}\frametitle{Lack of independence in the data}
 	\begin{itemize}
-		\item	Another test: Durbin-Watson test: \emph{Draper and Smith} (chapter 7) 
+		\item	Another test: Durbin-Watson test: \emph{Draper and Smith} (chapter 7)
 	\end{itemize}
-	
-	\textbf{Everything OK when}: 
+
+	\textbf{Everything OK when}:
 	\begin{itemize}
-		\item	\texttt{acf(y)} and \texttt{acf(e)} show no lags beyond lag 0 
+		\item	\texttt{acf(y)} and \texttt{acf(e)} show no lags beyond lag 0
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Linear model (incorrect model specification)}
 	\begin{itemize}
-		\item	Systems are known to be non-linear; linear might be good enough 
+		\item	Systems are known to be non-linear; linear might be good enough
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.8\textheight]{\imagedir/least-squares/nonlinear-linear-region.png}
@@ -1217,12 +1217,12 @@
 \end{frame}
 
 \begin{frame}\frametitle{Linear model (incorrect model specification)}
-	
-	\textbf{Detecting it}: 
+
+	\textbf{Detecting it}:
 	\begin{itemize}
-		\item	plot $\hat{y}$ against residuals (y-axis) 
-		\item	plot $x$ against residuals 
-		\item	qq-plot might show it also 
+		\item	plot $\hat{y}$ against residuals (y-axis)
+		\item	plot $x$ against residuals
+		\item	qq-plot might show it also
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/nonlinear-detection.png}
@@ -1230,71 +1230,71 @@
 \end{frame}
 
 \begin{frame}\frametitle{Linear model (incorrect model specification)}
-	
+
 	\textbf{Dealing with it}:
-	
-	1. Non-linear least squares 
+
+	1. Non-linear least squares
 	\begin{itemize}
-		\item	Too detailed for this course 
-		\item	\emph{Example}: $y = \beta_1\left(1-e^{-\beta_2 x} \right)$, let $\beta_1 = [10, 20, 30, 40, 50]$ and $\beta_2 = [0.0, 0.2, 0.4, 0.8]$. 
-		\item	Evaluate SSE objective function on a grid 
+		\item	Too detailed for this course
+		\item	\emph{Example}: $y = \beta_1\left(1-e^{-\beta_2 x} \right)$, let $\beta_1 = [10, 20, 30, 40, 50]$ and $\beta_2 = [0.0, 0.2, 0.4, 0.8]$.
+		\item	Evaluate SSE objective function on a grid
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Linear model (incorrect model specification)}
-	
+
 	\textbf{Dealing with it}:
-	
-	2. Transform the x or y variable; then use linear model 
+
+	2. Transform the x or y variable; then use linear model
 	\begin{itemize}
-		\item	$x_\text{transformed} \leftarrow x^p_\text{original}$ 
-		\item	$p$: 1 up to 1.5, 1.75, 2.0, \emph{etc} 
-		\item	$p$: 1 down to 0.5 ($\sqrt{x}$), 0.25, -0.5, -1.0 ($1/x$), -1.5, -2.0, \emph{etc} 
-		\item	$\log(x)$: approximates $p=0$ ito severity 
+		\item	$x_\text{transformed} \leftarrow x^p_\text{original}$
+		\item	$p$: 1 up to 1.5, 1.75, 2.0, \emph{etc}
+		\item	$p$: 1 down to 0.5 ($\sqrt{x}$), 0.25, -0.5, -1.0 ($1/x$), -1.5, -2.0, \emph{etc}
+		\item	$\log(x)$: approximates $p=0$ ito severity
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Linear model (incorrect model specification)}
-	
-	3. Rearrange first-principles equations 
+
+	3. Rearrange first-principles equations
 	\begin{itemize}
-		\item	Distillation: $T$ inversely proportional to log(VP). $y = b_0 + b_1x$: 
+		\item	Distillation: $T$ inversely proportional to log(VP). $y = b_0 + b_1x$:
 		\begin{itemize}
-			\item	$x \leftarrow 1/T$ 
-			\item	$y \leftarrow P$. 
-			\item	Slope coefficient: ... 
+			\item	$x \leftarrow 1/T$
+			\item	$y \leftarrow P$.
+			\item	Slope coefficient: ...
 		\end{itemize}
-		\item	$y = p \times q^x$; take logs so that $\log(y) = \log(p) + x \log(q)$, 
+		\item	$y = p \times q^x$; take logs so that $\log(y) = \log(p) + x \log(q)$,
 		\begin{itemize}
-			\item	Slope coefficient = $\log(q)$ 
+			\item	Slope coefficient = $\log(q)$
 		\end{itemize}
-		\item	$y = \dfrac{1}{p+qx}$, invert to get: $y = b_0 + b_1 x$: 
+		\item	$y = \dfrac{1}{p+qx}$, invert to get: $y = b_0 + b_1 x$:
 		\begin{itemize}
-			\item	$b_0 \leftarrow p$ 
-			\item	$b_1 \leftarrow q$ 
-			\item	$y\leftarrow 1/y$ 
+			\item	$b_0 \leftarrow p$
+			\item	$b_1 \leftarrow q$
+			\item	$y\leftarrow 1/y$
 		\end{itemize}
 	\end{itemize}
-	
-	\textbf{Everything OK when}: 
+
+	\textbf{Everything OK when}:
 	\begin{itemize}
-		\item	No more structure in the detection plots 
+		\item	No more structure in the detection plots
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Summary of steps to build and investigate a linear model}
-	
+
 	1. Plot the data
-	
+
 	2. Fit model and examine text:
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/least-squares/source-code-1.png} 
+		\includegraphics[width=\textwidth]{\imagedir/least-squares/source-code-1.png}
 	\end{center}
 	\begin{itemize}
-		\item	Model's standard error, compare it to y 
-		\item	Interpret confidence interval 
+		\item	Model's standard error, compare it to y
+		\item	Interpret confidence interval
 	\end{itemize}
-	
+
 	3. Visualize predictions:
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/source-code-2.png}
@@ -1302,121 +1302,121 @@
 \end{frame}
 
 \begin{frame}\frametitle{Summary of steps to build and investigate a linear model}
-	
+
 	4. q-q plot of the residuals. Are they normally distributed?
-	
-	5. Residuals against the x-values. 
+
+	5. Residuals against the x-values.
 	\begin{itemize}
-		\item	Expect to see no particular structure 
+		\item	Expect to see no particular structure
 	\end{itemize}
-	
-	6. Residuals in time (sequence) order 
+
+	6. Residuals in time (sequence) order
 	\begin{itemize}
-		\item	Also try \texttt{acf(model\$residuals))} 
+		\item	Also try \texttt{acf(model\$residuals))}
 	\end{itemize}
-	
+
 	7. Residuals against the fitted-values.
-	
+
 	8. Plot the $\hat{y}$ against actual values of y
 \end{frame}
 
 \begin{frame}\frametitle{Multiple linear regression (MLR)}
-	
+
 	\textbf{AIM}: Include more than one x-variable in the model.
 	\begin{enumerate}
-		\item	introduce some matrix notation 
-		\item	redo the optimization problem 
-		\item	interpret the model coefficients 
-		\item	use integer variables 
+		\item	introduce some matrix notation
+		\item	redo the optimization problem
+		\item	interpret the model coefficients
+		\item	use integer variables
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Multiple linear regression (MLR)}
 	\begin{enumerate}
-		\item	Improve our understanding of systems: 
+		\item	Improve our understanding of systems:
 		\begin{itemize}
-			\item	$x_1$ = reactant concentration 
-			\item	$x_2$ = temperature 
-			\item	$y$ = reaction rate 
-			\item	Understand the effect of temperature also: $y = b_0 + b_1x_1 + b_2x_2$ 
+			\item	$x_1$ = reactant concentration
+			\item	$x_2$ = temperature
+			\item	$y$ = reaction rate
+			\item	Understand the effect of temperature also: $y = b_0 + b_1x_1 + b_2x_2$
 		\end{itemize}
-		\item	Improve predictions: 
+		\item	Improve predictions:
 		\begin{itemize}
-			\item	$x_1$ = temperature 
-			\item	$x_2$ = feed flowrate 
-			\item	$y$ = melt index 
-			\item	Better predictions with $y = b_0 + b_1x_1 + b_2x_2$ than with $y = b_0 + b_1x_1$ 
+			\item	$x_1$ = temperature
+			\item	$x_2$ = feed flowrate
+			\item	$y$ = melt index
+			\item	Better predictions with $y = b_0 + b_1x_1 + b_2x_2$ than with $y = b_0 + b_1x_1$
 		\end{itemize}
-		\item	Integer variables at more than 2 levels: 
+		\item	Integer variables at more than 2 levels:
 		\begin{itemize}
-			\item	mixing tank 
-			\item	operator 
-			\item	supplier 
-			\item	day of week 
+			\item	mixing tank
+			\item	operator
+			\item	supplier
+			\item	day of week
 		\end{itemize}
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Notation for MLR}
-	
+
 	We will first center the data:
-	
-	$ 
+
+	$$
 	\begin{array}{rcl}
 		y_i &=& b_0 + b_1 x_i \\
 		\overline{y} &=& b_0 + b_1 \overline{x} \\
 		y_i - \overline{y} &=& 0 +b_1(x_i - \overline{x}) \qquad \text{by subtracting previous lines} \\
 	\end{array}
-	$
+	$$
 	\begin{itemize}
-		\item	Let $x = x_\text{original} - \text{mean}\left(x_\text{original} \right)$ 
-		\item	Let $y = y_\text{original} - \text{mean}\left(y_\text{original} \right)$ 
-		\item	Model is still the same, except intercept term is zero: $b_0 = 0$ 
+		\item	Let $x = x_\text{original} - \text{mean}\left(x_\text{original} \right)$
+		\item	Let $y = y_\text{original} - \text{mean}\left(y_\text{original} \right)$
+		\item	Model is still the same, except intercept term is zero: $b_0 = 0$
 	\end{itemize}
 	\begin{itemize}
-		\item	If you work with \emph{uncentered} data, but add a $b_0 = 0$ term to the model, you will get an \textbf{identical} MLR model 
+		\item	If you work with \emph{uncentered} data, but add a $b_0 = 0$ term to the model, you will get an \textbf{identical} MLR model
 		\begin{itemize}
-			\item	Centered data is more interpretable: $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ 
-			\item	Intercept can always be recovered afterwards, if required 
+			\item	Centered data is more interpretable: $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$
+			\item	Intercept can always be recovered afterwards, if required
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Notation for MLR}
-	
+
 	The general linear model is given by:
-	
-	$ 
+
+	$$
 	\begin{array}{rcl}
 		\\
 		y_i &=& \beta_1 x_1 + \beta_2x_2 + \ldots + \beta_kx_k + \epsilon_i \\
-		y_i &=& [x_1, x_2, \ldots, x_k] 
+		y_i &=& [x_1, x_2, \ldots, x_k]
 		\begin{bmatrix}
 			\beta_1 \\
 			\beta_2 \\
 			\vdots \\
-			\beta_k 
+			\beta_k
 		\end{bmatrix}
 		+ \epsilon_i \\
-		y_i &=& \underbrace{\mathit{x}^T}_{(1 \times k)} \underbrace{\beta}_{(k \times 1)} + \,\epsilon_i 
+		y_i &=& \underbrace{\mathit{x}^T}_{(1 \times k)} \underbrace{\beta}_{(k \times 1)} + \,\epsilon_i
 	\end{array}
-	$
+	$$
 	\begin{itemize}
-		\item	where each $x_k$ column (variable) and the $y$ column have been centered 
+		\item	where each $x_k$ column (variable) and the $y$ column have been centered
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Notation for MLR}
-	
-	$ 
+
+	$$
 	\begin{array}{rl}
 		\begin{bmatrix}
 			y_1\\
 			y_2\\
 			\vdots \\
-			y_n 
+			y_n
 		\end{bmatrix}
-		&= 
+		&=
 		\begin{bmatrix}
 			x_{1,1} & x_{1,2} & \ldots & x_{1,k}\\
 			x_{2,1} & x_{2,2} & \ldots & x_{2,k}\\
@@ -1427,33 +1427,33 @@
 			b_1 \\
 			b_2 \\
 			\vdots \\
-			b_k 
+			b_k
 		\end{bmatrix}
-		+ 
+		+
 		\begin{bmatrix}
 			e_1\\
 			e_2\\
 			\vdots \\
-			e_n 
+			e_n
 		\end{bmatrix}
 		\\
 		& \\
-		\mathbf{y} &= \mathbf{X} \mathbf{b} + \mathbf{e} 
+		\mathbf{y} &= \mathbf{X} \mathbf{b} + \mathbf{e}
 	\end{array}
-	$
+	$$
 	\begin{itemize}
-		\item	$\mathbf{y}$: $n \times 1$ 
-		\item	$\mathbf{X}$: $n \times k$ 
-		\item	$\mathbf{b}$: $k \times 1$ 
-		\item	$\mathbf{e}$: $n \times 1$ 
+		\item	$\mathbf{y}$: $n \times 1$
+		\item	$\mathbf{X}$: $n \times k$
+		\item	$\mathbf{b}$: $k \times 1$
+		\item	$\mathbf{e}$: $n \times 1$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Estimating the model parameters via optimization}
-	
+
 	\textbf{\emph{Objective function}}: minimize sum of squares of the errors
-	
-	$ 
+
+	$$
 	\begin{array}{rl}
 		& \\
 		f(\mathbf{b}) &= \mathbf{e}^T\mathbf{e} \\
@@ -1461,146 +1461,146 @@
 		&= \mathbf{y}^T\mathbf{y} - 2 \mathbf{y}^T\mathbf{X}\mathbf{b} + \mathbf{b}\mathbf{X}^T\mathbf{X}\mathbf{b} \\
 		\\
 	\end{array}
-	$ 
+	$$
 	\begin{itemize}
 		\item	Solving $\dfrac{f(\mathbf{b})}{
-		\partial{\mathbf{b}}} = 0 $ gives us that $\mathbf{b} = \left( \mathbf{X}^T\mathbf{X} \right)^{-1}\mathbf{X}^T\mathbf{y}$. 
+		\partial{\mathbf{b}}} = 0 $ gives us that $\mathbf{b} = \left( \mathbf{X}^T\mathbf{X} \right)^{-1}\mathbf{X}^T\mathbf{y}$.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Estimating the model parameters via optimization}
 	\begin{enumerate}
-		\item	$\mathcal{E}\{\mathbf{b}\} = \mathbf{\beta}$ 
-		\item	$\mathcal{V}\{\mathbf{b}\} = \left( \mathbf{X}^T\mathbf{X} \right)^{-1} S_E^2$ 
-		\item	Standard error = $\sigma_e \approx S_E = \sqrt{\dfrac{\mathbf{e}^T\mathbf{e}}{n-k}}$, 
+		\item	$\mathcal{E}\{\mathbf{b}\} = \mathbf{\beta}$
+		\item	$\mathcal{V}\{\mathbf{b}\} = \left( \mathbf{X}^T\mathbf{X} \right)^{-1} S_E^2$
+		\item	Standard error = $\sigma_e \approx S_E = \sqrt{\dfrac{\mathbf{e}^T\mathbf{e}}{n-k}}$,
 	\end{enumerate}
 	\begin{itemize}
-		\item	$k$ is the number of parameters estimated in the model 
-		\item	$n$ is the number of observations 
+		\item	$k$ is the number of parameters estimated in the model
+		\item	$n$ is the number of observations
 	\end{itemize}
-	
-	Earlier we had: $\mathcal{V}\{b_1\} = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}$ 
+
+	Earlier we had: $\mathcal{V}\{b_1\} = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}$
 	\begin{itemize}
-		\item	Matrix form is identical 
-		\item	Decrease $\mathcal{V}\{\mathbf{b}\}$ by: 
+		\item	Matrix form is identical
+		\item	Decrease $\mathcal{V}\{\mathbf{b}\}$ by:
 		\begin{itemize}
-			\item	taking more samples (increases denominator size) 
-			\item	including observations away from the center of the model 
+			\item	taking more samples (increases denominator size)
+			\item	including observations away from the center of the model
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Example}
 	\begin{itemize}
-		\item	$x_{1,\text{raw}} = [1, 3, 4, 7, 9, 9]$ 
+		\item	$x_{1,\text{raw}} = [1, 3, 4, 7, 9, 9]$
 		\begin{itemize}
-			\item	$x_1 = [-4.5, -2.5, -1.5 , 1.5 , 3.5, 3.5]$ , 
+			\item	$x_1 = [-4.5, -2.5, -1.5 , 1.5 , 3.5, 3.5]$ ,
 		\end{itemize}
-		\item	$x_{2,\text{raw}} = [9, 9, 6, 3, 1, 2]$ 
+		\item	$x_{2,\text{raw}} = [9, 9, 6, 3, 1, 2]$
 		\begin{itemize}
-			\item	$x_2 = [4, 4, 1, -2, -4, -3]$ 
+			\item	$x_2 = [4, 4, 1, -2, -4, -3]$
 		\end{itemize}
-		\item	$y_{\text{raw}} = [3,5,6,8,7,10]$ 
+		\item	$y_{\text{raw}} = [3,5,6,8,7,10]$
 		\begin{itemize}
-			\item	$y = [-3.5, -1.5, -0.5, 1.5, 0.5, 3.5]$ 
+			\item	$y = [-3.5, -1.5, -0.5, 1.5, 0.5, 3.5]$
 		\end{itemize}
 	\end{itemize}
-	
-	$ 
+
+	$$
 	\begin{array}{lr}
-		\mathbf{X} = 
+		\mathbf{X} =
 		\begin{bmatrix}
 			-4.5 & 4\\
 			-2.5 & 4 \\
 			-1.5 & 1 \\
 			1.5 & -2 \\
 			3.5 & -4 \\
-			3.5 & -3 
+			3.5 & -3
 		\end{bmatrix}
-		&\qquad\qquad \mathbf{y} = 
+		&\qquad\qquad \mathbf{y} =
 		\begin{bmatrix}
 			-3.5 \\
 			-1.5\\
 			-0.5\\
 			1.5\\
 			0.5\\
-			3.5 
+			3.5
 		\end{bmatrix}
 	\end{array}
-	$
-	
-	$ 
+	$$
+
+	$$
 	\begin{array}{lr}
-		\mathbf{X}^T\mathbf{X} = 
+		\mathbf{X}^T\mathbf{X} =
 		\begin{bmatrix}
 			55.5 & -57.0 \\-57.0 & 62
 		\end{bmatrix}
-		&\qquad\qquad \mathbf{X}^T\mathbf{y} = 
+		&\qquad\qquad \mathbf{X}^T\mathbf{y} =
 		\begin{bmatrix}
 			36.5 \\
-			-36.0 
+			-36.0
 		\end{bmatrix}
 	\end{array}
-	$
+	$$
 \end{frame}
 
 \begin{frame}\frametitle{Example}
-	
-	$ 
+
+	$$
 	\begin{array}{lr}
-		\mathbf{X}^T\mathbf{X} = 
+		\mathbf{X}^T\mathbf{X} =
 		\begin{bmatrix}
 			55.5 & -57.0 \\-57.0 & 62
 		\end{bmatrix}
-		&\qquad\qquad \mathbf{X}^T\mathbf{y} = 
+		&\qquad\qquad \mathbf{X}^T\mathbf{y} =
 		\begin{bmatrix}
 			36.5 \\
-			-36.0 
+			-36.0
 		\end{bmatrix}
 	\end{array}
-	$
+	$$
 	\begin{itemize}
-		\item	$\mathbf{X}^T\mathbf{X}$: scaled version of the covariance matrix of $\mathbf{X}$. 
-		\item	Diagonal entries: variance, always positive 
-		\item	Off-diagonal entries: symmetrical, strength of relationship between variables 
-		\item	What does $\mathbf{X}^T\mathbf{X}$ look like for uncorrelated variables? 
+		\item	$\mathbf{X}^T\mathbf{X}$: scaled version of the covariance matrix of $\mathbf{X}$.
+		\item	Diagonal entries: variance, always positive
+		\item	Off-diagonal entries: symmetrical, strength of relationship between variables
+		\item	What does $\mathbf{X}^T\mathbf{X}$ look like for uncorrelated variables?
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Example}
 	\begin{itemize}
-		\item	Standard error = $\mathcal{V}\{\mathbf{b}\} = \left( \mathbf{X}^T\mathbf{X} \right)^{-1} S_E^2$ 
+		\item	Standard error = $\mathcal{V}\{\mathbf{b}\} = \left( \mathbf{X}^T\mathbf{X} \right)^{-1} S_E^2$
 	\end{itemize}
-	
-	$ \qquad\qquad \left(\mathbf{X}^T\mathbf{X}\right)^{-1}= 
+
+	$$ \qquad\qquad \left(\mathbf{X}^T\mathbf{X}\right)^{-1}=
 	\begin{bmatrix}
 		0.323 & 0.297 \\
-		0.297 & 0.289 
+		0.297 & 0.289
 	\end{bmatrix}
-	$
+	$$
 	\begin{itemize}
-		\item	Variances are not independent of each other! CI are not independent either. 
-		\item	For 2 variables: 
+		\item	Variances are not independent of each other! CI are not independent either.
+		\item	For 2 variables:
 	\end{itemize}
-	
-	$ 
+
+	$$
 	\begin{array}{lcr}
 		\qquad\qquad \mathcal{V}\left(b_1\right) &=& \dfrac{1}{1-r^2_{12}} \times \dfrac{S_E^2}{\sum{x_1^2}} \\
-		\qquad\qquad \mathcal{V}\left(b_2\right) &=& \dfrac{1}{1-r^2_{12}} \times \dfrac{S_E^2}{\sum{x_2^2}} 
+		\qquad\qquad \mathcal{V}\left(b_2\right) &=& \dfrac{1}{1-r^2_{12}} \times \dfrac{S_E^2}{\sum{x_2^2}}
 	\end{array}
-	$
+	$$
 	\begin{itemize}
-		\item	$r^2_{12}$ = correlation between $x_1$ and $x_2$ 
-		\item	What happens as the correlation between the two variables increases? 
-		\item	Each $\mathcal{V}\left(b_k\right)$ variance has $n-k-1$ degrees of freedom 
+		\item	$r^2_{12}$ = correlation between $x_1$ and $x_2$
+		\item	What happens as the correlation between the two variables increases?
+		\item	Each $\mathcal{V}\left(b_k\right)$ variance has $n-k-1$ degrees of freedom
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Interpretation of the model coefficients}
 	\begin{block}
-		{Model} 
+		{Model}
 		\begin{center}
-			$y = b_1x_1 + b_2x_2$ 
+			$y = b_1x_1 + b_2x_2$
 		\end{center}
 	\end{block}
 	\begin{center}
@@ -1610,29 +1610,29 @@
 
 \begin{frame}\frametitle{Interpretation of the model coefficients}
 	\begin{itemize}
-		\item	$y = b_1x_1 + b_2x_2$ 
+		\item	$y = b_1x_1 + b_2x_2$
 	\end{itemize}
 	\begin{itemize}
-		\item	Coefficient $b_1$ is the average change in $\mathbf{y}$ for a one unit change in ${x}_1$ \textbf{provided we hold} ${x}_2$ \textbf{\emph{fixed}} 
+		\item	Coefficient $b_1$ is the average change in $\mathbf{y}$ for a one unit change in ${x}_1$ \textbf{provided we hold} ${x}_2$ \textbf{\emph{fixed}}
 	\end{itemize}
 	\begin{itemize}
-		\item	\emph{Example}: $y = b_T T + b_S S = -0.52 T + 3.2 S$ 
+		\item	\emph{Example}: $y = b_T T + b_S S = -0.52 T + 3.2 S$
 		\begin{itemize}
-			\item	$T$ = reactor temperature in Kelvin, 
-			\item	$S$ = substrate concentration in g/L 
-			\item	$y$ = yield in $\mu\text{g}$ 
-			\item	$b_T = -0.52 \mu\text{g}/\text{K}$: decrease in yield for every 1 Kelvin increase in temperature, holding the substrate concentration fixed 
+			\item	$T$ = reactor temperature in Kelvin,
+			\item	$S$ = substrate concentration in g/L
+			\item	$y$ = yield in $\mu\text{g}$
+			\item	$b_T = -0.52 \mu\text{g}/\text{K}$: decrease in yield for every 1 Kelvin increase in temperature, holding the substrate concentration fixed
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Interpretation of the model coefficients}
-	
-	$y = b_T T + b_S S = -0.52 T + 3.2 S$
+
+	$$y = b_T T + b_S S = -0.52 T + 3.2 S$$
 	\begin{itemize}
-		\item	CI for $b_T$ spans zero: ``\emph{the effect of the temperature, controlling for concentration, is not significant}" 
-		\item	The ``controlling for" indicates the controlled variable was used in the model 
-		\item	CI for $b_S$ does not span zero: ``\emph{the effect of concentration, controlling for temperature, is to increase the yield by 3.2 $\mu\text{g}$ for every 1g/L increase in concentration, S}" 
+		\item	CI for $b_T$ spans zero: ``\emph{the effect of the temperature, controlling for concentration, is not significant}"
+		\item	The ``controlling for" indicates the controlled variable was used in the model
+		\item	CI for $b_S$ does not span zero: ``\emph{the effect of concentration, controlling for temperature, is to increase the yield by 3.2 $\mu\text{g}$ for every 1g/L increase in concentration, S}"
 	\end{itemize}
 \end{frame}
 
@@ -1641,65 +1641,65 @@
 		\includegraphics[width=0.6\textwidth]{\imagedir/least-squares/Mixing_-_flusso_assiale_e_radiale.jpg}
 	\end{center}
 	\see{\href{http://en.wikipedia.org/wiki/File:Mixing_-_flusso_assiale_e_radiale.jpg}{Wikipedia article}}
-	
-	Yield = \emph{f}(temperature, impeller type); impeller = [radial, axial] 
+
+	Yield = \emph{f}(temperature, impeller type); impeller = [radial, axial]
 	\begin{itemize}
-		\item	Build two models: one for radial, one for axial 
+		\item	Build two models: one for radial, one for axial
 		\begin{itemize}
-			\item	Not efficient use of the data 
-			\item	Temperature effect is the same, independent of impeller 
-			\item	Fewer degrees of freedom 
-			\item	Increases $S_E$ 
+			\item	Not efficient use of the data
+			\item	Temperature effect is the same, independent of impeller
+			\item	Fewer degrees of freedom
+			\item	Increases $S_E$
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Integer variables in the model}
-	
-	$ 
+
+	$$
 	\begin{array}{lr}
 		y &= \beta_0 + \beta_1 T + \gamma d + \varepsilon \\
 		y &= b_0 + b_1 T + g d_i + e_i \\
 		\\
 	\end{array}
-	$ 
+	$$
 	\begin{itemize}
-		\item	Let: $d_i = 0$ for axial impeller 
-		\item	Let: $d_i = 1$ for radial impeller 
+		\item	Let: $d_i = 0$ for axial impeller
+		\item	Let: $d_i = 1$ for radial impeller
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Integer variables in the model}
-	
+
 	Assume $\beta_1 = 0$ (temperature has no effect) for now. Geometrically:
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{\imagedir/least-squares/least-squares-dummy-variable-and-intercept.png}
 	\end{center}
-	$ 
+	$$
 	\begin{array}{llll}
 		\text{Axial impeller:} \qquad & d_i=0 &\qquad y = b_0 + gd_i &\qquad y = b_0 + 0 \\
-		\text{Radial impeller:} \qquad & d_i=1 &\qquad y = b_0 + gd_i & \qquad y = b_0 + g 
+		\text{Radial impeller:} \qquad & d_i=1 &\qquad y = b_0 + gd_i & \qquad y = b_0 + g
 	\end{array}
-	$ 
+	$$
 	\begin{itemize}
-		\item	$g$ = difference in yield when changing the impeller from axial to radial 
+		\item	$g$ = difference in yield when changing the impeller from axial to radial
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Integer variables in the model}
-	
+
 	Now let $\beta_1 \neq 0$:
-	
-	$ 
+
+	$$
 	\begin{array}{ll}
 		& \\
 		\text{Axial impellers:} \qquad &\qquad y = b_0 + b_1 T + 0 \\
-		\text{Radial impellers:} \qquad &\qquad y = b_0 + b_1 T + g 
+		\text{Radial impellers:} \qquad &\qquad y = b_0 + b_1 T + g
 	\end{array}
-	$
+	$$
 	\begin{itemize}
-		\item	The lines are still parallel 
-		\item	If $g = -56 \mu\text{g}$: the decrease in yield is expected to be 56 $\mu\text{g}$ when changing from an axial to a radial impeller 
+		\item	The lines are still parallel
+		\item	If $g = -56 \mu\text{g}$: the decrease in yield is expected to be 56 $\mu\text{g}$ when changing from an axial to a radial impeller
 	\end{itemize}
 \end{frame}
 
@@ -1708,47 +1708,47 @@
 		\includegraphics[width=0.9\textheight]{\imagedir/least-squares/least-squares-two-x-variables-one-integer.png}
 	\end{center}
 	\begin{itemize}
-		\item	Example: assume the 95\% confidence interval for impeller parameter was: $ -32 \mu\text{g} \leq \gamma \leq 21 \mu\text{g}$; i.e. no significant effect on yield 
-		\item	CI for integer variables: no different to other variables 
+		\item	Example: assume the 95\% confidence interval for impeller parameter was: $ -32 \mu\text{g} \leq \gamma \leq 21 \mu\text{g}$; i.e. no significant effect on yield
+		\item	CI for integer variables: no different to other variables
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Integer variables in the model}
-	
+
 	Raw material from Spain, India, or Vietnam [3 levels]
 	\begin{itemize}
-		\item	2 integer variables: $y = \beta_0 + \beta_1x_1 + \ldots + \beta_k x_k +\mathbf{ \gamma_1 d_1 + \gamma_2 d_2} + \varepsilon$ 
+		\item	2 integer variables: $y = \beta_0 + \beta_1x_1 + \ldots + \beta_k x_k +\mathbf{ \gamma_1 d_1 + \gamma_2 d_2} + \varepsilon$
 		\begin{itemize}
-			\item	$d_{i1} = 0$ and $d_{i2} = 0$ for Spain 
-			\item	$d_{i1} = 1$ and $d_{i2} = 0$ for India 
-			\item	$d_{i1} = 0$ and $d_{i2} = 1$ for Vietnam 
-			\item	Interpret coefficients relative to the (0,0) baseline for Spain 
+			\item	$d_{i1} = 0$ and $d_{i2} = 0$ for Spain
+			\item	$d_{i1} = 1$ and $d_{i2} = 0$ for India
+			\item	$d_{i1} = 0$ and $d_{i2} = 1$ for Vietnam
+			\item	Interpret coefficients relative to the (0,0) baseline for Spain
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	3 integer variables: $y = \beta_0 + \beta_1x_1 + \ldots + \beta_k x_k + \mathbf{\gamma_1 d_1 + \gamma_2 d_2 + \gamma_3 d_3} + \varepsilon$ 
+		\item	3 integer variables: $y = \beta_0 + \beta_1x_1 + \ldots + \beta_k x_k + \mathbf{\gamma_1 d_1 + \gamma_2 d_2 + \gamma_3 d_3} + \varepsilon$
 		\begin{itemize}
-			\item	$d_{i1} = 1$ and $d_{i2} = 0$ and $d_{i3} = 0$ for Spain 
-			\item	$d_{i1} = 0$ and $d_{i2} = 1$ and $d_{i3} = 0$ for India 
-			\item	$d_{i1} = 0$ and $d_{i2} = 0$ and $d_{i3} = 1$ for Vietnam 
-			\item	These coefficients are more easily interpretable 
-			\item	Loose a single degree of freedom 
-			\item	IMPOSSIBLE to calculate model: the $\mathbf{X}^T\mathbf{X}$ is perfectly collinear, and cannot be inverted. 
+			\item	$d_{i1} = 1$ and $d_{i2} = 0$ and $d_{i3} = 0$ for Spain
+			\item	$d_{i1} = 0$ and $d_{i2} = 1$ and $d_{i3} = 0$ for India
+			\item	$d_{i1} = 0$ and $d_{i2} = 0$ and $d_{i3} = 1$ for Vietnam
+			\item	These coefficients are more easily interpretable
+			\item	Loose a single degree of freedom
+			\item	IMPOSSIBLE to calculate model: the $\mathbf{X}^T\mathbf{X}$ is perfectly collinear, and cannot be inverted.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Outliers: discrepancy, leverage, and influence}
 	\begin{itemize}
-		\item	Unusual observations influence the model parameters and our interpretation 
-		\item	Outliers are the most interesting data: 
+		\item	Unusual observations influence the model parameters and our interpretation
+		\item	Outliers are the most interesting data:
 		\begin{itemize}
-			\item	Do not delete without investigating them 
-			\item	If outlier is correct it could be very valuable information 
-			\item	Might have to add a new variable in model (avoid overfitting) 
+			\item	Do not delete without investigating them
+			\item	If outlier is correct it could be very valuable information
+			\item	Might have to add a new variable in model (avoid overfitting)
 		\end{itemize}
 	\end{itemize}
-	
+
 	For unusual data: $\text{Leverage} \times \text{Discrepancy} = \text{Influence on the model} $
 \end{frame}
 
@@ -1772,10 +1772,10 @@
 
 \begin{frame}\frametitle{Leverage}
 	\begin{itemize}
-		\item	How much each observation contributes to $\hat{y}_i$; called hat value, $h_i$ 
-		\item	Measures how far the data point is from the center of the model 
-		\item	$ h_i = \dfrac{1}{n} + \dfrac{\left(x_i -\overline{x}\right)^2}{\sum_{j=1}^{n}{\left(x_j -\overline{x}\right)^2}} \qquad \overline{h} = \dfrac{k}{n} \qquad \dfrac{1}{n} \leq h_i \leq 1.0$ 
-		\item	Show limits at 2 and 3 times average hat value 
+		\item	How much each observation contributes to $\hat{y}_i$; called hat value, $h_i$
+		\item	Measures how far the data point is from the center of the model
+		\item	$ h_i = \dfrac{1}{n} + \dfrac{\left(x_i -\overline{x}\right)^2}{\sum_{j=1}^{n}{\left(x_j -\overline{x}\right)^2}} \qquad \overline{h} = \dfrac{k}{n} \qquad \dfrac{1}{n} \leq h_i \leq 1.0$
+		\item	Show limits at 2 and 3 times average hat value
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{\imagedir/least-squares/hatvalue-of-outliers-slides.png}
@@ -1783,14 +1783,14 @@
 \end{frame}
 
 \begin{frame}\frametitle{Discrepancy}
-	
-	Discrepancy: unusual data pair \emph{in the context of the least squares model} 
+
+	Discrepancy: unusual data pair \emph{in the context of the least squares model}
 	\begin{itemize}
-		\item	Measured as residual distance, accounting for leverage: \emph{studentized residuals} 
+		\item	Measured as residual distance, accounting for leverage: \emph{studentized residuals}
 	\end{itemize}
-	$ \quad e_i^* = \dfrac{e_i}{S_{E(-i)}\sqrt{1-h_i}} = \dfrac{e_i - 0}{\text{``corrected'' standard deviation}\left\{e_i \right\}} $
+	$$ \quad e_i^* = \dfrac{e_i}{S_{E(-i)}\sqrt{1-h_i}} = \dfrac{e_i - 0}{\text{``corrected'' standard deviation}\left\{e_i \right\}} $$
 	\begin{itemize}
-		\item	$S_{E(-i)}$ = standard error without $i^\text{th}$ point in model 
+		\item	$S_{E(-i)}$ = standard error without $i^\text{th}$ point in model
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/studentized-residuals-slides.png}
@@ -1799,11 +1799,11 @@
 
 \begin{frame}\frametitle{Influence}
 	\begin{itemize}
-		\item	\emph{How much does the model change when omitting a data point} 
-		\item	$\text{Influence on the model} = \text{Discrepancy} \times \text{Leverage} $ 
-		\item	\emph{Cook's statistic}, called $D_i = \dfrac{e_i^2}{k \times \frac{1}{n}\sum{e_i^2}} \times \dfrac{h_i}{1-h_i} $ 
-		\item	\texttt{cooks.distance(model)} in R 
-		\item	Cut-off value: $D_i > \dfrac{4}{n-k} $ 
+		\item	\emph{How much does the model change when omitting a data point}
+		\item	$\text{Influence on the model} = \text{Discrepancy} \times \text{Leverage} $
+		\item	\emph{Cook's statistic}, called $D_i = \dfrac{e_i^2}{k \times \frac{1}{n}\sum{e_i^2}} \times \dfrac{h_i}{1-h_i} $
+		\item	\texttt{cooks.distance(model)} in R
+		\item	Cut-off value: $D_i > \dfrac{4}{n-k} $
 	\end{itemize}
 \end{frame}
 
@@ -1818,79 +1818,79 @@
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/influence-plots-slides.png}
 	\end{center}
 	\begin{itemize}
-		\item	\texttt{library(car)} 
-		\item	\texttt{model <- lm(y \string~ x)} 
-		\item	\texttt{influencePlot(model)} 
-		\item	\texttt{influenceIndexPlot(model)} 
+		\item	\texttt{library(car)}
+		\item	\texttt{model <- lm(y \string~ x)}
+		\item	\texttt{influencePlot(model)}
+		\item	\texttt{influenceIndexPlot(model)}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Enrichment Topics}
 	\begin{itemize}
-		\item	Enrichment: \emph{ robust least squares models} 
+		\item	Enrichment: \emph{ robust least squares models}
 		\begin{itemize}
-			\item	Useful for automated model building 
-			\item	Human reviewer not trained in understanding plots 
+			\item	Useful for automated model building
+			\item	Human reviewer not trained in understanding plots
 		\end{itemize}
-		\item	Enrichment: \emph{Logistic modelling} 
+		\item	Enrichment: \emph{Logistic modelling}
 		\begin{itemize}
-			\item	\emph{y}-variable is discrete (yes/no or pass/fail) 
-			\item	Model then predicts probability of success/failure from various x's 
+			\item	\emph{y}-variable is discrete (yes/no or pass/fail)
+			\item	Model then predicts probability of success/failure from various x's
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Enrichment: Testing of least-squares models}
 	\begin{enumerate}
-		\item	Objective: learn more about our system 
+		\item	Objective: learn more about our system
 		\begin{itemize}
-			\item	effect of one variable on another, 
-			\item	significant effect (use the CI) 
+			\item	effect of one variable on another,
+			\item	significant effect (use the CI)
 		\end{itemize}
-		\item	Objective: prediction 
+		\item	Objective: prediction
 		\begin{itemize}
-			\item	How well does it work? 
+			\item	How well does it work?
 		\end{itemize}
 	\end{enumerate}
-	
-	\textbf{Gold standard}: use an independent testing data set 
+
+	\textbf{Gold standard}: use an independent testing data set
 	\begin{itemize}
-		\item	$\text{RMSEP} = \sqrt{\dfrac{1}{n}\sum_{i}^{n}{\left(y_{\text{new}, i} - \hat{y}_{\text{new}, i}\right)^2}}$ 
-		\item	RMSEE is the same as RMSEP, but for building the model 
-		\item	The RMSEE $\approx S_E$ = standard error 
+		\item	$\text{RMSEP} = \sqrt{\dfrac{1}{n}\sum_{i}^{n}{\left(y_{\text{new}, i} - \hat{y}_{\text{new}, i}\right)^2}}$
+		\item	RMSEE is the same as RMSEP, but for building the model
+		\item	The RMSEE $\approx S_E$ = standard error
 		\item	Or, use some other measure of ``closeness''
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Testing of least-squares models}
-	
-	\textbf{Example}: 
+
+	\textbf{Example}:
 	\begin{itemize}
-		\item	Need to build a predictive model for product viscosity using 3 x-variables 
-		\item	Observations: one per day, from 2006 and 2007 (730 observations) 
+		\item	Need to build a predictive model for product viscosity using 3 x-variables
+		\item	Observations: one per day, from 2006 and 2007 (730 observations)
 	\end{itemize}
-	
-	Which situation is better? 
+
+	Which situation is better?
 	\begin{itemize}
-		\item	\textbf{A} 
+		\item	\textbf{A}
 		\begin{itemize}
-			\item	Observations: 1, 3, 5, 7, ... 729 to build 
-			\item	Observations: 2, 4, 6, 8, ... 730 to test 
+			\item	Observations: 1, 3, 5, 7, ... 729 to build
+			\item	Observations: 2, 4, 6, 8, ... 730 to test
 		\end{itemize}
-		\item	\textbf{B} 
+		\item	\textbf{B}
 		\begin{itemize}
-			\item	Observations: 1 to 365 (2006 data) to build 
-			\item	Observations: 366 to 730 (2007 data) to test 
+			\item	Observations: 1 to 365 (2006 data) to build
+			\item	Observations: 366 to 730 (2007 data) to test
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Enrichment: Nonparametric modelling}
-	
-	Relationship between $x$ and $y$ is of the form: $y = f(x) + \varepsilon$, 
+
+	Relationship between $x$ and $y$ is of the form: $y = f(x) + \varepsilon$,
 	\begin{itemize}
-		\item	The function (model), $f(x)$, is unspecified 
-		\item	The model is usually a smooth function 
+		\item	The function (model), $f(x)$, is unspecified
+		\item	The model is usually a smooth function
 	\end{itemize}
 	\begin{center}
 		\includegraphics[height=0.7\textheight]{\imagedir/least-squares/Income-Prestige-raw-data.png}
@@ -1902,58 +1902,58 @@
 		\includegraphics[height=0.65\textheight]{\imagedir/least-squares/Income-Prestige-with-smoothing.png}
 	\end{center}
 	\begin{itemize}
-		\item	The smoothed line is the nonparametric function, $f(x)$ 
-		\item	See the Cleveland reference \emph{Robust locally weighted regression and smoothing scatterplots} 
-		\item	See the \texttt{lowess} function in R 
+		\item	The smoothed line is the nonparametric function, $f(x)$
+		\item	See the Cleveland reference \emph{Robust locally weighted regression and smoothing scatterplots}
+		\item	See the \texttt{lowess} function in R
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Enrichment: Bootstrapping}
 	\begin{itemize}
-		\item	Enrichment topic 
-		\item	\emph{Example}: bootstrapping strictly not required, but useful. 
+		\item	Enrichment topic
+		\item	\emph{Example}: bootstrapping strictly not required, but useful.
 		\begin{itemize}
-			\item	Model: $y = \beta_0 + \beta_1 x$ 
-			\item	Interested in the slope $\beta_1$ 
-			\item	Uncertainty associated with it? How much does it depend on the data? 
-			\item	The CI is: 
+			\item	Model: $y = \beta_0 + \beta_1 x$
+			\item	Interested in the slope $\beta_1$
+			\item	Uncertainty associated with it? How much does it depend on the data?
+			\item	The CI is:
 		\end{itemize}
 	\end{itemize}
-	$ 
+	$$
 	\begin{array}{rcccl}
 		- c_t &\leq& \dfrac{b_1 - \beta_1}{S_E(b_1)} &\leq & +c_t\\
-		b_1 - c_t S_E(b_1) &\leq& \beta_1 &\leq& b_1 + c_t S_E(b_1) 
+		b_1 - c_t S_E(b_1) &\leq& \beta_1 &\leq& b_1 + c_t S_E(b_1)
 	\end{array}
-	$
+	$$
 \end{frame}
 
 \begin{frame}\frametitle{Bootstrapping example}
 	\begin{itemize}
-		\item	x = dose of radiation administered 
-		\item	y = survival percentage 
+		\item	x = dose of radiation administered
+		\item	y = survival percentage
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{\imagedir/least-squares/bootstrap-example-slide1.png}
 	\end{center}
 	\begin{itemize}
-		\item	Point 13 is influential 
+		\item	Point 13 is influential
 		\begin{itemize}
-			\item	slope = -0.0059 with point 13 
-			\item	slope = -0.0078 without it 
+			\item	slope = -0.0059 with point 13
+			\item	slope = -0.0078 without it
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Bootstrapping example}
 	\begin{itemize}
-		\item	Randomly select n=14 rows from the raw data 
+		\item	Randomly select n=14 rows from the raw data
 		\begin{itemize}
-			\item	\texttt{[4] 9 1 6 5 5 5 4 11 8 2 9 13 8 13} 
-			\item	\texttt{[5] 4 7 12 10 13 12 12 3 8 4 14 1 6 4} 
-			\item	\texttt{[6] 3 4 10 14 14 9 10 10 8 11 1 1 4 14} 
+			\item	\texttt{[4] 9 1 6 5 5 5 4 11 8 2 9 13 8 13}
+			\item	\texttt{[5] 4 7 12 10 13 12 12 3 8 4 14 1 6 4}
+			\item	\texttt{[6] 3 4 10 14 14 9 10 10 8 11 1 1 4 14}
 		\end{itemize}
-		\item	Calculate slope for each round 
-		\item	CI: $-0.0082 \leq \beta_1 \leq -0.0036$ 
+		\item	Calculate slope for each round
+		\item	CI: $-0.0082 \leq \beta_1 \leq -0.0036$
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{\imagedir/least-squares/bootstrap-example-slide2.png}
