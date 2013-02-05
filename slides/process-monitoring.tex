@@ -228,8 +228,6 @@
 	\begin{exampleblock}{Critical limitation}
 		All of the above assumed we knew $\mu$ and $\sigma$
 	\end{exampleblock}
-
-	
 \end{frame}
 
 \begin{frame}\frametitle{Shewhart chart: using estimates}
@@ -264,7 +262,7 @@
 	\begin{itemize}
 		\item	e.g. bale 1 raw values: [231, 251, 235, 241, 227]
 		\begin{itemize}
-			\item	$\bar{x}_1$ = 237 is our new data point for the Shewhart chart
+			\item	$\bar{x}_1$ = 237 is our data point for the Shewhart chart
 			\item	$s_1 = 9.38$
 		\end{itemize}
 		\item	e.g. bale 2 raw values: [252, 253, 247, 232, 244]
@@ -353,8 +351,11 @@
 
 	Assume $\bar{x}$ from shifted distribution: $\mu$ to $\mu + \Delta\sigma$
 
-	\textbf{Question}: probability this new $\bar{x}$ will fall within existing LCL and UCL?
-
+	\textbf{Question}: what is the probability a new $\bar{x}$ will fall within existing LCL and UCL?
+	\begin{itemize}
+		\item	{\color{myOrange}{\emph{Answer}}}: $1 -$ shaded area
+	\end{itemize}
+	\vspace{12pt}
 	\includegraphics[width=\textwidth]{\imagedir/monitoring/show-shift-beta-error.png}
 \end{frame}
 
@@ -366,10 +367,11 @@
 	\begin{itemize}
 		\item	$\beta$ is a function of the process shift, $\Delta$
 		\item	Table is for $n=4$ and UCL and LCL at the $\pm 3 \sigma_{\bar{X}}$ limits
-		\item	\texttt{beta <- pnorm(3 - delta*sqrt(n)) - pnorm(-3 - delta*sqrt(n))}
+		\item	\texttt{beta <- pnorm(3 - delta*sqrt(n)) \\
+		        - pnorm(-3 - delta*sqrt(n))}
 		\item	Interpretation: Shewhart chart not good at detecting a change in the location!
 		\item	Surprising, given that we use Shewhart chart for this purpose.
-		\item	E.g: a $0.75\sigma$ only be detected around 6.7\% of the time
+		\item	E.g: a $0.75\sigma$ only be detected around (1 - 0.9332) = 6.7\% of the time
 	\end{itemize}
 \end{frame}
 }
@@ -404,18 +406,21 @@
 
 \begin{frame}\frametitle{Extensions: Western Electric Rules}
 	\begin{itemize}
-		\item	Basic Shewhart chart is not too sensitive to process shifts. Raise an alarm when these \emph{improbable} events occur:
+		\item	Basic Shewhart chart is not too sensitive to process shifts. So supplement control limits with these additional heuristic ``rules''. Raise an alarm when:
 		\begin{itemize}
-			\item	2 out of 3 points lie beyond $2\sigma$ on the same side of the centre line
-			\item	4 out of 5 points lie beyond $1\sigma$ on the same side of the centre line
+			\item	2 out of 3 points lie beyond $2\sigma$ on the same side of the target
+			\item	4 out of 5 points lie beyond $1\sigma$ on the same side of the target
 			\item	8 successive points lie on the same side of the center line
 		\end{itemize}
 	\end{itemize}
-
+	
+	\vspace{12pt}
 	The theoretical ARL is reduced by using these rules
 	\begin{itemize}
 		\item	\textbf{Adding robustness}: use robust methods in phase 1: see notes for a journal reference.
 	\end{itemize}
+	
+	\vspace{12pt}
 	\begin{itemize}
 		\item	\textbf{Warning limits}:
 		\begin{itemize}
@@ -444,7 +449,7 @@
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}\frametitle{Notice the trends between these variables?}
+\begin{frame}\frametitle{What is the relationship between these variables?}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/monitoring/two-axis-monitoring-separate-plots.jpg}
 	\end{center}
@@ -456,7 +461,7 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{CUSUM charts}
+\begin{frame}\frametitle{CUSUM (\emph{\textbf{cu}}mulative \emph{\textbf{sum}}) charts}
 	\begin{itemize}
 		\item	Shewhart chart takes a long time to detect shift in the mean, away from target, $T$
 		\item	CUSUM formula:
@@ -484,7 +489,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{CUSUM charts: in-control}
+\begin{frame}\frametitle{CUSUM charts: everything is OK, ``in-control''}
 	\begin{itemize}
 		\item	$\mu=20$ and $\sigma=3$
 	\end{itemize}
@@ -493,9 +498,9 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{CUSUM charts: out-of-control}
+\begin{frame}\frametitle{CUSUM charts: ``out-of-control''}
 	\begin{itemize}
-		\item	Shift of 1.2 units at $t=150$, caught at around $t=180$
+		\item	Shift of 1.2 units starts at $t=150$, caught at around $t=180$
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/monitoring/CUSUM-with-shift.png}
@@ -514,7 +519,7 @@
 	\begin{enumerate}
 		\item	Shewhart: each subgroup is independent (unrelated), no ``memory''
 		\item	CUSUM: infinite build up of errors, all the way back to t=0
-		\item	Moving average chart: has a ``window'' of memory:
+		\item	Moving average (MA) chart: has a ``window'' of memory:
 	\end{enumerate}
 	
 	\begin{center}
@@ -527,14 +532,18 @@
 		\bar{x}_t &=& \dfrac{1}{n}x_{t-1} + \dfrac{1}{n}x_{t-2} + \ldots + \dfrac{1}{n}x_{t-n}
 	\end{array}
 	$$
+	\begin{itemize}
+		\item	essentially gives equal ``weight'' of $\dfrac{1}{n}$ to every raw data point
+	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{EWMA derivation}
 	\begin{itemize}
-		\item	Exponentially weighted MA:
+		\item	Exponentially weighted MA = EWMA
 		\begin{itemize}
-			\item	heavier weights for recent observations
-			\item	small weights further back
+			\item	don't give equal weights, rather ...
+			\item	heavier weights for the most recent observations
+			\item	small weights further back in time
 		\end{itemize}
 	\end{itemize}
 
@@ -578,24 +587,14 @@
 			\item	$\hat{x}_{t}$: historical data, weighted by $\left(1-\lambda \right)$
 		\end{enumerate}
 	\end{itemize}
+	
+	An alternative interpretation: 
 	\begin{itemize}
-		\item	$\hat{x}_{t+1} = \sum_{i=0}^{i=t}{w_i x_i} = w_0x_0 + w_1x_1 + w_2x_2 + \ldots $
+		\item	$\hat{x}_{t+1} = \displaystyle\sum_{i=0}^{i=t}{w_i x_i} = w_0x_0 + w_1x_1 + w_2x_2 + \ldots $
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{EWMA derivation}
-	\begin{center}
-		\includegraphics[height=0.9\textheight]{\imagedir/monitoring/explain-EWMA-derivation-part1.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{EWMA derivation}
-	\begin{center}
-		\includegraphics[height=0.9\textheight]{\imagedir/monitoring/explain-EWMA-derivation-part2.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{EWMA derivation}
+\begin{frame}\frametitle{EWMA derivation example}
 	\begin{center}
 		\includegraphics[height=0.8\textheight]{\imagedir/monitoring/explain-weights-for-process-monitoring.png}
 	\end{center}
@@ -604,6 +603,18 @@
 		\item	As $\lambda \rightarrow 0$: smoother chart, uses more history, less current data
 		\item	As $\lambda \rightarrow 1$: chart uses more current data (Shewhart-like)
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA derivation example}
+	\begin{center}
+		\includegraphics[height=0.9\textheight]{\imagedir/monitoring/explain-EWMA-derivation-part1.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA derivation example}
+	\begin{center}
+		\includegraphics[height=0.9\textheight]{\imagedir/monitoring/explain-EWMA-derivation-part2.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{EWMA limits}
@@ -621,16 +632,17 @@
 	\vspace{12pt}
 	\textbf{Nice implementation}: show both Shewhart and EWMA on the same chart
 	\begin{itemize}
-		\item	Get the usual Shewhart monitoring, but
-		\item	EWMA gives a one-step ahead prediction as well
-		\item	Used for slow-moving processes with long gaps between samples
+		\item	This gives you the usual Shewhart monitoring, but for a 
+		\item	slow-moving processes with long gaps between samples, 
+		\item	the EWMA helpfully gives a one-step ahead prediction
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{EWMA example}
-
-	\includegraphics[width=\textwidth]{\imagedir/monitoring/Hunter-EWMA-example.png}
-
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/monitoring/Hunter-EWMA-example.png}
+	\end{center}
+	\vspace{6pt}
 	From: Hunter, ``The Exponentially Weighted Moving Average'', \emph{Journal of Quality Technology}, \textbf{18}, p 203-210, 1986.
 \end{frame}
 
