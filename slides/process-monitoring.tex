@@ -522,18 +522,18 @@
 \begin{frame}\frametitle{EWMA charts: what is a moving average?}
 	\begin{enumerate}
 		\item	Shewhart: each subgroup is independent (unrelated), no ``memory''
-		\item	CUSUM: infinite build up of errors, all the way back to t=0
+		\item	CUSUM: infinite build up of errors, all the way back to $t=0$
 		\item	Moving average (MA) chart: has a ``window'' of memory:
 	\end{enumerate}
 	
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/monitoring/explain-moving-average-data-source.png}
-	\end{center}
-	
+	\end{center}	
 	$$
 	\begin{array}{rcl}
 		\\
-		\bar{x}_t &=& \dfrac{1}{n}x_{t-1} + \dfrac{1}{n}x_{t-2} + \ldots + \dfrac{1}{n}x_{t-n}
+		\bar{x}_t &=& \dfrac{1}{n}x_{t-1} + \dfrac{1}{n}x_{t-2} + \ldots + \dfrac{1}{n}x_{t-n} \\
+		\bar{x}_t &=& 0.25x_{t-1} + 0.25x_{t-2} + 0.25x_{t-3} + 0.25x_{t-4} + 0\qquad \text{for n=4}\\
 	\end{array}
 	$$
 	\begin{itemize}
@@ -543,7 +543,7 @@
 
 \begin{frame}\frametitle{EWMA derivation}
 	\begin{itemize}
-		\item	Exponentially weighted MA = EWMA
+		\item	{\color{purple}{Exponentially Weighted Moving Average}} = EWMA
 		\begin{itemize}
 			\item	don't give equal weights, rather ...
 			\item	heavier weights for the most recent observations
@@ -584,6 +584,7 @@
 		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda e_{t} \\
 		e_t &=& x_t - \hat{x}_t \\
 		\\
+		\text{Substitute in the}\,\, e_t:\\		
 		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda \left(x_t - \hat{x}_t\right) \\
 		\hat{x}_{t+1} &=& \lambda x_t + \left(1-\lambda \right)\hat{x}_{t}
 	\end{array}
@@ -597,13 +598,19 @@
 			\item	$\hat{x}_{t}$: historical data, weighted by $\left(1-\lambda \right)$
 		\end{enumerate}
 	\end{itemize}
-	
-	
 \end{frame}
 
 \begin{frame}\frametitle{EWMA example}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/monitoring/Hunter-EWMA-example.png}
+	\end{center}
+	\vspace{6pt}
+	From: Hunter, ``\href{http://literature.connectmv.com/item/175/the-exponentially-weighted-moving-average}{The Exponentially Weighted Moving Average}'', \emph{Journal of Quality Technology}, \textbf{18}, p 203-210, 1986.
+\end{frame}
+
+\begin{frame}\frametitle{EWMA example}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/monitoring/Hunter-EWMA-example-wtih-connections.png}
 	\end{center}
 	\vspace{6pt}
 	From: Hunter, ``\href{http://literature.connectmv.com/item/175/the-exponentially-weighted-moving-average}{The Exponentially Weighted Moving Average}'', \emph{Journal of Quality Technology}, \textbf{18}, p 203-210, 1986.
@@ -668,7 +675,7 @@
 	\end{array}
 	$$
 	\begin{itemize}
-		\item	$\sigma_{\text{Shewhart}}$: standard deviation from the Shewhart chart.
+		\item	$\sigma_{\text{Shewhart}}$: standard deviation from Shewhart chart = $\dfrac{\overline{S}}{a_n\sqrt{n}}$
 	\end{itemize}
 
 	\vspace{12pt}
@@ -737,6 +744,7 @@
 
 	460 spectra (lines) measured at 650 evenly spaced wavelengths ($x$-axis). The $y$-axis is the absorbance at each wavelength.
 
+	\vspace{12pt}
 	{\color{myOrange}{What can we monitor with this data?}}
 \end{frame}
 
@@ -781,7 +789,7 @@
 		\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/coatings.png}
 	\end{center}
 	\vskip12pt
-	Increased seasoning from left to right
+	Increasing seasoning from left to right $\longrightarrow$
 \end{frame}
 
 \begin{frame}\frametitle{Feature extraction in the score space {\color{myOrange}{(phase 1)}}}
@@ -825,9 +833,9 @@
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/small-window-strategy.png}
 	\end{center}
-	Monitor:
+	Monitoring system built for:
 	\begin{itemize}
-		\item	average seasoning level
+		\item	average seasoning level {\small (also placed under automatic feedback control)}
 		\item	seasoning \emph{variance}
 	\end{itemize}
 \end{frame}
@@ -995,8 +1003,8 @@
 	Implies: PCR = 0.5
 	\includegraphics[width=\textwidth]{\imagedir/monitoring/explain-PCR-half.png}
 	\begin{itemize}
-		\item	z for LSL = (65 - 80)/10 = -1.5
-		\item	z for USL = (95 - 80)/10 = 1.5
+		\item	$z$ for LSL = $(65 - 80)/10 = -1.5$
+		\item	$z$ for USL = $(95 - 80)/10 = +1.5$
 		\item	Shaded area probability = \texttt{pnorm(-1.5) + (1-pnorm(1.5))} = 13.4\%
 	\end{itemize}
 \end{frame}
@@ -1010,9 +1018,9 @@
 		\includegraphics[width=0.7\textwidth]{\imagedir/monitoring/explain-PCR-two.png}
 	\end{center}
 	\begin{itemize}
-		\item	z for LSL = (65 - 80)/2.5 = -6
-		\item	z for USL = (95 - 80)/2.5 = 6
-		\item	Shaded area probability = about 0 (1.973175e-09 x 100)
+		\item	$z$ for LSL = $(65 - 80)/2.5 = -6$
+		\item	$z$ for USL = $(95 - 80)/2.5 = +6$
+		\item	Shaded area probability = about 0 ($1.973\times 10^{-9} \times 100$)
 		\item	Process width: $12 \sigma$
 		\item	Why is it called process capability?
 		\begin{itemize}
