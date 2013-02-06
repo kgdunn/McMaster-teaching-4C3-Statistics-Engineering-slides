@@ -241,13 +241,17 @@
 		\begin{itemize}
 			\item	Define: $s_k$ = standard deviation of $n$ values
 			\item	Define: $\overline{S} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{s_k}$
-			\item	For $\sigma$: use $\dfrac{\overline{S}}{a_n}$, where $a_n$ is a correction factor
+			\item	For $\sigma$: use $\dfrac{\overline{S}}{a_n}$, where $a_n$ is a correction factor:
+			
+				\vspace{6pt}
+				\begin{tabular}{|c|ccccccc|}\hline
+					$n$		&	2		&	3		&	4		&	5		&	6		&	7		&	8		\\ \hline
+					$a_n$	&	0.798	&	0.886	&	0.921	&	0.940	&	0.952	&	0.959	&	0.965	\\ \hline
+				\end{tabular}
+				% In R:    n <- seq(2,8)
+				%          round(sqrt(2)*gamma( n/2.0)/ ( sqrt(n-1)*(gamma(n/2.0 -0.5)) ), 3)
 		\end{itemize}
 	\end{itemize}
-
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/table-for-an-values.png}
-	\end{center}
 	
 	$$
 	\begin{array}{rcccl}
@@ -558,12 +562,18 @@
 	\end{array}
 	$
 
-	To start if off:
-	\begin{itemize}
-		\item	$\hat{x}_0 = T$
-		\item	$e_0 = 0$
-		\item	$\hat{x}_1 = T$
-	\end{itemize}
+	\begin{columns}[t]
+		\column{0.50\textwidth}
+			To start if off:
+			\begin{itemize}
+				\item	$\hat{x}_0 = T$
+				\item	$e_0 = 0$
+				\item	$\hat{x}_1 = T$
+			\end{itemize}
+		\column{0.50\textwidth}
+			And: $0 \leq \lambda \leq 1$
+	\end{columns}
+	
 \end{frame}
 
 \begin{frame}\frametitle{EWMA derivation}
@@ -588,10 +598,15 @@
 		\end{enumerate}
 	\end{itemize}
 	
-	An alternative interpretation: 
-	\begin{itemize}
-		\item	$\hat{x}_{t+1} = \displaystyle\sum_{i=0}^{i=t}{w_i x_i} = w_0x_0 + w_1x_1 + w_2x_2 + \ldots $
-	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}\frametitle{EWMA example}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/monitoring/Hunter-EWMA-example.png}
+	\end{center}
+	\vspace{6pt}
+	From: Hunter, ``\href{http://literature.connectmv.com/item/175/the-exponentially-weighted-moving-average}{The Exponentially Weighted Moving Average}'', \emph{Journal of Quality Technology}, \textbf{18}, p 203-210, 1986.
 \end{frame}
 
 \begin{frame}\frametitle{EWMA derivation example}
@@ -606,12 +621,39 @@
 \end{frame}
 
 \begin{frame}\frametitle{EWMA derivation example}
+	
+	An alternative interpretation of the EWMA:
+	
+	\vspace{12pt}
+	\begin{columns}[t]
+		\column{1.1\textwidth}
+			{\footnotesize
+			\begin{align*}
+					           && \hat{x}_{t+1} &=& {\color{purple}{\lambda}} x_t &+& {\color{purple}{\lambda(1-\lambda)}} x_{t-1} &+& {\color{purple}{\lambda(1-\lambda)^2}} x_{t-2} &+& {\color{purple}{\lambda(1-\lambda)^3}} x_{t-3} &+ \ldots\\
+				\lambda = 0.6: && \hat{x}_{t+1} &=& 0.6 x_t     &+& 0.24 x_{t-1}               &+& 0.096 x_{t-2}                &+& 0.0384 x_{t-3} &+ \ldots      \\
+				\lambda = 0.2: && \hat{x}_{t+1} &=& 0.2 x_t     &+& 0.16 x_{t-1}               &+& 0.128 x_{t-2}                &+& 0.1024 x_{t-3} &+ \ldots       \\
+				\text{MA chart*}&& \hat{x}_{t+1} &=& 0.25 x_t    &+& 0.25 x_{t-1}               &+& 0.25 x_{t-2}                 &+& 0.25 x_{t-3}  &     
+			\end{align*}}
+
+		\column{0.01\textwidth}
+	\end{columns}
+
+	* MA chart with 4 samples per group: weight equals 1/4 = 0.25
+
+	\vspace{16pt}
+	\begin{itemize}
+		\item	As $\lambda \rightarrow 0$: smoother chart, uses more history, less current data
+		\item	As $\lambda \rightarrow 1$: chart uses more current data (Shewhart-like)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA visual example}
 	\begin{center}
 		\includegraphics[height=0.9\textheight]{\imagedir/monitoring/explain-EWMA-derivation-part1.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{EWMA derivation example}
+\begin{frame}\frametitle{EWMA visual example}
 	\begin{center}
 		\includegraphics[height=0.9\textheight]{\imagedir/monitoring/explain-EWMA-derivation-part2.png}
 	\end{center}
@@ -636,14 +678,6 @@
 		\item	slow-moving processes with long gaps between samples, 
 		\item	the EWMA helpfully gives a one-step ahead prediction
 	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{EWMA example}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/monitoring/Hunter-EWMA-example.png}
-	\end{center}
-	\vspace{6pt}
-	From: Hunter, ``The Exponentially Weighted Moving Average'', \emph{Journal of Quality Technology}, \textbf{18}, p 203-210, 1986.
 \end{frame}
 
 \begin{frame}\frametitle{Other charts}
@@ -703,22 +737,98 @@
 
 	460 spectra (lines) measured at 650 evenly spaced wavelengths ($x$-axis). The $y$-axis is the absorbance at each wavelength.
 
-	How do we monitor this?
+	{\color{myOrange}{What can we monitor with this data?}}
 \end{frame}
 
-\begin{frame}\frametitle{Monitoring in today's context}
-
-	Image data: very common situation now
+\begin{frame}\frametitle{Monitoring with image data}
+	\begin{columns}[c]
+		\column{0.50\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/image/image-structure.png}
+			\end{center}
+		\column{0.50\textwidth}
+			Image data: very common situation now
+			\begin{itemize}
+				\item	many easy measurements for liquids and gases;
+				\item	but for solids: use image data
+				\item	medical imaging
+			\end{itemize}
+	\end{columns}
+	\vspace{12pt}
+	The wavelength dimension (spectral dimension):
 	\begin{itemize}
-		\item	many easy measurements for liquids and gases;
-		\item	but for solids: use image data
-		\item	medical imaging
+		\item	1 channel: grayscale
+		\item	3 channels: colour image, RGB image
+		\item	multiple channels: hyperspectral image (e.g. NIR camera)
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Flame monitoring application}
 	\begin{center}
-		\includegraphics[width=0.4\textwidth]{\imagedir/data-types/image-data.png}
+		\includegraphics[width=\textwidth]{\imagedir/examples/flame/boiler-system.png}
 	\end{center}
 	\begin{itemize}
-		\item	Very high redundancy: neighbouring pixels are similar (spatially and in time)
+		\item	Liquid waste stream has variable energy content
+		\item	How can we maintain a desired steam flow from the boiler when the heating source is varying?
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Seasoning application}
+	We can see a change in product appearance with more seasoning:
+	\footnote{From \href{http://literature.connectmv.com/item/60}{Honglu Yu's PhD} {\tiny (used with permission)}}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/coatings.png}
+	\end{center}
+	\vskip12pt
+	Increased seasoning from left to right
+\end{frame}
+
+\begin{frame}\frametitle{Feature extraction in the score space {\color{myOrange}{(phase 1)}}}
+	
+	Create bins in the score space (eigen-decomposition of the raw image data); then count pixels:
+	\begin{columns}
+		\column{0.50\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/bins-in-score-space.png}
+			\end{center}
+		\column{0.50\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/example-histograms.png}
+			\end{center}
+	\end{columns}
+	{\small Direction of bins: direction in which seasoning level shifts the score plot}
+	\footnote{Other binning methods described in \href{http://literature.connectmv.com/item/119/}{journal publications} and thesis}
+\end{frame}
+
+\begin{frame}\frametitle{Model building and predictions {\color{myOrange}{(phase 1)}}}
+	PLS predictive model:
+	\begin{itemize}
+		\item	$\mathbf{X}$-space: cumulative histogram of \emph{fractional} bin counts 
+			\begin{itemize}
+				\item	Note the $\mathbf{X}$-space will be very collinear
+			\end{itemize}
+		\item	$y$-variable: seasoning level
+	\end{itemize}
+	
+	\begin{center}
+		\includegraphics[width=.5\textwidth]{\imagedir/examples/snackfood/model-predictions.png}
+	\end{center}
+	{\scriptsize triangles = training data; squares = testing data}
+\end{frame}
+
+\begin{frame}\frametitle{Apply the predictive model to new images {\color{myOrange}{(phase 2)}}}
+	
+	\begin{itemize}
+		\item	Apply procedure to subset of pixels:
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/small-window-strategy.png}
+	\end{center}
+	Monitor:
+	\begin{itemize}
+		\item	average seasoning level
+		\item	seasoning \emph{variance}
 	\end{itemize}
 \end{frame}
 
