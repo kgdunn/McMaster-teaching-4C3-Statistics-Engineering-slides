@@ -3,6 +3,7 @@
 		\item	A new development: we start looking at more than one variable at a time.
 		\item	We will use confidence intervals and visualization heavily though
 	\end{itemize}
+	\vspace{24pt}
 	\begin{itemize}
 		\item	Some of the most important classes are this section: we develop the base for DOE and almost all modelling tools you will see in your career.
 	\end{itemize}
@@ -11,6 +12,7 @@
 \begin{frame}\frametitle{Usage examples}
 	\begin{itemize}
 		\item	\textbf{Quantify} relationship between 2 variables:
+		\vspace{12pt}
 		\begin{itemize}
 			\item	\emph{Manager}: How does yield from the lactic acid batch fermentation relate to the purity of sucrose?
 			\item	\emph{Engineer}: The yield can be predicted from sucrose purity with an error of plus/minus 8\%
@@ -23,6 +25,7 @@
 \begin{frame}\frametitle{Usage examples}
 	\begin{itemize}
 		\item	\textbf{Assess} relationship between 2 variables:
+		\vspace{12pt}
 		\begin{itemize}
 			\item	\emph{Engineer 1}: the theoretical equation for the melt index is non-linearly related to the viscosity
 			\item	\emph{Engineer 2}: the linear model does not show any evidence of that, but the model's prediction ability does improve slightly when we use a non-linear transformation in the least-squares model.
@@ -33,8 +36,10 @@
 \begin{frame}\frametitle{Where are we headed}
 	\begin{itemize}
 		\item	You've seen the least squares model hundreds of times:
-
-		$$\mathrm{y} = \beta_0 + \beta_1 \mathrm{x} + \epsilon$$
+		
+		\begin{exampleblock}{}
+			$$\mathrm{y} = \beta_0 + \beta_1 \mathrm{x} + \epsilon$$
+		\end{exampleblock}
 
 		\begin{itemize}
 			\item	What are confidence intervals for $\beta_0$ and $\beta_1$?
@@ -67,7 +72,13 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Covariance}
+\begin{frame}\frametitle{Covariance: by example}
+	
+	\begin{exampleblock}{}
+		What does the term {\color{purple}{covariance}} mean to you?
+	\end{exampleblock}
+
+	
 	\begin{itemize}
 		\item	Consider measurements from a gas cylinder: temperature (K) and pressure (kPa).
 		\item	Ideal gas law applies under moderate condition: $pV = nRT$
@@ -114,21 +125,25 @@
 	$$ \text{Cov}\left\{x, y\right\} = \mathcal{E}\left\{ (x - \overline{x}) (y - \overline{y})\right\} \qquad \text{where} \qquad \mathcal{E}\left\{ z \right\} = \overline{z} $$
 
 	\begin{enumerate}
-		\item	Calculate deviation variables: $T - \overline{T}$ and $p - \overline{p}$
+		\item	Calculate {\color{purple}{deviation variables}}: $T - \overline{T}$ and $p - \overline{p}$
 		\begin{itemize}
 			\item	Subtracting off mean centers the vector at zero
 		\end{itemize}
-		\item	Multiply the centered vectors: $(T - \overline{T}) (p - \overline{p})$
+		\item	Multiply the {\color{purple}{centered vectors}}: $(T - \overline{T}) (p - \overline{p})$
 		\begin{itemize}
 			\item	\texttt{16740 10080 5400 1440 180 60 1620 5700 10920 15660}
 		\end{itemize}
 		\item	Calculate the expected value (mean): 6780
 		\item	Covariance has units: 6780 [K.kPa]
+		\begin{itemize}
+			\item	Product of the individual units
+			\item	\emph{Awkward units}!
+		\end{itemize}
 	\end{enumerate}
 
-	\vspace{12pt}
+	\vspace{6pt}
 	\begin{itemize}
-		\item	Covariance between temperature and humidity is 202 [K.\%]
+		\item	Covariance between temperature and humidity is: 202 [K.\%]
 		\begin{itemize}
 			\item	\emph{Awkward units}!
 		\end{itemize}
@@ -142,6 +157,7 @@
 
 		\item	(Co)variance of a centered vector = (co)variance of the uncentered vector
 		\item	What does $x^Tx$ represent?
+		\item	And $x^Ty$?
 	\end{itemize}
 	\begin{itemize}
 		\item	Go through the examples in the notes
@@ -157,7 +173,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Correlation}
+\begin{frame}\frametitle{Correlation: measures ``co-relationship''}
 	\begin{itemize}
 		\item	(Co)variance depends on units: e.g. different covariance for grams vs kilograms
 		\item	Correlation removes the scaling effect:
@@ -171,9 +187,9 @@
 	\begin{itemize}
 		\item	Gas cylinder example:
 		\begin{itemize}
-			\item	\emph{r}(temperature, pressure) = 0.997
-			\item	\emph{r}(pressure, temperature) = 0.997
-			\item	\emph{r}(temperature, humidity) = 0.380
+			\item	\emph{r}\,(temperature, pressure) = 0.997
+			\item	\emph{r}\,(pressure, temperature) = 0.997
+			\item	\emph{r}\,(temperature, humidity) = 0.380
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -231,12 +247,12 @@
 	$$
 	\begin{array}{rcl}
 		\mathcal{E}\left\{\mathrm{y}\right\} &=& \beta_0 + \beta_1 \mathrm{x} \\
-		\mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \epsilon
+		\mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \varepsilon
 	\end{array}
 	$$
 	\begin{itemize}
 		\item	$\beta_0$, $\beta_1$ and $\epsilon$: are \emph{population} parameters,
-		\item	$\epsilon$ term:
+		\item	$\varepsilon$ term:
 		\begin{itemize}
 			\item	unmodelled components of the linear model
 			\item	measurement error
@@ -253,7 +269,7 @@
 	\begin{itemize}
 		\item	$b_0 = \hat{\beta_0}$
 		\item	$b_1 = \hat{\beta_1}$
-		\item	$e = \hat{\epsilon}$
+		\item	$e = \hat{\varepsilon}$
 	\end{itemize}
 
 	So we can write:
@@ -320,6 +336,7 @@
 	$$
 	\begin{array}{rcl}
 		\min_{\displaystyle b_0, b_1} f(b_0, b_1) &=& \sum_{i=1}^{n}{(e_i)^2} \\
+		\\
 		&=& \sum_{i=1}^{n}{\left(y_i - b_0 - b_1 x_i\right)^2}
 	\end{array}
 	$$
@@ -327,12 +344,13 @@
 
 \begin{frame}\frametitle{Solving the model: grid search}
 
-	Gas cylinder example: $p = \beta_0 + \beta_1 T$
+	Let's come back to the gas cylinder example: $p = \beta_0 + \beta_1 T$
 	\begin{itemize}
 		\item	We know that $\beta_0 = 0$ from theoretical principles
 		\item	Solve for $\beta_1$ by trial and error. Initial guess?
-		\item	$b_1 \approx \beta_1 = \dfrac{nR}{V} = \dfrac{(14.1 \,\, \text{mol})(8.314 \,\,\text{J/(mol.K)})}{20 \times 10^{-3} \,\,\text{m}^3} = 5.861 \,\,\text{kPa/K}$
+		\item	{\small $b_1 \approx \beta_1 = \dfrac{nR}{V} = \dfrac{(14.1 \,\, \text{mol})(8.314 \,\,\text{J/(mol.K)})}{20 \times 10^{-3} \,\,\text{m}^3} = 5.861 \,\,\text{kPa/K}$}
 	\end{itemize}
+	\vspace{12pt}
 	\begin{enumerate}
 		\item	Construct equally spaced points between 5.0 and 6.5,
 		\item	Set $b_1 = $ guessed value
@@ -399,8 +417,8 @@
 	\begin{block}{Least squares solution}
 		$$
 			\begin{array}{rcl}
-				b_0 &=& \overline{\mathrm{y - b_1\overline{\mathrm{x}}}} \\
-				b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} }
+				b_0 &=& \overline{\mathrm{y}} - b_1\overline{\mathrm{x}} \\
+				b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x - \overline{\mathrm{x}}\right)^2} } = \dfrac{\left(\mathrm{x} - \overline{\mathrm{x}}\right)'\left(\mathrm{y} - \overline{\mathrm{y}}\right)}{\left(\mathrm{x} - \overline{\mathrm{x}}\right)'\left(\mathrm{x} - \overline{\mathrm{x}}\right)}
 			\end{array}
 		$$
 	\end{block}
@@ -424,8 +442,8 @@
 	\begin{block}{Least squares solution}
 			$$
 			\begin{array}{rcl}
-				b_0 &=& \overline{\mathrm{y - b_1\overline{\mathrm{x}}}} \\
-				b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} }
+				b_0 &=& \overline{\mathrm{y}} - b_1\overline{\mathrm{x}} \\
+				b_1 &=& \dfrac{ \sum_i{\left(x_i - \overline{\mathrm{x}}\right)\left(y_i - \overline{\mathrm{y}}\right) } }{ \sum_i{\left( x_i - \overline{\mathrm{x}}\right)^2} } = \dfrac{\left(\mathrm{x} - \overline{\mathrm{x}}\right)'\left(\mathrm{y} - \overline{\mathrm{y}}\right)}{\left(\mathrm{x} - \overline{\mathrm{x}}\right)'\left(\mathrm{x} - \overline{\mathrm{x}}\right)}
 			\end{array}
 			$$
 	\end{block}
@@ -697,7 +715,7 @@
 
 \begin{frame}\frametitle{Assumptions required}
 	\begin{itemize}
-		\item	Model structure: $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$
+		\item	Model structure: $y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$
 		\item	$b_0 = \hat{\beta}_0$ and $b_1= \hat{\beta}_1$
 	\end{itemize}
 	\begin{block}{Assumption 1}
@@ -706,7 +724,7 @@
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	Implies $\epsilon$ is the error of $\mathrm{y}$ ($\beta_0 + \beta_1 \mathrm{x}$ terms are fixed)
+		\item	Implies $\varepsilon$ is the error of $\mathrm{y}$ ($\beta_0 + \beta_1 \mathrm{x}$ terms are fixed)
 		\item	Means your $\mathrm{x}$ variable has much less uncertainty than the $\mathrm{y}$ variable
 	\end{itemize}
 \end{frame}
@@ -732,11 +750,11 @@
 \begin{frame}\frametitle{Assumptions required}
 	\begin{block}{Assumption 3}
 		\begin{center}
-			Errors are normally distributed: $e_i \sim \mathcal{N}(0, \sigma_\epsilon^2)$
+			Errors are normally distributed: $e_i \sim \mathcal{N}(0, \sigma_\varepsilon^2)$
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	Implies that $y_i \sim \mathcal{N}(\beta_0 + \beta_1x_i, \sigma_\epsilon^2)$ (from first linearity assumption)
+		\item	Implies that $y_i \sim \mathcal{N}(\beta_0 + \beta_1x_i, \sigma_\varepsilon^2)$ (from first linearity assumption)
 		\item	Practice: not always certain
 		\item	But at least it is easy to test with a q-q plot
 	\end{itemize}
@@ -971,7 +989,7 @@
 
 	$$
 	\begin{array}{rcl}
-		\mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \epsilon \\
+		\mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \varepsilon \\
 		y_i &=& b_0 + b_1 x_i + e_i \\
 		\\
 	\end{array}
@@ -1376,7 +1394,7 @@
 	$$
 	\begin{array}{rcl}
 		\\
-		y_i &=& \beta_1 x_1 + \beta_2x_2 + \ldots + \beta_kx_k + \epsilon_i \\
+		y_i &=& \beta_1 x_1 + \beta_2x_2 + \ldots + \beta_kx_k + \varepsilon_i \\
 		y_i &=& [x_1, x_2, \ldots, x_k]
 		\begin{bmatrix}
 			\beta_1 \\
@@ -1384,8 +1402,8 @@
 			\vdots \\
 			\beta_k
 		\end{bmatrix}
-		+ \epsilon_i \\
-		y_i &=& \underbrace{\mathit{x}^T}_{(1 \times k)} \underbrace{\beta}_{(k \times 1)} + \,\epsilon_i
+		+ \varepsilon_i \\
+		y_i &=& \underbrace{\mathit{x}^T}_{(1 \times k)} \underbrace{\beta}_{(k \times 1)} + \,\varepsilon_i
 	\end{array}
 	$$
 	\begin{itemize}
