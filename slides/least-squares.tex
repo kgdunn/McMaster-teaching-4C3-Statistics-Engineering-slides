@@ -38,7 +38,7 @@
 		\item	You've seen the least squares model hundreds of times:
 		
 		\begin{exampleblock}{}
-			$$\mathrm{y} = \beta_0 + \beta_1 \mathrm{x} + \epsilon$$
+			$$\mathrm{y} = \beta_0 + \beta_1 \mathrm{x} + \varepsilon$$
 		\end{exampleblock}
 
 		\begin{itemize}
@@ -251,7 +251,7 @@
 	\end{array}
 	$$
 	\begin{itemize}
-		\item	$\beta_0$, $\beta_1$ and $\epsilon$: are \emph{population} parameters,
+		\item	$\beta_0$, $\beta_1$ and $\varepsilon$: are \emph{population} parameters,
 		\item	$\varepsilon$ term:
 		\begin{itemize}
 			\item	unmodelled components of the linear model
@@ -485,47 +485,53 @@
 
 	Assume we have calculated values for $b_0$ and $b_1$ from the data. Now:
 	\begin{enumerate}
-		\item	how well does the model perform?
-		\item	what part of the data is error
+		\item	How well does the model perform?
+		\item	What part of the data is error
 		\begin{itemize}
 			\item	noise
 		\end{itemize}
-		\item	what part of the data is systematic
+		\item	What part of the data is systematic
 		\begin{itemize}
 			\item	signal
 		\end{itemize}
-		\item	confidence interval for the model coefficients: $b_0$ and $b_1$
+		\item	Confidence interval for the model coefficients: $b_0$ and $b_1$
+		
+		\vspace{12pt}
+		For example:
 		\begin{itemize}
 			\item	intercept: $-2.3 \leq \beta_0 \leq +3.2$
 			\item	slope = rate constant (1/seconds): $0.55 \leq \beta_1 \leq 1.07$
 		\end{itemize}
-		\item	prediction interval for the y-variable
+		\item	Prediction interval for the $y$-variable
 		\begin{itemize}
 			\item	e.g. the predicted yield is $8 \pm 1.7$ kg
 		\end{itemize}
 	\end{enumerate}
 
-	But, we need to \textbf{make assumptions} about the data first.
+	\vspace{12pt}
+	But, we need to \textbf{make assumptions} about the data first. We will get to points 4 and 5 soon. Let's look at points 1, 2, and 3 next.
 \end{frame}
 
 \begin{frame}\frametitle{The variance breakdown}
 
-	\emph{Recall}: \textbf{life is pretty boring without variability} (and this course would be unnecessary)
+	\emph{Recall}: \textbf{life is pretty boring without variability}
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{\imagedir/concepts/variation/variation-none.png}
 	\end{center}
 
-	Analysis of variance (ANOVA) - just a tool to show the breakdown of variability in the $y$ vector:
+	Analysis of variance (ANOVA) - just a tool to show the breakdown of variability in the $\mathrm{y}$ vector: $\mathrm{y} = b_0 + b_1 \mathrm{x} + \mathrm{e}$
 	\begin{enumerate}
-		\item	doing nothing, no model: implies $\hat{y} = \overline{y}$
-		\item	the model: $\hat{y}_i = b_0 + b_1 x_i$
-		\item	how much variance is left over in the errors $e_i$
+		\item	doing nothing, no model: implies $\hat{y} = b_0 = \overline{y}$ (intercept only)
+		\item	the model: $\hat{y}_i = b_0 + b_1 x_i$ (intercept \emph{plus} slope)
+		\item	then, how much variance is left over in the errors $e_i$?
 	\end{enumerate}
+	\vspace{12pt}
+	All 3 add up to the total variance. Note that:
 	\begin{itemize}
-		\item	All 3 add up to the total variance:
-		\item	Variance = deviation from the mean
+		\item	variance is quantified as {\color{orange}{deviation from the mean}}
 		\item	Variance for first portion is 0, by definition
 		\item	Total variance of $y$ = model's variance + error variance
+		\item	This is why it was important that $\sum_i{(\hat{y}_i e_i)} = 0$ (so we can sum them independently)
 	\end{itemize}
 \end{frame}
 
@@ -558,13 +564,18 @@
 	\begin{table}
 		[ht] \centering
 		\begin{tabular}
-			{lllll} \hline\ \textbf{Variance of} & \textbf{Distance} &\textbf{DOF} &\textbf{SSQ} &\textbf{Mean square} \\
-			\hline Regression & $\hat{y}_i - \overline{\mathrm{y}}$ & $k$ ($k$=2) & RegSS & RegSS/$k$ \\
-			Error & $y_i - \hat{y}_i$ & $n-k$ & RSS & RSS/($n-k$) \\
-			\hline \hline Total & $y_i - \overline{\mathrm{y}}$ & $n$ & TSS & TSS/$n$ \\
+			{lllll} \hline\ \textbf{Variance of} 	& \textbf{Distance} 					&\textbf{DOF} 	&\textbf{SSQ} 	&\textbf{Mean square}* \\
+			\hline Regression 						& $\hat{y}_i - \overline{\mathrm{y}}$ 	& $k$ ($k$=2) 	& RegSS 		& RegSS/$k$ \\
+			Residuals 								& $y_i - \hat{y}_i$ 					& $n-k$ 		& RSS 			& RSS/($n-k$) \\\hline \hline 
+			Total 									& $y_i - \overline{\mathrm{y}}$ 		& $n$ 			& TSS 			& TSS/$n$ \\
 			\hline
 		\end{tabular}
 	\end{table}
+	* {\color{purple}{mean square}} = ``variance''
+	%\begin{itemize}
+	%	\item	DOF = {\color{purple}{degrees of freedom}} = number of independent pieces of information involving the $n$ points uses to calculate the {\color{purple}{sum of squares}} (SSQ)
+	%\end{itemize}
+	\vspace{12pt}
 	\begin{itemize}
 		\item	Regression SS (RegSS) = $\sum{(\hat{y}_i - \overline{\mathrm{y}})^2}$ 
 			\begin{itemize}
@@ -631,8 +642,11 @@
 \begin{frame}\frametitle{Meaning of $R^2$}
 
 	$R^2$ name: square of the correlation between $\mathrm{x}$ and $\mathrm{y}$.
+	\begin{exampleblock}{}
+		$$ r(x, y) = \dfrac{\mathcal{E}\left\{ (x - \overline{x}) (y - \overline{y})\right\}}{\sqrt{\mathcal{V}\left\{x\right\}\mathcal{V}\left\{y\right\}}} = \dfrac{\text{Cov}\left\{x, y\right\}}{\sqrt{\mathcal{V}\left\{x\right\}\mathcal{V}\left\{y\right\}}} $$
+	\end{exampleblock}
 
-	$$ r(x, y) = \dfrac{\mathcal{E}\left\{ (x - \overline{x}) (y - \overline{y})\right\}}{\sqrt{\mathcal{V}\left\{x\right\}\mathcal{V}\left\{y\right\}}} = \dfrac{\text{Cov}\left\{x, y\right\}}{\sqrt{\mathcal{V}\left\{x\right\}\mathcal{V}\left\{y\right\}}} $$
+	\vspace{12pt}
 	\begin{itemize}
 		\item	$-1 \leq r(x,y) \leq +1$
 		\item	$0 \leq R^2 \leq +1 $
@@ -644,7 +658,8 @@
 
 \begin{frame}\frametitle{Meaning of $R^2$}
 	\begin{itemize}
-		\item	$R^2$ is just for the data used to build the model
+		\item	$R^2$ is computed from the data used to build the model
+		\item	{\color{myOrange}{Note}}:  $R^2$ can be calculated without even fitting the model (i.e. without finding $b_0$ and $b_1$)
 		\item	\textbf{No guarantee at all} as to future performance
 		\item	It is widely \textbf{abused} as a way to measure ``\emph{how good is my model}''
 		\begin{enumerate}
@@ -663,7 +678,7 @@
 	Goodness of a model is better judged by:
 	\begin{itemize}
 		\item	your engineering judgment: does the interpretation of model parameters make sense?
-		\item	use the standard error, $S_E$ (next section)
+		\item	use the {\color{purple}{standard error}}, $S_E$ (next section)
 		\item	use testing data to verify the model's predictive performance,
 		\item	using cross-validation/randomization tools (more later)
 	\end{itemize}
@@ -675,14 +690,14 @@
 	where $k=2$ for the case of estimating a model $y_i = b_0 + b_1 x_i$
 \end{frame}
 
-\begin{frame}\frametitle{Judging the standard error, $S_E$}
+\begin{frame}\frametitle{Judging the {\color{purple}{standard error}}, $S_E$}
 
 	A better way to judge model's predictive performance:
 	\begin{itemize}
 		\item	mean square error = $\text{RSS}/(n-k)$
 		\item	standard error = $S_E = \sqrt{\text{mean square error}} = \sqrt{\text{RSS}/(n-k)}$
 		\item	The standard deviation of the errors, accounting for degrees of freedom
-		\item	$S_E^2 = \frac{\displaystyle \text{RSS}}{\displaystyle n-k} = \frac{e^Te}{\displaystyle n-k}$
+		\item	$S_E^2 = \frac{\displaystyle \text{RSS}}{\displaystyle n-k} = \dfrac{e^Te}{\displaystyle n-k}$
 		\item	This is related to the model's objective function: minimizing RSS
 	\end{itemize}
 
