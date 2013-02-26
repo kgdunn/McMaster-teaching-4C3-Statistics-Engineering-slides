@@ -306,7 +306,7 @@
 	\begin{enumerate}
 		\item	$\sum_{i=1}^{n}{(e_i)^2}$: the standard least squares objective function
 		\item	$\sum_{i=1}^{n}{(e_i)^4}$
-		\item	sum of perpendicular distances to the L/S line
+		\item	sum of perpendicular distances to the model's line
 		\item	$\sum_{i=1}^{n}{\|e_i\|}$ (aka least absolute deviations, $\ell$-1 norm problem)
 		\item	$\text{median}\left\{ e_i^2 \right\}$: least median of squared errors model (one type of robust least squares model)
 	\end{enumerate}
@@ -649,6 +649,7 @@
 	\vspace{12pt}
 	\begin{itemize}
 		\item	$-1 \leq r(x,y) \leq +1$
+		\item	$R^2 = \left[r(x,y)\right]^2$
 		\item	$0 \leq R^2 \leq +1 $
 	\end{itemize}
 	
@@ -920,7 +921,7 @@
 			\item	\texttt{predictions = b0 + x*b1}
 			\item	\texttt{8.001 7.000 9.501 7.501 8.501 10.001 6.00 5.000 9.001 6.500 5.501}
 			\item	\texttt{error = y - predictions}
-			\item	\texttt{SE = sqrt(sum(error\^ 2) / (N-2))}
+			\item	\texttt{SE = sqrt(sum(error)**2 / (N-2))}
 		\end{itemize}
 		\item	$c_t = 2.26$ at 95\% confidence
 		\begin{itemize}
@@ -931,8 +932,8 @@
 
 \begin{frame}\frametitle{Example}
 	\begin{itemize}
-		\item	$S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} = \dfrac{1.237^2}{110} = 0.0139$
-		\item	$S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right) = \left(\dfrac{1}{11} + \dfrac{9^2}{110} \right)1.237^2 = 1.266$
+		\item	$S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} = \dfrac{1.237^2}{110} = 0.0139; S_E(b_1) = 1.1247$
+		\item	{ $S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right) = \left(\dfrac{1}{11} + \dfrac{9^2}{110} \right)1.237^2 = 1.266; S_E(b_0) = 0.1179$}
 	\end{itemize}
 	\begin{itemize}
 		\item	For $\beta_0$:
