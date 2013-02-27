@@ -1,0 +1,2122 @@
+\begin{frame}\frametitle{In context}
+	\begin{itemize}
+		\item	Empirical modelling of systems
+		\begin{itemize}
+			\item	Least squares model
+		\end{itemize}
+		\item	Experiments are important:
+		\begin{itemize}
+			\item	Learn more about our systems
+			\item	Use them to fit the empirical models
+			\item	Main aim: use them to optimize a process for \textbf{higher profit}
+		\end{itemize}
+		\item	Happenstance (as-is) data cannot tell cause-and effect
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Topics covered in this section}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/mindmaps/DOE-section-mapping.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{References}
+	\begin{itemize}
+		\item	Box, Hunter and Hunter, \emph{Statistics for Experimenters}
+		\begin{itemize}
+			\item	chapters 10, 11, 12, 13, 15 in first edition
+			\item	chapters 5 and 6 in second edition
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Experiments with a single variable at two levels}
+	\begin{itemize}
+		\item	Simplest case:
+		\begin{itemize}
+			\item	catalyst A vs catalyst B
+			\item	low RPM vs high RPM
+			\item	\emph{etc}
+		\end{itemize}
+		\item	Measure $n_A$ value from setup A
+		\item	Measure $n_B$ values from setup B
+		\item	Hold all other variables constant (control disturbances)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Recap of group-to-group differences}
+
+	Recap:
+
+	$
+	\begin{array}{rcl}
+		\\
+		s_P^2 &= \dfrac{(n_A -1) s_A^2 + (n_B-1)s_B^2}{n_A - 1 + n_B - 1} \\
+		& \\
+		z &= \dfrac{(\bar{x}_B - \bar{x}_A) - (\mu_B - \mu_A)}{\sqrt{s_P^2 \left(\dfrac{1}{n_A} + \dfrac{1}{n_B}\right)}}\\
+		\\
+	\end{array}
+	$
+
+	$
+	\begin{array}{rcccl}
+		\\
+		{\scriptstyle (\bar{x}_B - \bar{x}_A) - c_t} \times \sqrt{\scriptstyle s_P^2 \left(\frac{1}{n_A} + \frac{1}{n_B}\right)} &\leq& {\scriptstyle \mu_B - \mu_A} &\leq & {\scriptstyle (\bar{x}_B - \bar{x}_A) + c_t } \times \sqrt{\scriptstyle s_P^2 \left(\frac{1}{n_A} + \frac{1}{n_B}\right)}
+	\end{array}
+	$
+	\begin{itemize}
+		\item	Significant difference: does confidence interval span zero?
+		\item	Practical difference?
+		\begin{itemize}
+			\item	width of confidence interval
+			\item	where it lies relative to zero
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Using linear least squares models}
+	\begin{itemize}
+		\item	Can achieve same result using least squares: $y_i = b_0 + g d_i$
+		\item	$d_i = 0$ for A
+		\item	$d_i=1$ for B
+		\item	and $y_i$ is the response variable.
+	\end{itemize}
+
+	See question in this week's assignment.
+
+	Two totally different methods; same result! Confirm it for yourself with any other dataset.
+\end{frame}
+
+\begin{frame}\frametitle{Importance of randomization}
+
+	Why randomize experiments?
+	\begin{itemize}
+		\item	Prevent \textbf{\emph{unmeasured}}, and \textbf{\emph{uncontrollable}} disturbances affecting $y$
+		\item	Guarantees independence in the data
+		\item	We can then use $t$-distributions (which require independence)
+	\end{itemize}
+	\begin{itemize}
+		\item	The example of Fisher: lady and the tea. Modern day example: Coke vs Pepsi.
+		\item	Engineering example: A = TK104 and B = TK107
+		\begin{itemize}
+			\item	$n_A = 8$: [254, 440, 501, 368, 697, 476, 188, 525]
+			\item	$n_B = 9$: [338, 470, 558, 426, 733, 539, 240, 628, 517 ]
+		\end{itemize}
+		\item	Null hypothesis: there is no difference
+		\begin{itemize}
+			\item	In that case, these numbers could have come from either A or B
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Importance of randomization}
+	\begin{itemize}
+		\item	$n_A = 8$: [254, 440, 501, 368, 697, 476, 188, 525]
+		\item	$n_B = 9$: [338, 470, 558, 426, 733, 539, 240, 628, 517 ]
+	\end{itemize}
+	\begin{itemize}
+		\item	Randomly assign ``A'' to any $n_A$ of the values and ``B'' to any $n_B$ of the values
+		\item	$\dfrac{(n_A + n_B)!}{n_A! n_B!}$ possible combinations = 24310
+		\item	Combinations: number of unique ways to split 17 experiments into 2 groups of $n_A=8$ and $n_B=9$
+		\begin{itemize}
+			\item	1: AAAAAAAABBBBBBBBB
+			\item	2: AAAAAAABABBBBBBBB
+			\item	3: AAAAAAABBABBBBBBB
+			\item	\emph{etc}
+		\end{itemize}
+		\item	For each arrangement we calculate: $\bar{y}_A - \bar{y}_B$
+		\item	Plot a histogram of this \emph{difference of averages}
+		\item	Probability that the actual experiment could have come from chance?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Importance of randomization}
+	\begin{itemize}
+		\item	Probability that the actual experiment could have come from chance?
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{\imagedir/doe/single-experiment-randomization.png}
+	\end{center}
+	\begin{itemize}
+		\item	79.6\% combinations have a lower value than actual difference
+		\item	Using standard group-to-group difference:
+		\begin{itemize}
+			\item	$z = 0.8435$
+			\item	$Pr(z<0.8435) = 79.3\%$ (DOF = $n_A + n_B - 2$)
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	\textbf{Result}: if we don't randomize, we cannot use z-values and confidence intervals - may be misleading.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Change one variable at a time (COST)}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/COST-contours.png}
+	\end{center}
+	\begin{itemize}
+		\item	Baseline: $T$=346K, $S$ = 1.5g/L; yield = 63\%.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Change one variable at a time (COST)}
+	\begin{itemize}
+		\item	Trapped in a sub-optimal solution
+		\item	We have known for 80 years now: COST is \textbf{wrong way} to optimize a system
+		\item	How to do it better?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Why not use existing data?}
+	\begin{itemize}
+		\item	Existing data = historical data = happenstance data
+		\item	This is data without any intentional perturbations
+		\item	\textbf{Problem}: we see correlations, but we cannot tell if they are causal
+	\end{itemize}
+	\includegraphics[width=0.80\textwidth]{\imagedir/doe/yield-pressure-impurity-correlation.png}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: 2 levels for 2 or more factors}
+	\begin{itemize}
+		\item	Change multiple factors \emph{simultaneously}
+		\item	Consider, for now, two levels in each factor. E.g.
+		\begin{itemize}
+			\item	continuous: low and high pH
+			\item	continuous: short reaction time and long reaction time
+			\item	discrete: catalyst A and B
+			\item	discrete: mixing system A and B
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: by example}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-contour-plot.png}
+	\end{center}
+	\begin{itemize}
+		\item	We will use this system for our example
+		\item	$y$ values are measured with error of $\pm$ 0.8 \% and then rounded
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: by example}
+
+	Bioreactor example: optimize the $y$ = conversion [\%]
+	\begin{itemize}
+		\item	$T$: Temperature: $T_\text{low}$ = 338K and $T_\text{high}$ = 354K
+		\item	$S$: Substrate concentration: $S_\text{low}$ = 1.25 g/L and $S_\text{high}$ = 1.75 g/L
+		\item	How is range chosen?
+		\begin{itemize}
+			\item	About 25\% of typical operating range if no other prior knowledge
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Factors are: $T$ and $S$
+		\item	Number of experiments (runs): $2^k$; $k$ = number of factors
+		\item	Standard order
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: by example}
+	\begin{itemize}
+		\item	Run your experiments randomly, collect results:
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-result.png}
+	\end{center}
+	Notes:
+	\begin{itemize}
+		\item	we don't need to run an experiment at the baseline (it can be useful though)
+		\item	if we had replicate experiments, use the average of the response variable
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: by example}
+	\begin{itemize}
+		\item	Visualize results: cube plot
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=0.6\textheight]{\imagedir/doe/factorial-two-levels-two-variables-no-analysis.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: Main effects}
+	\begin{itemize}
+		\item	Main effect: difference from high to low level
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-with-analysis.png}
+	\end{center}
+	\begin{itemize}
+		\item	Where would you run your next experiment(s) to improve yield?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: Main effects}
+	\begin{itemize}
+		\item	This is the true surface plot:
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-level-surface-example-cropped.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: Main effects}
+	\begin{itemize}
+		\item	No computer? Use an interaction plot (section 1 of the course)
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-level-line-plot.png}
+	\end{center}
+	\begin{itemize}
+		\item	Lines are roughly parallel
+		\item	The numbers ``1'', ``2'', ``3'', ``4'' refer to the experiment number
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: interaction effects}
+	\begin{itemize}
+		\item	Consider a different system now (same variables):
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=0.85\textheight]{\imagedir/doe/factorial-two-level-with-interactions.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: interaction effects}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-interaction.png}
+	\end{center}
+	\begin{itemize}
+		\item	Main effect of $T$:
+		\item	Main effect of $S$:
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: interaction effects}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-interaction.png}
+	\end{center}
+	\begin{itemize}
+		\item	Main effect of $T$: \textbf{5\% per 10K}
+		\begin{itemize}
+			\item	$\Delta T_{S+} = 8\%$ per 10K
+			\item	$\Delta T_{S-} = 2\%$ per 10K
+		\end{itemize}
+		\item	Main effect of $S$: \textbf{7\% per 0.75g/L}
+		\begin{itemize}
+			\item	$\Delta S_{T+} = 10\%$ per 0.75g/L
+			\item	$\Delta S_{T-} = 4\%$ per 0.75g/L
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: interaction effects}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-level-line-plot-with-interaction.png}
+	\end{center}
+	\begin{itemize}
+		\item	Lines not parallel
+		\item	Implies there is an interaction
+		\begin{itemize}
+			\item	In this case, interaction between $T$ and $S$
+			\item	called the $T \times S$ interaction
+			\item	it is a 2-factor interaction (2fi)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: interaction effects}
+
+	Recall system with \textbf{no interaction} (earlier example):
+	\begin{itemize}
+		\item	Main effect of $T$:
+		\begin{itemize}
+			\item	$\Delta T_{S+} = -11\%$ per 16K
+			\item	$\Delta T_{S-} = -9\%$ per 16K
+		\end{itemize}
+		\item	Main effect of $S$:
+		\begin{itemize}
+			\item	$\Delta S_{T+} = -7\%$ per 0.5g/L
+			\item	$\Delta S_{T-} = -5\%$ per 0.5g/L
+		\end{itemize}
+		\item	Almost no difference between the values within each main effect
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: interaction effects}
+
+	System \textbf{with interaction} (second example):
+	\begin{itemize}
+		\item	Main effect of $T$: \textbf{5\% per 10K}
+		\begin{itemize}
+			\item	$\Delta T_{S+} = 8\%$ per 10K
+			\item	$\Delta T_{S-} = 2\%$ per 10K
+		\end{itemize}
+		\item	Main effect of $S$: \textbf{7\% per 0.75g/L}
+		\begin{itemize}
+			\item	$\Delta S_{T+} = 10\%$ per 0.75g/L
+			\item	$\Delta S_{T-} = 4\%$ per 0.75g/L
+		\end{itemize}
+		\item	There was an important phenomenon that we did not capture with the main effects alone
+		\item	We need ``something else'' to capture this interaction
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis: interaction effects}
+	\begin{itemize}
+		\item	$T$ interaction with $S$:
+		\begin{itemize}
+			\item	$\Delta y$ due to $T$ at high $S$: +8
+			\item	$\Delta y$ due to $T$ at low $S$: +2
+			\item	The half difference: $[+8 - (+2)]/2$ = \textbf{3}
+		\end{itemize}
+		\item	$S$ interaction with $T$:
+		\begin{itemize}
+			\item	$\Delta y$ due to $S$ at high $T$: +10
+			\item	$\Delta y$ due to $S$ at low $T$: +4
+			\item	The half difference: $[+10 - (+4)]/2$ = \textbf{3}
+		\end{itemize}
+	\end{itemize}
+
+	Interpretation:
+	\begin{itemize}
+		\item	$T$ and $S$ increase $y$ by a greater amount when both are high
+		\item	Similarly, both terms reduce $y$ when they are of opposite sign.
+	\end{itemize}
+
+	\textbf{Interaction terms dominate on a ridge}, and are more important as we approach an optimum.
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+	\begin{itemize}
+		\item	Return back to system with \textbf{little interaction}:
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-baseline.png}
+	\end{center}
+	\begin{itemize}
+		\item	Standard form: $\dfrac{\text{variable} - \text{center point}}{\text{range}/2}$
+		\item	$T_{-} = \dfrac{338 - 346}{(354-338)/2} = \dfrac{-8}{8} = -1$
+		\item	$S_{-} = \dfrac{1.25 - 1.50}{(1.75 - 1.25)/2} = \dfrac{-0.25}{0.25} = -1$
+		\item	$T_{+} = +1$
+		\item	$S_{+} = +1$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+	\begin{block}{Least squares model}
+		\begin{center}
+			$y = \beta_0 + \beta_Tx_T + \beta_S x_S + \beta_{TS} x_Tx_S + \varepsilon$
+		\end{center}
+	\end{block}
+	\begin{itemize}
+		\item	4 parameters to estimate: $b_0, b_T, b_S, b_{TS}$
+		\item	4 data points
+		\item	Zero degrees of freedom (i.e. $S_E = 0$, no confidence intervals possible)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+
+	$
+	\begin{array}{rcccl}
+		\begin{bmatrix}
+			y_1\\
+			y_2\\
+			y_3 \\
+			y_4
+		\end{bmatrix}
+		&=&
+		\begin{bmatrix}
+			1 & T_{-} & S_{-} & T_{-}S_{-}\\
+			1 & T_{+} & S_{-} & T_{+}S_{-}\\
+			1 & T_{-} & S_{+} & T_{-}S_{+}\\
+			1 & T_{+} & S_{+} & T_{+}S_{+}\\
+		\end{bmatrix}
+		\begin{bmatrix}
+			b_0 \\
+			b_T \\
+			b_S \\
+			b_{TS}
+		\end{bmatrix}
+		&+&
+		\begin{bmatrix}
+			e_1\\
+			e_2\\
+			e_3 \\
+			e_4
+		\end{bmatrix}
+		\\
+		\\
+		\mathbf{y} &=& \mathbf{X} \mathbf{b} &+& \,\,\,\,\,\mathbf{e} \\
+	\end{array}
+	$
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+	\begin{itemize}
+		\item	Least squares model for DOE in 2 factors
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.85\textwidth]{\imagedir/doe/two-factor-least-squares-interpretation.png}
+	\end{center}
+	\begin{itemize}
+		\item	Interaction term is small: blue plane is flat
+		\item	Interaction term is large: plane has curvature
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+
+	$
+	\begin{array}{rcccl}
+		\begin{bmatrix}
+			y_1\\
+			y_2\\
+			y_3 \\
+			y_4
+		\end{bmatrix}
+		&=&
+		\begin{bmatrix}
+			1 & T_{-} & S_{-} & T_{-}S_{-}\\
+			1 & T_{+} & S_{-} & T_{+}S_{-}\\
+			1 & T_{-} & S_{+} & T_{-}S_{+}\\
+			1 & T_{+} & S_{+} & T_{+}S_{+}\\
+		\end{bmatrix}
+		\begin{bmatrix}
+			b_0 \\
+			b_T \\
+			b_S \\
+			b_{TS}
+		\end{bmatrix}
+		&+&
+		\begin{bmatrix}
+			e_1\\
+			e_2\\
+			e_3 \\
+			e_4
+		\end{bmatrix}
+		\\
+		\\
+		\begin{bmatrix}
+			69\\
+			60\\
+			64\\
+			53
+		\end{bmatrix}
+		&=&
+		\begin{bmatrix}
+			1 & -1 & -1 & +1\\
+			1 & +1 & -1 & -1\\
+			1 & -1 & +1 & -1\\
+			1 & +1 & +1 & +1\\
+		\end{bmatrix}
+		\begin{bmatrix}
+			b_0 \\
+			b_T \\
+			b_S \\
+			b_{TS}
+		\end{bmatrix}
+		&+&
+		\begin{bmatrix}
+			e_1\\
+			e_2\\
+			e_3 \\
+			e_4
+		\end{bmatrix}
+		\\
+		\mathbf{y} &=& \mathbf{X} \mathbf{b} &+& \,\,\,\,\,\mathbf{e} \\
+	\end{array}
+	$
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+	\begin{itemize}
+		\item	$\mathbf{X}^T\mathbf{X} =$
+		\item	$\mathbf{X}^T\mathbf{X} =
+		\begin{bmatrix}
+			4 & 0 & 0 & 0\\
+			0 & 4 & 0 & 0\\
+			0 & 0 & 4 & 0\\
+			0 & 0 & 0 & 4
+		\end{bmatrix}
+		$
+		\item	$\mathbf{X}$ is orthogonal
+		\item	$\mathbf{X}^T\mathbf{y} =
+		\begin{bmatrix}
+			246 \\
+			-20 \\
+			-12 \\
+			-2
+		\end{bmatrix}
+		$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+
+	$
+	\begin{array}{rcl}
+		\mathbf{b} &=& (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y} =
+		\begin{bmatrix}
+			1/4 & 0 & 0 & 0\\
+			0 & 1/4 & 0 & 0\\
+			0 & 0 & 1/4 & 0\\
+			0 & 0 & 0 & 1/4
+		\end{bmatrix}
+		\begin{bmatrix}
+			246 \\
+			-20 \\
+			-12 \\
+			-2
+		\end{bmatrix}
+		\\
+		\\
+		\mathbf{b} &=&
+		\begin{bmatrix}
+			61.5 \\
+			-5 \\
+			-3 \\
+			-0.5
+		\end{bmatrix}
+	\end{array}
+	$
+	\begin{itemize}
+		\item	$y = \beta_0 + \beta_Tx_T + \beta_S x_S + \beta_{TS} x_Tx_S + \varepsilon$
+		\item	$y = 61.5 - 5 x_T - 3 x_S + - 0.5 x_Tx_S + e$
+	\end{itemize}
+
+	You can easily calculate these effects by hand:
+	\begin{itemize}
+		\item	(+ 69 + 60 + 64 + 53)/4 = 61.5
+		\item	(- 69 + 60 - 64 + 53)/4 = -5
+		\item	(- 69 - 60 + 64 + 53)/4 = -3
+		\item	(+ 69 - 60 - 64 + 53)/4 = - 0.5
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+	\begin{enumerate}
+		\item	$\mathbf{X}^T\mathbf{X}$: zeros on off-diagonals
+		\begin{itemize}
+			\item	orthogonal matrix
+			\item	each column is varied independently of the others
+			\item	calculate the $k^\text{th}$ slope coefficient separately: $b_k = \dfrac{x_k^Ty}{x_k^Tx_k}$
+		\end{itemize}
+		\item	Interpret $b_T = -5$?
+		\begin{itemize}
+			\item	$x_T$ is change in \emph{normalized temperature} by 1 unit
+			\item	Changing $x_T$ from 0 to 1 implies $T_\text{actual}$ changes from 346K to 354K
+			\item	-5\% decrease in conversion for every 8K increase in temperature
+		\end{itemize}
+		\item	Interpret $b_S = -3$?
+		\item	How to use this model for a prediction?
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+	\begin{itemize}
+		\item	Compare methods: $y = 61.5 - 5 x_T - 3 x_S + - 0.5 x_Tx_S + e$
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-with-analysis.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+
+	Return to system with \textbf{high interaction}
+	\begin{itemize}
+		\item	Base line: $T$ = 395K and $S$ = (1.25+0.5)/2 = 0.875 g/L
+		\item	Calculate deviation variables
+		\item	Verify at home: $y = 81.5 + 2.5 x_T + 3.5 x_S + 1.5 x_T x_S$
+	\end{itemize}
+
+	Large interaction is confirmed in least squares model
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+	\begin{columns}
+		\column{5cm} 
+			\textbf{Without interaction term:}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-level-surface-without-interaction-slides-cropped.png}
+			\end{center}
+			We are estimating a linear equation using linear least squares. 
+		
+		\column{5cm} 
+			\textbf{With interaction term:}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-level-surface-with-interaction-slides-cropped.png}
+			\end{center}
+			We are estimating a non-linear equation using linear least squares.
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{DOE of a 3-factor experiment}
+
+	Plastics molding factory; waste treatment.
+	\begin{itemize}
+		\item	Factor 1: $C$: chemical compound added (A or B)
+		\item	Factor 2: $T$: treatment temperature (72F or 100F)
+		\item	Factor 3: $S$: stirring speed (200 rpm or 400 rpm)
+		\item	$y$ = amount of pollutant discharged [lb]
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-3-factor-factorial-example.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{DOE of a 3-factor experiment}
+
+	Example on the board:
+	\begin{enumerate}
+		\item	Geometric illustration of the data
+		\item	Calculate main effects
+		\item	Calculate the 3 two-factor interactions, and the single 3 factor interaction
+		\begin{itemize}
+			\item	$C \times T$ and $C \times S$ and $T \times S$ and $C \times T \times S$
+		\end{itemize}
+		\item	Main effects and interactions using least squares (by-hand)
+		\item	Computer verification:
+		\begin{itemize}
+			\item	$y = 11.25 + 6.25x_C + 0.75x_T -7.25x_S + 0.25 x_{CT} -6.75 x_C x_S -0.25 x_T x_S - 0.25 x_Cx_Tx_S$
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Summary of factorial designs}
+	\begin{itemize}
+		\item	Good visual interpretation, even on paper
+		\item	Few experiments, but powerful information
+		\item	Building blocks for complex designs
+		\item	$2^k$ experiments for $k$ factors
+		\item	Each factor is varied independently of the others
+		\item	Each factor in model can be interpreted independently
+		\item	Least squares model easily derived by hand
+		\item	\textbf{Main effects cannot be interpreted separate from their interactions}
+		\begin{itemize}
+			\item	$y = b_0 + b_P x_P + b_Q x_Q + b_{PQ} x_Px_Q + e$
+		\end{itemize}
+		\item	Sometimes a small effect is desirable: implies $y$ not sensitive that factor
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Summary of factorial designs}
+	\begin{block}{Much more efficient than one-at-a-time (COST)}
+		\begin{center}
+			\includegraphics[width=0.65\textwidth]{\imagedir/doe/comparison-of-variances.png}
+		\end{center}
+	\end{block}
+	\begin{itemize}
+		\item	COST: cannot estimate interactions
+		\item	Rescue this COST design by adding $y_4$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Review: Change one variable at a time}
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{\imagedir/doe/COST-contours.png}
+	\end{center}
+	If COST in a cross shape (expts 2, 3, 4, 5, 6):
+	\begin{itemize}
+		\item	we cannot estimate interactions
+		\item	only a single estimate of each main effect
+		\item	rescued to a full factorial: e.g. use expts 2, 3, 6 and add new point below 2, to the right of 6
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Review: a better approach - full factorial}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-contour-plot.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Review: DOE of a 3-factor experiment}
+
+	Plastics molding factory; waste treatment.
+	\begin{itemize}
+		\item	Factor 1: $C$: chemical compound added (A or B)
+		\item	Factor 2: $T$: treatment temperature (72 F or 100F)
+		\item	Factor 3: $S$: stirring speed (200 rpm or 400 rpm)
+		\item	$y$ = amount of pollutant discharged [lb]
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-3-factor-factorial-example.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Review: DOE of a 3-factor experiment}
+	\begin{enumerate}
+		\item	Geometric illustration of the data
+		\item	Calculate main effects, \textbf{C}, \textbf{T} and \textbf{S}
+		\item	Calculate the 3 two-factor interactions:
+		\begin{itemize}
+			\item	\textbf{CT}, \textbf{CS} and \textbf{TS}
+		\end{itemize}
+		\item	and the single 3 factor interaction
+		\begin{itemize}
+			\item	\textbf{CTS}
+		\end{itemize}
+		\item	Main effects and interactions using least squares (by-hand)
+		\item	Computer verification:
+		\begin{itemize}
+			\item	$y = 11.25 + 6.25x_C + 0.75x_T -7.25x_S + 0.25 x_C x_T -6.75 x_C x_S -0.25 x_T x_S - 0.25 x_C x_T x_S$
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Significance of effects}
+	\begin{itemize}
+		\item	For a $2^k$ factorial:
+		\begin{itemize}
+			\item	$2^k$ parameters in the least squares model
+			\item	$2^k$ data points collected
+			\item	implies $S_E = 0$
+			\item	Zero degrees of freedom
+		\end{itemize}
+	\end{itemize}
+
+	How to assess if an effect is significant? Consider 2 approaches.
+\end{frame}
+
+\begin{frame}\frametitle{Significant? : Pareto-plot}
+	\begin{itemize}
+		\item	$2^4$ factorial: 15 parameters + intercept
+		\item	Bar plot: see code on course website
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{\imagedir/doe/pareto-plot-full-fraction.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Significant? : Pareto-plot}
+	\begin{itemize}
+		\item	For normal L/S models: cannot compare coefficients in this way
+		\item	Why can we with a DOE model?
+		\item	$x_i = \dfrac{x_{\text{actual}, i}- \text{center point}}{\frac{1}{2} (\text{range of X})}$
+		\item	Caution: the \emph{range of X} should span a reasonable range
+	\end{itemize}
+	\begin{itemize}
+		\item	Caution: if an interaction is significant (e.g. \textbf{BC}), then no need to test the main effects, \textbf{B} and \textbf{C}
+		\begin{itemize}
+			\item	these main effects are ``automatically'' significant
+			\item	even if they have small numeric coefficients
+			\item	since \textbf{B} and \textbf{C} act together to affect response $y$
+			\item	so never exclude main effects whose interactions are significant
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Significant effect?}
+
+	We require degrees of freedom to construct confidence intervals.
+
+	Two ways to get DoF:
+	\begin{enumerate}
+		\item	Replicate experiments
+		\item	Drop out a factor from a full factorial
+	\end{enumerate}
+	\begin{itemize}
+		\item	Complete replication is expensive - redo everything from scratch:
+		\begin{itemize}
+			\item	Setup equipment
+			\item	Run the complete experiment
+			\item	Take samples
+			\item	Measure results
+		\end{itemize}
+		\item	There are better ways to spend our experimental budget (see later)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Significant? : Replicate runs}
+	\begin{itemize}
+		\item	E.g replicated $2^3$ factorial: 8 + 8 runs
+		\item	$y_{i,1}$ and $y_{i,2}$ at condition i $(i=1, 2, \ldots, 8)$
+		\item	$\bar{y}_i = 0.5y_{i,1} + 0.5y_{i,2}$
+		\item	$d_i = y_{i,2} - y_{i,1}$,
+		\item	$s_i^2 = \dfrac{(y_{i,1} - \bar{y}_i)^2 + (y_{i,2} - \bar{y}_i)^2}{1}$
+		\item	$s_i^2 = d_i^2/2$
+		\item	Pool variances for all $2^k$ levels
+		\item	$\hat{\sigma}^2 = S_E^2 = \dfrac{1}{2}\displaystyle\sum_i^{2^k}{d_i^2}$
+		\item	Errors are $t$-distributed with $2^k$ degrees of freedom
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Significant? : Replicate runs}
+	\begin{itemize}
+		\item	Once we have $S_E \rightarrow S_E(b_i) \rightarrow$ confidence interval for $b_i$
+		\item	$S_E(b_i) = \sqrt{\mathcal{V}\left(b_i\right)} = \sqrt{\dfrac{S_E^2}{\sum{x_i^2}}}$
+		\item	$x_i$ is either -1 or +1 from the $i^\text{th}$ column
+		\item	Confidence intervals are independent \emph{!}
+		\item	Then determine if a main effect or interaction is significant
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Significant? : Replicate runs}
+
+	A $2^3$ factorial with 3 extra runs at the center point:
+
+	$
+	\begin{array}{rcl}
+		\mathrm{y} &=& \mathrm{X} \mathrm{b} + \mathrm{e}\\
+		\mathrm{y} &=&
+		\begin{bmatrix}
+			1 & -1 & -1 & -1 & +1 & +1 & +1 & -1\\
+			1 & +1 & -1 & -1 & -1 & -1 & +1 & +1\\
+			1 & -1 & +1 & -1 & -1 & +1 & -1 & +1\\
+			1 & +1 & +1 & -1 & +1 & -1 & -1 & -1\\
+			1 & -1 & -1 & +1 & +1 & -1 & -1 & +1\\
+			1 & +1 & -1 & +1 & -1 & +1 & -1 & -1\\
+			1 & -1 & +1 & +1 & -1 & -1 & +1 & -1\\
+			1 & +1 & +1 & +1 & +1 & +1 & +1 & +1\\
+			1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+			1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+			1 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+		\end{bmatrix}
+		\begin{bmatrix}
+			b_0 \\
+			b_A \\
+			b_B \\
+			b_{C} \\
+			b_{AB} \\
+			b_{AC} \\
+			b_{BC} \\
+			b_{ABC}
+		\end{bmatrix}
+		+ \mathrm{e}
+	\end{array}
+	$
+	\begin{itemize}
+		\item	$S_E(b_i) = \sqrt{\dfrac{S_E^2}{\sum{x_i^2}}} = \sqrt{\dfrac{S_E^2}{8}} $ for all parameters, except the intercept
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Significant? : Replicate runs}
+	\begin{itemize}
+		\item	Add as many center points as you like: adds DOF
+		\item	without changing orthogonality of $\mathrm{X}$
+		\item	decreases $S_E$
+	\end{itemize}
+
+	But standard error for factor $b_i = S_E(b_i) = \sqrt{\dfrac{S_E^2}{\sum{x_i^2}}}$
+	\begin{itemize}
+		\item	denominator not affected by center points
+		\item	Only the intercept term, $b_0$, has improved confidence interval
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Significant? : Replicate runs}
+
+	Reporting the standard error: just write the $S_E(b_i)$ value next to the effect:
+	\begin{itemize}
+		\item	$\text{Temperature effect}, b_T = 11.5 \pm 0.707$
+		\item	$\text{Catalyst effect}, b_K = 0.75 \pm 0.707$
+	\end{itemize}
+
+	The $0.707$ value is just $S_E(b_i)$; leave it up to user to choose their level of significance and to calculate the CI.
+\end{frame}
+
+\begin{frame}\frametitle{Side note: Box, Hunter and Hunter}
+	\begin{itemize}
+		\item	Interpretation of effect: \emph{change in response over \textbf{half the range} of the factor}
+		\begin{itemize}
+			\item	center = 400K
+			\item	lower level = 375K
+			\item	upper level = 425K
+			\item	Effect of ``-5'' would be interpreted as ...
+			\item	Advantage: matches computer software
+			\item	Disadvantage: interpreting binary variables (e.g. catalyst A or B)
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Box, Hunter and Hunter: \emph{change in response over \textbf{full range} of the factor}
+		\begin{itemize}
+			\item	Divide BHH values by 2
+			\item	Divide BHH standard errors by 2 also
+			\item	Advantage: binary variables
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Refitting model}
+	\begin{itemize}
+		\item	Delete non-significant effects (parameters)
+		\item	Now least squares model has residuals and DOF
+		\item	$S_E \neq 0$
+		\item	Use all previous tools from least squares to check model
+		\begin{itemize}
+			\item	q-q plot of residuals
+			\item	plots of residuals, \emph{etc}
+		\end{itemize}
+		\item	Use $S_E(b_i)$ to verify the effects are significant
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Efficiency: COST vs DOE}
+	\begin{block}{Much more efficient than one-at-a-time (COST)}
+		\begin{center}
+			\includegraphics[width=0.65\textwidth]{\imagedir/doe/comparison-of-variances.png}
+		\end{center}
+	\end{block}
+	\begin{columns}
+		\column{4cm}
+			\begin{itemize}
+				\item	$b_T = y_2 - y_1$
+				\item	$\mathcal{V}(b_T) = \sigma_y^2 + \sigma_y^2$
+				\item	$\mathcal{V}(b_T) = 2\sigma_y^2$
+			\end{itemize}
+		\column{6cm}
+			\begin{itemize}
+				\item	$b_T = 0.5(y_2 - y_1) + 0.5(y_4 - y_3)$
+				\item	$\mathcal{V}(b_T) = 0.25(\sigma_y^2 + \sigma_y^2) + 0.25(\sigma_y^2 + \sigma_y^2)$
+				\item	$\mathcal{V}(b_T) = \sigma_y^2$
+			\end{itemize}
+	\end{columns}
+	\begin{itemize}
+		\item	COST also cannot estimate interactions!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Summary of factorial designs}
+	\begin{itemize}
+		\item	Good visual interpretation, even on paper
+		\item	Few experiments, but powerful information
+		\item	Building blocks for complex designs (next part)
+		\item	$2^k$ experiments for $k$ factors
+		\item	Each factor is varied independently of the others
+		\item	Least squares model easily analyzed by hand
+		\item	Model coefficients have the lowest variability possible: $(\mathrm{X}^T\mathrm{X})^{-1}S_E^2$
+		\item	Small effect sometimes desirable: $y$ not sensitive the $x$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Disturbances}
+	\begin{itemize}
+		\item	Ideal case: all disturbances are \textbf{controlled}: have no effect on $y$
+	\end{itemize}
+
+	We always have \textbf{unknown, unmeasurable and uncontrollable} disturbances
+	\begin{itemize}
+		\item	That's why we randomize experiments
+		\item	Example: a side-reaction due to impurity in reactant affects $y$
+		\begin{itemize}
+			\item	Impurity is not uniform in the reactant
+		\end{itemize}
+		\item	Catalyst deactivation, equipment fouling
+	\end{itemize}
+
+	\textbf{Known, or controllable, or measurable} disturbances:
+	\begin{itemize}
+		\item	Operators, physical equipment
+		\item	Pairing: cancel out the disturbance by using the same subject
+		\item	Blocking: disturbance is known to affect $y$
+		\begin{itemize}
+			\item	but we design experiment to minimize its effect.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Blocking and confounding}
+	\begin{itemize}
+		\item	3 factor experiment: $2^3$ runs
+		\item	To estimate: $\mathrm{b} = [b_0, b_A, b_B, b_C, b_{AB}, b_{AC}, b_{BC}, b_{ABC}]$
+	\end{itemize}
+
+	But:
+	\begin{itemize}
+		\item	Enough material for only 4 runs at a time
+		\item	Material could affect response.
+		\item	How can we minimize that effect?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Blocking and confounding}
+	\begin{itemize}
+		\item	Intentionally confound with 3-factor interaction: \textbf{ABC}
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/table-blocking-3-factor-factorial-no-y.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Blocking and confounding}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/blocking-factorial-3-factors.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Blocking and confounding}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/table-blocking-3-factor-factorial-with-y.png}
+	\end{center}
+	\begin{itemize}
+		\item	Batch 1: $\widetilde{y}_i \leftarrow y_{i,\text{actual}} + g$, $i = 1, 4, 6, 7$
+		\item	Batch 2: $\mathring{y}_i \leftarrow y_{i,\text{actual}} + h$, $i = 2, 3, 5, 8$
+	\end{itemize}
+
+	Disturbance bias cancels out. E.g. for $b_A$: $ \widehat{\beta}_A = -\widetilde{y}_1 + \mathring{y}_2 - \mathring{y}_3 + \widetilde{y}_4 - \mathring{y}_5 + \widetilde{y}_6 - \widetilde{y}_7 + \mathring{y}_8 $
+\end{frame}
+
+\begin{frame}\frametitle{Blocking and confounding}
+	\begin{itemize}
+		\item	As if we have a new variable, \textbf{D}, in the model
+	\end{itemize}
+
+	$
+	\begin{array}{rcl}
+		& &
+		\begin{matrix}
+			b_0 & b_A & b_B & b_{C} & b_{AB} & b_{AC}& b_{BC} &b_{ABC} & b_{D}
+		\end{matrix}
+		\\
+		\mathrm{y} &=&
+		\begin{bmatrix}
+			1 & -1 & -1 & -1 & +1 & +1 & +1 & -1 & -1\\
+			1 & +1 & -1 & -1 & -1 & -1 & +1 & +1 & +1\\
+			1 & -1 & +1 & -1 & -1 & +1 & -1 & +1 & +1\\
+			1 & +1 & +1 & -1 & +1 & -1 & -1 & -1 & -1\\
+			1 & -1 & -1 & +1 & +1 & -1 & -1 & +1 & +1\\
+			1 & +1 & -1 & +1 & -1 & +1 & -1 & -1 & -1\\
+			1 & -1 & +1 & +1 & -1 & -1 & +1 & -1 & -1\\
+			1 & +1 & +1 & +1 & +1 & +1 & +1 & +1 & +1
+		\end{bmatrix}
+		\begin{bmatrix}
+			b_0 \\
+			b_A \\
+			b_B \\
+			b_{C} \\
+			b_{AB} \\
+			b_{AC} \\
+			b_{BC} \\
+			b_{ABC} \\
+			b_{D}
+		\end{bmatrix}
+		+ \mathrm{e}
+	\end{array}
+	$
+	\begin{itemize}
+		\item	$\widehat{\beta}_{ABC} \rightarrow \underbrace{\text{ABC interaction}}_{\text{expected to be small}} + \text{raw material effect, }\mathbf{D}$
+		\item	Block effect generated from the other 3 effects: \textbf{D = ABC}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Fractional factorial designs}
+
+	Real systems: many factors affect the $y$
+
+	Cell-culture example: many factors to investigate
+	\begin{itemize}
+		\item	the temperature profile
+		\begin{itemize}
+			\item	$T_{-}$: fast initial ramp then constant
+			\item	$T_{+}$: a slow increase over time
+		\end{itemize}
+		\item	dissolved oxygen
+		\item	agitation rate
+		\item	pH
+		\item	substrate type (A or B)
+	\end{itemize}
+
+	Would require $2^5 = 32$ runs; 10 days per cell culture = 1 year
+	\begin{itemize}
+		\item	Can we run a subset of full factorial?
+		\item	E.g. we are not interested in ``$\text{dissolved oxygen} \times \text{agitation rate} \times \text{pH}$'' interaction
+		\item	Only interested in main effects, maybe the 2 factor interactions
+		\begin{itemize}
+			\item	how many effects is this?
+			\item	can we save money and/or time?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Half fractions}
+	\begin{itemize}
+		\item	Called $\tfrac{1}{2}2^k = 2^{k-1}$ factorials
+		\item	This is the full factorial for a $2^3 = 8$ system:
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/half-fraction-justification.png}
+	\end{center}
+	\begin{itemize}
+		\item	We only want to do half the number of experiments: $\tfrac{1}{2}2^3 = 2^{3-1}$
+		\item	Which runs do we pick?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Half fractions}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{\imagedir/doe/half-fraction-in-3-factors-no-labels.png}
+	\end{center}
+	\begin{itemize}
+		\item	Run either the open or closed set of 4 runs
+		\item	In this example: run the closed corners
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Half fractions}
+	\begin{itemize}
+		\item	Why did I choose those 4 runs? Why not some other combination?
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.58\textwidth]{\imagedir/doe/projectivity-of-a-half-fraction-in-3-factors.png}
+	\end{center}
+	If we choose our runs in a smart way, then fractional factorials will collapse to full factorials if effects are insignificant.
+	\begin{itemize}
+		\item	e.g. if the \textbf{C} effect is insignificant, we have a full factorial in \textbf{A} and \textbf{B}
+		\item	Called \emph{projectivity}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial design tradeoffs}
+
+	Tradeoff table:
+	\begin{center}
+		\includegraphics[height=0.85\textheight]{\imagedir/doe/DOE-trade-off-table.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Half fractions}
+	\begin{itemize}
+		\item	The table tells us to generate \textbf{C=AB}
+		\begin{itemize}
+			\item	``\emph{Generate factor} \textbf{C} \emph{from the product of} \textbf{A} and \textbf{B}"
+		\end{itemize}
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/half-fraction-table.png}
+	\end{center}
+	\begin{itemize}
+		\item	What is confounded (i.e. which columns are the same)?
+		\begin{itemize}
+			\item	\textbf{A=BC}
+			\item	\textbf{B=AC}
+			\item	\textbf{C=AB} (this was intentional - from table)
+			\item	\textbf{I=ABC}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Notice: we have picked the 4 runs where the \textbf{ABC} interaction is the same sign: all $+$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Half fractions}
+
+	What do we loose by only doing 4 runs, instead of the full 8?
+
+	Use the least squares model:
+
+	$
+	\begin{array}{rcl}
+		\mathrm{y} &=& \mathrm{X} \mathrm{b} + \mathrm{e}\\
+		\begin{bmatrix}
+			y_1\\
+			y_2\\
+			y_3 \\
+			y_4
+		\end{bmatrix}
+		&=&
+		\begin{bmatrix}
+			1 & -1 & -1 & +1 & +1 & -1 & -1 & +1\\
+			1 & +1 & -1 & -1 & -1 & -1 & +1 & +1\\
+			1 & -1 & +1 & -1 & -1 & +1 & -1 & +1\\
+			1 & +1 & +1 & +1 & +1 & +1 & +1 & +1
+		\end{bmatrix}
+		\begin{bmatrix}
+			b_0 \\
+			b_A \\
+			b_B \\
+			b_{C} \\
+			b_{AB} \\
+			b_{AC} \\
+			b_{BC} \\
+			b_{ABC}
+		\end{bmatrix}
+		+
+		\begin{bmatrix}
+			e_1\\
+			e_2\\
+			e_3 \\
+			e_4
+		\end{bmatrix}
+	\end{array}
+	$
+
+	Several problems:
+	\begin{itemize}
+		\item	$\mathrm{X}$ not orthogonal
+		\item	More unknowns than equations
+	\end{itemize}
+	Model cannot be solved
+\end{frame}
+
+\begin{frame}\frametitle{Half fractions}
+	\begin{itemize}
+		\item	Collect perfectly correlated columns together:
+	\end{itemize}
+	$
+	\begin{array}{rcl}
+		\mathrm{y} &=& \mathrm{X} \mathrm{b} + \mathrm{e}\\
+		\begin{bmatrix}
+			y_1\\
+			y_2\\
+			y_3 \\
+			y_4
+		\end{bmatrix}
+		&=&
+		\begin{bmatrix}
+			1 & -1 & -1 & +1 \\
+			1 & +1 & -1 & -1 \\
+			1 & -1 & +1 & -1 \\
+			1 & +1 & +1 & +1
+		\end{bmatrix}
+		\begin{bmatrix}
+			b_0 + b_{ABC} \\
+			b_A + b_{BC} \\
+			b_B + b_{AC} \\
+			b_{C} + b_{AB}
+		\end{bmatrix}
+		+
+		\begin{bmatrix}
+			e_1\\
+			e_2\\
+			e_3 \\
+			e_4
+		\end{bmatrix}
+	\end{array}
+	$
+	\begin{itemize}
+		\item	Confounding pattern:
+		\begin{itemize}
+			\item	$\widehat{\beta}_A \rightarrow$ \textbf{A + BC}
+			\item	$\widehat{\beta}_B \rightarrow$ \textbf{B + AC}
+			\item	$\widehat{\beta}_C \rightarrow$ \textbf{C + AB}
+			\item	$\widehat{\beta}_0 \rightarrow$ \textbf{I + ABC}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Half fractions}
+	\begin{itemize}
+		\item	Confounding pattern:
+		\begin{itemize}
+			\item	$\widehat{\beta}_A \rightarrow$ \textbf{A + BC}
+			\item	$\widehat{\beta}_B \rightarrow$ \textbf{B + AC}
+			\item	$\widehat{\beta}_C \rightarrow$ \textbf{C + AB} (intentional)
+			\item	$\widehat{\beta}_0 \rightarrow$ \textbf{I + ABC}
+		\end{itemize}
+	\end{itemize}
+
+	We say:
+	\begin{enumerate}
+		\item	\textbf{A} is an \emph{alias} for \textbf{BC}
+		\item	\textbf{B} is an \emph{alias} for \textbf{AC}
+		\item	\textbf{C} is an \emph{alias} for \textbf{AB}
+		\item	Design was generated by \textbf{C = AB}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Generators/Defining relationship}
+	\begin{itemize}
+		\item	General rule for half-fractions of $2^k$ factorial:
+		\begin{itemize}
+			\item	write down $k-1$ main factors
+			\item	\emph{generate} last factor from product of previous $k-1$ factors
+		\end{itemize}
+	\end{itemize}
+
+	Example: $2^4$ with \textbf{A}, \textbf{B}, \textbf{C} and \textbf{D}
+	\begin{itemize}
+		\item	Generator: \textbf{D = ABC} (from the table)
+	\end{itemize}
+
+	Some ``aliasing notation'' rules:
+	\begin{itemize}
+		\item	\textbf{A} $\times$ \textbf{A = I}
+		\item	\textbf{B} $\times$ \textbf{B = I}
+		\item	\textbf{I} $\times$ \textbf{I = I}
+		\item	\textbf{ABC} $\times$ \textbf{D} = \textbf{ABC} $\times$ \textbf{ABC = AABBCC = I I I}, so we get \textbf{I = ABCD}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Generators/Defining relationship}
+	\begin{itemize}
+		\item	\textbf{I = ABCD} is called the \emph{defining relation} for the design
+		\item	Defining relationship = product of all generator combinations, solved for \textbf{I} on the left side
+		\item	There is only generator in this example (\textbf{D = ABC})
+	\end{itemize}
+
+	Aliasing: multiply effect with defining relationship. E.g.:
+	\begin{itemize}
+		\item	\textbf{A} $\times$ \textbf{I = A} $\times$ \textbf{ABCD = BCD}
+		\begin{itemize}
+			\item	Main effect \textbf{A} aliased with 3-factor interaction \textbf{BCD}
+		\end{itemize}
+		\item	\textbf{B} main effect is aliased with:
+		\item	\textbf{D} main effect is aliased with:
+		\item	\textbf{AB} two-factor interaction:
+		\item	\textbf{AC} two-factor interaction:
+		\item	\textbf{BCD} three-factor interaction:
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated designs}
+
+	Saturated design: fewest number of runs as possible
+	\begin{itemize}
+		\item	$2^{k-1}$ factorial: half-fraction
+		\item	$2^{k-2}$ factorial: quarter-fraction
+		\item	$2^{k-p}$ factorial in general
+	\end{itemize}
+	\begin{itemize}
+		\item	Excellent for screening many factors
+		\begin{itemize}
+			\item	Fewest number of experiments for a given number of factors
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated designs}
+	\begin{itemize}
+		\item	Found by moving up the columns in the tradeoff table:
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=0.85\textheight]{\imagedir/doe/DOE-trade-off-table.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+	\begin{itemize}
+		\item	Seven factors: \textbf{A, B, C, D, E, F, G }. A $2^{7-p}$ fraction
+		\begin{itemize}
+			\item	p=0: 128 runs, 128 parameters estimated
+			\item	p=1: 64 runs (half-fraction), 64 parameters
+			\item	p=2: 32 runs
+			\item	p=3: 16 runs
+			\item	p=4: 8 runs: parameters are 7 factors + intercept
+		\end{itemize}
+	\end{itemize}
+
+	How to design this experiment?
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+
+	1. 8 runs: $2^3$ factorial for factors \textbf{A, B} and \textbf{C}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{\imagedir/doe/saturated-design-base-factorial.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+
+	2. What about factors \textbf{D, E, F} and \textbf{G}?
+
+	Create these by intentionally confounding with the interactions derived from the \textbf{A}, \textbf{B}, and \textbf{C} factors.
+
+	Generators are:
+	\begin{itemize}
+		\item	\textbf{D=AB}
+		\item	\textbf{E=AC}
+		\item	\textbf{F=BC}
+		\item	\textbf{G=ABC}
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/saturated-design-base-factorial-expanded.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+
+	3. Determine aliasing. Require defining relationship first.
+
+	General rule for $2^{k-p}$ factorials:
+	\begin{itemize}
+		\item	produced by $p$ generator
+		\item	defining relationship has $2^p$ words
+	\end{itemize}
+
+	Defining relationship: all combinations of the generators.
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+
+	3. This case: $2^4 = 16$ words in our defining relation
+	\begin{itemize}
+		\item	\textbf{I}
+		\item	Generators: \textbf{I = ABD = ACE = BCF = ABCG}
+		\item	Combine 2: \textbf{I = BDCE = ACDF = CDG = ABEF = BEG = AFG}
+		\item	Combine 3: \textbf{I = DEF = ADEG = CEFG = BDFG}
+		\item	Combine 4: \textbf{I = ABCDEFG}
+	\end{itemize}
+
+	\textbf{I = ABD = ACE = BCF = ABCG}
+
+	\textbf{ = BDCE = ACDF = CDG = ABEF = BEG = AFG}
+
+	\textbf{ = DEF = ADEG = CEFG = BDFG }
+
+	\textbf{ = ABCDEFG}
+
+	Shortest word: 3 factors. Called a resolution III design.
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+
+	4. Confounding pattern for main effects. For \textbf{A}:
+
+	\textbf{AI = BD = CE = ABCF = BCG = ABDCE = CDF = ACDG = BEF = ABEG = FG = ADEF = DEG = ACEFG = ABDFG = BCDEFG}
+
+	We usually only report the main effects and 2fi confounding:
+	\begin{itemize}
+		\item	$\widehat{\beta}_0$ = ABCDEFG
+		\item	$\widehat{\beta}_{\mathbf{A}} \rightarrow$ A + BD + CE + FG
+		\item	$\widehat{\beta}_{\mathbf{B}} \rightarrow$ B + AD + CF + EG
+		\item	$\widehat{\beta}_{\mathbf{C}} \rightarrow$ C + AE + BF + DG
+		\item	$\widehat{\beta}_{\mathbf{D}} \rightarrow$ \textbf{D + AB} + CG + EF
+		\item	$\widehat{\beta}_{\mathbf{E}} \rightarrow$ \textbf{E + AC} + BG + DF
+		\item	$\widehat{\beta}_{\mathbf{F}} \rightarrow$ \textbf{F + BC} + AG + DE
+		\item	$\widehat{\beta}_{\mathbf{G}} \rightarrow$ G + CD + BE + AF
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+
+	5. Choose different confounding if this is not suitable. More simply: just reassign the letters to different factors.
+
+	6. Collect $y$ values from experiment
+	\begin{itemize}
+		\item	X-matrix: as shown in the table
+		\item	Calculate: $\mathrm{b} = \left(\mathrm{X}^T\mathrm{X}\right)^{-1}\mathrm{X}\mathrm{y}$
+		\item	$\mathrm{b} = [b_0, b_\mathbf{A}, b_\mathbf{B}, b_\mathbf{C}, b_\mathbf{D}, b_\mathbf{E}, b_\mathbf{F}, b_\mathbf{G}]$
+		\item	$\mathrm{X}^T\mathrm{X}$ matrix is diagonal
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+
+	7. Which main effects are important? Use Pareto-plot of effect.
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{\imagedir/doe/pareto-plot.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Highly fractionated designs}
+	\begin{itemize}
+		\item	$2^k$ factorials: too many runs for large $k$
+		\item	Rather use $2^{k-p}$ fractional factorial
+		\item	Budget for 8 experiments:
+		\begin{itemize}
+			\item	$2^3$ full factorial with \textbf{3 factors}
+			\item	$2^{4-1}$ half fraction in \textbf{4 factors}
+			\item	$2^{5-2}$ quarter fraction in \textbf{5 factors}
+			\item	$2^{6-3}$ fractional factorial in \textbf{6 factors}
+			\item	$2^{7-4}$ fractional factorial in \textbf{7 factors}.
+		\end{itemize}
+	\end{itemize}
+
+	\textbf{What are the trade-offs?}
+\end{frame}
+
+\begin{frame}\frametitle{``Generators" and ``Defining relationships" summary}
+
+	For a $2^{k-p}$ factorial with $k$ factors:
+	\begin{block}{Purpose of generators?}
+		\begin{center}
+			To tell how to create (generate) the fractional factorial
+		\end{center}
+	\end{block}
+	\begin{itemize}
+		\item	Generators are found from the trade-off table
+	\end{itemize}
+	\begin{block}{Purpose of the defining relationship?}
+		\begin{center}
+			To find, in advance, which factors are aliased with each other
+		\end{center}
+	\end{block}
+	\begin{itemize}
+		\item	Allows us to adjust our experiment \emph{before} we start it.
+		\item	In a $2^{k-p}$ design, there are $2^p$ words in the defining relationship
+		\item	Multiply each factor with the defining relationship to see aliasing
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{At-home example 1}
+	\begin{enumerate}
+		\item	7 factors; smallest number of runs?
+		\item	What are generators and defining relationship for part 1?
+		\item	Confounding pattern for main effects?
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{At-home example 2}
+	\begin{enumerate}
+		\item	8 factors: smallest number of runs?
+		\item	What are generators and defining relationship for part 1?
+		\item	Confounding pattern for main effects?
+		\begin{itemize}
+			\item	\emph{Answer}: main effects confounded with 3-factor interactions
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Notes for fractionated designs}
+	\begin{enumerate}
+		\item	Can use different choices for generators
+		\item	Pick a choice, then just shuffle assignment of letters to actual factors:
+		\begin{itemize}
+			\item	\textbf{A} confounded with \textbf{BCD}
+			\item	\textbf{B} confounded with \textbf{CA}
+			\item	\textbf{C} \emph{etc}
+		\end{itemize}
+	\end{enumerate}
+
+	A $2^{k-p}$ factorial:
+	\begin{itemize}
+		\item	is produced by $p$ generators
+		\item	defining relation has $2^p$ words
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Design resolution}
+	\begin{block}{What is ``{\color{purple}{Resolution}}'' ?}
+		\begin{center}
+			The length of the shortest word in the defining relation.
+		\end{center}
+	\end{block}
+	\begin{itemize}
+		\item	$2^{7-4}$ example: shortest word = 3 letters: $2^{7-4}_\text{III}$ design
+		\begin{itemize}
+			\item	main effects confounded with 2-factor interactions
+		\end{itemize}
+		\item	$2^{8-5}$ example: shortest word = 4 letter: $2^{8-5}_\text{IV}$ design
+		\begin{itemize}
+			\item	main effects confounded with 3-factor interactions
+		\end{itemize}
+		\item	$2^{5-1}$ half-fraction design
+		\begin{itemize}
+			\item	four factors as standard factorial
+			\item	factor \textbf{E = ABCD}, so \textbf{I = ABCDE}
+			\item	it is a $2^{5-1}_{\text{V}}$ design
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Design resolution}
+
+	Resolution: \emph{shows how clearly effects are separated}
+	\begin{itemize}
+		\item	Let main effects = 1
+		\item	Two-factor interactions = 2
+		\item	Three-factor interactions = 3
+	\end{itemize}
+
+	\textbf{Resolution V}
+	\begin{itemize}
+		\item	5 - 1 = 4: main effects confounded with 4-factor interactions (fi)
+		\item	5 - 2 = 3: 2-fi confounded with 3-fi
+		\item	5 - 3 = 2: 3-fi confounded with 2-fi
+	\end{itemize}
+
+	Aim for a higher resolution, but accept a lower resolution initially, in order to test more factors
+\end{frame}
+
+\begin{frame}\frametitle{Design resolution}
+
+	\textbf{Resolution III designs }
+	\begin{itemize}
+		\item	Excellent for initial screening
+		\item	Confounding?
+	\end{itemize}
+
+	\textbf{Resolution IV designs }
+	\begin{itemize}
+		\item	Learning about and understanding a system (characterization)
+		\item	Confounding?
+	\end{itemize}
+
+	\textbf{Resolution V designs}
+	\begin{itemize}
+		\item	For optimizing a process, understanding complex effects,
+		\item	To develop high-accuracy models
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Design resolution}
+	\begin{center}
+		\includegraphics[height=0.85\textheight]{\imagedir/doe/DOE-trade-off-table.png}
+	\end{center}
+	From BHH2, p272. Bring copy of this table to exams.
+\end{frame}
+
+\begin{frame}\frametitle{Saturated designs - screening}
+	\begin{itemize}
+		\item	Resolution III design
+		\item	Screen many factors
+		\item	Good for evaluating a new system
+		\begin{itemize}
+			\item	Lab-scale work
+			\item	New product development
+			\item	Transfer from the lab to plant scale
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/saturated-experiment-in-7-factors.png}
+	\end{center}
+	\begin{enumerate}
+		\item	Create $\mathbf{X}$ and $\mathbf{y}$ matrices from the table
+		\item	Solve for $\mathbf{b}$
+		\item	Plot Pareto plot of main effects (they are highly confounded)
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated design example}
+	\begin{columns}
+		\column{4cm} 
+			\begin{center}
+				\includegraphics[width=1.3\textwidth]{\imagedir/doe/pareto-plot.png} 
+			\end{center}
+		\column{6cm} 
+			\begin{itemize}
+				\item	\textbf{A}, \textbf{C} and \textbf{G} 
+				\item	\textbf{E}: fairly small 
+				\begin{itemize}
+					\item	$\widehat{\beta}_{\mathbf{E}} \rightarrow \textbf{E + AC} + BG + DF$ 
+					\item	could be due to main effect \textbf{E} 
+					\item	or due to \textbf{AC} interaction 
+				\end{itemize}
+				\item	Factors \textbf{B}, \textbf{D} and \textbf{F} are not important.
+			\end{itemize}
+	\end{columns}
+	\vspace{12pt}
+	Next experiments: focus on \textbf{A}, \textbf{C}, \textbf{G} and their interactions.
+\end{frame}
+
+\begin{frame}\frametitle{Saturated designs: note}
+	\begin{itemize}
+		\item	Fraction factorials: $2^{k-p}$ runs
+		\begin{itemize}
+			\item	for integers $k$ and $p$: $4, 8, 16, 32, 64, 128, \ldots$
+		\end{itemize}
+		\item	Plackett and Burman designs are for screening also:
+		\begin{itemize}
+			\item	multiples of 4: $12, 16, 20, 24, 28, \ldots$ runs
+		\end{itemize}
+		\item	Box and Bisgaard paper: ``What can you find out from 12 experimental runs?''
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Foldover: de-aliasing}
+	\begin{itemize}
+		\item	Experiments are not a one-shot operation; always run sequential expts
+		\item	Fractional factorial:
+		\begin{itemize}
+			\item	highly confounded; but say one factor \textbf{C} is important
+			\item	switch the sign of \textbf{C}: from \textbf{C} to \textbf{-C}
+			\item	repeat the fractional experiments
+			\item	it unconfounds \textbf{C}: main effect and all its 2-fi
+		\end{itemize}
+	\end{itemize}
+
+	Switching the sign of a factor will de-alias its main effect and all its associated two-factor interactions.
+\end{frame}
+
+\begin{frame}\frametitle{Foldover: removing 2-fi confounding}
+	\begin{itemize}
+		\item	Run another fraction, but switch all the signs in the design table
+		\begin{itemize}
+			\item	i.e. let \textbf{A = -A}, \textbf{B = -B}, \emph{etc}
+			\item	Run another fractional factorial
+			\item	All 2-fi will be removed from the main effects
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Projectivity}
+
+	Fractional factorials collapse to full factorials when effects are insignificant.
+	\begin{center}
+		\includegraphics[width=0.65\textwidth]{\imagedir/doe/projectivity-of-a-half-fraction-in-3-factors.png}
+	\end{center}
+	Projectivity = $P$ = resolution - 1
+\end{frame}
+
+\begin{frame}\frametitle{Example}
+
+	You are developing a new product, but struggling to get product stability (measured in days), to the required level. Aim for stability above 50 days. Four factors considered:
+	\begin{itemize}
+		\item	\textbf{A} = monomer concentration: 30\% or 50\%
+		\item	\textbf{B} = acid concentration: low or high
+		\item	\textbf{C} = catalyst level: 2\% or 3\%
+		\item	\textbf{D} = temperature: 393K or 423K
+	\end{itemize}
+
+	Experiments in standard order:
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/experiments-for-stability.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Example (continued)}
+	\begin{enumerate}
+		\item	How was the experimented generated?
+		\item	What is the defining relationship?
+		\item	What will be aliased with \textbf{A}; with \textbf{D} and with \textbf{BC}?
+		\item	Describe the aliasing structure (resolution)?
+		\item	What is the model's intercept; main effect for \textbf{A}; and for the \textbf{AD} interaction?
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Example (continued)}
+
+	If the least squares model is:
+
+	$ y = 29.5 -5.75x_A -3.75 x_B -1.25 x_C + 0.75 x_D + 0.50 x_A x_B + 1.0 x_A x_C - 1.0 x_A x_D$
+
+	what is the predicted stability when operating at:
+	\begin{itemize}
+		\item	monomer concentration of 25\%
+		\item	low acid concentration
+		\item	1.5\% catalyst level
+		\item	a temperature of 408 K
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Response surface methods}
+
+	\textbf{Objective}: achieve the best response using sequential experimentation.
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{\imagedir/doe/COST-contours.png}
+	\end{center}
+	Wasn't the COST approach also sequential experimentation?
+
+	\textbf{Different to COST}: We are changing multiple variables at a time!
+\end{frame}
+
+\begin{frame}\frametitle{Single-variable case}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/steepest-ascent-univariately-corrected.png}
+	\end{center}
+	\begin{itemize}
+		\item	Can get to optimum faster if use quadratic (or spline) approximations
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Single-variable case}
+
+	This is the COST approach:
+	\begin{itemize}
+		\item	exploratory steps of $\gamma_i$ towards an optimum
+		\item	refit the model once we plateau
+		\item	repeat
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Analogy}
+	\begin{itemize}
+		\item	Analogy for finding the optimum:
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=0.85\textheight]{\imagedir/doe/pictograms-nps-accessibility-low-vision-access.png} %3626157564_ba129e810a_b.jpg}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{2-variable example}
+	\begin{columns}
+		\column{6cm}
+			\begin{center}
+				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-first-factorial.png}
+			\end{center}
+		\column{4cm}
+			\begin{itemize}
+				\item	Baseline:
+				\begin{itemize}
+					\item	$T$=325K
+					\item	$S$ = 0.75g/L
+					\item	profit = \$407.
+				\end{itemize}
+				\item	Example worked out on the board
+			\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{2-variable example}
+	\begin{columns}
+		\column{6cm}
+			\begin{center}
+				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-exploration.png}
+			\end{center}
+		\column{4cm}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{2-variable example}
+	\begin{columns}
+		\column{6cm}
+			\begin{center}
+				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-extra-factorial.png}
+			\end{center}
+	 	\column{4cm}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{2-variable example}
+	\begin{columns}
+		\column{6cm}
+			\begin{center}
+				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-CCD-factorial.png} 
+			\end{center}
+		\column{4cm}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{2-variable example}
+
+	Adding second order effects; use a central composite design.
+	\begin{itemize}
+		\item	CCD design: full factorial + axial points + center points
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/central-composite-design.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{2-variable example}
+
+	Add quadratic terms to model:
+
+	$\hat{y} = b_0 + b_Tx_T + b_S x_S + b_{TS} x_T x_S + b_{TT} x_T^2 + b_{SS} x_S^2$
+
+	$
+	\begin{array}{rcl}
+		\\
+		\\
+		\mathrm{y} &=& \mathrm{X} \mathrm{b} + \mathrm{e}\\
+		\\
+		\begin{bmatrix}
+			y_8\\
+			y_9\\
+			y_{10} \\
+			y_{11} \\
+			y_{6} \\
+			y_{13} \\
+			y_{14} \\
+			y_{15} \\
+			y_{16}
+		\end{bmatrix}
+		&=&
+		\begin{bmatrix}
+			1 & -1 & -1 & +1 & +1 & +1\\
+			1 & +1 & -1 & -1 & +1 & +1\\
+			1 & -1 & +1 & -1 & +1 & +1\\
+			1 & +1 & +1 & +1 & +1 & +1\\
+			1 & 0 & 0 & 0 & 0 & 0\\
+			1 & 0 &-1.41& 0 & 0 & 2\\
+			1 & 1.41& 0& 0 & 2 & 0\\
+			1 & 0 & 1.41& 0 & 0 & 2\\
+			1 &-1.41& 0& 0 & 2 & 0
+		\end{bmatrix}
+		\begin{bmatrix}
+			b_0 \\
+			b_T \\
+			b_S \\
+			b_{TS} \\
+			b_{TT} \\
+			b_{SS}
+		\end{bmatrix}
+		+ \mathrm{e}
+	\end{array}
+	$
+\end{frame}
+
+\begin{frame}\frametitle{2-variable example}
+	\begin{columns}
+		\column{6cm}
+			\begin{center}
+				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-CCD-contours.png} 
+			\end{center}
+		\column{4cm}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{General approach for RSM}
+
+	1. Start at baseline; run full or fractional factorial
+	\begin{itemize}
+		\item	$ \hat{y} = b_0 + b_1x_1 + b_2 x_2 + \ldots + b_{12}x_1x_2 + b_{13} x_1 x_3 + \ldots$
+	\end{itemize}
+	2. Main effects usually greater than 2-factor interaction
+
+	3. Estimate path of steepest ascent (or descent):
+	\begin{itemize}
+		\item	$\dfrac{\partial \hat{y}}{\partial x_1} = b_1 \qquad\qquad \dfrac{\partial \hat{y}}{\partial x_2} = b_2 \qquad \ldots$
+		\item	Move $b_1$ units in $x_1$ \textbf{and} move $b_2$ units in $x_2$, \emph{etc}
+		\item	These are coded units. Unscale to real-world units!
+		\item	Implement a portion of the full step, e.g. only 25\%
+	\end{itemize}
+
+	4. Make several sequential steps until response levels off
+	\begin{itemize}
+		\item	$y_6 = 600; y_7 = 800, y_8 = 825, y_9 = 750$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{General approach for RSM}
+
+	5. Use a new factorial
+	\begin{itemize}
+		\item	perhaps add other factors
+		\item	flip signs on binary factors
+	\end{itemize}
+	6. Repeat steps 1 to 5, until linear model is insufficient
+	\begin{itemize}
+		\item	Curvature shows up
+		\item	2-factor interactions dominate main effects
+	\end{itemize}
+	7. Estimate a quadratic model
+	\begin{itemize}
+		\item	Use central composite design; use 3-levels per factor
+		\item	Add quadratic terms to model, e.g. $\ldots + b_{11}x_1^2 + b_{22}x_2^2 + \ldots$
+	\end{itemize}
+	8. Draw contour plots (surfaces) and move to next optimum
+\end{frame}
+
+\begin{frame}\frametitle{What is the response variable}
+	\begin{itemize}
+		\item	Single $y$ is not always feasible
+		\item	Use y = ``total costs'', or y = ``net profit''
+		\item	Superimpose contour surfaces
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=0.65\textwidth]{\imagedir/doe/multi-objective-RSM.png}
+	\end{center}
+	Page 579 of the Hill and Hunter review article - reference in the notes.
+\end{frame}
+
+
+\begin{frame}\frametitle{Evolutionary operation}
+	\begin{itemize}
+		\item	Similar concept to RSM
+		\item	Processes are not constant, the optimum is shifting
+		\begin{itemize}
+			\item	heat-exchanger fouling
+			\item	build-up inside reactors and tubing
+			\item	catalyst deactivation
+			\item	slowly varying disturbances
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Iterative hunt for the process optimum:
+		\begin{itemize}
+			\item	make small perturbations within daily production
+			\item	use replicate runs and average
+			\item	move along the response surface
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{General approach for experimentation}
+	\begin{itemize}
+		\item	Box: ``\emph{The best time to run an experiment is after the experiment}''
+		\item	Box: ``\emph{Do not spend more than 20\% to 25\% of your time and budget on your first group of experiments}''
+	\end{itemize}
+
+	\textbf{Phase 1}: screening runs
+
+	\textbf{Phase 2}: sequential experiments to augment screening
+
+	\textbf{Phase 3}: optimizing; RSM and full factorials
+
+	\textbf{Phase 4}: maintain the optimum, search for better optima
+\end{frame}
+
+\begin{frame}\frametitle{Mistakes, missing values, and constraints}
+	\begin{itemize}
+		\item	Do not or cannot reach $-1$ or $+1$:
+		\begin{itemize}
+			\item	use a least squares model with the coded value actually used in expt
+			\item	loose some orthogonality
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Missing values
+		\begin{itemize}
+			\item	main effects estimate multiple times
+			\item	solve underdetermined system, or
+			\item	drop out insignificant terms (iterate)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Handling of constraints}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{\imagedir/doe/two-factors-with-constraint.png}
+	\end{center}
+	\begin{itemize}
+		\item	New runs are not independent; lost orthogonality
+		\item	Use ``optimal'' design to locate experiments (next)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Optimal designs}
+	\begin{itemize}
+		\item	What is sub-optimal about our existing designs? \textbf{Nothing!}
+		\item	Use optimal designs when:
+		\begin{itemize}
+			\item	constraints are complex (plane constraints; $k \geq 3$)
+			\item	estimating a non-standard model
+			\item	running a reduced number of experiments
+			\item	have more than 2-levels per factor
+			\item	want to add experiments to existing runs
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Optimal designs}
+
+	Computer-based approach:
+	\begin{enumerate}
+		\item	User specifies the model (i.e. the parameters)
+		\item	Computer finds all possible combinations (grid approach)
+		\begin{itemize}
+			\item	user can augment this list, called candidate points
+			\item	center-points added
+		\end{itemize}
+		\item	User specifies number of experiments
+		\item	Computer iteratively selects the ``optimal'' set
+	\end{enumerate}
+
+	Optimality criteria:
+	\begin{itemize}
+		\item	A-optimal: minimizes $\text{trace}\left\{(\mathbf{X}^T\mathbf{X})^{-1}\right\}$
+		\item	D-optimal: maximizes $\text{det}(\mathbf{X}^T\mathbf{X})$
+		\item	G-optimal: minimize maximum variance of $\hat{y}$
+		\item	V-optimal: minimize average variance of $\hat{y}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Optimal designs}
+	\begin{itemize}
+		\item	A full factorial design, $2^k$ is already A-, D- G- and V-optimal.
+		\item	D-optimal designs work well; used most often.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Mixture designs}
+	\begin{itemize}
+		\item	Fine chemicals, pharmaceuticals, food manufacturing, and polymer processing
+		\item	There are screening and optimization designs for mixtures also
+		\item	Constraint for mixtures: $\sum_i x_i = 1$
+		\item	Cannot be changed independently
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/mixture-design.png}
+	\end{center}
+\end{frame}
