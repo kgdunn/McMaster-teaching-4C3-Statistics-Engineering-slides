@@ -932,8 +932,8 @@
 
 \begin{frame}\frametitle{Example}
 	\begin{itemize}
-		\item	$S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} = \dfrac{1.237^2}{110} = 0.0139; S_E(b_1) = 1.1247$
-		\item	{ $S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right) = \left(\dfrac{1}{11} + \dfrac{9^2}{110} \right)1.237^2 = 1.266; S_E(b_0) = 0.1179$}
+		\item	$S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} = \dfrac{1.237^2}{110} = 0.0139; {\color{myRed}{S_E(b_1) = 0.1179}}$
+		\item	{ $S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right) = \left(\dfrac{1}{11} + \dfrac{9^2}{110} \right)1.237^2 = 1.266; \qquad {\color{myRed}{S_E(b_0) = 1.125}}$}
 	\end{itemize}
 	\begin{itemize}
 		\item	For $\beta_0$:
@@ -973,13 +973,25 @@
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{\imagedir/least-squares/cameras-road-deaths.jpg}
 	\end{center}
+	\vspace{-8pt}
 	\begin{itemize}
 		\item	What is the causal direction (line of reasoning) that the plot's author is wanting you to follow?
-		\item	Interpret the software output: $y = 15.7 - 0.70 \text{cameras}$
-		\begin{itemize}
-			\item	$9.61 \leq \beta_0 \leq 21.8$
-			\item	$-1.8 \leq \beta_1 \leq 0.36$
-		\end{itemize}
+		\item	Interpret the software output: $y = 15.7 - (0.70) \text{cameras}$
+		\vspace{-16pt}
+		\begin{columns}[t]
+			\column{0.10\textwidth}
+			\column{0.45\textwidth}
+				\begin{itemize}
+					\item	$9.61 \leq \beta_0 \leq 21.8$
+					\item	$-1.8 \leq \beta_1 \leq 0.36$
+				\end{itemize}
+			\column{0.45\textwidth}
+				\begin{itemize}
+					\item	$S_E = 10.9$
+					\item	$R^2 = 0.075$
+				\end{itemize}
+		\end{columns}
+		
 	\end{itemize}
 \end{frame}
 
@@ -1005,8 +1017,8 @@
 
 	$$
 	\begin{array}{rcl}
-		\mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \varepsilon \\
-		y_i &=& b_0 + b_1 x_i + e_i \\
+		\text{Population model}: \mathrm{y} &=& \beta_0 + \beta_1 \mathrm{x} + \varepsilon \\
+		\text{Estimated model}: y_i &=& b_0 + b_1 x_i + e_i \\
 		\\
 	\end{array}
 	$$
@@ -1028,18 +1040,19 @@
 		\\
 	\end{array}
 	$$
-	\begin{itemize}
-		\item	$S_E = \sqrt{\text{RSS}/(n-k)} = \sqrt{\dfrac{ e^Te}{n-k}}$
-	\end{itemize}
+	
+	
+	$S_E = \sqrt{\dfrac{\text{RSS}}{n-k}} = \sqrt{\dfrac{ e^Te}{n-k}} \qquad\qquad \sum{e_i}=0$
+	
 \end{frame}
 
 \begin{frame}\frametitle{Review of assumptions}
 	\begin{enumerate}
 		\item	Model is linear
-		\item	Variance of y is constant at all values of x
+		\item	Variance of $y$ is constant at all values of $x$
 		\item	Errors are normally distributed
 		\item	Each error is independent of the other
-		\item	Assume x are fixed and independent of the error
+		\item	Assume $x$ are fixed and independent of the error
 		\item	All $y_i$ values are independent of each other
 	\end{enumerate}
 \end{frame}
@@ -1062,7 +1075,7 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Prediction interval for y}
+\begin{frame}\frametitle{Prediction interval for $y$}
 
 	$$\mathcal{V}\{\hat{y}_i\} = S_E^2 \left(1 + \dfrac{1}{n} + \dfrac{(x_i - \overline{\mathrm{x}})^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}\right)$$
 	\begin{itemize}
@@ -1074,7 +1087,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Prediction interval for y: \emph{has curvature}}
+\begin{frame}\frametitle{Prediction interval for $y$: \emph{it has curvature}}
 	\begin{center}
 		\includegraphics[height=0.9\textheight]{\imagedir/least-squares/show-anscome-solution-with-yhat-bounds.png}
 	\end{center}
@@ -1125,7 +1138,7 @@
 	\textbf{Dealing with it}:
 	\begin{itemize}
 		\item	Remove any outlying observation(s) (after investigation)
-		\item	Transform the y-variable
+		\item	Transform the $y$-variable
 		\item	Add additional explanatory terms to the model (see this in MLR later)
 	\end{itemize}
 \end{frame}
@@ -1230,7 +1243,7 @@
 
 \begin{frame}\frametitle{Linear model (incorrect model specification)}
 	\begin{itemize}
-		\item	Systems are known to be non-linear; linear might be good enough
+		\item	Systems are known to be non-linear; linear might be good enough (depends on model's purpose)
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.8\textheight]{\imagedir/least-squares/nonlinear-linear-region.png}
@@ -1243,7 +1256,7 @@
 	\begin{itemize}
 		\item	plot $\hat{y}$ against residuals (y-axis)
 		\item	plot $x$ against residuals
-		\item	qq-plot might show it also
+		\item	q-q plot might show it also
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/nonlinear-detection.png}
@@ -1266,7 +1279,7 @@
 
 	\textbf{Dealing with it}:
 
-	2. Transform the x or y variable; then use linear model
+	2. Transform the $x$ or $y$ variable; then use linear model
 	\begin{itemize}
 		\item	$x_\text{transformed} \leftarrow x^p_\text{original}$
 		\item	$p$: 1 up to 1.5, 1.75, 2.0, \emph{etc}
@@ -1312,7 +1325,7 @@
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/source-code-1.png}
 	\end{center}
 	\begin{itemize}
-		\item	Model's standard error, compare it to y
+		\item	Model's standard error, compare it to $y$
 		\item	Interpret confidence interval
 	\end{itemize}
 
@@ -1326,7 +1339,7 @@
 
 	4. q-q plot of the residuals. Are they normally distributed?
 
-	5. Residuals against the x-values.
+	5. Residuals against the $x$-values.
 	\begin{itemize}
 		\item	Expect to see no particular structure
 	\end{itemize}
@@ -1338,12 +1351,12 @@
 
 	7. Residuals against the fitted-values.
 
-	8. Plot the $\hat{y}$ against actual values of y
+	8. Plot the $\hat{y}$ against actual values of $y$
 \end{frame}
 
 \begin{frame}\frametitle{Multiple linear regression (MLR)}
 
-	\textbf{AIM}: Include more than one x-variable in the model.
+	\textbf{AIM}: Include more than one $x$-variable in the model.
 	\begin{enumerate}
 		\item	introduce some matrix notation
 		\item	redo the optimization problem
