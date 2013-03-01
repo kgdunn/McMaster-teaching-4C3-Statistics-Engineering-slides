@@ -286,7 +286,7 @@
 	\begin{itemize}
 		\item	Calculate the estimates $b_0$ and $b_1$
 		\item	We want: $\mathcal{E}\left\{e\right\} = 0$
-		\item	Then for a new x-observation, $x_i$, we can predict $\hat{y}_i =b_0 + b_1x_{i}$
+		\item	Then for a new $x$-observation, $x_i$, we can predict $\hat{y}_i =b_0 + b_1x_{i}$
 	\end{itemize}
 	\begin{center}
 		\includegraphics[height=0.67\textheight]{\imagedir/least-squares/least-squares-picture.png}
@@ -459,7 +459,7 @@
 		\end{itemize}
 		\item	How could the denominator term for $b_1$ equal zero? And what would that mean?
 		\begin{itemize}
-			\item	As long as there is variation in the x-data that we will obtain a solution
+			\item	As long as there is variation in the $x$-data that we will obtain a solution
 		\end{itemize}
 	\end{enumerate}
 \end{frame}
@@ -1055,29 +1055,41 @@
 		\item	Assume $x$ are fixed and independent of the error
 		\item	All $y_i$ values are independent of each other
 	\end{enumerate}
+	\vspace{12pt}
+	{\color{myGreen}{Fortunately}}: least squares is pretty ``{\color{purple}{robust}}'' to violations in these assumptions.
 \end{frame}
 
 \begin{frame}\frametitle{Analysis}
+	If those above assumptions hold then:
 	\begin{enumerate}
 		\item	$\mathcal{V}\{b_0\} = S_E^2(b_0) = S_E^2 \left(\dfrac{1}{N} + \dfrac{\overline{\mathrm{x}}^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}} \right)$
 		\item	$\mathcal{V}\{b_1\} = S_E^2(b_1) = \dfrac{S_E^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}$
-		\item	$\mathcal{V}\{y_i\} = \mathcal{V}\{e_i\} \approx S_E^2 = \dfrac{\sum{e_i^2}}{n-k}$
+		\item	$\mathcal{V}\{y_i\} = \mathcal{V}\{e_i\} = S_E^2 = \dfrac{\sum{e_i^2}}{n-k}$
 	\end{enumerate}
+	\vspace{12pt}
+	and then these are accurate estimates of the variance.\\
+	We then go on to use those variances to calculate confidence intervals.
 \end{frame}
 
-\begin{frame}\frametitle{Continuing on}
+\begin{frame}\frametitle{An approximate prediction interval for $y$}
 	\begin{itemize}
-		\item	Predict a new y-value: $\hat{y}_i = b_0 + b_1 x_i$
+		\item	True model: $y = \beta_0 + \beta_1 x + \varepsilon \quad \Longrightarrow \quad \hat{y} = \beta_0 + \beta_1 x$
+		\item	Predict a new $y$-value: $\hat{y}_i = b_0 + b_1 x_i$
 		\item	We could assume $\hat{y}_i \pm 2S_E$
 	\end{itemize}
+	\vspace{-6pt}
 	\begin{center}
-		\includegraphics[height=0.80\textheight]{\imagedir/least-squares/show-naive-predictions.png}
+		\includegraphics[height=0.70\textheight]{\imagedir/least-squares/show-naive-predictions.png}
 	\end{center}
+	\vspace{-6pt}
+	Use this when you are in a hurry: {\small you're going to get a good estimate!}
 \end{frame}
 
-\begin{frame}\frametitle{Prediction interval for $y$}
-
-	$$\mathcal{V}\{\hat{y}_i\} = S_E^2 \left(1 + \dfrac{1}{n} + \dfrac{(x_i - \overline{\mathrm{x}})^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}\right)$$
+\begin{frame}\frametitle{More accurate prediction interval for $y$}
+	But, the previous slide ignores that $b_0$ and $b_1$ have error: that gets propagated into $\hat{y}_i$. True prediction error:
+	\begin{exampleblock}{}
+		$$\mathcal{V}\{\hat{y}_i\} = S_E^2 \left(1 + \dfrac{1}{n} + \dfrac{(x_i - \overline{\mathrm{x}})^2}{\sum_j{\left( x_j - \overline{\mathrm{x}} \right)^2}}\right)$$
+	\end{exampleblock}
 	\begin{itemize}
 		\item	Example in the notes
 		\item	General shape: quadratic shape
@@ -1152,7 +1164,7 @@
 		\text{Before}: \qquad & b_1 = -0.173 & \qquad -0.255 \leq \beta_1 \leq -0.0898 \\
 		& S_E = 9789\\ \\
 		\text{After}: \qquad & b_1 = -0.155 & \qquad -0.230 \leq \beta_1 \leq -0.0807 \\
-		&S_E = 8655
+		&S_E = 8655 & {\color{myOrange}{\longleftarrow} \text{it has been reduced}}
 	\end{array}
 	$
 \end{frame}
@@ -1168,7 +1180,7 @@
 		\includegraphics[width=\textwidth]{\imagedir/least-squares/residual-pattern-non-contant-error.png}
 	\end{center}
 	\begin{itemize}
-		\item	Variability in y is non-constant as x or y change.
+		\item	Variability in $y$ is non-constant as $x$ or $y$ change.
 		\item	Increases $S_E$, undermining confidence intervals
 		\item	Not usually too problematic (LS is pretty robust)
 	\end{itemize}
@@ -1178,8 +1190,9 @@
 
 	\textbf{Detecting it}:
 	\begin{itemize}
-		\item	plot $\hat{y}$ against residuals (y-axis)
+		\item	plot $\hat{y}$ {\scriptsize (on the horizontal axis)} against residuals {\scriptsize (on the vertical axis)}
 		\item	plot $x$ against residuals
+		\item	look for fan-shapes, or regions of non-constant variance
 	\end{itemize}
 
 	\textbf{Dealing with it}:
@@ -1203,7 +1216,11 @@
 			\item	CLT is used for confidence intervals of $\beta_0$ and $\beta_1$
 		\end{itemize}
 		\item	Not-independent: \emph{autocorrelated}, e.g. a slow-moving process.
-		\item	Dealing with it: topic is called time-series analysis; many good textbooks, e.g. Box and Jenkins.
+		\item	Dealing with it: topic is called time-series analysis; many good textbooks, e.g. 
+			\begin{itemize}
+				\item	Chatfield: {\scriptsize The Analysis of Time Series} \hfill {\color{myOrange}{$\longleftarrow$}highly recommended}
+				\item	Box and Jenkins: {\scriptsize Time Series Analysis} \hfill {\color{myOrange}{$\longleftarrow$}comprehensive}
+			\end{itemize}
 		\item	We will use a very simple method here
 	\end{itemize}
 \end{frame}
@@ -1269,9 +1286,13 @@
 
 	1. Non-linear least squares
 	\begin{itemize}
-		\item	Too detailed for this course
-		\item	\emph{Example}: $y = \beta_1\left(1-e^{-\beta_2 x} \right)$, let $\beta_1 = [10, 20, 30, 40, 50]$ and $\beta_2 = [0.0, 0.2, 0.4, 0.8]$.
-		\item	Evaluate SSE objective function on a grid
+		\item	Too many details to go into for this course
+		\item	\emph{Example}: $y = \beta_1\left(1-e^{-\beta_2 x} \right)$
+		\begin{itemize}
+			\item	$\beta_1 = [10, 20, 30, 40, 50]$ {\scriptsize (e.g. picked 5 values that span $\beta_1$ range)}
+			\item	$\beta_2 = [0.0, 0.2, 0.4, 0.8]$ {\scriptsize (e.g. and here I picked 4 values for $\beta_2$)}
+		\end{itemize}
+		\item	Evaluate sum of squares of errors (SSE = $\displaystyle \sum{e_i^2}$) objective function at all $4 \times 5 = 20$ combinations of $\beta_1$ and $\beta_2$
 	\end{itemize}
 \end{frame}
 
@@ -1912,7 +1933,7 @@
 
 	\textbf{Example}:
 	\begin{itemize}
-		\item	Need to build a predictive model for product viscosity using 3 x-variables
+		\item	Need to build a predictive model for product viscosity using 3 $x$-variables
 		\item	Observations: one per day, from 2006 and 2007 (730 observations)
 	\end{itemize}
 
