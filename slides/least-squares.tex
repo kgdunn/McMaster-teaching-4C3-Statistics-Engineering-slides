@@ -1192,7 +1192,7 @@
 	\begin{itemize}
 		\item	plot $\hat{y}$ {\scriptsize (on the horizontal axis)} against residuals {\scriptsize (on the vertical axis)}
 		\item	plot $x$ against residuals
-		\item	look for fan-shapes, or regions of non-constant variance
+		\item	look for fan-shapes, and regions of non-constant variance
 	\end{itemize}
 
 	\textbf{Dealing with it}:
@@ -1304,7 +1304,7 @@
 	\begin{itemize}
 		\item	$x_\text{transformed} \leftarrow x^p_\text{original}$
 		\item	$p$: 1 up to 1.5, 1.75, 2.0, \emph{etc}
-		\item	$p$: 1 down to 0.5 ($\sqrt{x}$), 0.25, -0.5, -1.0 ($1/x$), -1.5, -2.0, \emph{etc}
+		\item	$p$: 1 down to 0.5 ($\sqrt{x}$), 0.25, $-0.5$, $-1.0$ ($1/x$), $-1.5$, $-2.0$, \emph{etc}
 		\item	$\log(x)$: approximates $p=0$ ito severity
 	\end{itemize}
 \end{frame}
@@ -1444,8 +1444,8 @@
 	$$
 	\begin{array}{rcl}
 		\\
-		y_i &=& \beta_1 x_1 + \beta_2x_2 + \ldots + \beta_kx_k + \varepsilon_i \\
-		y_i &=& [x_1, x_2, \ldots, x_k]
+		y_i &=& \beta_1 x_{i,1} + \beta_2x_{i,2} + \ldots + \beta_kx_{i,k} + \varepsilon_i \\
+		y_i &=& [x_{i,1},\,\, x_{i,2},\,\, \ldots,\,\, x_{i,k}]
 		\begin{bmatrix}
 			\beta_1 \\
 			\beta_2 \\
@@ -1453,12 +1453,12 @@
 			\beta_k
 		\end{bmatrix}
 		+ \varepsilon_i \\
-		y_i &=& \underbrace{\mathit{x}^T}_{(1 \times k)} \underbrace{\beta}_{(k \times 1)} + \,\varepsilon_i
+		y_i &=& \underbrace{\mathit{x}_i^T}_{(1 \times k)} \underbrace{\beta}_{(k \times 1)} + \,\varepsilon_i
 	\end{array}
 	$$
-	\begin{itemize}
-		\item	where each $x_k$ column (variable) and the $y$ column have been centered
-	\end{itemize}
+	% \begin{itemize}
+	% 	\item	where each $x_k$ column (variable) and the $y$ column have been centered
+	% \end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Notation for MLR}
@@ -1694,8 +1694,10 @@
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{\imagedir/least-squares/Mixing_-_flusso_assiale_e_radiale.jpg}
 	\end{center}
-	\see{\href{http://en.wikipedia.org/wiki/File:Mixing_-_flusso_assiale_e_radiale.jpg}{Wikipedia article}}
+	\vspace{-16pt}
+	\see{From \href{http://en.wikipedia.org/wiki/File:Mixing_-_flusso_assiale_e_radiale.jpg}{Wikipedia}}
 
+	\vspace{12pt}
 	Yield = \emph{f}\,(temperature, impeller type); impeller = [radial, axial]
 	\begin{itemize}
 		\item	Build two models: one for radial, one for axial
