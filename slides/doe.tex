@@ -287,9 +287,13 @@
 \end{frame}
 
 \begin{frame}\frametitle{Analysis: interaction effects}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-interaction.png}
-	\end{center}
+	\begin{tabulary}
+		{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{$T$ [K]} & \textbf{$S$ [g/L]} & \textbf{$y$ [\%]}\\\hline
+		1 & $-$ (390K) & $-$ (0.5 g/L) & 77 \\\hline
+		2 & $+$ (400K) & $-$ (0.5 g/L) & 79 \\\hline
+		3 & $-$ (390K) & $+$ (1.25 g/L) & 81 \\\hline
+		4 & $+$ (400K) & $+$ (1.25 g/L) & 89 \\\hline 
+	\end{tabulary}
 	\begin{itemize}
 		\item	Main effect of $T$:
 		\item	Main effect of $S$:
@@ -297,9 +301,18 @@
 \end{frame}
 
 \begin{frame}\frametitle{Analysis: interaction effects}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-interaction.png}
-	\end{center}
+	% \begin{center}
+	% 		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-interaction.png}
+	% 	\end{center}
+	
+	\begin{tabulary}
+		{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{$T$ [K]} & \textbf{$S$ [g/L]} & \textbf{$y$ [\%]}\\\hline
+		1 & $-$ (390K) & $-$ (0.5 g/L) & 77 \\\hline
+		2 & $+$ (400K) & $-$ (0.5 g/L) & 79 \\\hline
+		3 & $-$ (390K) & $+$ (1.25 g/L) & 81 \\\hline
+		4 & $+$ (400K) & $+$ (1.25 g/L) & 89 \\\hline 
+	\end{tabulary}
+	
 	\begin{itemize}
 		\item	Main effect of $T$: \textbf{5\% per 10K}
 		\begin{itemize}
@@ -395,9 +408,16 @@
 	\begin{itemize}
 		\item	Return back to system with \textbf{little interaction}:
 	\end{itemize}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-baseline.png}
-	\end{center}
+	
+	\begin{tabulary}
+		{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{ $T$ [K] } & \textbf{ $S$ [g/L] } & \textbf{ $y$ [\%] }\\
+		Baseline & \textbf{346 K} & \textbf{1.50} & \\\hline
+		1 & $-$ (338K) & $-$ (1.25 g/L) & 69 \\\hline
+		2 & $+$ (354K) & $-$ (1.25 g/L) & 60 \\\hline
+		3 & $-$ (338K) & $+$ (1.75 g/L) & 64 \\\hline
+		4 & $+$ (354K) & $+$ (1.75 g/L) & 53 \\\hline
+	\end{tabulary}
+	
 	\begin{itemize}
 		\item	Standard form: $\dfrac{\text{variable} - \text{center point}}{\text{range}/2}$
 		\item	$T_{-} = \dfrac{338 - 346}{(354-338)/2} = \dfrac{-8}{8} = -1$
