@@ -81,9 +81,11 @@
 		\item	$d_i=1$ for B
 		\item	and $y_i$ is the response variable.
 	\end{itemize}
-
-	See question in this week's assignment.
-
+	
+	\vspace{12pt}
+	{\color{myOrange}{See question in this week's assignment.}}
+	
+	\vspace{12pt}
 	Two totally different methods; same result! Confirm it for yourself with any other dataset.
 \end{frame}
 
@@ -146,7 +148,7 @@
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	\textbf{Result}: if we don't randomize, we cannot use z-values and confidence intervals - may be misleading.
+		\item	\textbf{Result}: if we don't randomize, we cannot use $z$-values and confidence intervals - may be misleading.
 	\end{itemize}
 \end{frame}
 
@@ -179,12 +181,13 @@
 \begin{frame}\frametitle{Factorial designs: 2 levels for 2 or more factors}
 	\begin{itemize}
 		\item	Change multiple factors \emph{simultaneously}
-		\item	Consider, for now, two levels in each factor. E.g.
+		\item	{\color{purple}{Factor}}: is a variable that we can manipulate/adjust/set
+		\item	Consider, for now, two levels in each \textbf{{\color{myOrange}{factor}}}. For example:
 		\begin{itemize}
-			\item	continuous: low and high pH
-			\item	continuous: short reaction time and long reaction time
-			\item	discrete: catalyst A and B
-			\item	discrete: mixing system A and B
+			\item	continuous: low and high {\color{myOrange}{pH}}
+			\item	continuous: short reaction time and long {\color{myOrange}{reaction time}}
+			\item	discrete: {\color{myOrange}{catalyst}} A and B
+			\item	discrete: {\color{myOrange}{mixing system}} A and B
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -201,11 +204,11 @@
 
 \begin{frame}\frametitle{Factorial designs: by example}
 
-	Bioreactor example: optimize the $y$ = conversion [\%]
+	Bioreactor example: aim is to maximize the $y$ = conversion [\%]
 	\begin{itemize}
 		\item	$T$: Temperature: $T_\text{low}$ = 338K and $T_\text{high}$ = 354K
-		\item	$S$: Substrate concentration: $S_\text{low}$ = 1.25 g/L and $S_\text{high}$ = 1.75 g/L
-		\item	How is range chosen?
+		\item	$S$: Substrate concn: $S_\text{low}$ = 1.25\,g/L and $S_\text{high}$ = 1.75\,g/L
+		\item	How is the range chosen?
 		\begin{itemize}
 			\item	About 25\% of typical operating range if no other prior knowledge
 		\end{itemize}
@@ -213,7 +216,7 @@
 	\begin{itemize}
 		\item	Factors are: $T$ and $S$
 		\item	Number of experiments (runs): $2^k$; $k$ = number of factors
-		\item	Standard order
+		\item	{\color{purple}{Standard order}} vs {\color{purple}{Actual execution (run) order}}
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors.png}
@@ -222,7 +225,7 @@
 
 \begin{frame}\frametitle{Factorial designs: by example}
 	\begin{itemize}
-		\item	Run your experiments randomly, collect results:
+		\item	Run your experiments in random order, collect results:
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-result.png}
@@ -266,14 +269,14 @@
 
 \begin{frame}\frametitle{Analysis: Main effects}
 	\begin{itemize}
-		\item	No computer? Use an interaction plot (section 1 of the course)
+		\item	No computer? Use an interaction plot {\scriptsize (see notes for section 1 of the course)}
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-level-line-plot.png}
 	\end{center}
 	\begin{itemize}
-		\item	Lines are roughly parallel
-		\item	The numbers ``1'', ``2'', ``3'', ``4'' refer to the experiment number
+		\item	Lines are roughly parallel in this case
+		\item	The numbers ``1'', ``2'', ``3'', ``4'' refer to the experiment number in standard order
 	\end{itemize}
 \end{frame}
 

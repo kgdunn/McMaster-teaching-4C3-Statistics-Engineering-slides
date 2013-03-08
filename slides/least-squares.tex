@@ -1620,9 +1620,15 @@
 		\item	Off-diagonal entries: symmetrical, strength of relationship between variables
 		\item	What does $\mathbf{X}^T\mathbf{X}$ look like for uncorrelated variables?
 	\end{itemize}
+	\vspace{24pt}
+	Let's take a look at building the model in R.
+	\begin{itemize}
+		\item	\texttt{model <- lm(y \textasciitilde\,\, x1 + x2)}
+		\item	\texttt{summary(model)}
+	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Example}
+\begin{frame}\frametitle{Example: {\color{myOrange}{600-level students self-study}}}
 	\begin{itemize}
 		\item	Standard error = $\mathcal{V}\{\mathbf{b}\} = \left( \mathbf{X}^T\mathbf{X} \right)^{-1} S_E^2$
 	\end{itemize}
