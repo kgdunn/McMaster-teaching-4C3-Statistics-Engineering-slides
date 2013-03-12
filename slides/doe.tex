@@ -1,16 +1,27 @@
+\begin{frame}\frametitle{Intro}
+	\begin{exampleblock}{}
+		{\Huge When was the last time you ran an experiment ?}
+	\end{exampleblock}
+\end{frame}
+
 \begin{frame}\frametitle{In context}
 	\begin{itemize}
-		\item	Empirical modelling of systems
-		\begin{itemize}
-			\item	Least squares model
-		\end{itemize}
+		\item	The section we've just finished could be considered: ``{\color{myOrange}{Empirical modelling of systems using a least squares model}}''
+		
+		\vspace{12pt}
 		\item	Experiments are important:
 		\begin{itemize}
-			\item	Learn more about our systems
-			\item	Use them to fit the empirical models
-			\item	Main aim: use them to optimize a process for \textbf{higher profit}
+			\item	We learn more about our systems
+			\item	We use the data to fit an empirical model
+			\item	Main aim: use the model to optimize a process for \textbf{higher profit}
 		\end{itemize}
-		\item	Happenstance (as-is) data cannot tell cause-and effect
+		
+		\vspace{12pt}
+		\item	Happenstance (as-is) data 
+		\begin{itemize}
+			\item	cannot tell cause-and effect
+			\item	most often is not in a DOE layout, but might still be valuable to learn from.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -157,13 +168,19 @@
 		\includegraphics[width=0.95\textwidth]{\imagedir/doe/COST-contours.png}
 	\end{center}
 	\begin{itemize}
-		\item	Baseline: $T$=346K, $S$ = 1.5g/L; yield = 63\%.
+		\item	Base case: $T$=346K, $S$ = 1.5g/L; yield = 63\%.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Change one variable at a time (COST)}
 	\begin{itemize}
 		\item	Trapped in a sub-optimal solution
+		\item	In the previous example: we would have considered experiment 7 to be the optimum
+			\begin{itemize}
+				\item	experiment 3 is the optimum wrt ``Temperature''
+				\item	then expt 7 is the optimum wrt ``Substrate''
+				\item	but, we're still away from the true optimum
+			\end{itemize}
 		\item	We have known for 80 years now: COST is \textbf{wrong way} to optimize a system
 		\item	How to do it better?
 	\end{itemize}
@@ -178,12 +195,59 @@
 	\includegraphics[width=0.75\textwidth]{\imagedir/doe/yield-pressure-impurity-correlation.png}
 \end{frame}
 
+\begin{frame}\frametitle{Terminology: {\color{purple}{Factors}}}
+	{\color{purple}{Factor}}: the thing that is being changed.
+	
+	\begin{itemize}
+		\item	growing plants? 
+			\begin{itemize}
+				\item	water used = [50mL \emph{vs} 80 mL]
+			\end{itemize}
+		\item	maximizing sales in a store? 
+			\begin{itemize}
+				\item	height from floor = [3ft \emph{vs} 5ft]
+			\end{itemize}
+		\item	first date or ``date-night''?
+			\begin{itemize}
+				\item	action movie \emph{vs} chick flick
+			\end{itemize}
+		\item	growing plants?
+			\begin{itemize}
+				\item	fertilizer A \emph{vs} fertilizer B
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Terminology: {\color{purple}{Response}}}
+	{\color{purple}{Response}}: the outcome that is being measured
+	\begin{itemize}
+		\item	growing plants? 
+			\begin{itemize}
+				\item	e.g. height of plant after 10 days
+				\item	other outcomes are possible
+			\end{itemize}
+		\item	maximizing sales in a store? 
+			\begin{itemize}
+				\item	total profit
+			\end{itemize}
+	\end{itemize}
+	
+	\vspace{12pt}
+	A response variable:
+	\begin{itemize}
+		\item	is usually (in almost every case) a continuous variable
+		\item	should be reproducibly measurable
+		\item	measure as many outcomes as you can to avoid repeating experiments later
+	\end{itemize}	
+\end{frame}
+
 \begin{frame}\frametitle{Factorial designs: 2 levels for 2 or more factors}
 	\begin{itemize}
 		\item	Change multiple factors \emph{simultaneously}
 		\item	{\color{purple}{Factor}}: is a variable that we can manipulate/adjust/set
 		\item	Consider, for now, two levels in each \textbf{{\color{myOrange}{factor}}}. For example:
 		\begin{itemize}
+			
 			\item	continuous: low and high {\color{myOrange}{pH}}
 			\item	continuous: short reaction time and long {\color{myOrange}{reaction time}}
 			\item	discrete: {\color{myOrange}{catalyst}} A and B
@@ -210,7 +274,7 @@
 		\item	$S$: Substrate concn: $S_\text{low}$ = 1.25\,g/L and $S_\text{high}$ = 1.75\,g/L
 		\item	How is the range chosen?
 		\begin{itemize}
-			\item	About 25\% of typical operating range if no other prior knowledge
+			\item	About 25\% of typical operating range if no other prior knowledge. We will consider other criteria later also.
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
@@ -232,8 +296,10 @@
 	\end{center}
 	Notes:
 	\begin{itemize}
-		\item	we don't need to run an experiment at the baseline (it can be useful though)
-		\item	if we had replicate experiments, use the average of the response variable
+		\item	we don't need to run an experiment at the {\color{purple}{baseline}} (it can be useful though)
+		\item	{\color{purple}{baseline}} at $T=\frac{1}{2}\left(338+354\right)$ and $S = \frac{1}{2}\left(1.25+1.75\right)$, i.e. \\
+		        {\color{purple}{baseline}} at (346K; 1.5g/L) = midpoint of the factorial
+		\item	if we had replicate experiments, then use the average of the response variable
 	\end{itemize}
 \end{frame}
 
@@ -241,8 +307,10 @@
 	\begin{itemize}
 		\item	Visualize results: cube plot
 	\end{itemize}
+	
+	\vspace{12pt}
 	\begin{center}
-		\includegraphics[height=0.6\textheight]{\imagedir/doe/factorial-two-levels-two-variables-no-analysis.png}
+		\includegraphics[height=0.7\textheight]{\imagedir/doe/factorial-two-levels-two-variables-no-analysis.png}
 	\end{center}
 \end{frame}
 
@@ -568,7 +636,7 @@
 			0 & 0 & 0 & 4
 		\end{bmatrix}
 		$
-		\item	$\mathbf{X}$ is orthogonal
+		\item	$\mathbf{X}$ is orthogonal; which implies ....
 		\item	$\mathbf{X}^T\mathbf{y} =
 		\begin{bmatrix}
 			246 \\
