@@ -141,6 +141,7 @@
 		\item	Plot a histogram of this \emph{difference of averages}
 		\item	Probability that the actual experiment could have come from chance?
 	\end{itemize}
+	% Note that running the code for moderate size n's is prohibitive, even on modern computer hardware.
 \end{frame}
 
 \begin{frame}\frametitle{Importance of randomization}
@@ -163,7 +164,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Change one variable at a time (COST)}
+\begin{frame}\frametitle{Change one single variable at a time (COST)}
 	\begin{center}
 		\includegraphics[width=0.95\textwidth]{\imagedir/doe/COST-contours.png}
 	\end{center}
@@ -172,13 +173,13 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Change one variable at a time (COST)}
+\begin{frame}\frametitle{Change one single variable at a time (COST)}
 	\begin{itemize}
 		\item	Trapped in a sub-optimal solution
 		\item	In the previous example: we would have considered experiment 7 to be the optimum
 			\begin{itemize}
 				\item	experiment 3 is the optimum wrt ``Temperature''
-				\item	then expt 7 is the optimum wrt ``Substrate''
+				\item	then experiment 7 is the optimum wrt ``Substrate''
 				\item	but, we're still away from the true optimum
 			\end{itemize}
 		\item	We have known for 80 years now: COST is \textbf{wrong way} to optimize a system
@@ -236,6 +237,7 @@
 	A response variable:
 	\begin{itemize}
 		\item	is usually (in almost every case) a continuous variable
+		\item	should be measured in the same manner for all experiments
 		\item	should be reproducibly measurable
 		\item	measure as many outcomes as you can to avoid repeating experiments later
 	\end{itemize}	
@@ -358,32 +360,38 @@
 \end{frame}
 
 \begin{frame}\frametitle{Analysis: interaction effects}
-	\begin{tabulary}
-		{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{$T$ [K]} & \textbf{$S$ [g/L]} & \textbf{$y$ [\%]}\\\hline
-		1 & $-$ (390K) & $-$ (0.5 g/L) & 77 \\\hline
-		2 & $+$ (400K) & $-$ (0.5 g/L) & 79 \\\hline
-		3 & $-$ (390K) & $+$ (1.25 g/L) & 81 \\\hline
-		4 & $+$ (400K) & $+$ (1.25 g/L) & 89 \\\hline 
-	\end{tabulary}
+	\begin{center}
+		\begin{tabulary}
+			{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{$T$ [K]} & \textbf{$S$ [g/L]} & \textbf{$y$ [\%]}\\\hline
+			1 & $-$ (390K) & $-$ (0.5 g/L) & 77 \\\hline
+			2 & $+$ (400K) & $-$ (0.5 g/L) & 79 \\\hline
+			3 & $-$ (390K) & $+$ (1.25 g/L) & 81 \\\hline
+			4 & $+$ (400K) & $+$ (1.25 g/L) & 89 \\\hline 
+		\end{tabulary}
+	\end{center}
+	%\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-interaction.png}
+	
+	\vspace{12pt}
 	\begin{itemize}
 		\item	Main effect of $T$:
+		\vspace{24pt}
 		\item	Main effect of $S$:
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Analysis: interaction effects}
-	% \begin{center}
-	% 		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors-with-interaction.png}
-	% 	\end{center}
+
+	\begin{center}
+		\begin{tabulary}
+			{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{$T$ [K]} & \textbf{$S$ [g/L]} & \textbf{$y$ [\%]}\\\hline
+			1 & $-$ (390K) & $-$ (0.5 g/L) & 77 \\\hline
+			2 & $+$ (400K) & $-$ (0.5 g/L) & 79 \\\hline
+			3 & $-$ (390K) & $+$ (1.25 g/L) & 81 \\\hline
+			4 & $+$ (400K) & $+$ (1.25 g/L) & 89 \\\hline 
+		\end{tabulary}
+	\end{center}
 	
-	\begin{tabulary}
-		{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{$T$ [K]} & \textbf{$S$ [g/L]} & \textbf{$y$ [\%]}\\\hline
-		1 & $-$ (390K) & $-$ (0.5 g/L) & 77 \\\hline
-		2 & $+$ (400K) & $-$ (0.5 g/L) & 79 \\\hline
-		3 & $-$ (390K) & $+$ (1.25 g/L) & 81 \\\hline
-		4 & $+$ (400K) & $+$ (1.25 g/L) & 89 \\\hline 
-	\end{tabulary}
-	
+	\vspace{12pt}
 	\begin{itemize}
 		\item	Main effect of $T$: \textbf{5\% per 10K}
 		\begin{itemize}
@@ -404,10 +412,11 @@
 	\end{center}
 	\begin{itemize}
 		\item	Lines not parallel
-		\item	Implies there is an interaction
+		\item	Implies there is an {\color{purple}{interaction}}
 		\begin{itemize}
 			\item	In this case, interaction between $T$ and $S$
-			\item	called the $T \times S$ interaction
+			\item	could also be called the $S$ and $T$ interaction: symmetrical
+			\item	called the $T \times S$ interaction (or $S \times T$ interaction)
 			\item	it is a 2-factor interaction (2fi)
 		\end{itemize}
 	\end{itemize}
@@ -419,15 +428,17 @@
 	\begin{itemize}
 		\item	Main effect of $T$:
 		\begin{itemize}
-			\item	$\Delta T_{S+} = -11\%$ per 16K
-			\item	$\Delta T_{S-} = -9\%$ per 16K
+			\item	$T_{S+} = -11\%$ per 16K
+			\item	$T_{S-} = -9\%$ per 16K
 		\end{itemize}
 		\item	Main effect of $S$:
 		\begin{itemize}
-			\item	$\Delta S_{T+} = -7\%$ per 0.5g/L
-			\item	$\Delta S_{T-} = -5\%$ per 0.5g/L
+			\item	$S_{T+} = -7\%$ per 0.5g/L
+			\item	$S_{T-} = -5\%$ per 0.5g/L
 		\end{itemize}
-		\item	Almost no difference between the values within each main effect
+		
+		\vspace{12pt}
+		\item	Almost no difference between the values within each main effect. This is how we tell there is no interaction.
 	\end{itemize}
 \end{frame}
 
@@ -437,15 +448,18 @@
 	\begin{itemize}
 		\item	Main effect of $T$: \textbf{5\% per 10K}
 		\begin{itemize}
-			\item	$\Delta T_{S+} = 8\%$ per 10K
-			\item	$\Delta T_{S-} = 2\%$ per 10K
+			\item	$T_{S+} = 8\%$ per 10K
+			\item	$T_{S-} = 2\%$ per 10K
 		\end{itemize}
 		\item	Main effect of $S$: \textbf{7\% per 0.75g/L}
 		\begin{itemize}
-			\item	$\Delta S_{T+} = 10\%$ per 0.75g/L
-			\item	$\Delta S_{T-} = 4\%$ per 0.75g/L
+			\item	$S_{T+} = 10\%$ per 0.75g/L
+			\item	$S_{T-} = 4\%$ per 0.75g/L
 		\end{itemize}
+		
+		\vspace{12pt}
 		\item	There was an important phenomenon that we did not capture with the main effects alone
+		\item	The main effects are quite different for each estimate.
 		\item	We need ``something else'' to capture this interaction
 	\end{itemize}
 \end{frame}
@@ -472,16 +486,43 @@
 		\item	Similarly, both terms reduce $y$ when they are of opposite sign.
 	\end{itemize}
 
-	\textbf{Interaction terms dominate on a ridge}, and are more important as we approach an optimum.
+	\textbf{Interaction terms dominate on a ridge}, and are important as we approach an optimum.
+\end{frame}
+
+\begin{frame}\frametitle{Visualizing the interaction: we are on a ridge}
+	\begin{center}
+		\includegraphics[height=0.65\textheight]{\imagedir/doe/factorial-two-level-with-interactions.png}
+	\end{center}
+	\vspace{-24pt}
+	\begin{columns}[t]
+		\column{0.50\textwidth}
+			\begin{itemize}
+				\item	$T$ interacts with $S$:
+				\begin{itemize}
+					\item	$\Delta y$ due to $T$ at $S_{+}$: +8
+					\item	$\Delta y$ due to $T$ at $S_{-}$: +2
+				\end{itemize}
+			\end{itemize}
+		\column{0.50\textwidth}
+			\begin{itemize}
+				\item	$S$ interacts with $T$:
+				\begin{itemize}
+					\item	$\Delta y$ due to $S$ at $T_{+}$: +10
+					\item	$\Delta y$ due to $S$ at $T_{-}$: +4
+				\end{itemize}
+			\end{itemize}
+	\end{columns}
+	\vspace{6pt}
+	$T$ and $S$ increase $y$ when they both operate together (they are synergistic, in this example. In other cases they may cancel out).
 \end{frame}
 
 \begin{frame}\frametitle{Analysis by least squares modelling}
 	\begin{itemize}
-		\item	Return back to system with \textbf{little interaction}:
+		\item	Return back to system with {\color{myOrange}{\textbf{little interaction}}}:
 	\end{itemize}
 	
 	\begin{tabulary}
-		{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{ $T$ [K] } & \textbf{ $S$ [g/L] } & \textbf{ $y$ [\%] }\\
+		{\linewidth}{|l|c|c||c|} \hline \textbf{ Experiment } & \textbf{ $T$ [K] } & \textbf{ $S$ [g/L] } & \textbf{ $y$ [\%] }\\ \hline
 		Baseline & \textbf{346 K} & \textbf{1.50} & \\\hline
 		1 & $-$ (338K) & $-$ (1.25 g/L) & 69 \\\hline
 		2 & $+$ (354K) & $-$ (1.25 g/L) & 60 \\\hline
@@ -490,7 +531,7 @@
 	\end{tabulary}
 	
 	\begin{itemize}
-		\item	Standard form: $\dfrac{\text{variable} - \text{center point}}{\text{range}/2}$
+		\item	{\color{purple}{Standard form}}: $\dfrac{\text{variable} - \text{center point}}{\text{range}/2}$
 		\item	$T_{-} = \dfrac{338 - 346}{(354-338)/2} = \dfrac{-8}{8} = -1$
 		\item	$S_{-} = \dfrac{1.25 - 1.50}{(1.75 - 1.25)/2} = \dfrac{-0.25}{0.25} = -1$
 		\item	$T_{+} = +1$
@@ -501,7 +542,12 @@
 \begin{frame}\frametitle{Analysis by least squares modelling}
 	\begin{block}{Least squares model}
 		\begin{center}
-			$y = \beta_0 + \beta_Tx_T + \beta_S x_S + \beta_{TS} x_Tx_S + \varepsilon$
+			$
+			\begin{array}{rcl}
+				y &= \beta_0 + \beta_Tx_T + \beta_S x_S + \beta_{TS} x_Tx_S + \varepsilon \\
+				y &= b_0 + b_Tx_T + b_S x_S + b_{TS} x_Tx_S + e
+			\end{array}
+			$
 		\end{center}
 	\end{block}
 	\begin{itemize}
@@ -512,43 +558,57 @@
 \end{frame}
 
 \begin{frame}\frametitle{Analysis by least squares modelling}
-
-	$
-	\begin{array}{rcccl}
-		\begin{bmatrix}
-			y_1\\
-			y_2\\
-			y_3 \\
-			y_4
-		\end{bmatrix}
-		&=&
-		\begin{bmatrix}
-			1 & T_{-} & S_{-} & T_{-}S_{-}\\
-			1 & T_{+} & S_{-} & T_{+}S_{-}\\
-			1 & T_{-} & S_{+} & T_{-}S_{+}\\
-			1 & T_{+} & S_{+} & T_{+}S_{+}\\
-		\end{bmatrix}
-		\begin{bmatrix}
-			b_0 \\
-			b_T \\
-			b_S \\
-			b_{TS}
-		\end{bmatrix}
-		&+&
-		\begin{bmatrix}
-			e_1\\
-			e_2\\
-			e_3 \\
-			e_4
-		\end{bmatrix}
-		\\
-		\\
-		\mathbf{y} &=& \mathbf{X} \mathbf{b} &+& \,\,\,\,\,\mathbf{e} \\
-	\end{array}
-	$
+	\textbf{Aim}: Write out the LS model equation for the 4 data points; stack them as rows in a matrix.
+	
+	\vspace{12pt}
+	For example, for the first experiment from the standard order table, which was run at low $T$ and low $S$:
+	
+	\begin{center}
+		$
+		\begin{array}{rcccccccccc}
+			y_1 &= &b_0 &+ &b_Tx_T    &+ &b_S x_S   &+ &b_{TS} x_Tx_S     &+ &e_1\\
+			y_1 &= &b_0 &+ &b_T T_{-} &+ &b_S S_{-} &+ &b_{TS} T_{-}S_{-} &+ &e_1\\
+		\end{array}
+		$
+	
+		\vspace{12pt}
+		$
+		\begin{array}{rcccl}
+			\begin{bmatrix}
+				y_1\\
+				y_2\\
+				y_3 \\
+				y_4
+			\end{bmatrix}
+			&=&
+			\begin{bmatrix}
+				1 & T_{-} & S_{-} & T_{-}S_{-}\\
+				1 & T_{+} & S_{-} & T_{+}S_{-}\\
+				1 & T_{-} & S_{+} & T_{-}S_{+}\\
+				1 & T_{+} & S_{+} & T_{+}S_{+}\\
+			\end{bmatrix}
+			\begin{bmatrix}
+				b_0 \\
+				b_T \\
+				b_S \\
+				b_{TS}
+			\end{bmatrix}
+			&+&
+			\begin{bmatrix}
+				e_1\\
+				e_2\\
+				e_3 \\
+				e_4
+			\end{bmatrix}
+			\\
+			\\
+			\mathbf{y} &=& \mathbf{X} \mathbf{b} &+& \,\,\,\,\,\mathbf{e} \\
+		\end{array}
+		$
+	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Analysis by least squares modelling}
+\begin{frame}\frametitle{Visualizing the least squares modelling}
 	\begin{itemize}
 		\item	Least squares model for DOE in 2 factors
 	\end{itemize}
@@ -623,11 +683,19 @@
 		\mathbf{y} &=& \mathbf{X} \mathbf{b} &+& \,\,\,\,\,\mathbf{e} \\
 	\end{array}
 	$
+	
+	\vspace{12pt}
+	$\mathbf{X}$ matrix is trivial to set up:
+	\begin{itemize}
+		\item	Intercept column: is always a column of 1's
+		\item	$b_T$ column: comes directly from standard table
+		\item	$b_S$ column: comes directly from standard table
+		\item	$b_{TS}$ column: is the product of the $b_T$ and $b_S$ columns
+	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Analysis by least squares modelling}
 	\begin{itemize}
-		\item	$\mathbf{X}^T\mathbf{X} =$
 		\item	$\mathbf{X}^T\mathbf{X} =
 		\begin{bmatrix}
 			4 & 0 & 0 & 0\\
@@ -636,7 +704,6 @@
 			0 & 0 & 0 & 4
 		\end{bmatrix}
 		$
-		\item	$\mathbf{X}$ is orthogonal; which implies ....
 		\item	$\mathbf{X}^T\mathbf{y} =
 		\begin{bmatrix}
 			246 \\
@@ -677,20 +744,21 @@
 	\end{array}
 	$
 	\begin{itemize}
-		\item	$y = \beta_0 + \beta_Tx_T + \beta_S x_S + \beta_{TS} x_Tx_S + \varepsilon$
+		\item	$y = b_0 + b_Tx_T + b_S x_S + b_{TS} x_Tx_S + e$
 		\item	$y = 61.5 - 5 x_T - 3 x_S + - 0.5 x_Tx_S + e$
 	\end{itemize}
 
 	You can easily calculate these effects by hand:
 	\begin{itemize}
-		\item	(+ 69 + 60 + 64 + 53)/4 = $61.5$
-		\item	(- 69 + 60 - 64 + 53)/4 = $-5$
-		\item	(- 69 - 60 + 64 + 53)/4 = $-3$
-		\item	(+ 69 - 60 - 64 + 53)/4 = $-0.5$
+		\item	$(+ 69 + 60 + 64 + 53)/4 = 61.5$
+		\item	$(- 69 + 60 - 64 + 53)/4 = -5$
+		\item	$(- 69 - 60 + 64 + 53)/4 = -3$
+		\item	$(+ 69 - 60 - 64 + 53)/4 = -0.5$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Analysis by least squares modelling}
+	\vspace{6pt}
 	\begin{enumerate}
 		\item	$\mathbf{X}^T\mathbf{X}$: zeros on off-diagonals
 		\begin{itemize}
@@ -700,22 +768,24 @@
 		\end{itemize}
 		\item	Interpret $b_T = -5$?
 		\begin{itemize}
-			\item	$x_T$ is change in \emph{normalized temperature} by 1 unit
-			\item	Changing $x_T$ from 0 to 1 implies $T_\text{actual}$ changes from 346K to 354K
-			\item	-5\% decrease in conversion for every 8K increase in temperature
+			\item	$x_T$ is the change in \emph{normalized temperature} by 1 unit
+			\item	Changing $x_T$ from 0 to 1 implies $T_\text{actual}$ changes from 346K to 354K (baseline to high level)
+			\item	$-5$\% decrease in conversion for every 8K increase in temperature
 		\end{itemize}
-		\item	Interpret $b_S = -3$?
+		\item	Now interpret $b_S = -3$?
 		\item	How to use this model for a prediction?
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Analysis by least squares modelling}
 	\begin{itemize}
-		\item	Compare methods: $y = 61.5 - 5 x_T - 3 x_S + - 0.5 x_Tx_S + e$
+		\item	{\footnotesize The least squares model was} $y = 61.5 - 5 x_T - 3 x_S - 0.5 x_Tx_S + e$
+		\item	The geometric construction was:
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-with-analysis.png}
 	\end{center}
+	{\color{myOrange}{\emph{The interpretations agree!}}}
 \end{frame}
 
 \begin{frame}\frametitle{Analysis by least squares modelling}
@@ -724,13 +794,15 @@
 	\begin{itemize}
 		\item	Base line: $T$ = 395K and $S$ = (1.25+0.5)/2 = 0.875 g/L
 		\item	Calculate deviation variables
+		\item	Build the matrices and calculate $\mathbf{b} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$
 		\item	Verify at home: $y = 81.5 + 2.5 x_T + 3.5 x_S + 1.5 x_T x_S$
 	\end{itemize}
-
-	Large interaction is confirmed in least squares model
+	
+	\vspace{12pt}
+	Large interaction is confirmed in least squares model due to high value of the 1.5 coefficient on the $x_T x_S$ term
 \end{frame}
 
-\begin{frame}\frametitle{Analysis by least squares modelling}
+\begin{frame}\frametitle{Analysis by least squares modelling: visualizing it}
 	\begin{columns}
 		\column{5cm} 
 			\textbf{Without interaction term:}
@@ -760,6 +832,9 @@
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-3-factor-factorial-example.png}
 	\end{center}
+	\begin{itemize}
+		\item	Categorial variables: A=$-1$ and B=$+1$ (or \emph{vice versa})
+	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{DOE of a 3-factor experiment}
@@ -805,7 +880,7 @@
 	\end{block}
 	\begin{itemize}
 		\item	COST: cannot estimate interactions
-		\item	Rescue this COST design by adding $y_4$
+		\item	We could rescue this COST design by adding $y_4$
 	\end{itemize}
 \end{frame}
 
@@ -821,45 +896,45 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Review: a better approach - full factorial}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-contour-plot.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{Review: DOE of a 3-factor experiment}
-
-	Plastics molding factory; waste treatment.
-	\begin{itemize}
-		\item	Factor 1: $C$: chemical compound added (A or B)
-		\item	Factor 2: $T$: treatment temperature (72 F or 100F)
-		\item	Factor 3: $S$: stirring speed (200 rpm or 400 rpm)
-		\item	$y$ = amount of pollutant discharged [lb]
-	\end{itemize}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-3-factor-factorial-example.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{Review: DOE of a 3-factor experiment}
-	\begin{enumerate}
-		\item	Geometric illustration of the data
-		\item	Calculate main effects, \textbf{C}, \textbf{T} and \textbf{S}
-		\item	Calculate the 3 two-factor interactions:
-		\begin{itemize}
-			\item	\textbf{CT}, \textbf{CS} and \textbf{TS}
-		\end{itemize}
-		\item	and the single 3 factor interaction
-		\begin{itemize}
-			\item	\textbf{CTS}
-		\end{itemize}
-		\item	Main effects and interactions using least squares (by-hand)
-		\item	Computer verification:
-		\begin{itemize}
-			\item	$y = 11.25 + 6.25x_C + 0.75x_T -7.25x_S + 0.25 x_C x_T -6.75 x_C x_S -0.25 x_T x_S - 0.25 x_C x_T x_S$
-		\end{itemize}
-	\end{enumerate}
-\end{frame}
+% \begin{frame}\frametitle{Review: a better approach - full factorial}
+% 	\begin{center}
+% 		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-contour-plot.png}
+% 	\end{center}
+% \end{frame}
+% 
+% \begin{frame}\frametitle{Review: DOE of a 3-factor experiment}
+% 
+% 	Plastics molding factory; waste treatment.
+% 	\begin{itemize}
+% 		\item	Factor 1: $C$: chemical compound added (A or B)
+% 		\item	Factor 2: $T$: treatment temperature (72 F or 100F)
+% 		\item	Factor 3: $S$: stirring speed (200 rpm or 400 rpm)
+% 		\item	$y$ = amount of pollutant discharged [lb]
+% 	\end{itemize}
+% 	\begin{center}
+% 		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-3-factor-factorial-example.png}
+% 	\end{center}
+% \end{frame}
+% 
+% \begin{frame}\frametitle{Review: DOE of a 3-factor experiment}
+% 	\begin{enumerate}
+% 		\item	Geometric illustration of the data
+% 		\item	Calculate main effects, \textbf{C}, \textbf{T} and \textbf{S}
+% 		\item	Calculate the 3 two-factor interactions:
+% 		\begin{itemize}
+% 			\item	\textbf{CT}, \textbf{CS} and \textbf{TS}
+% 		\end{itemize}
+% 		\item	and the single 3 factor interaction
+% 		\begin{itemize}
+% 			\item	\textbf{CTS}
+% 		\end{itemize}
+% 		\item	Main effects and interactions using least squares (by-hand)
+% 		\item	Computer verification:
+% 		\begin{itemize}
+% 			\item	$y = 11.25 + 6.25x_C + 0.75x_T -7.25x_S + 0.25 x_C x_T -6.75 x_C x_S -0.25 x_T x_S - 0.25 x_C x_T x_S$
+% 		\end{itemize}
+% 	\end{enumerate}
+% \end{frame}
 
 \begin{frame}\frametitle{Significance of effects}
 	\begin{itemize}
@@ -872,7 +947,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	How to assess if an effect is significant? Consider 2 approaches.
+	How to judge if an effect is significant? Consider 2 approaches.
 \end{frame}
 
 \begin{frame}\frametitle{Significant? : Pareto-plot}
@@ -1014,12 +1089,12 @@
 
 \begin{frame}\frametitle{Side note: Box, Hunter and Hunter}
 	\begin{itemize}
-		\item	Interpretation of effect: \emph{change in response over \textbf{half the range} of the factor}
+		\item	Interpretation of effects \textbf{in this course}: \emph{change in response over \textbf{half the range} of the factor}
 		\begin{itemize}
 			\item	center = 400K
 			\item	lower level = 375K
 			\item	upper level = 425K
-			\item	Effect of ``-5'' would be interpreted as ...
+			\item	Effect of ``$-5$'' would be interpreted as ...
 			\item	Advantage: matches computer software
 			\item	Disadvantage: interpreting binary variables (e.g. catalyst A or B)
 		\end{itemize}
@@ -1027,7 +1102,7 @@
 	\begin{itemize}
 		\item	Box, Hunter and Hunter: \emph{change in response over \textbf{full range} of the factor}
 		\begin{itemize}
-			\item	Divide BHH values by 2
+			\item	Divide BHH effect values by 2
 			\item	Divide BHH standard errors by 2 also
 			\item	Advantage: binary variables
 		\end{itemize}
@@ -1055,13 +1130,13 @@
 		\end{center}
 	\end{block}
 	\begin{columns}
-		\column{4cm}
+		\column{3cm}
 			\begin{itemize}
 				\item	$b_T = y_2 - y_1$
 				\item	$\mathcal{V}(b_T) = \sigma_y^2 + \sigma_y^2$
 				\item	$\mathcal{V}(b_T) = 2\sigma_y^2$
 			\end{itemize}
-		\column{6cm}
+		\column{7cm}
 			\begin{itemize}
 				\item	$b_T = 0.5(y_2 - y_1) + 0.5(y_4 - y_3)$
 				\item	$\mathcal{V}(b_T) = 0.25(\sigma_y^2 + \sigma_y^2) + 0.25(\sigma_y^2 + \sigma_y^2)$
