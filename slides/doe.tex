@@ -393,12 +393,12 @@
 	
 	\vspace{12pt}
 	\begin{itemize}
-		\item	Main effect of $T$: \textbf{5\% per 10K}
+		\item	Main effect of $T$: 5\% per 10K; but reported as \textbf{2.5\% per 5K}
 		\begin{itemize}
 			\item	$\Delta T_{S+} = 8\%$ per 10K
 			\item	$\Delta T_{S-} = 2\%$ per 10K
 		\end{itemize}
-		\item	Main effect of $S$: \textbf{7\% per 0.75g/L}
+		\item	Main effect of $S$: 7\% per 0.75g/L; {\small report }\textbf{3.5\% per 0.375g/L}
 		\begin{itemize}
 			\item	$\Delta S_{T+} = 10\%$ per 0.75g/L
 			\item	$\Delta S_{T-} = 4\%$ per 0.75g/L
@@ -412,6 +412,7 @@
 	\end{center}
 	\begin{itemize}
 		\item	Lines not parallel
+		\item	Indicates magnitude of effect is not the same at both levels of the variable being held constant
 		\item	Implies there is an {\color{purple}{interaction}}
 		\begin{itemize}
 			\item	In this case, interaction between $T$ and $S$
@@ -1017,7 +1018,7 @@
 	\begin{itemize}
 		\item	Once we have $S_E \rightarrow S_E(b_i) \rightarrow$ confidence interval for $b_i$
 		\item	$S_E(b_i) = \sqrt{\mathcal{V}\left(b_i\right)} = \sqrt{\dfrac{S_E^2}{\sum{x_i^2}}}$
-		\item	$x_i$ is either -1 or +1 from the $i^\text{th}$ column
+		\item	$x_i$ is either $-1$ or $+1$ from the $i^\text{th}$ column
 		\item	Confidence intervals are independent \emph{!}
 		\item	Then determine if a main effect or interaction is significant
 	\end{itemize}
@@ -1129,8 +1130,9 @@
 			\includegraphics[width=0.65\textwidth]{\imagedir/doe/comparison-of-variances.png}
 		\end{center}
 	\end{block}
+	Consider the $b_T$ main effect as an example:
 	\begin{columns}
-		\column{3cm}
+		\column{3.5cm}
 			\begin{itemize}
 				\item	$b_T = y_2 - y_1$
 				\item	$\mathcal{V}(b_T) = \sigma_y^2 + \sigma_y^2$
@@ -1144,7 +1146,7 @@
 			\end{itemize}
 	\end{columns}
 	\begin{itemize}
-		\item	COST also cannot estimate interactions!
+		\item	COST cannot estimate interactions!
 	\end{itemize}
 \end{frame}
 
