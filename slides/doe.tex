@@ -769,8 +769,9 @@
 		\end{itemize}
 		\item	Interpret $b_T = -5$?
 		\begin{itemize}
-			\item	$x_T$ is the change in \emph{normalized temperature} by 1 unit
+			\item	$x_T$ is the change in {\color{purple}{\emph{normalized temperature}}} by 1 unit
 			\item	Changing $x_T$ from 0 to 1 implies $T_\text{actual}$ changes from 346K to 354K (baseline to high level)
+			\item	Changing $x_T$ from -1 to 0 implies $T_\text{actual}$ changes from 338K to 346K (low level to baseline)
 			\item	$-5$\% decrease in conversion for every 8K increase in temperature
 		\end{itemize}
 		\item	Now interpret $b_S = -3$?
@@ -791,7 +792,7 @@
 
 \begin{frame}\frametitle{Analysis by least squares modelling}
 
-	Return to system with \textbf{high interaction}
+	Return to system with {\color{myOrange}{\textbf{high interaction}}}
 	\begin{itemize}
 		\item	Base line: $T$ = 395K and $S$ = (1.25+0.5)/2 = 0.875 g/L
 		\item	Calculate deviation variables
@@ -804,9 +805,11 @@
 \end{frame}
 
 \begin{frame}\frametitle{Analysis by least squares modelling: visualizing it}
+	{\color{myOrange}{High interaction system:}}
+	\vspace{12pt}
 	\begin{columns}
 		\column{5cm} 
-			\textbf{Without interaction term:}
+			\textbf{Ignoring interaction term:}
 			\begin{center}
 				\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-level-surface-without-interaction-slides-cropped.png}
 			\end{center}
@@ -851,7 +854,8 @@
 		\item	Main effects and interactions using least squares (by-hand)
 		\item	Computer verification:
 		\begin{itemize}
-			\item	$y = 11.25 + 6.25x_C + 0.75x_T -7.25x_S + 0.25 x_{CT} -6.75 x_C x_S -0.25 x_T x_S - 0.25 x_Cx_Tx_S$
+			\item	$y = 11.25 + 6.25x_C + 0.75x_T -7.25x_S + 0.25 x_{CT}$\\
+					$-6.75 x_C x_S -0.25 x_T x_S - 0.25 x_Cx_Tx_S$
 		\end{itemize}
 	\end{enumerate}
 \end{frame}
@@ -874,7 +878,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Summary of factorial designs}
-	\begin{block}{Much more efficient than one-at-a-time (COST)}
+	\begin{block}{Much more efficient than change one-single factor at-a-time (COST)}
 		\begin{center}
 			\includegraphics[width=0.65\textwidth]{\imagedir/doe/comparison-of-variances.png}
 		\end{center}
@@ -986,7 +990,7 @@
 	Two ways to get DoF:
 	\begin{enumerate}
 		\item	Replicate experiments
-		\item	Drop out a factor from a full factorial
+		\item	Drop out a factor from a full factorial; refit the model without it.
 	\end{enumerate}
 	\begin{itemize}
 		\item	Complete replication is expensive - redo everything from scratch:
@@ -1292,7 +1296,7 @@
 
 	Would require $2^5 = 32$ runs; 10 days per cell culture = 1 year
 	\begin{itemize}
-		\item	Can we run a subset of full factorial?
+		\item	Can we run a subset of the full factorial?
 		\item	E.g. we are not interested in ``$\text{dissolved oxygen} \times \text{agitation rate} \times \text{pH}$'' interaction
 		\item	Only interested in main effects, maybe the 2 factor interactions
 		\begin{itemize}
