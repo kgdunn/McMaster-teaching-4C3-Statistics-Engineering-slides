@@ -102,9 +102,9 @@
 
 \begin{frame}\frametitle{Importance of randomization}
 
-	Why randomize experiments?
+	Why {\color{purple}{randomize}} experiments?
 	\begin{itemize}
-		\item	Prevent \textbf{\emph{unmeasured}}, and \textbf{\emph{uncontrollable}} disturbances affecting $y$
+		\item	Prevent {\color{purple}{\textbf{\emph{unmeasured}}}}, and {\color{purple}{\textbf{\emph{uncontrollable}}}} disturbances affecting $y$
 		\item	Guarantees independence in the data
 		\item	We can then use $t$-distributions (which require independence)
 	\end{itemize}
@@ -1119,6 +1119,10 @@
 \begin{frame}\frametitle{Refitting model}
 	\begin{itemize}
 		\item	Delete non-significant effects (parameters)
+		\item	Interesting note: factors retained in the model keep same slope coefficient values
+		\begin{itemize}
+			\item	Why? We are only deleting \emph{columns} from the $\mathbf{X}$ matrix
+		\end{itemize}
 		\item	Now least squares model has residuals and DOF
 		\item	$S_E \neq 0$
 		\item	Use all previous tools from least squares to check model
@@ -1171,17 +1175,18 @@
 
 \begin{frame}\frametitle{Disturbances}
 	\begin{itemize}
-		\item	Ideal case: all disturbances are \textbf{controlled}: have no effect on $y$
+		\item	Ideally: all disturbances are \textbf{controlled}; have no effect on $y$
 	\end{itemize}
 
 	We always have \textbf{unknown, unmeasurable and uncontrollable} disturbances
 	\begin{itemize}
 		\item	That's why we randomize experiments
-		\item	Example: a side-reaction due to impurity in reactant affects $y$
+		\item	\emph{Example}: a side-reaction due to impurity in reactant affects $y$
 		\begin{itemize}
 			\item	Impurity is not uniform in the reactant
 		\end{itemize}
-		\item	Catalyst deactivation, equipment fouling
+		\item	\emph{Example}: catalyst deactivation, equipment fouling
+		\item	\emph{Example}: you get better as experiments progress (e.g. weightlifting)
 	\end{itemize}
 
 	\textbf{Known, or controllable, or measurable} disturbances:
@@ -1193,6 +1198,18 @@
 			\item	but we design experiment to minimize its effect.
 		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Classifying variables in an experiment}
+	Write down \textbf{all possible} variables that can affect $y$. Those variables are either:
+	\begin{itemize}
+		\item	{\color{purple}{Measurable}} = able to quantify that variable, or not.
+		\item	{\color{purple}{Controllable}} = able to adjust that variable, or not.
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/disturbance-classification.png}
+	\end{center}
+	Always record your covariates: add them into L/S model later
 \end{frame}
 
 \begin{frame}\frametitle{Blocking and confounding}
@@ -1216,6 +1233,8 @@
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/table-blocking-3-factor-factorial-no-y.png}
 	\end{center}
+	\vspace{12pt}
+	{\color{myOrange}{Important note}}: you must still run your experiments in random order. Do \textbf{NOT} run all the batch 1, then all the batch 2 experiments.
 \end{frame}
 
 \begin{frame}\frametitle{Blocking and confounding}
@@ -1229,16 +1248,18 @@
 		\includegraphics[width=\textwidth]{\imagedir/doe/table-blocking-3-factor-factorial-with-y.png}
 	\end{center}
 	\begin{itemize}
-		\item	Batch 1: $\widetilde{y}_i \leftarrow y_{i,\text{actual}} + g$, $i = 1, 4, 6, 7$
-		\item	Batch 2: $\mathring{y}_i \leftarrow y_{i,\text{actual}} + h$, $i = 2, 3, 5, 8$
+		\item	Batch 1: $\widetilde{y}_i \leftarrow y_{i,\text{actual}} + g, \qquad\qquad i = 1, 4, 6, 7$
+		\item	Batch 2: $\mathring{y}_i \leftarrow y_{i,\text{actual}} + h, \qquad\qquad i = 2, 3, 5, 8$
 	\end{itemize}
-
+	e.g, $h$ = incremental, but \emph{unmeasurable} effect on $y$ due to batch 2 
+	
+	\vspace{12pt}
 	Disturbance bias cancels out. E.g. for $b_A$: $ \widehat{\beta}_A = -\widetilde{y}_1 + \mathring{y}_2 - \mathring{y}_3 + \widetilde{y}_4 - \mathring{y}_5 + \widetilde{y}_6 - \widetilde{y}_7 + \mathring{y}_8 $
 \end{frame}
 
 \begin{frame}\frametitle{Blocking and confounding}
 	\begin{itemize}
-		\item	As if we have a new variable, \textbf{D}, in the model
+		\item	It is as we have a new variable, \textbf{D}, in the model
 	\end{itemize}
 
 	$
@@ -1250,7 +1271,7 @@
 		\\
 		\mathrm{y} &=&
 		\begin{bmatrix}
-			1 & -1 & -1 & -1 & +1 & +1 & +1 & -1 & -1\\
+			1\,\, & -1\,\, & -1\,\, & -1\,\, & +1\,\, & +1\,\, & +1\,\, & -1\,\, & -1\\
 			1 & +1 & -1 & -1 & -1 & -1 & +1 & +1 & +1\\
 			1 & -1 & +1 & -1 & -1 & +1 & -1 & +1 & +1\\
 			1 & +1 & +1 & -1 & +1 & -1 & -1 & -1 & -1\\
@@ -1276,6 +1297,7 @@
 	\begin{itemize}
 		\item	$\widehat{\beta}_{ABC} \rightarrow \underbrace{\text{ABC interaction}}_{\text{expected to be small}} + \text{raw material effect, }\mathbf{D}$
 		\item	Block effect generated from the other 3 effects: \textbf{D = ABC}
+		\item	Note the identical column signs for $b_{ABC}$ and $b_{D}$
 	\end{itemize}
 \end{frame}
 
@@ -1284,7 +1306,7 @@
 	Real systems: many factors affect the $y$
 
 	Cell-culture example: many factors to investigate
-	\begin{itemize}
+	\begin{enumerate}
 		\item	the temperature profile
 		\begin{itemize}
 			\item	$T_{-}$: fast initial ramp then constant
@@ -1294,7 +1316,7 @@
 		\item	agitation rate
 		\item	pH
 		\item	substrate type (A or B)
-	\end{itemize}
+	\end{enumerate}
 
 	Would require $2^5 = 32$ runs; 10 days per cell culture = 1 year
 	\begin{itemize}
@@ -1310,15 +1332,15 @@
 
 \begin{frame}\frametitle{Half fractions}
 	\begin{itemize}
-		\item	Called $\tfrac{1}{2}2^k = 2^{k-1}$ factorials
-		\item	This is the full factorial for a $2^3 = 8$ system:
+		\item	Called $\tfrac{1}{2}2^k = 2^{k-1}$ factorials. Let's look at a simple example:
+		\item	A full factorial for a $2^3 = 8$ system:
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/half-fraction-justification.png}
 	\end{center}
 	\begin{itemize}
-		\item	We only want to do half the number of experiments: $\tfrac{1}{2}2^3 = 2^{3-1}$
-		\item	Which runs do we pick?
+		\item	Want to do half the number of experiments: $\tfrac{1}{2}2^3 = 2^{3-1}$
+		\item	Which 4 of the 8 original experiments (runs) do we pick?
 	\end{itemize}
 \end{frame}
 
@@ -1328,18 +1350,19 @@
 	\end{center}
 	\begin{itemize}
 		\item	Run either the open or closed set of 4 runs
-		\item	In this example: run the closed corners
+		\item	In the example that follows: run the closed corners
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Half fractions}
 	\begin{itemize}
-		\item	Why did I choose those 4 runs? Why not some other combination?
+		\item	Why did we choose those 4 runs? Why not some other combination?
 	\end{itemize}
+	\vspace{-6pt}
 	\begin{center}
 		\includegraphics[width=0.58\textwidth]{\imagedir/doe/projectivity-of-a-half-fraction-in-3-factors.png}
 	\end{center}
-	If we choose our runs in a smart way, then fractional factorials will collapse to full factorials if effects are insignificant.
+	If we choose our runs in a smart way, then fractional factorials will collapse to full factorials if an effect is insignificant.
 	\begin{itemize}
 		\item	e.g. if the \textbf{C} effect is insignificant, we have a full factorial in \textbf{A} and \textbf{B}
 		\item	Called \emph{projectivity}
@@ -1348,7 +1371,7 @@
 
 \begin{frame}\frametitle{Factorial design tradeoffs}
 
-	Tradeoff table:
+	Tradeoff table {\color{myOrange}{(\emph{bring a copy to the exam!})}}
 	\begin{center}
 		\includegraphics[height=0.85\textheight]{\imagedir/doe/DOE-trade-off-table.png}
 	\end{center}
@@ -1358,14 +1381,15 @@
 	\begin{itemize}
 		\item	The table tells us to generate \textbf{C=AB}
 		\begin{itemize}
-			\item	``\emph{Generate factor} \textbf{C} \emph{from the product of} \textbf{A} and \textbf{B}"
+			\item	Run factor \textbf{A} and \textbf{B} in the usual factorial way ($2^2 = 4$), then
+			\item	``\emph{{\color{purple}{generate}} factor} \textbf{C} \emph{from the product of} \textbf{A} and \textbf{B}"
 		\end{itemize}
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/half-fraction-table.png}
 	\end{center}
 	\begin{itemize}
-		\item	What is confounded (i.e. which columns are the same)?
+		\item	What is {\color{purple}{confounded}} (i.e. which columns are the same)?
 		\begin{itemize}
 			\item	\textbf{A=BC}
 			\item	\textbf{B=AC}
@@ -1374,7 +1398,7 @@
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	Notice: we have picked the 4 runs where the \textbf{ABC} interaction is the same sign: all $+$
+		\item	Notice: we have picked the 4 runs where the \textbf{ABC} interaction is the same sign: all $+$ (i.e. the \textbf{ABC} factor is not varying in these experiments)
 	\end{itemize}
 \end{frame}
 
@@ -1486,12 +1510,15 @@
 	\end{itemize}
 
 	We say:
-	\begin{enumerate}
+	\begin{itemize}
 		\item	\textbf{A} is an \emph{alias} for \textbf{BC}
 		\item	\textbf{B} is an \emph{alias} for \textbf{AC}
 		\item	\textbf{C} is an \emph{alias} for \textbf{AB}
 		\item	Design was generated by \textbf{C = AB}
-	\end{enumerate}
+	\end{itemize}
+	
+	\vspace{12pt}
+	{\color{myOrange}{Homework}}: write out the half fraction design for a 4 factor experiment using the trade-off table (\emph{hint}: see next slide).
 \end{frame}
 
 \begin{frame}\frametitle{Generators/Defining relationship}
