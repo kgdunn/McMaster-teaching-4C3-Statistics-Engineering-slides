@@ -958,10 +958,10 @@
 \begin{frame}\frametitle{Significant? : Pareto-plot}
 	\begin{itemize}
 		\item	$2^4$ factorial: 15 parameters + intercept
-		\item	Bar plot: see code on course website
+		\item	Bar plot: see code on course website. Bar colour indicates sign: blue are negative and orange are positive coefficients.
 	\end{itemize}
 	\begin{center}
-		\includegraphics[width=0.6\textwidth]{\imagedir/doe/pareto-plot-full-fraction.png}
+		\includegraphics[width=0.65\textwidth]{\imagedir/doe/pareto-plot-full-fraction.png}
 	\end{center}
 \end{frame}
 
@@ -990,7 +990,7 @@
 	Two ways to get DoF:
 	\begin{enumerate}
 		\item	Replicate experiments
-		\item	Drop out a factor from a full factorial; refit the model without it.
+		\item	Drop out a factor from a full factorial; refit the model without the dropped factor(s).
 	\end{enumerate}
 	\begin{itemize}
 		\item	Complete replication is expensive - redo everything from scratch:
@@ -1026,6 +1026,8 @@
 		\item	Confidence intervals are independent \emph{!}
 		\item	Then determine if a main effect or interaction is significant
 	\end{itemize}
+	\vspace{12pt}
+	{\color{myOrange}{So how do we get degrees of freedom to calculate \( S_E \)?}}
 \end{frame}
 
 \begin{frame}\frametitle{Significant? : Replicate runs}
