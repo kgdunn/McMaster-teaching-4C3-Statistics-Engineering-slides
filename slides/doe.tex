@@ -117,9 +117,10 @@
 		\end{itemize}
 		\item	Null hypothesis: there is no difference
 		\begin{itemize}
-			\item	In that case, these numbers could have come from either A or B
+			\item	Implies these numbers could have come from either A or B
 		\end{itemize}
 	\end{itemize}
+	{\color{myOrange}{Details of the analysis are given in the course textbook}}
 \end{frame}
 
 \begin{frame}\frametitle{Importance of randomization}
@@ -162,6 +163,19 @@
 	\begin{itemize}
 		\item	\textbf{Result}: if we don't randomize, we cannot use $z$-values and confidence intervals - may be misleading.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Importance of randomization}
+	The previous derivation, used random combinations and made no statistical assumptions.
+	
+	\vspace{12pt}
+	{\color{myOrange}{\emph{Why don't we use this approach instead?}}}
+	
+	\vspace{12pt}
+	The original data set (still a small data set by today's standards) was $n_A = 20$ and $n_B = 23$. There are $\dfrac{(n_A + n_B)!}{n_A! n_B!} \approx 960,567\,\text{million}$ combinations, and it would take about 3 years on a regular computer to do the computation\\ (never mind storing the results.)
+	
+	\vspace{12pt}
+	So as long as we randomize our experiments, we can be guaranteed to use the regular $t$-test.
 \end{frame}
 
 \begin{frame}\frametitle{Change one single variable at a time (COST)}
@@ -1103,7 +1117,7 @@
 			\item	upper level = 425K
 			\item	Effect of ``$-5$'' would be interpreted as ...
 			\item	Advantage: matches computer software
-			\item	Disadvantage: interpreting binary variables (e.g. catalyst A or B)
+			\item	Disadvantage: interpreting binary factors (e.g. catalyst A or B)
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
@@ -1209,7 +1223,7 @@
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/disturbance-classification.png}
 	\end{center}
-	Always record your covariates: add them into L/S model later
+	Always record your covariates: add them into L/S model later.
 \end{frame}
 
 \begin{frame}\frametitle{Blocking and confounding}
@@ -1318,7 +1332,7 @@
 		\item	substrate type (A or B)
 	\end{enumerate}
 
-	Would require $2^5 = 32$ runs; 10 days per cell culture = 1 year
+	Would require $2^5 = 32$ runs; 10 days per cell culture $\approx$ 1 year
 	\begin{itemize}
 		\item	Can we run a subset of the full factorial?
 		\item	E.g. we are not interested in ``$\text{dissolved oxygen} \times \text{agitation rate} \times \text{pH}$'' interaction
@@ -1404,10 +1418,9 @@
 
 \begin{frame}\frametitle{Half fractions}
 
-	What do we loose by only doing 4 runs, instead of the full 8?
-
-	Use the least squares model:
-
+	\begin{exampleblock}{}
+		{\color{myOrange}{Use the least squares model to determine what we lose by only doing 4 runs, instead of the full 8.}}
+	\end{exampleblock}
 	$
 	\begin{array}{rcl}
 		\mathrm{y} &=& \mathrm{X} \mathrm{b} + \mathrm{e}\\
@@ -1419,10 +1432,10 @@
 		\end{bmatrix}
 		&=&
 		\begin{bmatrix}
-			1 & -1 & -1 & +1 & +1 & -1 & -1 & +1\\
-			1 & +1 & -1 & -1 & -1 & -1 & +1 & +1\\
-			1 & -1 & +1 & -1 & -1 & +1 & -1 & +1\\
-			1 & +1 & +1 & +1 & +1 & +1 & +1 & +1
+			+1 & -1 & -1 & +1 & +1 & -1 & -1 & +1\\
+			+1 & +1 & -1 & -1 & -1 & -1 & +1 & +1\\
+			+1 & -1 & +1 & -1 & -1 & +1 & -1 & +1\\
+			+1 & +1 & +1 & +1 & +1 & +1 & +1 & +1
 		\end{bmatrix}
 		\begin{bmatrix}
 			b_0 \\
@@ -1449,13 +1462,15 @@
 		\item	$\mathrm{X}$ not orthogonal
 		\item	More unknowns than equations
 	\end{itemize}
-	Model cannot be solved
+	Model cannot be calculated.
 \end{frame}
 
 \begin{frame}\frametitle{Half fractions}
 	\begin{itemize}
 		\item	Collect perfectly correlated columns together:
 	\end{itemize}
+	
+	\vspace{12pt}
 	$
 	\begin{array}{rcl}
 		\mathrm{y} &=& \mathrm{X} \mathrm{b} + \mathrm{e}\\
@@ -1467,10 +1482,10 @@
 		\end{bmatrix}
 		&=&
 		\begin{bmatrix}
-			1 & -1 & -1 & +1 \\
-			1 & +1 & -1 & -1 \\
-			1 & -1 & +1 & -1 \\
-			1 & +1 & +1 & +1
+			+1 & -1 & -1 & +1 \\
+			+1 & +1 & -1 & -1 \\
+			+1 & -1 & +1 & -1 \\
+			+1 & +1 & +1 & +1
 		\end{bmatrix}
 		\begin{bmatrix}
 			b_0 + b_{ABC} \\
@@ -1487,8 +1502,10 @@
 		\end{bmatrix}
 	\end{array}
 	$
+	
+	\vspace{12pt}
 	\begin{itemize}
-		\item	Confounding pattern:
+		\item	{\color{purple}{Confounding pattern}}:
 		\begin{itemize}
 			\item	$\widehat{\beta}_A \rightarrow$ \textbf{A + BC}
 			\item	$\widehat{\beta}_B \rightarrow$ \textbf{B + AC}
@@ -1496,6 +1513,9 @@
 			\item	$\widehat{\beta}_0 \rightarrow$ \textbf{I + ABC}
 		\end{itemize}
 	\end{itemize}
+	
+	\vspace{12pt}
+	What does the confounding pattern tell us?
 \end{frame}
 
 \begin{frame}\frametitle{Half fractions}
@@ -1533,22 +1553,25 @@
 	Example: $2^4$ with \textbf{A}, \textbf{B}, \textbf{C} and \textbf{D}
 	\begin{itemize}
 		\item	Generator: \textbf{D = ABC} (from the table)
+		\item	\emph{There's only 1 generator}, according to the table
 	\end{itemize}
 
-	Some ``aliasing notation'' rules:
+	\vspace{12pt}
+	Some ``aliasing notation'' rules applied to this example:
 	\begin{itemize}
 		\item	\textbf{A} $\times$ \textbf{A = I}
 		\item	\textbf{B} $\times$ \textbf{B = I}
 		\item	\textbf{I} $\times$ \textbf{I = I}
-		\item	\textbf{ABC} $\times$ \textbf{D} = \textbf{ABC} $\times$ \textbf{ABC = AABBCC = I I I}, so we get \textbf{I = ABCD}
+		\item	\textbf{ABC} $\times$ \textbf{D} = \textbf{ABC} $\times$ \textbf{ABC = AABBCC = I I I}, so we get\\ \textbf{I = ABCD}
+		\item	We call this the defining relationship for this experiment.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Generators/Defining relationship}
 	\begin{itemize}
+		\item	{\color{purple}{Defining relationship}} = product of all generator combinations, solved for \textbf{I} on the left side
+		\item	There is only generator in this example, \textbf{D = ABC}
 		\item	\textbf{I = ABCD} is called the \emph{defining relation} for the design
-		\item	Defining relationship = product of all generator combinations, solved for \textbf{I} on the left side
-		\item	There is only generator in this example (\textbf{D = ABC})
 	\end{itemize}
 
 	Aliasing: multiply effect with defining relationship. E.g.:
@@ -1563,11 +1586,12 @@
 		\item	\textbf{AC} two-factor interaction:
 		\item	\textbf{BCD} three-factor interaction:
 	\end{itemize}
+	{\color{myOrange}{Homework}}: repeat this now on the half-fraction generated by\\ \textbf{C = AB}.
 \end{frame}
 
 \begin{frame}\frametitle{Saturated designs}
 
-	Saturated design: fewest number of runs as possible
+	{\color{purple}{Saturated design}}: fewest number of runs as possible for a given number of factors
 	\begin{itemize}
 		\item	$2^{k-1}$ factorial: half-fraction
 		\item	$2^{k-2}$ factorial: quarter-fraction
@@ -1576,9 +1600,13 @@
 	\begin{itemize}
 		\item	Excellent for screening many factors
 		\begin{itemize}
-			\item	Fewest number of experiments for a given number of factors
+			\item	Fewest number of experiments, for a given number of factors
 		\end{itemize}
 	\end{itemize}
+	\begin{exampleblock}{}
+		With little/no prior knowledge about a process, always start your first experiments with a saturated, screening design.
+	\end{exampleblock}
+	{\color{myOrange}{This gives you the greatest value for your experimental budget.}}
 \end{frame}
 
 \begin{frame}\frametitle{Saturated designs}
@@ -1816,11 +1844,11 @@
 		\item	Three-factor interactions = 3
 	\end{itemize}
 
-	\textbf{Resolution V}
+	\textbf{Resolution V designs}
 	\begin{itemize}
-		\item	5 - 1 = 4: main effects confounded with 4-factor interactions (fi)
-		\item	5 - 2 = 3: 2-fi confounded with 3-fi
-		\item	5 - 3 = 2: 3-fi confounded with 2-fi
+		\item	$5 - 1 = 4$: main effects confounded with 4-factor interactions (fi)
+		\item	$5 - 2 = 3$: 2-fi confounded with 3-fi
+		\item	$5 - 3 = 2$: 3-fi confounded with 2-fi
 	\end{itemize}
 
 	Aim for a higher resolution, but accept a lower resolution initially, in order to test more factors
@@ -1828,19 +1856,19 @@
 
 \begin{frame}\frametitle{Design resolution}
 
-	\textbf{Resolution III designs }
+	\textbf{Resolution III designs}
 	\begin{itemize}
 		\item	Excellent for initial screening
 		\item	Confounding?
 	\end{itemize}
 
-	\textbf{Resolution IV designs }
+	\textbf{Resolution IV designs}
 	\begin{itemize}
 		\item	Learning about and understanding a system (characterization)
 		\item	Confounding?
 	\end{itemize}
 
-	\textbf{Resolution V designs}
+	\textbf{Resolution V designs and full factorial designs}
 	\begin{itemize}
 		\item	For optimizing a process, understanding complex effects,
 		\item	To develop high-accuracy models
