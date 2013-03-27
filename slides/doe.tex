@@ -1665,8 +1665,9 @@
 
 	General rule for $2^{k-p}$ factorials:
 	\begin{itemize}
-		\item	produced by $p$ generator
+		\item	produced by $p$ generators
 		\item	defining relationship has $2^p$ words
+		\item	first word in the defining relationship is always \textbf{I}
 	\end{itemize}
 
 	Defining relationship: all combinations of the generators.
@@ -1702,7 +1703,7 @@
 
 	We usually only report the main effects and 2fi confounding:
 	\begin{itemize}
-		\item	$\widehat{\beta}_0$ = ABCDEFG
+		\item	$\widehat{\beta}_0 \rightarrow b_0 + \text{3fi and higher order interactions}$
 		\item	$\widehat{\beta}_{\mathbf{A}} \rightarrow$ A + BD + CE + FG
 		\item	$\widehat{\beta}_{\mathbf{B}} \rightarrow$ B + AD + CF + EG
 		\item	$\widehat{\beta}_{\mathbf{C}} \rightarrow$ C + AE + BF + DG
@@ -1717,18 +1718,20 @@
 
 	5. Choose different confounding if this is not suitable. More simply: just reassign the letters to different factors.
 
+	\vspace{12pt}
 	6. Collect $y$ values from experiment
 	\begin{itemize}
-		\item	X-matrix: as shown in the table
-		\item	Calculate: $\mathrm{b} = \left(\mathrm{X}^T\mathrm{X}\right)^{-1}\mathrm{X}\mathrm{y}$
-		\item	$\mathrm{b} = [b_0, b_\mathbf{A}, b_\mathbf{B}, b_\mathbf{C}, b_\mathbf{D}, b_\mathbf{E}, b_\mathbf{F}, b_\mathbf{G}]$
-		\item	$\mathrm{X}^T\mathrm{X}$ matrix is diagonal
+		\item	$\mathbf{X}$-matrix: as shown in the table
+		\item	Calculate: $\mathbf{b} = \left(\mathbf{X}^T\mathbf{X}\right)^{-1}\mathbf{X}\mathbf{y}$
+		\item	$\mathbf{b} = [b_0, b_\mathbf{A}, b_\mathbf{B}, b_\mathbf{C}, b_\mathbf{D}, b_\mathbf{E}, b_\mathbf{F}, b_\mathbf{G}]$
+		\item	These are not the pure main effects: these are confounded as shown on the previous slide
+		\item	$\mathbf{X}^T\mathbf{X}$ matrix is diagonal
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Saturated design example}
 
-	7. Which main effects are important? Use Pareto-plot of effect.
+	7. Which effects are important? Use Pareto-plot of effects.
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{\imagedir/doe/pareto-plot.png}
 	\end{center}
@@ -1837,7 +1840,7 @@
 
 \begin{frame}\frametitle{Design resolution}
 
-	Resolution: \emph{shows how clearly effects are separated}
+	{\color{purple}{Resolution}}: \emph{shows how clearly effects are separated}
 	\begin{itemize}
 		\item	Let main effects = 1
 		\item	Two-factor interactions = 2
@@ -1846,31 +1849,34 @@
 
 	\textbf{Resolution V designs}
 	\begin{itemize}
-		\item	$5 - 1 = 4$: main effects confounded with 4-factor interactions (fi)
+		\item	$5 - 1 = 4$: main effects confounded with 4-factor interactions
 		\item	$5 - 2 = 3$: 2-fi confounded with 3-fi
 		\item	$5 - 3 = 2$: 3-fi confounded with 2-fi
 	\end{itemize}
 
-	Aim for a higher resolution, but accept a lower resolution initially, in order to test more factors
+	\vspace{12pt}
+	\begin{exampleblock}{}
+		Aim for a higher resolution, but accept a lower resolution initially, in order to test more factors
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}\frametitle{Design resolution}
 
 	\textbf{Resolution III designs}
 	\begin{itemize}
-		\item	Excellent for initial screening
-		\item	Confounding?
+		\item	Used for: Excellent for initial screening
+		\item	Type of confounding?
 	\end{itemize}
 
 	\textbf{Resolution IV designs}
 	\begin{itemize}
-		\item	Learning about and understanding a system (characterization)
-		\item	Confounding?
+		\item	Used for: Learning about and understanding a system (characterization)
+		\item	Type of confounding?
 	\end{itemize}
 
 	\textbf{Resolution V designs and full factorial designs}
 	\begin{itemize}
-		\item	For optimizing a process, understanding complex effects,
+		\item	Used for: Optimizing a process, understanding complex effects
 		\item	To develop high-accuracy models
 	\end{itemize}
 \end{frame}
@@ -1903,29 +1909,36 @@
 		\item	Create $\mathbf{X}$ and $\mathbf{y}$ matrices from the table
 		\item	Solve for $\mathbf{b}$
 		\item	Plot Pareto plot of main effects (they are highly confounded)
+		\item	Usual assumption: high order interactions are small
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Saturated design example}
-	\begin{columns}
-		\column{4cm} 
+	
+	\begin{columns}[T]
+		\column{0.40\textwidth}
 			\begin{center}
-				\includegraphics[width=1.3\textwidth]{\imagedir/doe/pareto-plot.png} 
+				\includegraphics[width=1.2\textwidth]{\imagedir/doe/pareto-plot.png} 
 			\end{center}
-		\column{6cm} 
+		\column{0.60\textwidth}
 			\begin{itemize}
-				\item	\textbf{A}, \textbf{C} and \textbf{G} 
+				\item	\textbf{A}, \textbf{C} and \textbf{G} are significant
 				\item	\textbf{E}: fairly small 
 				\begin{itemize}
-					\item	$\widehat{\beta}_{\mathbf{E}} \rightarrow \textbf{E + AC} + BG + DF$ 
+					\item	$\widehat{\beta}_{\mathbf{E}} \rightarrow \textbf{E + AC + BG + DF}$ 
 					\item	could be due to main effect \textbf{E} 
-					\item	or due to \textbf{AC} interaction 
+					\item	or due to \textbf{AC}, and/or \textbf{BG} and/or \textbf{DF} interactions
 				\end{itemize}
-				\item	Factors \textbf{B}, \textbf{D} and \textbf{F} are not important.
+				\item	Factors \textbf{B}, \textbf{D} and \textbf{F} are not important
+				\begin{itemize}
+					\item	If we remove them, we are left with 4 factors, in 8 runs
+					\item	This automatically becomes a resolution IV design
+					\item	The coefficients for other terms \emph{will not change} (Why?)
+				\end{itemize}
 			\end{itemize}
 	\end{columns}
 	\vspace{12pt}
-	Next experiments: focus on \textbf{A}, \textbf{C}, \textbf{G} and their interactions.
+	Next experiments: focus on \textbf{A}, \textbf{C}, \textbf{G} and their interactions. Maybe keep \textbf{E}, but it is small enough that it is likely negligible.
 \end{frame}
 
 \begin{frame}\frametitle{Saturated designs: note}
@@ -1944,13 +1957,19 @@
 
 \begin{frame}\frametitle{Foldover: de-aliasing}
 	\begin{itemize}
-		\item	Experiments are not a one-shot operation; always run sequential expts
-		\item	Fractional factorial:
+		\item	Experiments are not a one-shot operation; always run sequential experiments
+		\item	How should we work with fractional factorials?
 		\begin{itemize}
 			\item	highly confounded; but say one factor \textbf{C} is important
-			\item	switch the sign of \textbf{C}: from \textbf{C} to \textbf{-C}
-			\item	repeat the fractional experiments
-			\item	it unconfounds \textbf{C}: main effect and all its 2-fi
+			\item	switch the sign of \textbf{C}: from \textbf{C} to $\mathbf{-C}$
+			\item	Also switch the signs of the terms that depend on it:
+			\begin{itemize}
+				\item	\emph{e.g.} if \textbf{D = ABC},
+				\item	\emph{then}: $\mathbf{D} = \mathbf{AB}(\mathbf{-C}) = \mathbf{-ABC}$
+			\end{itemize}
+			\item	repeat the fractional set of experiments
+			\item	combine the results of both fractions: the $\mathbf{X}$ and $\mathbf{y}$ will have double the number of rows
+			\item	it unconfounds \textbf{C}: this main effect will be estimated on its own, and have no confounding associated with it
 		\end{itemize}
 	\end{itemize}
 
@@ -1961,9 +1980,11 @@
 	\begin{itemize}
 		\item	Run another fraction, but switch all the signs in the design table
 		\begin{itemize}
-			\item	i.e. let \textbf{A = -A}, \textbf{B = -B}, \emph{etc}
+			\item	i.e. let $\mathbf{A} = \mathbf{-A}$, let $\mathbf{B} = \mathbf{-B}$, \emph{etc}
+			\item	Also switch the signs of the terms that are generated from it (see previous slide)
 			\item	Run another fractional factorial
-			\item	All 2-fi will be removed from the main effects
+			\item	Combine both sets of experiments
+			\item	All 2-fi will be removed from the main effects; will still be confounded with higher order interactions
 		\end{itemize}
 	\end{itemize}
 \end{frame}
