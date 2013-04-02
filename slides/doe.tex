@@ -1801,9 +1801,12 @@
 		\item	Can use different choices for generators
 		\item	Pick a choice, then just shuffle assignment of letters to actual factors:
 		\begin{itemize}
-			\item	\textbf{A} confounded with \textbf{BCD}
-			\item	\textbf{B} confounded with \textbf{CA}
-			\item	\textbf{C} \emph{etc}
+			\item	\textbf{A} confounded with \textbf{BCD}: OK
+			\item	\textbf{B} confounded with \textbf{CA}: if not OK ...
+			\begin{itemize}
+				\item	reassign whatever factor \textbf{B} was to another letter
+				\item	re-check your confounding, until you are satisfied
+			\end{itemize}
 		\end{itemize}
 	\end{enumerate}
 
@@ -1998,10 +2001,10 @@
 	{\color{purple}{Projectivity}} = $P$ = resolution - 1 = highest number of factors which can form a full factorial, that are embedded in your fractionated set of experiments.
 	
 	\vspace{12pt}
-	What is projectivity for a set $2^{6-2}$ runs, and what does it imply?
+	What is projectivity for set of $2^{6-2}$ runs, and what does it imply?
 \end{frame}
 
-\begin{frame}\frametitle{Example}
+\begin{frame}\frametitle{Example (previous exam/test)}
 
 	You are developing a new product, but struggling to get product stability (measured in days), to the required level. Aim for stability above 50 days. Four factors considered:
 	\begin{itemize}
@@ -2044,40 +2047,80 @@
 
 \begin{frame}\frametitle{Response surface methods}
 
-	\textbf{Objective}: achieve the best response using sequential experimentation.
+	Objective for the {\color{purple}{response surface method (RSM)}}: achieve the best response using sequential experimentation.
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{\imagedir/doe/COST-contours.png}
 	\end{center}
 	Wasn't the COST approach also sequential experimentation?
+	
+	\vspace{6pt}
+	\textbf{Different to COST}: We are going to change multiple variables at a time!
+\end{frame}
 
-	\textbf{Different to COST}: We are changing multiple variables at a time!
+\begin{frame}\frametitle{George E. P. Box: he pioneered RSM}
+	{\scriptsize G. E. P. Box and K. B. Wilson (1951): ``\href{http://www.jstor.org/stable/2983966}{On the Experimental Attainment of Optimum Conditions}'', \emph{Journal of the Royal Statististical Society}. \textbf{B 13}, 1 - 45.}
+	\vspace{-12pt}
+	\begin{columns}[t]
+		\column{0.60\textwidth}
+			\begin{center}
+				\includegraphics[width=0.9\textwidth]{\imagedir/statistics/Box-JMP-Discovery-Summit-2009.jpg}
+			\end{center}
+			
+			\vspace{-8pt}
+			\see{\href{http://blogs.sas.com/content/jmp/2013/03/29/george-box-a-remembrance/}{Photo credit: JMP/SAS}}
+			
+			\begin{itemize}
+				\item	{\small October 1919 to 28 March 2013}
+				\item	He was the PhD supervisor of my prior boss
+				\item	``... \emph{essentially, all models are wrong, but some are useful}\,''
+			\end{itemize}
+		\column{0.50\textwidth}
+			\begin{center}
+				\includegraphics[width=0.85\textwidth]{\imagedir/statistics/flickr-Box-Hunter-Hunter-cover-3056749047_1c1f633fcb_o.jpg}
+			\end{center}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{Single-variable case}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/steepest-ascent-univariately-corrected.png}
 	\end{center}
-	\begin{itemize}
-		\item	Can get to optimum faster if use quadratic (or spline) approximations
-	\end{itemize}
+	{\small We could have got to optimum faster if we had used quadratic (or spline) approximations.}
 \end{frame}
 
 \begin{frame}\frametitle{Single-variable case}
 
-	This is the COST approach:
+	This coincides with the COST approach:
 	\begin{itemize}
-		\item	exploratory steps of $\gamma_i$ towards an optimum
+		\item	take exploratory steps of $\gamma_i$ towards an optimum
 		\item	refit the model once we plateau
 		\item	repeat
 	\end{itemize}
+	
+	\vspace{24pt}
+	We are going to do exactly the same, but with \emph{multiple variables}. \textbf{Key points}: 
+	\begin{enumerate}
+		\item	use the model to optimize with
+		\item	stop once you detect the ``model'' is inadequate
+		\item	the rebuild/refit it
+	\end{enumerate}
 \end{frame}
 
-\begin{frame}\frametitle{Analogy}
+\begin{frame}\frametitle{Analogy for finding the optimum}
+	\begin{center}
+		\includegraphics[height=0.80\textheight]{\imagedir/doe/pictograms-nps-accessibility-low-vision-access.png} %3626157564_ba129e810a_b.jpg}
+	\end{center}
+	Each ``tap'' is very expensive. Limited number of taps available.
+\end{frame}
+
+\begin{frame}\frametitle{Motivation: an example from reactor design}
 	\begin{itemize}
-		\item	Analogy for finding the optimum:
+		\item	Reactor inlet temperature, $T$, and pressure, $P$ can be adjusted
+		\item	Leads to different responses, $y$ = yield, for different combinations
+		\item	What if we did not have a reliable ``first-principles'' model?
 	\end{itemize}
 	\begin{center}
-		\includegraphics[height=0.85\textheight]{\imagedir/doe/pictograms-nps-accessibility-low-vision-access.png} %3626157564_ba129e810a_b.jpg}
+		\includegraphics[width=.9\textwidth]{\imagedir/examples/reactor-design-example/response-surface.png}
 	\end{center}
 \end{frame}
 
@@ -2089,11 +2132,11 @@
 			\end{center}
 		\column{4cm}
 			\begin{itemize}
-				\item	Baseline:
+				\item	Current baseline:
 				\begin{itemize}
-					\item	$T$=325K
-					\item	$S$ = 0.75g/L
-					\item	profit = \$407.
+					\item	$T = 325\,\text{K}$
+					\item	$S = 0.75\,\text{g.L}^{-1}$
+					\item	profit = \$407 per day
 				\end{itemize}
 				\item	Example worked out on the board
 			\end{itemize}
@@ -2102,11 +2145,24 @@
 
 \begin{frame}\frametitle{2-variable example}
 	\begin{columns}
-		\column{6cm}
+		\column{0.60\textwidth}
 			\begin{center}
 				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-exploration.png}
 			\end{center}
-		\column{4cm}
+		\column{0.50\textwidth}
+			\vspace{12pt}
+			\emph{Questions}:
+			\begin{itemize}
+				\item	how ``wide'' should the initial factorial be?
+				\item	should it be fractional or full?
+				\item	how do you deal with more than 2 variables?
+				\item	how do you deal with integer variables?
+				\item	how large should steps be?
+			\end{itemize}
+			\vspace{6pt}
+			\hrule
+			\vspace{12pt}
+			Both expt 6 and 7 were wasteful.
 	\end{columns}
 \end{frame}
 
@@ -2253,8 +2309,7 @@
 	Page 579 of the Hill and Hunter review article - reference in the notes.
 \end{frame}
 
-
-\begin{frame}\frametitle{Evolutionary operation}
+\begin{frame}\frametitle{Evolutionary operation (EVOP)}
 	\begin{itemize}
 		\item	Similar concept to RSM
 		\item	Processes are not constant, the optimum is shifting
