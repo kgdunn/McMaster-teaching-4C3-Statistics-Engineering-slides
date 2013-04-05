@@ -2116,11 +2116,11 @@
 \begin{frame}\frametitle{Motivation: an example from reactor design}
 	\begin{itemize}
 		\item	Reactor inlet temperature, $T$, and pressure, $P$ can be adjusted
-		\item	Leads to different responses, $y$ = yield, for different combinations
+		\item	Leads to different responses, $y$ = methanol yield, for different combinations of $T$ and $P$
 		\item	What if we did not have a reliable ``first-principles'' model?
 	\end{itemize}
 	\begin{center}
-		\includegraphics[width=.9\textwidth]{\imagedir/examples/reactor-design-example/response-surface.png}
+		\includegraphics[width=.85\textwidth]{\imagedir/examples/reactor-design-example/response-surface.png}
 	\end{center}
 \end{frame}
 
@@ -2154,7 +2154,7 @@
 			\emph{Questions}:
 			\begin{itemize}
 				\item	how ``wide'' should the initial factorial be?
-				\item	should it be fractional or full?
+				\item	should it be a fractional or full factorial?
 				\item	how do you deal with more than 2 variables?
 				\item	how do you deal with integer variables?
 				\item	how large should steps be?
@@ -2168,11 +2168,11 @@
 
 \begin{frame}\frametitle{2-variable example}
 	\begin{columns}
-		\column{6cm}
+		\column{0.60\textwidth}
 			\begin{center}
 				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-extra-factorial.png}
 			\end{center}
-	 	\column{4cm}
+	 	\column{0.4\textwidth}
 	\end{columns}
 \end{frame}
 
@@ -2247,11 +2247,18 @@
 
 \begin{frame}\frametitle{2-variable example}
 	\begin{columns}
-		\column{6cm}
+		\column{0.60\textwidth}
 			\begin{center}
 				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-CCD-contours.png} 
 			\end{center}
-		\column{4cm}
+		\column{0.45\textwidth}
+			\begin{itemize}
+				\item	The next experiment is based on the contour plot output, i.e.
+				\item	$T^{(17)} \approx 343\,\text{K}$
+				\item	$S^{(17)} \approx 1.60\,\text{g.L}^{-1}$
+				\item	$\hat{y}^{(17)} = \$736$
+				\item	${y}^{(17)}_\text{actual} = \$738$
+			\end{itemize}
 	\end{columns}
 \end{frame}
 
@@ -2259,27 +2266,27 @@
 
 	1. Start at baseline; run full or fractional factorial
 	\begin{itemize}
-		\item	$ \hat{y} = b_0 + b_1x_1 + b_2 x_2 + \ldots + b_{12}x_1x_2 + b_{13} x_1 x_3 + \ldots$
+		\item	$ \hat{y} = b_0 + b_\text{A}x_\text{A} + b_\text{B} x_\text{B} + \ldots + b_\text{AB}x_\text{A}x_\text{B} + b_\text{AC} x_\text{A} x_\text{C} + \ldots$
 	\end{itemize}
 	2. Main effects usually greater than 2-factor interaction
 
 	3. Estimate path of steepest ascent (or descent):
 	\begin{itemize}
-		\item	$\dfrac{\partial \hat{y}}{\partial x_1} = b_1 \qquad\qquad \dfrac{\partial \hat{y}}{\partial x_2} = b_2 \qquad \ldots$
-		\item	Move $b_1$ units in $x_1$ \textbf{and} move $b_2$ units in $x_2$, \emph{etc}
+		\item	$\dfrac{\partial \hat{y}}{\partial x_\text{A}} = b_\text{A} \qquad\qquad \dfrac{\partial \hat{y}}{\partial x_\text{B}} = b_\text{B} \qquad\qquad \dfrac{\partial \hat{y}}{\partial x_\text{C}} = b_\text{C} \qquad \ldots$
+		\item	Move $b_\text{A}$ units in $x_\text{A}$; \textbf{and} $b_\text{B}$ units in $x_\text{B}$; \textbf{and} $b_\text{C}$ units in $x_\text{C}$ \emph{etc}
 		\item	These are coded units. Unscale to real-world units!
-		\item	Implement a portion of the full step, e.g. only 25\%
+		\item	Implement a portion of the full step, e.g. only 25\% if full step is too large.
 	\end{itemize}
 
 	4. Make several sequential steps until response levels off
 	\begin{itemize}
-		\item	$y_6 = 600; y_7 = 800, y_8 = 825, y_9 = 750$
+		\item	e.g. $y_6 = 600; y_7 = 800, {\color{myOrange}{y_8 = 825}}, y_9 = 750$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{General approach for RSM}
 
-	5. Use a new factorial
+	5. Use a new factorial at the previous peak (e.g. at the ${\color{myOrange}{y_8}}$ point)
 	\begin{itemize}
 		\item	perhaps add other factors
 		\item	flip signs on binary factors
@@ -2287,12 +2294,13 @@
 	6. Repeat steps 1 to 5, until linear model is insufficient
 	\begin{itemize}
 		\item	Curvature shows up
-		\item	2-factor interactions dominate main effects
+		\item	2-factor interactions similar or greater than main effects
+		\item	Contour plots will show this clearly
 	\end{itemize}
-	7. Estimate a quadratic model
+	7. Estimate (calculate) a quadratic model
 	\begin{itemize}
-		\item	Use central composite design; use 3-levels per factor
-		\item	Add quadratic terms to model, e.g. $\ldots + b_{11}x_1^2 + b_{22}x_2^2 + \ldots$
+		\item	Use a central composite design; uses 3-levels per factor
+		\item	Add quadratic terms to model, e.g. $\ldots + {\color{myOrange}{b_\text{AA}x_A^2}} + {\color{myOrange}{b_\text{BB}x_\text{B}^2}} + \ldots$
 	\end{itemize}
 	8. Draw contour plots (surfaces) and move to next optimum
 \end{frame}
@@ -2333,6 +2341,8 @@
 \begin{frame}\frametitle{General approach for experimentation}
 	\begin{itemize}
 		\item	Box: ``\emph{The best time to run an experiment is after the experiment}''
+		\item	Box: ``\emph{To find out what happens when you interfere with a system, you must interfere with it, not passively observe it}." 
+		\item	Box: ``\emph{Discovering the unexpected is more important than confirming the known}''
 		\item	Box: ``\emph{Do not spend more than 20\% to 25\% of your time and budget on your first group of experiments}''
 	\end{itemize}
 
