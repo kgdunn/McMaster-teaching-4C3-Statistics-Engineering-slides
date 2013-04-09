@@ -1,0 +1,677 @@
+% \begin{frame}\frametitle{What we will cover}
+% 	\begin{itemize}
+% 		\item	What is a latent variable?
+% 		\item	Applications of latent variable methods
+% 	\end{itemize}
+% \end{frame}
+
+% \begin{frame}\frametitle{Extracting value from data}
+%
+% 	Ankit - 4C3 student in 2010 - now at Tenova:
+% 	\begin{itemize}
+% 		\item	\emph{Now, having worked for over a year, I find myself referring back to my notes all the time and appreciating the concepts about how to look at data and represent the data in the best possible manner, especially since on a daily basis I look at a gigantic amount of data and am required to make sense of it.}
+% 	\end{itemize}
+% 	\begin{itemize}
+% 		\item	\emph{I think what I loved most about the course was the emphasis on the} \textbf{\emph{thinking}} \emph{and} \textbf{\emph{process of getting to a solution}} \emph{instead of the the final solution itself which has been an important attribute to becoming a good engineer or a problem solver/troubleshooter.}
+% 	\end{itemize}
+% \end{frame}
+
+\begin{frame}\frametitle{Extracting value from data}
+
+	Engineers deal with large quantities of data from many different sources. We can do some some interesting \emph{and profitable} things with these data:
+
+	1. {\color{myOrange}{Improve process understanding }}
+	\begin{itemize}
+		\item	Visualize it in interesting ways
+		\item	Test if there are significant differences
+	\end{itemize}
+	2. {\color{myOrange}{Troubleshooting process problems}}
+	\begin{itemize}
+		\item	Patterns in monitoring charts/visualizations
+		\item	Diagnose outliers in least squares model
+	\end{itemize}
+	3. {\color{myOrange}{Predictive modelling }}
+	\begin{itemize}
+		\item	Distillation column data set
+		\item	LDPE melt index predicted from temperature
+	\end{itemize}
+	4. {\color{myOrange}{Process monitoring }}
+	\begin{itemize}
+		\item	Flotation data set
+	\end{itemize}
+	5. {\color{myOrange}{Process optimization and improvement }}
+	\begin{itemize}
+		\item	Designed experiments
+		\item	Response surface methods
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Types of data you will see}
+	\begin{columns}
+		\column{4cm}
+		\includegraphics[width=0.8\textwidth]{\imagedir/data-types/X-matrix-long-and-thin.png} \column{6cm} 1920's to 1950's:
+		\begin{itemize}
+			\item	small number of columns
+			\item	scatter plots
+			\item	time-series plots for each column
+			\item	Shewhart and EWMA charts
+			\item	multiple linear regression (MLR)
+			\item	carefully chose which columns to measure
+			\begin{itemize}
+				\item	independent
+				\item	low error
+			\end{itemize}
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Types of data you will see}
+	\begin{itemize}
+		\item	\textbf{Small N and small K}
+		\begin{itemize}
+			\item	expensive measurement, low frequency
+			\item	use scatterplots, linear regression, \emph{etc}.
+		\end{itemize}
+		\item	\textbf{Small N and large K}
+	\end{itemize}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/tablet-spectra/pharma-spectra.png}
+	\begin{itemize}
+		\item	Cannot use MLR directly: because $k > n$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Types of data you will see}
+	\begin{itemize}
+		\item	\textbf{Large N and small K}
+		\begin{itemize}
+			\item	Refinery, most chemical plants
+			\item	2000 to 5000 variables (called tags) every second
+			\item	50 to 100 Mb collected per second
+		\end{itemize}
+	\end{itemize}
+
+	\includegraphics[width=0.5\textwidth]{\imagedir/examples/distillation/Distillation_column_correlation.png}
+
+	35 temperatures, 5 to 10 flow rates, 10 pressures, 5 derived values
+\end{frame}
+
+\begin{frame}\frametitle{Types of data we deal with}
+	\begin{itemize}
+		\item	\textbf{X and Y matrices}
+	\end{itemize}
+	\includegraphics[width=\textwidth]{\imagedir/data-types/X-and-Y-matrices.png}
+	\begin{itemize}
+		\item	Predict one or more variables
+		\item	Could use MLR; fails for highly correlated data
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Types of data we deal with}
+	\begin{itemize}
+		\item	\textbf{3D data sets and higher dimensions}
+	\end{itemize}
+	\begin{itemize}
+		\item	Very common situation now
+		\item	Image data (medical imaging)
+	\end{itemize}
+
+	\includegraphics[width=0.4\textwidth]{\imagedir/data-types/image-data.png}
+	\begin{itemize}
+		\item	4th dimension: time
+		\item	Very high redundancy: neighbouring pixels are similar (spatially and in time)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Types of data we deal with}
+	\begin{itemize}
+		\item	\textbf{Batch data sets}
+	\end{itemize}
+
+	\includegraphics[width=\textwidth]{\imagedir/batch/Batch-data-layers-into-the-page.png}
+\end{frame}
+
+\begin{frame}\frametitle{Batch reactor}
+
+	\includegraphics[height=0.9\textheight]{\imagedir/batch/batch-system.png}
+\end{frame}
+
+\begin{frame}\frametitle{Typical batch trajectories}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/fmc/fmc-raw-trajectories.png}
+\end{frame}
+
+\begin{frame}\frametitle{Examples of interesting data sets: Millau Viaduct}
+
+	In France: expressway connecting Paris and Barcelona
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/Millau/Millau-Viaduct-France-2-20070909.JPG}
+\end{frame}
+
+\begin{frame}\frametitle{Examples of interesting data sets: Millau Viaduct}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/Millau/Millau-Viaduct-3.jpg}
+\end{frame}
+
+\begin{frame}\frametitle{Examples of interesting data sets: Millau Viaduct}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/Millau/Millau-Viaduct-2.jpg}
+\end{frame}
+
+\begin{frame}\frametitle{Examples of interesting data sets: Millau Viaduct}
+	\begin{itemize}
+		\item	Pylons, deck, masts have anemometers, accelerometers, inclinometers, extensometers, and temperature sensors
+		\item	Detect movement (micrometer level), monitor for oscillations, stress/strain
+		\item	Piezoelectric sensors gather traffic data: weight, speed, density of traffic
+		\item	Can distinguish between fourteen different types of vehicles
+		\item	100 readings per second from the main pylon
+		\item	Data transmitted via ethernet and fibre optic cables
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Other data sources}
+	\begin{itemize}
+		\item	Chemical plants are moving to wireless sensors and networks
+		\item	More and more data available \textbf{and accessible} to engineers than even before
+		\begin{itemize}
+			\item	Prior to about 2005: data recorded, but not easily available
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Issues faced with engineering data}
+	\begin{itemize}
+		\item	\textbf{Size of the data}
+		\begin{itemize}
+			\item	rows: we can deal with this
+			\item	columns: $K(K-1)/2$ pairs of scatterplots
+		\end{itemize}
+		\item	\textbf{Lack of independence} between columns (i.e. redundancy in data)
+		\begin{itemize}
+			\item	$\mathbf{X}^T\mathbf{X}$ becomes singular
+			\item	make-shift approach: pick a reduced set of columns
+		\end{itemize}
+		\item	\textbf{Low signal to noise ratio}
+		\begin{itemize}
+			\item	aim to keep our processes constant
+			\item	little signal and high noise
+			\item	data collected is mostly uninformative: constant, noisy, has drift and error
+			\item	Called ``happenstance data''
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Issues faced with engineering data}
+
+	\textbf{Non-causal data}
+	\begin{itemize}
+		\item	Happenstance data is non-causal
+		\begin{itemize}
+			\item	Only see correlation effects
+			\item	Good enough in many cases
+		\end{itemize}
+		\item	Opposite case: a designed experiment
+		\begin{itemize}
+			\item	cause-and-effect
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Issues faced with engineering data}
+	\begin{itemize}
+		\item	\textbf{Errors in the data}
+		\begin{itemize}
+			\item	Least squares: assumes no error in X
+			\item	Not realistic in most cases
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	\textbf{Missing data}
+	\end{itemize}
+
+	\includegraphics[width=\textwidth]{\imagedir/data-types/Missing-data.png}
+\end{frame}
+
+\begin{frame}\frametitle{Issues faced with engineering data}
+
+	Large data set: this is not a problem
+	\begin{block}
+		{}
+		\begin{center}
+			It's not about the size of your data ... it's what you do with it.
+		\end{center}
+	\end{block}
+	\begin{itemize}
+		\item	Many \textbf{rows}?
+		\begin{itemize}
+			\item	use a for loop
+			\item	use parallel computing
+			\item	Amazon EC2:
+			\begin{itemize}
+				\item	Simple CPU rent: \$0.17/hour
+				\item	23 GB memory, 4-core CPU, 1.7 TB storage, 64-bit: \$1.60/hour
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Many \textbf{columns}?
+		\begin{itemize}
+			\item	are they really all independent?
+			\item	use latent variable methods
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Issues faced with engineering data}
+
+	We require tools that:
+	\begin{itemize}
+		\item	extract relevant \textbf{information} from data
+		\item	deal with missing data
+		\item	3-D, 4-D and higher data sets
+		\item	combine data from different sources (same object)
+		\item	handle collinearity (low signal to noise ratio)
+		\item	handle error in recorded data
+	\end{itemize}
+
+	Latent variable methods meet these requirements.
+\end{frame}
+
+% \begin{frame}\frametitle{What is a latent variable?}
+%
+% 	\textbf{Your health}
+% 	\begin{itemize}
+% 		\item	No single measurement of ``health''
+% 		\begin{itemize}
+% 			\item	blood pressure
+% 			\item	cholesterol
+% 			\item	weight
+% 			\item	various length/circumference measurements
+% 			\item	various ratios: BMI; waist/hip; etc
+% 			\item	blood sugar
+% 			\item	temperature, \emph{etc}
+% 		\end{itemize}
+% 		\item	Combine these in some way? Trained doctor does this mentally.
+% 	\end{itemize}
+%
+% 	\textbf{Health} is a latent (hidden) variable
+% \end{frame}
+%
+% \begin{frame}\frametitle{What is a latent variable?}
+%
+% 	\textbf{Temperature in this room}
+%
+% 	\includegraphics[width=\textwidth]{room-temperature-plots.png}
+% 	\begin{itemize}
+% 		\item	What drives the movement up and down?
+% 		\item	Thermometer data correlated with the driving force (the latent variable)
+% 	\end{itemize}
+% \end{frame}
+%
+% \begin{frame}\frametitle{What is a latent variable?}
+%
+% 	\textbf{Temperature in this room: geometrically}
+%
+% 	\includegraphics[width=\textwidth]{temperature-2d-and-3d-plot.png}
+% 	\begin{itemize}
+% 		\item	Each measurement in time is one point
+% 	\end{itemize}
+% \end{frame}
+%
+% \begin{frame}\frametitle{What is a latent variable?}
+%
+% 	\includegraphics[width=\textwidth]{room-temperature-plots-combine.png}
+% 	\begin{itemize}
+% 		\item	Rotating plot demo
+% 	\end{itemize}
+% \end{frame}
+%
+% \begin{frame}\frametitle{What is a latent variable?}
+%
+% 	Distillation column data
+% 	\begin{itemize}
+% 		\item	We see movement in the time-series plots
+% 		\item	Many variables correlated with each other
+% 		\item	True dimensionality: 3, perhaps 4 "true dimensions"
+% 	\end{itemize}
+% \end{frame}
+
+\begin{frame}\frametitle{Why do we need latent variable methods?}
+	\begin{itemize}
+		\item	Shewhart chart for two variables, $x_1$ and $x_2$
+		\begin{itemize}
+			\item	e.g. final product quality from lab values
+		\end{itemize}
+	\end{itemize}
+	\includegraphics[height=0.8\textheight]{\imagedir/monitoring/Two-axis-monitoring-separate-plots.jpg}
+\end{frame}
+
+\begin{frame}\frametitle{Why LVM? For process monitoring}
+
+	\includegraphics[height=0.90\textheight]{\imagedir/monitoring/two-axis-monitoring-plot.png}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for regression}
+
+	Multiple linear regression model: $y = b_1x_1 + b_2x_2$
+	\begin{columns}
+		\column{6cm}
+		\includegraphics[width=\textwidth]{\imagedir/least-squares/Least-squares-two-x-variables-with-projection.png} \column{4cm}
+		\begin{itemize}
+			\item	We get stable estimates for $b_1$ and $b_2$ when the plane is ``well supported'' by the measured points
+			\item	Think of DOE: we intentionally move to the corner points in $x_1$ and $x_2$ to fit the model
+		\end{itemize}
+	\end{columns}
+	\begin{itemize}
+		\item	Stable estimates are desirable:
+		\begin{itemize}
+			\item	for learning about the process
+			\item	for accurate predictions of $\hat{y}$ in the future
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for regression}
+	\begin{itemize}
+		\item	But what if the two $x$-variables are strongly correlated?
+	\end{itemize}
+
+	\includegraphics[width=0.6\textwidth]{\imagedir/pls/correlated-x-variables.png}
+	\begin{itemize}
+		\item	The plane rotates for small changes in $x$-variables
+		\item	The slope coefficients change: can even change sign! (demo in class)
+		\item	Unstable slopes: cannot be interpreted reliably
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for regression}
+	\begin{itemize}
+		\item	What can we do about it?
+		\item	\emph{Suboptimal solution}
+		\begin{itemize}
+			\item	Recognize that $x_1$ and $x_2$ are correlated
+			\item	Choose either $x_1$ or $x_2$ in the model:
+			\begin{itemize}
+				\item	$y = b_0 + b_1 x_1$
+				\item	$y = b_0 + b_2 x_2$
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Problems with correlated data
+		\begin{itemize}
+			\item	which variables do you choose to keep or throw out?
+			\item	can I use an average of the two correlated variables?
+			\item	how do you know what is ``too strong correlation'' before its problematic?
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Solution: don't select variables!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for regression}
+
+	Use projection to latent structures (PLS)
+	\begin{itemize}
+		\item	handles missing values
+		\item	deals with correlated columns in $X$
+		\item	can be built simultaneously if more than 1 $y$-variable
+		\item	assumes error in the $X$'s, unlike least squares
+	\end{itemize}
+\end{frame}
+
+% \begin{frame}\frametitle{LVM for troubleshooting}
+% 	\begin{itemize}
+% 		\item	$\sim$300 measurements
+% 		\item	3.5 months of data
+% 		\item	How to uncover problems and visualize this much data?
+% 	\end{itemize}
+% 	\includegraphics[width=0.9\textwidth]{\imagedir/examples/refinery-troubleshooting/Slama-refinery-flowsheet.png}
+% 	\begin{itemize}
+% 		\item	\emph{Carol Slama, Masters Thesis, McMaster University, 1991}
+% 		\item	\href{http://digitalcommons.mcmaster.ca/opendissertations/3301}{http://digitalcommons.mcmaster.ca/opendissertations/3301}
+% 	\end{itemize}
+% \end{frame}
+
+\begin{frame}\frametitle{LVM for troubleshooting}
+
+	Monomer recovery flowsheet
+	\begin{itemize}
+		\item	447 tags measured (i.e. a 447 dimensional data cube)
+		\item	Data on about 500 days of operation
+	\end{itemize}
+
+	\includegraphics[width=0.9\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-flowsheet.jpg}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for troubleshooting}
+	\begin{itemize}
+		\item	Reduction in monomer recovery $\sim$ day 400. Target recovery = 92\%
+	\end{itemize}
+
+	\includegraphics[width=0.8\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-time-series.jpg}
+	\begin{itemize}
+		\item	Engineers looked at various time series plots for several weeks
+		\item	100 days elapsed without finding the cause
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for troubleshooting}
+	\begin{itemize}
+		\item	A latent variable model with 2 variables was built
+		\begin{itemize}
+			\item	Compressed the 447 variables to 2 variables
+			\item	Retains most of the information
+		\end{itemize}
+	\end{itemize}
+
+	\includegraphics[width=0.9\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-score-plot.jpg}
+	\begin{itemize}
+		\item	Interrogate the latent variables to see what changed ...
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for troubleshooting: contribution plot}
+	\begin{itemize}
+		\item	Shows difference between two points in the score plot
+	\end{itemize}
+	\begin{columns}
+		\column{5cm}
+		\includegraphics[width=1.2\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-contributions.jpg} \column{5cm}
+		\begin{itemize}
+			\item	\textbf{207}: temperature on tray 129 in distillation column \#3
+			\item	\textbf{158}: a tag from distillation column \#3
+			\item	\textbf{33} and \textbf{277}: related to concentration of feed A
+		\end{itemize}
+	\end{columns}
+	\begin{itemize}
+		\item	\emph{Suggests}: bad temperature control on tray 129 when feed concentration of A is high
+		\item	Fixed the controller and recovery went back to normal
+	\end{itemize}
+\end{frame}
+
+% \begin{frame}\frametitle{Principal component analysis (PCA)}
+%
+% 	Main aim: data reduction
+%
+% 	\includegraphics[width=\textwidth]{X-and-T-matrices.png}
+% \end{frame}
+%
+% \begin{frame}\frametitle{Principal component analysis (PCA)}
+% 	\begin{itemize}
+% 		\item	PCA considers a single matrix: $\mathbf{X}$
+% 	\end{itemize}
+%
+% 	\includegraphics[width=0.5\textwidth]{X-matrix.png}
+% 	\begin{itemize}
+% 		\item	$N$ observations
+% 		\item	$K$ variables
+% 		\item	What goes in $\mathbf{X}$?
+% 		\begin{itemize}
+% 			\item	Any variable we measure
+% 			\item	Calculations about the process
+% 			\item	Theoretical knowledge: e.g. dimensionless numbers
+% 		\end{itemize}
+% 	\end{itemize}
+% \end{frame}
+
+\begin{frame}\frametitle{Improved process understanding}
+
+	\includegraphics[width=0.8\textwidth]{\imagedir/examples/competitor-product/competitor-product.png}
+	\begin{itemize}
+		\item	Learn which variables are correlated
+		\item	Competitor has much less variability !
+		\item	Can we reproduce the competitor's product? \emph{Yes}
+	\end{itemize}
+\end{frame}
+
+% \begin{frame}\frametitle{Troubleshooting process problems}
+% 	\begin{itemize}
+% 		\item	Yield was declining
+% 		\item	6 measurements: 3 size-related, 3 from the lab
+% 	\end{itemize}
+% 	\includegraphics[width=\textwidth]{process-troubleshooting.png}
+% \end{frame}
+
+\begin{frame}\frametitle{Process monitoring}
+
+	Monitoring with latent variables:
+	\begin{itemize}
+		\item	We have $K$ variables (tags)
+		\item	Reduce this to $A$ scores (latent variables)
+		\item	Combine these $A$ scores to a single value: Hotelling's $T^2$
+		\item	Errors: combined into a single value: SPE
+	\end{itemize}
+
+	\emph{Advantages}:
+	\begin{itemize}
+		\item	The scores are orthogonal
+		\item	Fewer scores than original variables
+		\item	Monitor anywhere that there is real-time data
+		\item	Don't have to wait for the lab's final measurement
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Industrial case study: Dofasco}
+	\begin{itemize}
+		\item	ArcelorMittal in Hamilton (formerly called Dofasco) has used multivariate process monitoring tools since 1990's
+		\item	Over 80 latent variable applications used daily
+		\item	Most well known is their casting monitoring application, Caster SOS (Stable Operation Supervisor)
+		\item	It is a multivariate monitoring system
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: slabs of steel}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/Dofasco/Casting-plant-environment.png}
+
+	\emph{All screenshots with permission of Dr. John MacGregor}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: casting}
+	\begin{columns}
+		\column{5cm}
+		\includegraphics[width=\textwidth]{\imagedir/examples/Dofasco/Casting-schematic.png} \column{5cm}
+		\includegraphics[width=\textwidth]{\imagedir/examples/Dofasco/Casting-hot-slab.png}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: breakout}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/Dofasco/Casting-breakout.png}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: monitoring for breakouts}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/Dofasco/Dofasco-monitoring-chart.png}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: monitoring for breakouts}
+
+	\includegraphics[width=0.7\textwidth]{\imagedir/examples/Dofasco/Dofasco-monitoring-chart.png}
+	\begin{itemize}
+		\item	Stability Index 1 and 2:
+		\begin{itemize}
+			\item	Hotelling's $T^2$
+			\item	SPE
+		\end{itemize}
+		\item	When alarm: shows contribution plots
+		\item	Shows real-time raw data, as operator requires it
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Dofasco case study: an alarm}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/Dofasco/Dofasco-monitoring-chart-with-alarm.png}
+\end{frame}
+
+\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
+	\begin{itemize}
+		\item	MLR has some serious disadvantages
+		\begin{itemize}
+			\item	Cannot handle missing data
+			\item	Cannot handle strong correlations
+			\item	MLR requires $N > K$
+			\item	Only one $y$-variable at a time
+			\item	Assumes no noise in $\mathbf{X}$, which is never true
+		\end{itemize}
+	\end{itemize}
+
+	\includegraphics[width=\textwidth]{\imagedir/pls/PLS-prediction-new-data.png}
+\end{frame}
+
+\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
+	\begin{itemize}
+		\item	Inferential sensor = soft sensor
+		\item	Image data used as $\mathbf{X}$
+		\item	Snackfood example: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
+		\item	Work by Honglu Yu
+		\begin{itemize}
+			\item	\href{http://digitalcommons.mcmaster.ca/opendissertations/866}{http://digitalcommons.mcmaster.ca/opendissertations/866}/
+		\end{itemize}
+	\end{itemize}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/snackfood-example-1.png}
+
+	Figure 2 from the paper
+\end{frame}
+
+\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/snackfood-example-4.png}
+
+	Figure 8 from the paper: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
+\end{frame}
+
+\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/snackfood-example-5.png}
+
+	Figure 10 from the paper: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
+\end{frame}
+
+\begin{frame}\frametitle{Summary: Extracting value from data}
+
+	1. Improve process understanding
+	\begin{itemize}
+		\item	Competitor example
+	\end{itemize}
+	2. Troubleshooting process problems
+	\begin{itemize}
+		\item	Monomer example
+	\end{itemize}
+	3. Predictive modelling (inferential sensors)
+	\begin{itemize}
+		\item	Snackfood example
+	\end{itemize}
+	4. Process monitoring
+	\begin{itemize}
+		\item	Dofasco example
+	\end{itemize}
+	5. Optimizing and improving processes
+	\begin{itemize}
+		\item	DOE with RSM: excellent tools, even on modern data systems
+		\item	Can combine latent variable methods with DOE
+	\end{itemize}
+\end{frame}
