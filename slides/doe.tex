@@ -907,11 +907,11 @@
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{\imagedir/doe/COST-contours.png}
 	\end{center}
-	If COST in a cross shape (expts 2, 3, 4, 5, 6):
+	If COST in a cross shape (experiments 2, 3, 4, 5, 6):
 	\begin{itemize}
 		\item	we cannot estimate interactions
 		\item	only a single estimate of each main effect
-		\item	rescued to a full factorial: e.g. use expts 2, 3, 6 and add new point below 2, to the right of 6
+		\item	rescued to a full factorial: e.g. use experiments 2, 3, 6 and add new point below 2, to the right of 6
 	\end{itemize}
 \end{frame}
 
@@ -2161,7 +2161,7 @@
 			\vspace{6pt}
 			\hrule
 			\vspace{12pt}
-			Both expt 6 and 7 were wasteful.
+			Both experiment 6 and 7 were wasteful.
 	\end{columns}
 \end{frame}
 
@@ -2356,10 +2356,16 @@
 
 \begin{frame}\frametitle{Mistakes, missing values, and constraints}
 	\begin{itemize}
-		\item	Do not or cannot reach $-1$ or $+1$:
+		\item	If you do not, or cannot, reach $-1$ or $+1$:
 		\begin{itemize}
-			\item	use a least squares model with the coded value actually used in expt
-			\item	loose some orthogonality
+			\item	Use a least squares model, with the coded values actually used in the experiment. E.g.:
+			\begin{itemize}
+				\item	$-1$ corresponds to 425K, and $+1$ corresponds to 475K
+				\item	experiment ran at 455K, instead of 475K 
+				\item	then use $\dfrac{455 - 450}{(475 - 425)/2} = 0.2$ in the $\mathbf{X}$ matrix
+				\item	(see the next slide)
+			\end{itemize}
+			\item	You lose some orthogonality in the $\mathbf{X}$ matrix
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
