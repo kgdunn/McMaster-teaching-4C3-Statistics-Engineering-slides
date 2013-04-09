@@ -96,16 +96,16 @@
 	35 temperatures, 5 to 10 flow rates, 10 pressures, 5 derived values
 \end{frame}
 
-\begin{frame}\frametitle{Types of data we deal with}
-	\begin{itemize}
-		\item	\textbf{X and Y matrices}
-	\end{itemize}
-	\includegraphics[width=\textwidth]{\imagedir/data-types/X-and-Y-matrices.png}
-	\begin{itemize}
-		\item	Predict one or more variables
-		\item	Could use MLR; fails for highly correlated data
-	\end{itemize}
-\end{frame}
+% \begin{frame}\frametitle{Types of data we deal with}
+% 	\begin{itemize}
+% 		\item	\textbf{X and Y matrices}
+% 	\end{itemize}
+% 	\includegraphics[width=\textwidth]{\imagedir/data-types/X-and-Y-matrices.png}
+% 	\begin{itemize}
+% 		\item	Predict one or more variables
+% 		\item	Could use MLR; fails for highly correlated data
+% 	\end{itemize}
+% \end{frame}
 
 \begin{frame}\frametitle{Types of data we deal with}
 	\begin{itemize}
@@ -139,6 +139,8 @@
 \begin{frame}\frametitle{Typical batch trajectories}
 
 	\includegraphics[width=\textwidth]{\imagedir/examples/fmc/fmc-raw-trajectories.png}
+	
+	This is a small data set: 325 time points $\times$ 10 tags $\times$ 65 batches
 \end{frame}
 
 \begin{frame}\frametitle{Examples of interesting data sets: Millau Viaduct}
@@ -179,7 +181,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Issues faced with engineering data}
+\begin{frame}\frametitle{Issues you will face with engineering data}
 	\begin{itemize}
 		\item	\textbf{Size of the data}
 		\begin{itemize}
@@ -201,7 +203,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Issues faced with engineering data}
+\begin{frame}\frametitle{Issues you will face with engineering data}
 
 	\textbf{Non-causal data}
 	\begin{itemize}
@@ -217,7 +219,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Issues faced with engineering data}
+\begin{frame}\frametitle{Issues you will face with engineering data}
 	\begin{itemize}
 		\item	\textbf{Errors in the data}
 		\begin{itemize}
@@ -232,13 +234,13 @@
 	\includegraphics[width=\textwidth]{\imagedir/data-types/Missing-data.png}
 \end{frame}
 
-\begin{frame}\frametitle{Issues faced with engineering data}
+\begin{frame}\frametitle{Issues you will face with engineering data}
 
-	Large data set: this is not a problem
+	Large data set: this is \textbf{not a problem}
 	\begin{block}
 		{}
 		\begin{center}
-			It's not about the size of your data ... it's what you do with it.
+			{\color{myOrange}{It's not about the size of your data ... it's what you do with it.}}
 		\end{center}
 	\end{block}
 	\begin{itemize}
@@ -248,8 +250,8 @@
 			\item	use parallel computing
 			\item	Amazon EC2:
 			\begin{itemize}
-				\item	Simple CPU rent: \$0.17/hour
-				\item	23 GB memory, 4-core CPU, 1.7 TB storage, 64-bit: \$1.60/hour
+				\item	Simple CPU rent: \$0.06/hour
+				\item	23 GB memory, 4-core CPU, 1.7 TB storage, 64-bit: \$1.64/hour
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
@@ -262,7 +264,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Issues faced with engineering data}
+\begin{frame}\frametitle{Issues you will face with engineering data}
 
 	We require tools that:
 	\begin{itemize}
@@ -336,19 +338,92 @@
 % 	\end{itemize}
 % \end{frame}
 
-\begin{frame}\frametitle{Why do we need latent variable methods?}
+\begin{frame}\frametitle{Improved process understanding}
+
+	\includegraphics[width=0.8\textwidth]{\imagedir/examples/competitor-product/competitor-product.png}
 	\begin{itemize}
-		\item	Shewhart chart for two variables, $x_1$ and $x_2$
-		\begin{itemize}
-			\item	e.g. final product quality from lab values
-		\end{itemize}
+		\item	Learn which variables are correlated
+		\item	Competitor has much less variability !
+		\item	Can we reproduce the competitor's product? \emph{Yes}
 	\end{itemize}
-	\includegraphics[height=0.8\textheight]{\imagedir/monitoring/Two-axis-monitoring-separate-plots.jpg}
 \end{frame}
 
-\begin{frame}\frametitle{Why LVM? For process monitoring}
+% \begin{frame}\frametitle{Troubleshooting process problems}
+% 	\begin{itemize}
+% 		\item	Yield was declining
+% 		\item	6 measurements: 3 size-related, 3 from the lab
+% 	\end{itemize}
+% 	\includegraphics[width=\textwidth]{process-troubleshooting.png}
+% \end{frame}
 
-	\includegraphics[height=0.90\textheight]{\imagedir/monitoring/two-axis-monitoring-plot.png}
+% \begin{frame}\frametitle{LVM for troubleshooting}
+% 	\begin{itemize}
+% 		\item	$\sim$300 measurements
+% 		\item	3.5 months of data
+% 		\item	How to uncover problems and visualize this much data?
+% 	\end{itemize}
+% 	\includegraphics[width=0.9\textwidth]{\imagedir/examples/refinery-troubleshooting/Slama-refinery-flowsheet.png}
+% 	\begin{itemize}
+% 		\item	\emph{Carol Slama, Masters Thesis, McMaster University, 1991}
+% 		\item	\href{http://digitalcommons.mcmaster.ca/opendissertations/3301}{http://digitalcommons.mcmaster.ca/opendissertations/3301}
+% 	\end{itemize}
+% \end{frame}
+
+\begin{frame}\frametitle{LVM for troubleshooting}
+
+	Monomer recovery flowsheet
+	\begin{itemize}
+		\item	447 tags measured (i.e. a 447 dimensional data cube)
+		\item	Data on about 500 days of operation
+	\end{itemize}
+
+	\includegraphics[width=0.9\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-flowsheet.jpg}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for troubleshooting}
+	\begin{itemize}
+		\item	Reduction in monomer recovery $\sim$ day 400. Target recovery = 92\%
+	\end{itemize}
+
+	\includegraphics[width=0.8\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-time-series.jpg}
+	\begin{itemize}
+		\item	Engineers looked at various time series plots for several weeks
+		\item	100 days elapsed without finding the cause
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for troubleshooting}
+	\begin{itemize}
+		\item	A latent variable model with 2 variables was built
+		\begin{itemize}
+			\item	Compressed the 447 variables to 2 variables
+			\item	Retains most of the information
+		\end{itemize}
+	\end{itemize}
+
+	\includegraphics[width=0.9\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-score-plot.jpg}
+	\begin{itemize}
+		\item	Interrogate the latent variables to see what changed ...
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{LVM for troubleshooting: contribution plot}
+	\begin{itemize}
+		\item	Shows difference between two points in the score plot
+	\end{itemize}
+	\begin{columns}
+		\column{5cm}
+		\includegraphics[width=1.2\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-contributions.jpg} \column{5cm}
+		\begin{itemize}
+			\item	\textbf{207}: temperature on tray 129 in distillation column \#3
+			\item	\textbf{158}: a tag from distillation column \#3
+			\item	\textbf{33} and \textbf{277}: related to concentration of feed A
+		\end{itemize}
+	\end{columns}
+	\begin{itemize}
+		\item	\emph{Suggests}: bad temperature control on tray 129 when feed concentration of A is high
+		\item	Fixed the controller and recovery went back to normal
+	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{LVM for regression}
@@ -421,76 +496,6 @@
 	\end{itemize}
 \end{frame}
 
-% \begin{frame}\frametitle{LVM for troubleshooting}
-% 	\begin{itemize}
-% 		\item	$\sim$300 measurements
-% 		\item	3.5 months of data
-% 		\item	How to uncover problems and visualize this much data?
-% 	\end{itemize}
-% 	\includegraphics[width=0.9\textwidth]{\imagedir/examples/refinery-troubleshooting/Slama-refinery-flowsheet.png}
-% 	\begin{itemize}
-% 		\item	\emph{Carol Slama, Masters Thesis, McMaster University, 1991}
-% 		\item	\href{http://digitalcommons.mcmaster.ca/opendissertations/3301}{http://digitalcommons.mcmaster.ca/opendissertations/3301}
-% 	\end{itemize}
-% \end{frame}
-
-\begin{frame}\frametitle{LVM for troubleshooting}
-
-	Monomer recovery flowsheet
-	\begin{itemize}
-		\item	447 tags measured (i.e. a 447 dimensional data cube)
-		\item	Data on about 500 days of operation
-	\end{itemize}
-
-	\includegraphics[width=0.9\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-flowsheet.jpg}
-\end{frame}
-
-\begin{frame}\frametitle{LVM for troubleshooting}
-	\begin{itemize}
-		\item	Reduction in monomer recovery $\sim$ day 400. Target recovery = 92\%
-	\end{itemize}
-
-	\includegraphics[width=0.8\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-time-series.jpg}
-	\begin{itemize}
-		\item	Engineers looked at various time series plots for several weeks
-		\item	100 days elapsed without finding the cause
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{LVM for troubleshooting}
-	\begin{itemize}
-		\item	A latent variable model with 2 variables was built
-		\begin{itemize}
-			\item	Compressed the 447 variables to 2 variables
-			\item	Retains most of the information
-		\end{itemize}
-	\end{itemize}
-
-	\includegraphics[width=0.9\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-score-plot.jpg}
-	\begin{itemize}
-		\item	Interrogate the latent variables to see what changed ...
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{LVM for troubleshooting: contribution plot}
-	\begin{itemize}
-		\item	Shows difference between two points in the score plot
-	\end{itemize}
-	\begin{columns}
-		\column{5cm}
-		\includegraphics[width=1.2\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-contributions.jpg} \column{5cm}
-		\begin{itemize}
-			\item	\textbf{207}: temperature on tray 129 in distillation column \#3
-			\item	\textbf{158}: a tag from distillation column \#3
-			\item	\textbf{33} and \textbf{277}: related to concentration of feed A
-		\end{itemize}
-	\end{columns}
-	\begin{itemize}
-		\item	\emph{Suggests}: bad temperature control on tray 129 when feed concentration of A is high
-		\item	Fixed the controller and recovery went back to normal
-	\end{itemize}
-\end{frame}
-
 % \begin{frame}\frametitle{Principal component analysis (PCA)}
 %
 % 	Main aim: data reduction
@@ -516,23 +521,65 @@
 % 	\end{itemize}
 % \end{frame}
 
-\begin{frame}\frametitle{Improved process understanding}
-
-	\includegraphics[width=0.8\textwidth]{\imagedir/examples/competitor-product/competitor-product.png}
+\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
 	\begin{itemize}
-		\item	Learn which variables are correlated
-		\item	Competitor has much less variability !
-		\item	Can we reproduce the competitor's product? \emph{Yes}
+		\item	MLR has some serious disadvantages
+		\begin{itemize}
+			\item	Cannot handle missing data
+			\item	Cannot handle strong correlations
+			\item	MLR requires $N > K$
+			\item	Only one $y$-variable at a time
+			\item	Assumes no noise in $\mathbf{X}$, which is never true
+		\end{itemize}
 	\end{itemize}
+
+	\includegraphics[width=\textwidth]{\imagedir/pls/PLS-prediction-new-data.png}
 \end{frame}
 
-% \begin{frame}\frametitle{Troubleshooting process problems}
-% 	\begin{itemize}
-% 		\item	Yield was declining
-% 		\item	6 measurements: 3 size-related, 3 from the lab
-% 	\end{itemize}
-% 	\includegraphics[width=\textwidth]{process-troubleshooting.png}
-% \end{frame}
+\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
+	\begin{itemize}
+		\item	Inferential sensor = soft sensor
+		\item	Image data used as $\mathbf{X}$
+		\item	Snackfood example: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
+		\item	Work by Honglu Yu
+		\begin{itemize}
+			\item	\href{http://digitalcommons.mcmaster.ca/opendissertations/866}{http://digitalcommons.mcmaster.ca/opendissertations/866}/
+		\end{itemize}
+	\end{itemize}
+
+	\includegraphics[width=.9\textwidth]{\imagedir/examples/snackfood/snackfood-example-1.png}
+
+	Figure 2 from the paper
+\end{frame}
+
+\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/snackfood-example-4.png}
+
+	Figure 8 from the paper: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
+\end{frame}
+
+\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
+
+	\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/snackfood-example-5.png}
+
+	Figure 10 from the paper: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
+\end{frame}
+
+\begin{frame}\frametitle{Why do we need latent variable methods?}
+	\begin{itemize}
+		\item	Shewhart chart for two variables, $x_1$ and $x_2$
+		\begin{itemize}
+			\item	e.g. final product quality from lab values
+		\end{itemize}
+	\end{itemize}
+	\includegraphics[height=0.8\textheight]{\imagedir/monitoring/Two-axis-monitoring-separate-plots.jpg}
+\end{frame}
+
+\begin{frame}\frametitle{Why LVM? For process monitoring}
+
+	\includegraphics[height=0.90\textheight]{\imagedir/monitoring/two-axis-monitoring-plot.png}
+\end{frame}
 
 \begin{frame}\frametitle{Process monitoring}
 
@@ -606,70 +653,25 @@
 	\includegraphics[width=\textwidth]{\imagedir/examples/Dofasco/Dofasco-monitoring-chart-with-alarm.png}
 \end{frame}
 
-\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
-	\begin{itemize}
-		\item	MLR has some serious disadvantages
-		\begin{itemize}
-			\item	Cannot handle missing data
-			\item	Cannot handle strong correlations
-			\item	MLR requires $N > K$
-			\item	Only one $y$-variable at a time
-			\item	Assumes no noise in $\mathbf{X}$, which is never true
-		\end{itemize}
-	\end{itemize}
-
-	\includegraphics[width=\textwidth]{\imagedir/pls/PLS-prediction-new-data.png}
-\end{frame}
-
-\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
-	\begin{itemize}
-		\item	Inferential sensor = soft sensor
-		\item	Image data used as $\mathbf{X}$
-		\item	Snackfood example: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
-		\item	Work by Honglu Yu
-		\begin{itemize}
-			\item	\href{http://digitalcommons.mcmaster.ca/opendissertations/866}{http://digitalcommons.mcmaster.ca/opendissertations/866}/
-		\end{itemize}
-	\end{itemize}
-
-	\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/snackfood-example-1.png}
-
-	Figure 2 from the paper
-\end{frame}
-
-\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
-
-	\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/snackfood-example-4.png}
-
-	Figure 8 from the paper: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
-\end{frame}
-
-\begin{frame}\frametitle{Predictive modelling (inferential sensors)}
-
-	\includegraphics[width=\textwidth]{\imagedir/examples/snackfood/snackfood-example-5.png}
-
-	Figure 10 from the paper: \href{http://dx.doi.org/10.1021/ie020941f}{http://dx.doi.org/10.1021/ie020941f}
-\end{frame}
-
 \begin{frame}\frametitle{Summary: Extracting value from data}
 
-	1. Improve process understanding
+	1. {\color{myOrange}{Improve process understanding}}
 	\begin{itemize}
 		\item	Competitor example
 	\end{itemize}
-	2. Troubleshooting process problems
+	2. {\color{myOrange}{Troubleshooting process problems}}
 	\begin{itemize}
 		\item	Monomer example
 	\end{itemize}
-	3. Predictive modelling (inferential sensors)
+	3. {\color{myOrange}{Predictive modelling (inferential sensors)}}
 	\begin{itemize}
 		\item	Snackfood example
 	\end{itemize}
-	4. Process monitoring
+	4. {\color{myOrange}{Process monitoring}}
 	\begin{itemize}
 		\item	Dofasco example
 	\end{itemize}
-	5. Optimizing and improving processes
+	5. {\color{myOrange}{Optimizing and improving processes}}
 	\begin{itemize}
 		\item	DOE with RSM: excellent tools, even on modern data systems
 		\item	Can combine latent variable methods with DOE
