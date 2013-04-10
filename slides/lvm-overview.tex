@@ -18,8 +18,10 @@
 
 \begin{frame}\frametitle{Extracting value from data}
 
-	Engineers deal with large quantities of data from many different sources. We can do some some interesting \emph{and profitable} things with these data:
-
+	Engineers deal with {\color{purple}{large quantities}} of data from many {\color{purple}{different sources}}. We can do some some interesting {\color{myGreen}{\emph{and profitable}}} things with these data:
+	
+	\vspace{6pt}
+	{\footnotesize
 	1. {\color{myOrange}{Improve process understanding }}
 	\begin{itemize}
 		\item	Visualize it in interesting ways
@@ -44,7 +46,7 @@
 	\begin{itemize}
 		\item	Designed experiments
 		\item	Response surface methods
-	\end{itemize}
+	\end{itemize}}
 \end{frame}
 
 \begin{frame}\frametitle{Types of data you will see}
@@ -78,7 +80,7 @@
 
 	\includegraphics[width=\textwidth]{\imagedir/examples/tablet-spectra/pharma-spectra.png}
 	\begin{itemize}
-		\item	Cannot use MLR directly: because $k > n$
+		\item	Cannot use linear regression directly: because $k > n$
 	\end{itemize}
 \end{frame}
 
@@ -130,6 +132,11 @@
 	\end{itemize}
 
 	\includegraphics[width=\textwidth]{\imagedir/batch/Batch-data-layers-into-the-page.png}
+	
+	\begin{itemize}
+		\item	This is an example of a {\color{purple}{multiblock data set}}
+		\item	Let's take a look at how the 3D cube of batch data arises ...
+	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Batch reactor}
@@ -184,17 +191,17 @@
 
 \begin{frame}\frametitle{Issues you will face with engineering data}
 	\begin{itemize}
-		\item	\textbf{Size of the data}
+		\item	\textbf{1. Size of the data}
 		\begin{itemize}
 			\item	rows: we can deal with this
 			\item	columns: $K(K-1)/2$ pairs of scatterplots
 		\end{itemize}
-		\item	\textbf{Lack of independence} between columns (i.e. redundancy in data)
+		\item	\textbf{2. Lack of independence} between columns (i.e. redundancy in data)
 		\begin{itemize}
 			\item	$\mathbf{X}^T\mathbf{X}$ becomes singular
 			\item	make-shift approach: pick a reduced set of columns
 		\end{itemize}
-		\item	\textbf{Low signal to noise ratio}
+		\item	\textbf{3. Low signal to noise ratio}
 		\begin{itemize}
 			\item	aim to keep our processes constant
 			\item	little signal and high noise
@@ -206,7 +213,7 @@
 
 \begin{frame}\frametitle{Issues you will face with engineering data}
 
-	\textbf{Non-causal data}
+	\textbf{4. Non-causal data}
 	\begin{itemize}
 		\item	Happenstance data is non-causal
 		\begin{itemize}
@@ -222,17 +229,32 @@
 
 \begin{frame}\frametitle{Issues you will face with engineering data}
 	\begin{itemize}
-		\item	\textbf{Errors in the data}
+		\item	\textbf{5. Errors in the data}
 		\begin{itemize}
 			\item	Least squares: assumes no error in X
 			\item	Not realistic in most cases
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
-		\item	\textbf{Missing data}
+		\item	\textbf{6. Missing data}
 	\end{itemize}
 
 	\includegraphics[width=\textwidth]{\imagedir/data-types/Missing-data.png}
+\end{frame}
+
+\begin{frame}\frametitle{Issues you will face with engineering data}
+	\begin{itemize}
+		\item	\textbf{7. Multiple data sources}
+	\end{itemize}
+	\begin{itemize}
+		\item	raw material properties (e.g. one block per material)
+		\item	NIR or UV-VIS spectra from the process
+		\item	Batch data from the system \emph{or} Continuous data
+		\item	Final quality variables
+	\end{itemize}
+	
+	\vspace{12pt}
+	These are called {\color{purple}{multiblock data sets}}.
 \end{frame}
 
 \begin{frame}\frametitle{Issues you will face with engineering data}
@@ -382,11 +404,11 @@
 \end{frame}
 
 \begin{frame}\frametitle{LVM for troubleshooting}
-	\begin{itemize}
-		\item	Reduction in monomer recovery $\sim$ day 400. Target recovery = 92\%
-	\end{itemize}
-
-	\includegraphics[width=0.8\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-time-series.jpg}
+	Reduction in monomer recovery $\sim$ day 400. Target recovery is 92\%
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-time-series.jpg}
+	\end{center}
+	
 	\begin{itemize}
 		\item	Engineers looked at various time series plots for several weeks
 		\item	100 days elapsed without finding the cause
@@ -397,29 +419,32 @@
 	\begin{itemize}
 		\item	A latent variable model with 2 variables was built
 		\begin{itemize}
-			\item	Compressed the 447 variables to 2 variables
-			\item	Retains most of the information
+			\item	Compresses the 447 variables to 2 variables
+			\item	Retains most of the information in $t_1$ and $t_2$
 		\end{itemize}
 	\end{itemize}
 
 	\includegraphics[width=0.9\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-score-plot.jpg}
 	\begin{itemize}
-		\item	Interrogate the latent variables to see what changed ...
+		\item	Investigate the latent variables instead to see what changed ...
 	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{LVM for troubleshooting: contribution plot}
-	\begin{itemize}
-		\item	Shows difference between two points in the score plot
-	\end{itemize}
-	\begin{columns}
-		\column{5cm}
-		\includegraphics[width=1.2\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-contributions.jpg} \column{5cm}
-		\begin{itemize}
-			\item	\textbf{207}: temperature on tray 129 in distillation column \#3
-			\item	\textbf{158}: a tag from distillation column \#3
-			\item	\textbf{33} and \textbf{277}: related to concentration of feed A
-		\end{itemize}
+
+	Ask the LV model: what has changed between the two clusters of points
+	\begin{columns}[c]
+		\column{0.6\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/examples/monomer-recovery/Monomer-recovery-contributions.jpg} 
+			\end{center}
+			\vfill
+		\column{0.55\textwidth}
+			\begin{itemize}
+				\item	\textbf{207}: temperature on tray 129 in distillation column \#3
+				\item	\textbf{158}: a tag from distillation column \#3
+				\item	\textbf{33} and \textbf{277}: related to concentration of feed A
+			\end{itemize}
 	\end{columns}
 	\begin{itemize}
 		\item	\emph{Suggests}: bad temperature control on tray 129 when feed concentration of A is high
