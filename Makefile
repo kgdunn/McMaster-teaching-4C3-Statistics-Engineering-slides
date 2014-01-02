@@ -14,15 +14,18 @@ else
 	SUBDIR = classes/
 endif
 
+.DEFAULT_GOAL := 01
+
+
 all: clean
 	$(foreach FILE, $(CLASSES), $(MAKE) $(FILE);)
 
 $(CLASSES): %:
     # Runs PDF latex on the main file, sending in jobname that is used in 
     # $(MAIN).tex to \input{} the correct class file
-	pdflatex --shell-escape --jobname=$(SUBDIR)2013-4C3-class-$* $(MAIN).tex;
-    
-	open $(SUBDIR)2013-4C3-class-$*.pdf
+	pdflatex --shell-escape --jobname=$(SUBDIR)2014-4C3-class-$* $(MAIN).tex;
+	open $(SUBDIR)2014-4C3-class-$*.pdf
+	#open $(SUBDIR)2014-TrojanUV-$*.pdf
 
 clean:  
     # Windows requires one wildcard entry per line, unfortunately
