@@ -1,0 +1,370 @@
+\begin{frame}\frametitle{Meeting with TrojanUV}
+	\begin{exampleblock}{}
+		{\Huge 03 October 2013}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}\frametitle{General approach for experimentation}
+	\begin{itemize}
+		\item	Box: ``\emph{The best time to run an experiment is after the experiment}''
+		\item	Box: ``\emph{To find out what happens when you interfere with a system, you must interfere with it, not passively observe it}."
+		\item	Box: ``\emph{Do not spend more than 20\% to 25\% of your time and budget on your first group of experiments}''
+	\end{itemize}
+
+	\textbf{Phase 1}: screening runs
+
+	\textbf{Phase 2}: sequential experiments to augment screening runs
+
+	\textbf{Phase 3}: optimize: Response Surface Methods (RSM) and full factorials
+
+	\textbf{Phase 4}: maintain the optimum, continually search for better optima
+\end{frame}
+
+\begin{frame}\frametitle{Experiments with a single variable at two levels}
+	\begin{itemize}
+		\item	Simplest case:
+		\begin{itemize}
+			\item	flocculant A vs flocculant B
+			\item	low RPM vs high RPM
+			\item	\emph{etc}
+		\end{itemize}
+		\item	Measure $n_A$ values from setup A
+		\item	Measure $n_B$ values from setup B
+		\item	Hold all other variables constant (control disturbances)
+	\end{itemize}
+
+	\vspace{12pt}
+	\hrule
+	\vspace{12pt}
+	We are used to these experiments. They are OK to perform. But ...
+
+\end{frame}
+
+\begin{frame}\frametitle{Change one single variable at a time (COST)}
+	\begin{center}
+		\includegraphics[width=0.95\textwidth]{\imagedir/doe/COST-contours.png}
+	\end{center}
+	\begin{itemize}
+		\item	Base case: $T$=346K, $S$ = 1.5g/L; yield = 63\%.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Change one single variable at a time (COST)}
+	\begin{itemize}
+		\item	Trapped in a sub-optimal solution
+		\item	In the previous example: we would have considered experiment 7 to be the optimum
+			\begin{itemize}
+				\item	experiment 3 is the optimum wrt ``Temperature''
+				\item	then experiment 7 is the optimum wrt ``Substrate''
+				\item	but, we're still away from the true optimum
+			\end{itemize}
+		\item	We have known for 80 years now: COST is \textbf{wrong way} to optimize a system
+		\item	How to do it better?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Why not use existing data?}
+	\begin{itemize}
+		\item	Existing data = historical data = happenstance data
+		\item	This is data without any intentional perturbations
+		\item	\textbf{Problem}: we see correlations, but we cannot tell if they are cause-effect
+	\end{itemize}
+	\includegraphics[width=0.75\textwidth]{\imagedir/doe/yield-pressure-impurity-correlation.png}
+\end{frame}
+
+\begin{frame}\frametitle{Terminology: {\color{purple}{Response}}}
+	{\color{purple}{Response}}: the outcome that is being measured
+	\begin{itemize}
+		\item	e.g. growing plants?
+			\begin{itemize}
+				\item	height of plant after 10 days
+				\item	average width of 8 randomly chosen leaves
+			\end{itemize}
+		\item	e.g. maximizing sales in a store?
+			\begin{itemize}
+				\item	total profit in a week
+			\end{itemize}
+	\end{itemize}
+
+	\vspace{12pt}
+	A response variable:
+	\begin{itemize}
+		\item	is usually (in almost every case) a continuous variable
+		\item	should be measured in the same manner for all experiments
+		\item	should be reproducibly measurable
+		\item
+	\end{itemize}
+	{\color{myOrange}Always measure as many responses as you can to avoid repeating experiments later}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: 2 levels for 2 or more factors}
+	\begin{itemize}
+		\item	Change multiple factors \emph{simultaneously}
+		\item	{\color{purple}{Factor}}: is a variable that we can manipulate/adjust/set
+		\item	Consider, for now, two levels in each \textbf{{\color{myOrange}{factor}}}. For example:
+		\begin{itemize}
+
+			\item	continuous: low and high {\color{myOrange}{pH}}
+			\item	continuous: short mixing time and long {\color{myOrange}{mixing time}}
+			\item	discrete: {\color{myOrange}{flocculant}} A vs B
+			\item	discrete: {\color{myOrange}{mixing system}} A vs B
+			\item	discrete: {\color{myOrange}{impeller}} A vs B
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: illustrated at 2 levels, for 2 factors}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-contour-plot.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: illustrated at 2 levels, for 2 factors}
+	
+	\begin{enumerate}
+		\item	Pick your response, $y$ = conversion [\%] (for example)
+		\item	Pick your factors, e.g.
+		
+		\begin{itemize}
+			\item	$T$: Temperature: $T_\text{low}$ = 338K and $T_\text{high}$ = 354K
+			\item	$S$: Substrate concn: $S_\text{low}$ = 1.25\,g/L and $S_\text{high}$ = 1.75\,g/L
+		\end{itemize}
+		\item	Pick the range to investigate for each factor
+		\begin{itemize}
+			\item	About 25\% of typical operating range if no other prior knowledge. 
+			\item	Usually we have prior knowledge and can be smarter than this.
+		\end{itemize}
+		\item	Run experiments
+		\item	Analyze and think about the results (\emph{interpret})
+	\end{enumerate}
+	% \begin{itemize}
+	% 	\item	Number of experiments (runs): $2^k$; $k$ = number of factors = 2 in this case
+	% 	\item	{\color{purple}{Standard order}} vs {\color{purple}{Actual execution (run) order}}
+	% \end{itemize}
+	% \begin{center}
+	% 	\includegraphics[width=\textwidth]{\imagedir/doe/DOE-factorial-factors.png}
+	% \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Analysis by least squares modelling}
+	
+	\begin{itemize}
+		\item	$y = b_0 + b_Tx_T + b_S x_S + b_{TS} x_Tx_S + e$
+		\item	$y = 61.5 - 5 x_T - 3 x_S + - 0.5 x_Tx_S + e$
+	\end{itemize}
+
+	\begin{enumerate}
+		\item	Interpret $b_T = -5$?
+		\begin{itemize}
+			\item	$x_T$ is the change in {\color{purple}{\emph{normalized temperature}}} by 1 unit
+			\item	$-5$\% decrease in conversion for every 8K increase in temperature
+		\end{itemize}
+		\item	Now interpret $b_S = -3$?
+		\item	How to use this model for a prediction?
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{DOE of a 3-factor experiment}
+
+	Plastics molding factory; waste treatment.
+	\begin{itemize}
+		\item	Factor 1: $C$: chemical compound added (A or B)
+		\item	Factor 2: $T$: treatment temperature (72F or 100F)
+		\item	Factor 3: $S$: stirring speed (200 rpm or 400 rpm)
+		\item	$y$ = amount of pollutant discharged [lb]
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/DOE-3-factor-factorial-example.png}
+	\end{center}
+	\begin{itemize}
+		\item	We can already tell more about the system from the table alone!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Summary of factorial designs}
+	\begin{itemize}
+		\item	Good visual interpretation, even on paper
+		\item	Few experiments, but powerful information
+		\item	Building blocks for complex designs
+		\item	$2^k$ experiments for $k$ factors
+		\item	Each factor is varied independently of the others
+		\item	Each factor in model can be interpreted independently
+		\item	Least squares model easily derived by hand
+		\item	Sometimes a small effect is desirable: implies $y$ not sensitive that factor
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Summary of factorial designs}
+	\begin{block}{Much more efficient than change one-single factor at-a-time (COST)}
+		\begin{center}
+			\includegraphics[width=0.65\textwidth]{\imagedir/doe/comparison-of-variances.png}
+		\end{center}
+	\end{block}
+	\begin{itemize}
+		\item	COST: cannot estimate interactions
+		\item	We could rescue this COST design by adding $y_4$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}Issue:} Disturbances}
+	\begin{itemize}
+		\item	Ideally: all disturbances are \textbf{controlled}; have no effect on $y$
+		\item	That's never the case. So we deal with them.
+	\end{itemize}
+
+	We always have \textbf{unknown, unmeasurable and uncontrollable} disturbances
+	\begin{itemize}
+		\item	That's why we randomize experiments
+		\item	\emph{Example}: a side-reaction due to impurity in reactant affects $y$
+		\begin{itemize}
+			\item	Impurity is not uniform in the reactant
+		\end{itemize}
+		\item	\emph{Example}: catalyst deactivation, equipment fouling
+		\item	\emph{Example}: you get better as experiments progress (e.g. weightlifting)
+	\end{itemize}
+
+	\textbf{Known, or controllable, or measurable} disturbances:
+	\begin{itemize}
+		\item	Operators, physical equipment
+		\item	Pairing: cancel out the disturbance by using the same subject
+		\item	Blocking: disturbance is known to affect $y$
+		\begin{itemize}
+			\item	but we design experiment to minimize its effect.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}Issue:} Too many experiments in a factorial}
+
+	Real systems: many factors affect the $y$
+	
+	Cell-culture example: many factors to investigate
+	\begin{enumerate}
+		\item	the temperature profile
+		\begin{itemize}
+			\item	$T_{-}$: fast initial ramp then constant
+			\item	$T_{+}$: a slow increase over time
+		\end{itemize}
+		\item	dissolved oxygen
+		\item	agitation rate
+		\item	pH
+		\item	substrate type (A or B)
+	\end{enumerate}
+	
+	Would require $2^5 = 32$ runs; 10 days per cell culture $\approx$ 1 year
+	\begin{itemize}
+		\item	We can run a subset of the full factorial!
+		\item	We save money and/or time.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Half fractions}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{\imagedir/doe/half-fraction-in-3-factors-no-labels.png}
+	\end{center}
+	\begin{itemize}
+		\item	Run either the open or closed set of 4 runs
+		\item	In the example that follows: run the closed corners
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Saturated designs}
+
+	%{\color{purple}{Saturated design}}: fewest number of runs as possible for a given number of factors
+	\begin{exampleblock}{}
+		With little/no prior knowledge about a process, always start your first experiments with a saturated, screening design.
+	\end{exampleblock}
+	{\color{myOrange}{This gives you the greatest value for your experimental budget.}}
+
+	\begin{center}
+		\includegraphics[height=0.8\textheight]{\imagedir/doe/DOE-trade-off-table.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Response surface methods}
+
+	Objective for the {\color{purple}{response surface method (RSM)}}: achieve the best response using sequential experimentation.
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{\imagedir/doe/COST-contours.png}
+	\end{center}
+	Wasn't the COST approach also sequential experimentation?
+
+	\vspace{6pt}
+	\textbf{Different to COST}: We are going to change multiple variables at a time!
+\end{frame}
+
+\begin{frame}\frametitle{George E. P. Box: he pioneered RSM}
+	{\scriptsize G. E. P. Box and K. B. Wilson (1951): ``\href{http://www.jstor.org/stable/2983966}{On the Experimental Attainment of Optimum Conditions}'', \emph{Journal of the Royal Statististical Society}. \textbf{B 13}, 1 - 45.}
+	\vspace{-12pt}
+	\begin{columns}[t]
+		\column{0.60\textwidth}
+			\begin{center}
+				\includegraphics[width=0.9\textwidth]{\imagedir/statistics/Box-JMP-Discovery-Summit-2009.jpg}
+			\end{center}
+
+			\vspace{-8pt}
+			\see{\href{http://blogs.sas.com/content/jmp/2013/03/29/george-box-a-remembrance/}{Photo credit: JMP/SAS}}
+
+			\begin{itemize}
+				\item	{\small October 1919 to 28 March 2013}
+				\item	He was the PhD supervisor of my prior boss
+				\item	``... \emph{essentially, all models are wrong, but some are useful}\,''
+			\end{itemize}
+		\column{0.50\textwidth}
+			\begin{center}
+				\includegraphics[width=0.85\textwidth]{\imagedir/statistics/flickr-Box-Hunter-Hunter-cover-3056749047_1c1f633fcb_o.jpg}
+			\end{center}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Single-variable case}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/doe/steepest-ascent-univariately-corrected.png}
+	\end{center}
+	{\small We could have got to optimum faster if we had used quadratic (or spline) approximations.}
+\end{frame}
+
+\begin{frame}\frametitle{Analogy for finding the optimum}
+	\begin{center}
+		\includegraphics[height=0.80\textheight]{\imagedir/doe/pictograms-nps-accessibility-low-vision-access.png} %3626157564_ba129e810a_b.jpg}
+	\end{center}
+	Each ``tap'' is very expensive. Limited number of taps available.
+\end{frame}
+
+\begin{frame}\frametitle{2-variable example}
+	\begin{columns}
+		\column{0.60\textwidth}
+			\begin{center}
+				\includegraphics[height=0.95\textheight]{\imagedir/doe/RSM-base-case-with-CCD-contours.png}
+			\end{center}
+		\column{0.45\textwidth}
+			\begin{itemize}
+				\item	The next experiment is based on the contour plot output, i.e.
+				\item	$T^{(17)} \approx 343\,\text{K}$
+				\item	$S^{(17)} \approx 1.60\,\text{g.L}^{-1}$
+				\item	$\hat{y}^{(17)} = \$736$
+				\item	${y}^{(17)}_\text{actual} = \$738$
+			\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Evolutionary operation (EVOP)}
+	\begin{itemize}
+		\item	Similar concept to RSM
+		\item	Processes are not constant, the optimum is shifting
+		\begin{itemize}
+			\item	heat-exchanger fouling
+			\item	build-up inside reactors and tubing
+			\item	catalyst deactivation
+			\item	slowly varying disturbances
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Iterative hunt for the process optimum:
+		\begin{itemize}
+			\item	make small perturbations within daily production
+			\item	use replicate runs and average
+			\item	move along the response surface
+		\end{itemize}
+	\end{itemize}
+\end{frame}
