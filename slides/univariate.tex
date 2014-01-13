@@ -18,12 +18,13 @@
 \begin{frame}\frametitle{References and readings}
 	\begin{itemize}
 		\item	Any standard statistics text book
-		\begin{itemize}
-			\item	\textbf{Recommended}: Box, Hunter and Hunter, \emph{Statistics for Experimenters}, Chapter 2 (both 1st and 2nd edition)
-			\item	Hodges and Lehmann, \emph{Basic Concepts of Probability and Statistics}
-			\item	Hogg and Ledolter, \emph{Engineering Statistics}
-			\item	Montgomery and Runger, \emph{Applied Statistics and Probability for Engineers}
-		\end{itemize}
+		\item	\textbf{Recommended}: Box, Hunter and Hunter, \emph{Statistics for Experimenters}, Chapter 2 (both 1st and 2nd edition)
+		\item	\textbf{Wikipedia articles} on any term that seems unfamiliar or that you've forgotten
+
+		\vspace{2cm}
+		\item	Hodges and Lehmann, \emph{Basic Concepts of Probability and Statistics}
+		\item	Hogg and Ledolter, \emph{Engineering Statistics}
+		\item	Montgomery and Runger, \emph{Applied Statistics and Probability for Engineers}
 	\end{itemize}
 \end{frame}
 
@@ -42,7 +43,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{We have plenty of variability in our recorded data}
-	
+
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/concepts/variation/variation-some.png}
 	\end{center}
@@ -317,7 +318,7 @@
 		\item	4024, 5152, 2314, 6360, 4915, 9552, 2415, 6402, 6261
 		\item	4, 61, 12, 64, 4024, 52, -8, 67, 104, 24
 	\end{itemize}
-	
+
 	\vspace{12pt}
 	\begin{itemize}
 		\item	$\bar{x} = 440.4$  and $s = 1260$
@@ -501,7 +502,7 @@
 			0 			&	1			& 	1		&  		  \\ \hline
 			0 			&	1			& 	-1		&  		  \\ \hline
 		\end{tabular}
-		
+
 	\end{center}
 	Some rules of thumb:
 	\begin{itemize}
@@ -518,7 +519,7 @@
 		\item	The {\color{purple}{standard form}} is defined as $ z = \displaystyle \frac{x - \mu}{\sigma} $
 		\item	$z \sim \mathcal{N}(\mu, \sigma^2)$ \hfill {\color{myOrange}{$\longleftarrow$ do not use the standard deviation in here}}
 		\item	$z \sim \mathcal{N}(0.0, 1.0)$.
-		\item	Units of $z$ if $x$ were measured in \texttt{kg}, for example? 
+		\item	Units of $z$ if $x$ were measured in \texttt{kg}, for example?
 		\item	Standardization allows us to straightforwardly compare 2 variables that have different means and spreads
 		\item	{\color{red}{Recommendation}}: make sure you can read a statistical table (see end of Chapter 2)
 	\end{itemize}
@@ -570,10 +571,10 @@
 	\textbf{Approach}: {\color{myOrange}{compare}}
 	\begin{itemize}
 		\item	the theoretical distribution against
-		\item	the actual data. 
+		\item	the actual data.
 	\end{itemize}
 	Let's say you have $N$ \emph{actual} observations you want to check.
-	
+
 	\vspace{16pt}
 	1. Select $N$ observations that really are normally distributed:
 	\begin{itemize}
@@ -587,11 +588,11 @@
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Checking for normality using q-q plots}
-	
+
 	\begin{lstlisting}[R]
 	N = 10
 	index <- seq(1, N)       #    1,    2, ...   10
-	P <- (index - 0.5) / N   # 0.05, 0.15, ... 0.95 
+	P <- (index - 0.5) / N   # 0.05, 0.15, ... 0.95
 	theoretical.quantity <- qnorm(P)
 	# [1] -1.64 -1.04 -0.674 -0.385 -0.126
 	#      0.125  0.385  0.6744 1.036  1.64
@@ -608,7 +609,7 @@
 		\item	Sort the data from lowest to highest
 		\item	These points should now match the theoretical points from step 1 if they are normally distributed. \emph{{\color{myGreen}{Example}}}:
 	\end{itemize}
-	
+
 	\begin{lstlisting}[R]
 	yields <- c(86.2, 85.7, 71.9, ... 86.9, 78.4)
 	mean.yield <- mean(yields)          # 80.0
@@ -620,7 +621,7 @@
 	yields.z.sorted <- sort(yields.z)
 	#[1] -1.34 -1.04  -0.978 -0.355 ... 0.734 0.818  1.82
 
-	theoretical.quantity  
+	theoretical.quantity
 	#[1] -1.64 -1.04  -0.674 -0.385 ... 0.674 1.036  1.64
 	\end{lstlisting}
 \end{frame}
@@ -645,7 +646,7 @@
 	\vspace{-8pt}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/univariate/qqplot-from-R.png}
-		
+
 		\begin{columns}[t]
 			\column{0.35\textwidth}
 				\texttt{qqplot(...)}\\
@@ -655,7 +656,7 @@
 				\texttt{qqPlot(...)}
 		\end{columns}
 	\end{center}
-	
+
 \end{frame}
 
 \begin{frame}\frametitle{Example: 4N4 exam grades}
@@ -734,9 +735,9 @@
 		\item	Assume we know the population $\sigma=3.5$
 	\end{itemize}
 	\myhrule
-	1. Distribution of the sample mean? Parameters of that distribution? 
+	1. Distribution of the sample mean? Parameters of that distribution?
 	\begin{itemize}
-		\item$\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$ 
+		\item$\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$
 	\end{itemize}
 	2. Construct a $z$-value for $\bar{x} $
 	\begin{itemize}
@@ -759,8 +760,8 @@
 \begin{frame}\frametitle{Example}
 	4. Unpack the $z$-value inside those bounds, solving for the unknown population mean, $\mu$
 	\begin{itemize}
-		\item	$\displaystyle - c_n < \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} < c_n$ 
-		\item	$\displaystyle \bar{x} - c_n\frac{\sigma}{\sqrt{n}} < \mu < \bar{x} + c_n\frac{\sigma}{\sqrt{n}}$ 
+		\item	$\displaystyle - c_n < \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} < c_n$
+		\item	$\displaystyle \bar{x} - c_n\frac{\sigma}{\sqrt{n}} < \mu < \bar{x} + c_n\frac{\sigma}{\sqrt{n}}$
 		\item	$\displaystyle \text{LB} < \mu < \text{UB}$
 	\end{itemize}
 
@@ -804,20 +805,20 @@
 
 \begin{frame}\frametitle{Bale example: applying the $t$-distribution}
 	\begin{enumerate}
-		\item	Construct the $z$-value for the sample average, assuming we don't know $\sigma$ 
+		\item	Construct the $z$-value for the sample average, assuming we don't know $\sigma$
 		\begin{itemize}
 			\item	$z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}}$
 		\end{itemize}
-		\item	What distribution does this $z$-value follow? Be specific. 
+		\item	What distribution does this $z$-value follow? Be specific.
 		\begin{itemize}
 			\item	$t$-distribution, with 8 degrees of freedom
 		\end{itemize}
 		\item	Check that $x_i$ raw data follow a normal distribution (assumption)
-		\item	Find lower and upper bounds for interval that spans 95\% of the area of this distribution. 
+		\item	Find lower and upper bounds for interval that spans 95\% of the area of this distribution.
 		\begin{itemize}
 			\item	\texttt{qt(0.025, df=8) = - 2.31} and \texttt{qt(0.975, df=8) = +2.31}
 		\end{itemize}
-		\item	Substitute the $z$-value into the interval. What is the interval for the population mean this time? 
+		\item	Substitute the $z$-value into the interval. What is the interval for the population mean this time?
 		\begin{itemize}
 			\item	$\bar{x} - c_t\dfrac{s}{\sqrt{n}} < \mu < \bar{x} + c_t\dfrac{s}{\sqrt{n}}$
 		\end{itemize}
@@ -876,7 +877,7 @@
 		\item	The CI {\color{myOrange}{\textbf{does not imply}}} that $\bar{x}$ lies in the interval from LB to UB, i.e. the CI is not about $\bar{x}$; it's about $\mu$
 		\item	\textbf{Incorrect} to say: (sample) average viscosity is 20 units and lies inside the range of 17.1 to 22.9 with a 95\% probability
 		\item	The CI \textbf{does imply} that $\mu$ is expected to lie within that interval with a given level of confidence
-		\item	The {\color{myGreen}{\textbf{CI is a range}}} of possible values for $\mu$, not for $\bar{x}$ 
+		\item	The {\color{myGreen}{\textbf{CI is a range}}} of possible values for $\mu$, not for $\bar{x}$
 		\item	UB and LB are a function of the data sample
 		\item	If we take a different sample of data, we will get different bounds
 		\item	How should the confidence level (probability) be interpreted?
@@ -900,12 +901,12 @@
 		\end{tabular}
 	\end{center}
 	\begin{itemize}
-		\item	What happens if the level of confidence is 100\%? 
+		\item	What happens if the level of confidence is 100\%?
 		\begin{itemize}
 			\item	The confidence interval is then infinite.
 			\item	We are 100\% certain this infinite range contains the population mean, however this is not a useful interval.
 		\end{itemize}
-		\item	What happens if we increase the value of $n$? 
+		\item	What happens if we increase the value of $n$?
 		\begin{itemize}
 			\item	As $n$ increases, the confidence interval range decreases
 			\item	but with diminishing returns (intuitively expected)
@@ -915,7 +916,7 @@
 
 \begin{frame}\frametitle{Summary: CI for a mean}
 
-	Make 2 assumptions about the raw data: (\emph{always check these}!) 
+	Make 2 assumptions about the raw data: (\emph{always check these}!)
 	\begin{enumerate}
 		\item	$n$ independent points \hfill {\color{myOrange}{$\longleftarrow$ this assumption is always required}}
 		\item	from the normal distribution \hfill {\color{myOrange}{$\longleftarrow$ not required if $\sigma$ known}}
@@ -933,7 +934,7 @@
 \begin{frame}\frametitle{Confidence interval calculations when the \textbf{variance is known}}
 	\begin{itemize}
 		\item	$z = \dfrac{\bar{x} - \mu}{\sigma/\sqrt{n}}$
-		\item	z is normally distributed \textbf{if} the $x_i$ used to calculate $\bar{x}$ are independent 
+		\item	z is normally distributed \textbf{if} the $x_i$ used to calculate $\bar{x}$ are independent
 	\end{itemize}
 
 	$
@@ -981,7 +982,7 @@
 		\begin{itemize}
 			\item	ratio of two variances: \emph{do these 2 samples have same variance}?
 		\end{itemize}
-		
+
 		\vspace{12pt}
 		\item	They exist for proportions:
 		\begin{itemize}
@@ -1021,7 +1022,7 @@
 
 \begin{frame}\frametitle{Example for testing differences: the raw data acquired}
 	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-wikitable.png}
-	
+
 	\vspace{12pt}
 	$\bar{x}_B - \bar{x}_A = 82.93 - 79.89 = 3.04$
 \end{frame}
@@ -1032,7 +1033,7 @@
 
 \begin{frame}\frametitle{Example for testing differences: look at the data in context}
 	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-sequence-plot.png}
-	
+
 	\vspace{0pt}
 	Always request contextual data, if available: extremely valuable. {\color{myOrange}{Let's see why.}}
 \end{frame}
@@ -1092,7 +1093,7 @@
 				\item	$\mathcal{V}\left\{\bar{x}_B\right\} = \dfrac{\sigma^2_B}{n_B}$
 			\end{itemize}
 	\end{enumerate}
-	
+
 \end{frame}
 
 \begin{frame}\frametitle{Second approach: when no reference data is available}
@@ -1122,7 +1123,7 @@
 	\begin{itemize}
 		\item	Sheet may not be uniform
 		\begin{itemize}
-			\item	\textbf{Randomly} assign blocks A and B on the packaging sheet 
+			\item	\textbf{Randomly} assign blocks A and B on the packaging sheet
 		\end{itemize}
 		\item	Is the sheet representative?
 		\begin{itemize}
@@ -1205,7 +1206,7 @@
 \begin{frame}\frametitle{Method 2a: No reference set, external $\sigma$}
 
 	If we have some \textbf{population estimate} for $\sigma$ (external estimate)
-	
+
 	$
 	\begin{array}{rcl}
 		z &=& \dfrac{(\bar{x}_B - \bar{x}_A) - (\mu_B - \mu_A)}{\sqrt{\sigma^2 \left( \dfrac{1}{n_A} + \dfrac{1}{n_B}\right)}} \\
@@ -1237,7 +1238,7 @@
 		s_P^2 &=& \dfrac{9\times 6.81^2 + 9 \times 6.70^2}{18} = 45.63
 	\end{array}
 	$
-	
+
 	\vspace{8pt}
 	$
 	\begin{array}{rcccl}
@@ -1285,17 +1286,17 @@
 \end{frame}
 
 \begin{frame}\frametitle{What happens if the samples are not independent? [600-level]}
-	Actual engineering data often violate the assumption of independence. 
-	
+	Actual engineering data often violate the assumption of independence.
+
 	Simulate sequences of lag-1 autocorrelated data, $x_{k+1} = \phi x_{k} + a_k$ with $a_k \sim \mathcal{N}\left(\mu=0, \sigma^2 = 25.0 \right)$ with length of $n=100$ samples
 	\begin{itemize}
 		\item[A]	Positively correlated: use $\phi > 0.7$
 		\item[B]	Negatively correlated: use $\phi < -0.6$
 		\item[C]	No correlation, i.e. totally independent data: $\phi = 0.0$
 	\end{itemize}
-	
+
 	What happens to the standard deviation of $\bar{x}$? (simulate many sequences; calculate $\bar{x}$ then stddev, $s$, of these $\bar{x}$ values)
-	
+
 	\myhrule
 	\emph{Solution}
 	\begin{itemize}
@@ -1323,7 +1324,7 @@
 	Consider the case of \emph{statistical difference} vs \emph{engineering difference}
 \end{frame}
 
-\begin{frame}\frametitle{Example: BOD}	
+\begin{frame}\frametitle{Example: BOD}
 	A system is assumed to have constant BOD during a time when multiple samples were taken using two different methods:
 	\begin{center}
 		\scalebox{0.80}{
@@ -1342,7 +1343,7 @@
 					14 &             16\\
 				\end{tabular}
 		}
-	\end{center}	
+	\end{center}
 	\begin{columns}[t]
 		\column{0.50\textwidth}
 			BOD via \textbf{Dilution method}:
@@ -1365,7 +1366,7 @@
 
 \begin{frame}\frametitle{Example of testing for differences: BOD}
 	\vspace{12pt}
-	
+
 	\hspace{-0.75cm}\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-raw-data-alternative.png}
 \end{frame}
 
@@ -1519,7 +1520,7 @@
 		\item	Assume these $n$ differences are independent
 		\item	Calculate the mean $\overline{w}$ and standard deviation $s_{\overline{w}}$
 		\item	$\overline{w}$ should be normally distributed (CLT): $\bar{w} \sim \mathcal{N}\left(\mu_w, \sigma_w^2/n \right)$
-		\item	We are testing: 
+		\item	We are testing:
 		\begin{itemize}
 			\item	$\mu_w = \mu_A - \mu_B$  (if you calculated $w_i = x_{A,i} - x_{B,i}$)
 			\item	$\mu_w = \mu_B - \mu_A$  (if you calculated $w_i = x_{B,i} - x_{A,i}$)
