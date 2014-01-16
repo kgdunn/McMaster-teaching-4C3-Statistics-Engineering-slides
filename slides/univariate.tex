@@ -530,8 +530,8 @@
 		\item	Used for tables of normal distribution, and cumulative area
 		\item	We will use software instead in the course
 		\item	The {\color{purple}{standard form}} is defined as $ z = \displaystyle \frac{x - \mu}{\sigma} $
-		\item	$z \sim \mathcal{N}(\mu, \sigma^2)$ \hfill {\color{myOrange}{$\longleftarrow$ do not use the standard deviation in here}}
-		\item	$z \sim \mathcal{N}(0.0, 1.0)$.
+		\item	${\color{red} \mathbf{x}} \sim \mathcal{N}(\mu, \sigma^2)$ \hfill {\color{myOrange}{$\longleftarrow$ do not use the standard deviation, use $\sigma^2$}}
+		\item	$z \sim \mathcal{N}(0.0, 1.0)$ after standardization
 		\item	Units of $z$ if $x$ were measured in \texttt{kg}, for example?
 		\item	Standardization allows us to straightforwardly compare 2 variables that have different means and spreads
 		\item	{\color{red}{Recommendation}}: make sure you can read a statistical table (see end of Chapter 2)
@@ -558,6 +558,9 @@
 				$$x \sim \mathcal{N}(85 \text{~g/L}, 16\, \text{g}^2\text{.L}^{-2})$$
 				What is the proportion of yield values between 77 and 93 g/L?
 	\end{enumerate}
+	
+	% Q1: sigma = 3 units; mean = 27; so at 30, we cover all the area between +/- 1sigma, which is 70%. Then add the area from -Inf to -1Sigma = 15%, to 70% + 15% = 85% (or read it from the tables where z=+1)
+	% Q2: sigma = 4 units; mean = 85; z = (77-85)/4 = -2;   z=(93 - 85)/4 = 8/4 =2; so area between -2 and +2 = 95%
 \end{frame}
 
 \begin{frame}\frametitle{Checking for normality. Is this sample normally distributed?}
@@ -570,7 +573,7 @@
 \begin{frame}\frametitle{Inverse cumulative distribution function (inverse CDF)}
 	\begin{itemize}
 		\item	\textbf{Cumulative distribution}: area underneath the distribution function
-		\item	\textbf{Inverse cumulative distribution}: we know the area, but want to get back to the value along the x-axis.
+		\item	\textbf{Inverse cumulative distribution}: we know the area, but want to get back to the value along the $z$-axis.
 		\item	We use this to construct a q-q plot
 	\end{itemize}
 	\vspace{-4pt}
@@ -589,7 +592,7 @@
 	Let's say you have $N$ \emph{actual} observations you want to check.
 
 	\vspace{16pt}
-	1. Select $N$ observations that really are normally distributed:
+	1. Create $N$ theoretical observations that are normally distributed:
 	\begin{itemize}
 		\item	Sort from lowest to highest
 		\item	The first point is the 1/$N$ x 100 percentile
@@ -634,7 +637,7 @@
 	yields.z.sorted <- sort(yields.z)
 	#[1] -1.34 -1.04  -0.978 -0.355 ... 0.734 0.818  1.82
 
-	theoretical.quantity
+	theoretical.quantity   # see prior slide
 	#[1] -1.64 -1.04  -0.674 -0.385 ... 0.674 1.036  1.64
 	\end{lstlisting}
 \end{frame}
@@ -672,9 +675,9 @@
 
 \end{frame}
 
-\begin{frame}\frametitle{Example: 4N4 exam grades}
+\begin{frame}\frametitle{Example: the 4N4 exam grades from 2013}
 	\begin{center}
-		\includegraphics[width=.84\textwidth]{\imagedir/univariate/qqplot-4N4-2012-grades.png}
+		\includegraphics[height=.9\textheight]{\imagedir/univariate/qqplot-4N4-2013-grades.png}
 	\end{center}
 \end{frame}
 
@@ -727,7 +730,10 @@
 
 	\emph{Interpretation}
 
-	Repeated estimates of mean are unbiased (tends towards $\mu$ {\color{myOrange}{$\leftarrow$ of the distribution sampled from!}}) and variance of that estimate is decreased. \emph{Computer demo.}
+	Repeated estimates of mean are unbiased (tends towards $\mu$ {\color{myOrange}{$\leftarrow$ of the distribution sampled from!}}) and variance of that estimate is decreased. 
+	\emph{Computer demo.}
+	
+	% 
 \end{frame}
 
 \begin{frame}\frametitle{Central limit theorem: extended}
