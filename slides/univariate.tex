@@ -1223,10 +1223,14 @@
 		\item$z = \dfrac{(\bar{x}_B - \bar{x}_A) - (\mu_B - \mu_A)}{\sqrt{\sigma^2 \left(\dfrac{1}{n_A} + \dfrac{1}{n_B}\right)}}$
 	\end{itemize}
 
-	7. Create confidence interval. Ask: does is span zero?
-	\begin{itemize}
-		\item$(\bar{x}_B - \bar{x}_A) - c_n \sqrt{\sigma^2 (\tfrac{1}{n_A} + \tfrac{1}{n_B})} < \mu_B - \mu_A < (\bar{x}_B - \bar{x}_A) + c_n \sqrt{\sigma^2 (\tfrac{1}{n_A} + \tfrac{1}{n_B})}$
-	\end{itemize}
+	7. Create a confidence interval. Ask: does is span zero?
+	
+
+	{\small
+	
+		 \hspace{-0.5cm} \fbox{${\color{blue} (\bar{x}_B - \bar{x}_A) - c_n \sqrt{\sigma^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B}\right)}  } < {\color{red} \mu_B - \mu_A} < {\color{blue} (\bar{x}_B - \bar{x}_A) + c_n \sqrt{\sigma^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B} \right)} }$}
+	
+	}
 \end{frame}
 
 \begin{frame}\frametitle{Method 2a: No reference set, external $\sigma$}
@@ -1316,8 +1320,8 @@
 
 	Simulate sequences of lag-1 autocorrelated data, $x_{k+1} = \phi x_{k} + a_k$ with $a_k \sim \mathcal{N}\left(\mu=0, \sigma^2 = 25.0 \right)$ with length of $n=100$ samples
 	\begin{itemize}
-		\item[A]	Positively correlated: use $\phi > 0.7$
-		\item[B]	Negatively correlated: use $\phi < -0.6$
+		\item[A]	Positively correlated: use $\phi = 0.7$
+		\item[B]	Negatively correlated: use $\phi = -0.6$
 		\item[C]	No correlation, i.e. totally independent data: $\phi = 0.0$
 	\end{itemize}
 
@@ -1388,6 +1392,15 @@
 	\end{columns}
 	\vspace{6pt}
 	\emph{Verify that there is no difference between the two methods}
+	
+	% s^2_p = 62.53 = (10*(5.9)^2 + 10*(9.5)^2)/20; s_p = 7.908
+	% DOF = 20
+	
+	% Confidence interval: (xM,bar-xD,bar) = (22.6 - 16.4) 
+	% Confidence interval: c_t with 20 DOF at 95\% level = qt(0.975, 20) = 2.085963
+	% Confidence interval: stddev = sqrt(sp^2*(1/nM + 1/nD)) = sqrt(7.908^2 * (1/11+1/11)) = 3.37
+	% CI lower bound =  (xM,bar-xD,bar) - c_t * stddev = (22.6 - 16.4) - 2.086*3.37 = -0.83
+	% CI upper bound =  (xM,bar-xD,bar) + c_t * stddev = (22.6 - 16.4) + 2.086*3.37 = 13.2
 \end{frame}
 
 \begin{frame}\frametitle{Example of testing for differences: BOD}
