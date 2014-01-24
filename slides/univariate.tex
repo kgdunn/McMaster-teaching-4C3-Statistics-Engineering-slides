@@ -1137,69 +1137,6 @@
 	\textbf{Question}: what is the probability of getting a $z$ \textbf{\emph{smaller}} than this?
 \end{frame}
 
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
-
-	Testing a new coating, B, to repel moisture. Coating is applied to packaging sheets to enhance the moisture barrier property. We take 1 sheet, divide into 16 squares, apply coating A and coating B as shown. Are 16 measured hydrophobicity values independent?
-	\begin{center}
-		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/sheet-coating-application.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
-	\begin{itemize}
-		\item	Sheet may not be uniform
-		\begin{itemize}
-			\item	\textbf{Randomly} assign blocks A and B on the packaging sheet
-		\end{itemize}
-		\item	Is the sheet representative?
-		\begin{itemize}
-			\item	Use sheets from different lots from the sheet supplier. Randomly apply A and B to different sheets.
-		\end{itemize}
-		\item	Couldn't we just measure $\text{B} - \text{A}$ (cancels out non-uniformity)?
-		\begin{itemize}
-			\item	Yes - paired experiment.
-			\item	Note that $\bar{x}_A$ and $\bar{x}_B$ are not independent (violates step 5)
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
-
-	Aim: Testing an alternative, cheaper raw material in our process. Do not want the final product to change.
-	\begin{itemize}
-		\item	The dispensing system must be modified for raw material B, requiring production line to be shut down for 15 hours.
-	\end{itemize}
-	\begin{itemize}
-		\item	The new supplier has given us 8 representative batches to test; each test takes 3 hours. Run these 8 batches over the weekend: set up dispenser on Friday night (15 hours), run tests from Saturday noon to Sunday noon (8 x 3 = 24hrs), then return the line back to normal for Monday's shift.
-	\end{itemize}
-	\begin{itemize}
-		\item\textbf{\emph{How}} do we violate the assumptions of independence when comparing 8 batches of material A (taken from Thursday and Friday) to the 8 batches from material B (Saturday and Sunday)?
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
-	\begin{itemize}
-		\item	The 8 tests are run sequentially; \emph{any changes} in conditions between these 8 runs and the 8 runs from material A will be confounded
-		\begin{itemize}
-			\item	Staff running the equipment on the weekend
-			\item	Dispenser change may have modified the process
-			\item	Dispenser might be the improvement, not the new material
-			\item	Samples waiting to be analyzed on Monday
-		\end{itemize}
-	\end{itemize}
-	\begin{itemize}
-		\item	Expensive and impractical to randomize in this case.
-		\item	Suboptimal: Run \texttt{A A A A B B B B A A A A B B B B}
-		\begin{itemize}
-			\item	Run \texttt{A A A A B B B B} once
-			\item	Run \texttt{B B B B A A A A} next
-		\end{itemize}
-		\item	Use a split-plot experimental design
-	\end{itemize}
-
-	\textcolor{red}{Randomization is the insurance (cost) we require to avoid being misled.}
-\end{frame}
-
 \begin{frame}\frametitle{Back to method 2 for testing differences}
 
 	\textbf{Aim}: is $\mu_B > \mu_A$ ? In other words, is $\mu_B - \mu_A > 0$?
@@ -1315,7 +1252,70 @@
 	Method 2 used only experimental (recent) data, but requires randomization (insurance policy - not always cheap)
 \end{frame}
 
-\begin{frame}\frametitle{What happens if the samples are not independent? [600-level]}
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
+
+	Testing a new coating, B, to repel moisture. Coating is applied to packaging sheets to enhance the moisture barrier property. We take 1 sheet, divide into 16 squares, apply coating A and coating B as shown. Are 16 measured hydrophobicity values independent?
+	\begin{center}
+		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/sheet-coating-application.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
+	\begin{itemize}
+		\item	Sheet may not be uniform
+		\begin{itemize}
+			\item	\textbf{Randomly} assign blocks A and B on the packaging sheet
+		\end{itemize}
+		\item	Is the sheet representative?
+		\begin{itemize}
+			\item	Use sheets from different lots from the sheet supplier. Randomly apply A and B to different sheets.
+		\end{itemize}
+		\item	Couldn't we just measure $\text{B} - \text{A}$ (cancels out non-uniformity)?
+		\begin{itemize}
+			\item	Yes - paired experiment.
+			\item	Note that $\bar{x}_A$ and $\bar{x}_B$ are not independent (violates step 5)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
+
+	Aim: Testing an alternative, cheaper raw material in our process. Do not want the final product to change.
+	\begin{itemize}
+		\item	The dispensing system must be modified for raw material B, requiring production line to be shut down for 15 hours.
+	\end{itemize}
+	\begin{itemize}
+		\item	The new supplier has given us 8 representative batches to test; each test takes 3 hours. Run these 8 batches over the weekend: set up dispenser on Friday night (15 hours), run tests from Saturday noon to Sunday noon (8 x 3 = 24hrs), then return the line back to normal for Monday's shift.
+	\end{itemize}
+	\begin{itemize}
+		\item\textbf{\emph{How}} do we violate the assumptions of independence when comparing 8 batches of material A (taken from Thursday and Friday) to the 8 batches from material B (Saturday and Sunday)?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
+	\begin{itemize}
+		\item	The 8 tests are run sequentially; \emph{any changes} in conditions between these 8 runs and the 8 runs from material A will be confounded
+		\begin{itemize}
+			\item	Staff running the equipment on the weekend
+			\item	Dispenser change may have modified the process
+			\item	Dispenser might be the improvement, not the new material
+			\item	Samples waiting to be analyzed on Monday
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Expensive and impractical to randomize in this case.
+		\item	Suboptimal: Run \texttt{A A A A B B B B A A A A B B B B}
+		\begin{itemize}
+			\item	Run \texttt{A A A A B B B B} once
+			\item	Run \texttt{B B B B A A A A} next
+		\end{itemize}
+		\item	Use a split-plot experimental design
+	\end{itemize}
+
+	\textcolor{red}{Randomization is the insurance (cost) we require to avoid being misled.}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} What happens if the samples are not independent? [600-level]}
 	Actual engineering data often violate the assumption of independence.
 
 	Simulate sequences of lag-1 autocorrelated data, $x_{k+1} = \phi x_{k} + a_k$ with $a_k \sim \mathcal{N}\left(\mu=0, \sigma^2 = 25.0 \right)$ with length of $n=100$ samples
@@ -1392,7 +1392,7 @@
 	\end{columns}
 	\vspace{6pt}
 	\emph{Verify that there is no difference between the two methods}
-	
+		
 	% s^2_p = 62.53 = (10*(5.9)^2 + 10*(9.5)^2)/20; s_p = 7.908
 	% DOF = 20
 	
