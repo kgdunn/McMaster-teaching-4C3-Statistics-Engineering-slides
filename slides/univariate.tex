@@ -1,3 +1,5 @@
+% TODO: add the Confidence interval for the system on the slide "Method 2b: No reference set, internal σ"
+
 \begin{frame}\frametitle{Univariate data analysis: What we will cover}
 	\includegraphics[width=\textwidth]{\imagedir/mindmaps/univariate-section-mapping.png}
 \end{frame}
@@ -1119,7 +1121,6 @@
 				\item	$\mathcal{V}\left\{\bar{x}_B\right\} = \dfrac{\sigma^2_B}{n_B}$
 			\end{itemize}
 	\end{enumerate}
-
 \end{frame}
 
 \begin{frame}\frametitle{Second approach: when no reference data is available}
@@ -1136,6 +1137,90 @@
 
 	\textbf{Question}: what is the probability of getting a $z$ \textbf{\emph{smaller}} than this?
 \end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
+
+	Testing a new coating, B, to repel moisture. Coating is applied to packaging sheets to enhance the moisture barrier property. We take 1 sheet, divide into 16 squares, apply coating A and coating B as shown. Are 16 measured hydrophobicity values independent?
+	\begin{center}
+		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/sheet-coating-application.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
+	\begin{itemize}
+		\item	Sheet may not be uniform
+		\begin{itemize}
+			\item	\textbf{Randomly} assign blocks A and B on the packaging sheet
+		\end{itemize}
+		\item	Is the sheet representative?
+		\begin{itemize}
+			\item	Use sheets from different lots from the sheet supplier. Randomly apply A and B to different sheets.
+		\end{itemize}
+		\item	Couldn't we just measure $\text{B} - \text{A}$ (cancels out non-uniformity)?
+		\begin{itemize}
+			\item	Yes - paired experiment.
+			\item	Note that $\bar{x}_A$ and $\bar{x}_B$ are not independent (violates step 5)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
+
+	Aim: Testing an alternative, cheaper raw material in our process. Do not want the final product to change.
+	\begin{itemize}
+		\item	The dispensing system must be modified for raw material B, requiring production line to be shut down for 15 hours.
+	\end{itemize}
+	\begin{itemize}
+		\item	The new supplier has given us 8 representative batches to test; each test takes 3 hours. Run these 8 batches over the weekend: set up dispenser on Friday night (15 hours), run tests from Saturday noon to Sunday noon (8 x 3 = 24hrs), then return the line back to normal for Monday's shift.
+	\end{itemize}
+	\begin{itemize}
+		\item\textbf{\emph{How}} do we violate the assumptions of independence when comparing 8 batches of material A (taken from Thursday and Friday) to the 8 batches from material B (Saturday and Sunday)?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
+	\begin{itemize}
+		\item	The 8 tests are run sequentially; \emph{any changes} in conditions between these 8 runs and the 8 runs from material A will be confounded
+		\begin{itemize}
+			\item	Staff running the equipment on the weekend
+			\item	Dispenser change may have modified the process
+			\item	Dispenser might be the improvement, not the new material
+			\item	Samples waiting to be analyzed on Monday
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Expensive and impractical to randomize in this case.
+		\item	Suboptimal: Run \texttt{A A A A B B B B A A A A B B B B}
+		\begin{itemize}
+			\item	Run \texttt{A A A A B B B B} once
+			\item	Run \texttt{B B B B A A A A} next
+		\end{itemize}
+		\item	Use a split-plot experimental design
+	\end{itemize}
+
+	\textcolor{red}{Randomization is the insurance (cost) we require to avoid being misled.}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} What happens if the samples are not independent? [600-level]}
+	Actual engineering data often violate the assumption of independence.
+
+	Simulate sequences of lag-1 autocorrelated data, $x_{k+1} = \phi x_{k} + a_k$ with $a_k \sim \mathcal{N}\left(\mu=0, \sigma^2 = 25.0 \right)$ with length of $n=100$ samples
+	\begin{itemize}
+		\item[A]	Positively correlated: use $\phi = 0.7$
+		\item[B]	Negatively correlated: use $\phi = -0.6$
+		\item[C]	No correlation, i.e. totally independent data: $\phi = 0.0$
+	\end{itemize}
+
+	What happens to the standard deviation of $\bar{x}$? (simulate many sequences; calculate $\bar{x}$ then stddev, $s$, of these $\bar{x}$ values)
+
+	\myhrule
+	\emph{Solution}
+	\begin{itemize}
+		\item[A]	estimate of $s = 1.66$
+		\item[B]	estimate of $s = 0.32$
+		\item[C]	estimate of $s = 0.52$ {\color{myOrange}{{\scriptsize (close to the theoretical $\sqrt{\sigma^2/n} = \sqrt{25/100} = 0.5$)}}}
+	\end{itemize}
+\end{frame} 
 
 \begin{frame}\frametitle{Back to method 2 for testing differences}
 
@@ -1252,90 +1337,6 @@
 	Method 2 used only experimental (recent) data, but requires randomization (insurance policy - not always cheap)
 \end{frame}
 
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
-
-	Testing a new coating, B, to repel moisture. Coating is applied to packaging sheets to enhance the moisture barrier property. We take 1 sheet, divide into 16 squares, apply coating A and coating B as shown. Are 16 measured hydrophobicity values independent?
-	\begin{center}
-		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/sheet-coating-application.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
-	\begin{itemize}
-		\item	Sheet may not be uniform
-		\begin{itemize}
-			\item	\textbf{Randomly} assign blocks A and B on the packaging sheet
-		\end{itemize}
-		\item	Is the sheet representative?
-		\begin{itemize}
-			\item	Use sheets from different lots from the sheet supplier. Randomly apply A and B to different sheets.
-		\end{itemize}
-		\item	Couldn't we just measure $\text{B} - \text{A}$ (cancels out non-uniformity)?
-		\begin{itemize}
-			\item	Yes - paired experiment.
-			\item	Note that $\bar{x}_A$ and $\bar{x}_B$ are not independent (violates step 5)
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
-
-	Aim: Testing an alternative, cheaper raw material in our process. Do not want the final product to change.
-	\begin{itemize}
-		\item	The dispensing system must be modified for raw material B, requiring production line to be shut down for 15 hours.
-	\end{itemize}
-	\begin{itemize}
-		\item	The new supplier has given us 8 representative batches to test; each test takes 3 hours. Run these 8 batches over the weekend: set up dispenser on Friday night (15 hours), run tests from Saturday noon to Sunday noon (8 x 3 = 24hrs), then return the line back to normal for Monday's shift.
-	\end{itemize}
-	\begin{itemize}
-		\item\textbf{\emph{How}} do we violate the assumptions of independence when comparing 8 batches of material A (taken from Thursday and Friday) to the 8 batches from material B (Saturday and Sunday)?
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
-	\begin{itemize}
-		\item	The 8 tests are run sequentially; \emph{any changes} in conditions between these 8 runs and the 8 runs from material A will be confounded
-		\begin{itemize}
-			\item	Staff running the equipment on the weekend
-			\item	Dispenser change may have modified the process
-			\item	Dispenser might be the improvement, not the new material
-			\item	Samples waiting to be analyzed on Monday
-		\end{itemize}
-	\end{itemize}
-	\begin{itemize}
-		\item	Expensive and impractical to randomize in this case.
-		\item	Suboptimal: Run \texttt{A A A A B B B B A A A A B B B B}
-		\begin{itemize}
-			\item	Run \texttt{A A A A B B B B} once
-			\item	Run \texttt{B B B B A A A A} next
-		\end{itemize}
-		\item	Use a split-plot experimental design
-	\end{itemize}
-
-	\textcolor{red}{Randomization is the insurance (cost) we require to avoid being misled.}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} What happens if the samples are not independent? [600-level]}
-	Actual engineering data often violate the assumption of independence.
-
-	Simulate sequences of lag-1 autocorrelated data, $x_{k+1} = \phi x_{k} + a_k$ with $a_k \sim \mathcal{N}\left(\mu=0, \sigma^2 = 25.0 \right)$ with length of $n=100$ samples
-	\begin{itemize}
-		\item[A]	Positively correlated: use $\phi = 0.7$
-		\item[B]	Negatively correlated: use $\phi = -0.6$
-		\item[C]	No correlation, i.e. totally independent data: $\phi = 0.0$
-	\end{itemize}
-
-	What happens to the standard deviation of $\bar{x}$? (simulate many sequences; calculate $\bar{x}$ then stddev, $s$, of these $\bar{x}$ values)
-
-	\myhrule
-	\emph{Solution}
-	\begin{itemize}
-		\item[A]	estimate of $s = 1.66$
-		\item[B]	estimate of $s = 0.32$
-		\item[C]	estimate of $s = 0.52$ {\color{myOrange}{{\scriptsize (close to the theoretical $\sqrt{\sigma^2/n} = \sqrt{25/100} = 0.5$)}}}
-	\end{itemize}
-\end{frame}
-
 \begin{frame}\frametitle{Example of testing for differences: impellers}
 
 	Axial and Radial impellers give different mixing times. The objective is to have the \emph{shortest} mixing times possible.
@@ -1393,7 +1394,8 @@
 	\vspace{6pt}
 	\emph{Verify that there is no difference between the two methods}
 		
-	% s^2_p = 62.53 = (10*(5.9)^2 + 10*(9.5)^2)/20; s_p = 7.908
+	% s^2_p = 62.53 = (10*(5.9)^2 + 10*(9.5)^2)/20
+	%   s_p = 7.908
 	% DOF = 20
 	
 	% Confidence interval: (xM,bar-xD,bar) = (22.6 - 16.4) 
@@ -1447,7 +1449,9 @@
 
 \begin{frame}\frametitle{Paired tests: how to recognize it when you come across it}
 
-	A paired test: run experiment twice on the same object/batch/area. Also called ``two treatments''.
+	A paired test: run experiment twice on the same object/batch/area. Also called {\color{purple}"two treatments''}.
+	
+	\vspace{24pt}
 	\begin{itemize}
 		\item	Drug trial: each person randomly receives placebo or drug for 3 weeks; later they receive the opposite, for another 3 weeks.
 		\begin{itemize}
@@ -1472,7 +1476,7 @@
 
 	$\qquad$
 
-	Example: we want to test process \textbf{A} vs \textbf{B} to get a lower energy usage:
+	Example: we want to test process \textbf{A} vs \textbf{B} to see if we get a lower energy usage:
 
 	$ \left.
 	\begin{array}{r}
@@ -1482,7 +1486,7 @@
 		\text{Material 4}\\
 		\text{Material 5}
 	\end{array}
-	\right\} \text{only enough material for 2 experiments} $
+	\right\} \text{only enough material for 2 expts per batch of material} $
 
 	$\qquad$
 
@@ -1491,7 +1495,7 @@
 
 \begin{frame}\frametitle{Paired tests: a comparison}
 
-	1. \textbf{Sequentially} {\color{myOrange}{(don't ever do this!)}}
+	1. \textbf{Sequentially assign A and B} {\color{myOrange}{(don't ever do this!)}}
 
 	$
 	\begin{array}{cccccccccc}
@@ -1502,7 +1506,7 @@
 
 	$\qquad$
 
-	2. \textbf{Randomly} {\color{myOrange}{(commonality between pairs will not cancel)}}
+	2. \textbf{Randomly assign A and B} {\color{myOrange}{(commonality between pairs won't cancel)}}
 
 	$
 	\begin{array}{cccccccccc}
@@ -1513,7 +1517,7 @@
 
 	$\qquad$
 
-	3. \textbf{Paired} (but, run the 10 experiments in random order!)
+	3. \textbf{Paired assignment of A and B} (but, run the 10 expts in random order!)
 
 	$
 	\begin{array}{cccccccccc}
@@ -1524,7 +1528,7 @@
 
 	$\qquad$
 
-	Procedure followed for 1 and 2? $\text{LB} \leq \mu_A - \mu_B \leq \text{UB}$. How many DOF?
+	How many DOF will you have for procedure 1 or 2 if you followed the regular $\text{LB} \leq \mu_A - \mu_B \leq \text{UB}$?
 
 	Procedure for 3 shown next. How many DOF?
 \end{frame}
@@ -1549,16 +1553,16 @@
 
 \begin{frame}\frametitle{Paired tests: so how do I analyze data from such a test?}
 
-	\textbf{Question}: is the difference is significant, or is it essentially zero?
+	\textbf{Question}: is the difference significant, or is it essentially zero?
 	\begin{enumerate}
 		\item	Calculate the $n$ differences: $w = [w_1, w_2, \ldots, w_n]$
 		\begin{itemize}
 			\item	$w_i = x_{A,i} - x_{B,i}$  \qquad\emph{or}\qquad $w_i = x_{B,i} - x_{A,i}$
 			\item	just be consistent in your calculation \emph{and} then your interpretation
 		\end{itemize}
-		\item	Assume these $n$ differences are independent
-		\item	Calculate the mean $\overline{w}$ and standard deviation $s_{\overline{w}}$
-		\item	$\overline{w}$ should be normally distributed (CLT): $\bar{w} \sim \mathcal{N}\left(\mu_w, \sigma_w^2/n \right)$
+		\item	Assume (check!) these $n$ differences are independent
+		\item	Calculate the mean difference, $\overline{w}$, and standard deviation $s_{\overline{w}}$
+		\item	$\overline{w}$ should be normally distributed (CLT): $\overline{w} \sim \mathcal{N}\left(\mu_w, \sigma_w^2/n \right)$
 		\item	We are testing:
 		\begin{itemize}
 			\item	$\mu_w = \mu_A - \mu_B$  (if you calculated $w_i = x_{A,i} - x_{B,i}$)
@@ -1581,25 +1585,26 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Paired tests: back to the BOD example}
+\begin{frame}\frametitle{Back to the BOD example: there are 10 pairs of differences}
 
-	Now assume the BOD samples were split in half and analyzed by each method.
+	Now assume the BOD samples were originally split in half and analyzed by each method.
 
+	\vspace{12pt}
 	Why is a paired test appropriate?
 	\begin{itemize}
 		\item	E.g. contaminants in the sample affect both methods
 		\item	E.g. delays from sample to analysis might influence BOD
 	\end{itemize}
 	\begin{itemize}
-		\item	$\overline{w} = -6.27$
+		\item	$\overline{w} = +6.27$
 		\item	$s_{\overline{w}} = 11.77$
-		\item	$n$ = 11 samples
+		\item	$n$ = 11 samples, so the degrees of freedom = $11 - 1= 10$
 	\end{itemize}
 
 	\emph{Verify that there is no difference between the two methods}
 \end{frame}
 
-\begin{frame}\frametitle{Paired tests: back to the BOD example}
+\begin{frame}\frametitle{Back to the BOD example}
 	\begin{center}
 		\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-plot.png}
 	\end{center}
