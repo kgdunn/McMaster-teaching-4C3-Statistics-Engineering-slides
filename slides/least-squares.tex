@@ -440,6 +440,7 @@
 		\item	Prove and interpret that $\sum_i{(\hat{y}_i e_i)} = \hat{\mathrm{y}}^T\mathrm{e} = 0$
 		\begin{itemize}
 			\item	The fitted values are uncorrelated with the residuals
+			\item	Use this in the ANOVA table (so we can write \texttt{RegSS} $\perp$ \texttt{RSS})
 		\end{itemize}
 		\item	Estimate of $b_0$ depends on $b_1$: the estimates are correlated
 	\end{enumerate}
@@ -724,7 +725,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Confidence intervals for $b_0$ and $b_1$}
+\begin{frame}\frametitle{Confidence intervals for {\color{red}$\beta_0$ and $\beta_1$}}
 	\begin{itemize}
 		\item	We have made no assumptions about the data
 		\item	We can calculate $b_0$ and $b_1$
@@ -834,7 +835,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Confidence intervals for $b_0$ and $b_1$}
+\begin{frame}\frametitle{Confidence intervals for {\color{red}$\beta_0$ and $\beta_1$}}
 
 	To construct a confidence interval, we must know the distribution
 
@@ -893,7 +894,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Confidence intervals for $b_0$ and $b_1$}
+\begin{frame}\frametitle{Confidence intervals for {\color{red}$\beta_0$ and $\beta_1$}}
 
 	Finally! Construct confidence intervals for the least squares model parameters:
 
@@ -1145,7 +1146,7 @@
 		\begin{itemize}
 			\item	Human eye not good at picking up heavy tails
 		\end{itemize}
-		\item	Do \emph{not} plot the residuals in time-order to try detect if normally distributed
+		\item	Do \emph{not} plot the residuals to try detect if normally distributed
 		\begin{itemize}
 			\item	Human eye not good at picking up heavy tails
 		\end{itemize}
@@ -1194,6 +1195,10 @@
 \end{frame}
 
 \begin{frame}\frametitle{Non-constant error variance}
+
+	\begin{center}
+		\includegraphics[width=0.45\textwidth]{\imagedir/least-squares/constant-error-variance.png}
+	\end{center}
 
 	\textbf{Detecting it}:
 	\begin{itemize}
@@ -1323,7 +1328,7 @@
 		\item	Distillation: $T$ inversely proportional to log(VP). $y = b_0 + b_1x$:
 		\begin{itemize}
 			\item	$x \leftarrow 1/T$
-			\item	$y \leftarrow P$.
+			\item	$y \leftarrow \log(P)$.
 			\item	Slope coefficient: ...
 		\end{itemize}
 		\item	$y = p \times q^x$; take logs so that $\log(y) = \log(p) + x \log(q)$,
@@ -1556,7 +1561,7 @@
 	\begin{itemize}
 		\item	$x_{1,\text{raw}} = [1, 3, 4, 7, 9, 9]$
 		\begin{itemize}
-			\item	$x_1 = [-4.5, -2.5, -1.5 , 1.5 , 3.5, 3.5]$ ,
+			\item	$x_1 = [-4.5, -2.5, -1.5 , 1.5 , 3.5, 3.5]$
 		\end{itemize}
 		\item	$x_{2,\text{raw}} = [9, 9, 6, 3, 1, 2]$
 		\begin{itemize}
