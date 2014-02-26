@@ -1438,7 +1438,7 @@
 	\begin{itemize}
 		\item	Let $x = x_\text{original} - \text{mean}\left(x_\text{original} \right)$
 		\item	Let $y = y_\text{original} - \text{mean}\left(y_\text{original} \right)$
-		\item	Model is still the same, except intercept term is zero: $b_0 = 0$
+		\item	Model is still the same, except intercept term is forced to zero: $b_0 = 0$
 	\end{itemize}
 	\begin{itemize}
 		\item	If you work with \emph{uncentered} data, but add a $b_0 = 0$ term to the model, you will get an \textbf{identical} MLR model
@@ -1687,12 +1687,18 @@
 	\begin{itemize}
 		\item	Coefficient $b_1$ is the average change in $\mathbf{y}$ for a one unit change in ${x}_1$ \textbf{provided we hold} ${x}_2$ \textbf{\emph{fixed}}
 	\end{itemize}
+	
+	\vspace{24pt}
 	\begin{itemize}
 		\item	\emph{Example}: $y = b_T T + b_S S = -0.52 T + 3.2 S$
+		
+		\vspace{12pt}
 		\begin{itemize}
 			\item	$T$ = reactor temperature in Kelvin,
 			\item	$S$ = substrate concentration in g/L
 			\item	$y$ = yield in $\mu\text{g}$
+			
+			\vspace{12pt}
 			\item	$b_T = -0.52 \mu\text{g}/\text{K}$: decrease in yield for every 1 Kelvin increase in temperature, holding the substrate concentration fixed
 		\end{itemize}
 	\end{itemize}
@@ -1730,9 +1736,9 @@
 
 \begin{frame}\frametitle{Integer variables in the model}
 	$$
-	\begin{array}{lr}
-		y &= \beta_0 + \beta_1 T + \gamma d + \varepsilon \\
-		y &= b_0 + b_1 T + g d_i + e_i \\
+	\begin{array}{lcr}
+		y &=& \beta_0 + \beta_1 T + \gamma d + \varepsilon \qquad\hfill {\color{myOrange}{\longleftarrow}\text{population model}}\\
+		y &=& b_0 + b_1 T + g d_i + e_i \qquad \hfill {\color{myOrange}{\longleftarrow}\text{statistical model}}\\
 		\\
 	\end{array}
 	$$
@@ -1744,9 +1750,13 @@
 
 \begin{frame}\frametitle{Integer variables in the model}
 
-	Assume $\beta_1 = 0$ (temperature has no effect) for now. Geometrically:
+	Assume $\beta_1 = 0$ (temperature has no effect) for now.
+	
+	$$y = b_0 + \cancel{b_1 T} + g d_i$$
+	
+	Geometrically: \vspace{-0.5cm}
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\imagedir/least-squares/least-squares-dummy-variable-and-intercept.png}
+		\includegraphics[width=0.7\textwidth]{\imagedir/least-squares/least-squares-dummy-variable-and-intercept.png}
 	\end{center}
 	$$
 	\begin{array}{llll}
