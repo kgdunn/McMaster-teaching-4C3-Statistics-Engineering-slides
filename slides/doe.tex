@@ -12,7 +12,7 @@
 		\item	Experiments are important:
 		\begin{itemize}
 			\item	We learn more about our systems
-			\item	We use the data to fit an empirical model
+			\item	We use the data to fit an empirical model: {\color{red}make predictions}
 			\item	Main aim: use the model to optimize a process for \textbf{higher profit}
 		\end{itemize}
 		
@@ -45,8 +45,8 @@
 	\begin{itemize}
 		\item	Simplest case:
 		\begin{itemize}
-			\item	catalyst A vs catalyst B
-			\item	low RPM vs high RPM
+			\item	catalyst A vs catalyst B \hfill {\color{myOrange} $\longleftarrow$ categorical variable example}
+			\item	low RPM vs high RPM \hfill {\color{myOrange} $\longleftarrow$ continuous variable example}
 			\item	\emph{etc}
 		\end{itemize}
 		\item	Measure $n_A$ values from setup A
@@ -88,9 +88,9 @@
 \begin{frame}\frametitle{Using linear least squares models}
 	\begin{itemize}
 		\item	Can achieve same result using least squares: $y_i = b_0 + g d_i$
-		\item	$d_i = 0$ for A
-		\item	$d_i=1$ for B
-		\item	and $y_i$ is the response variable.
+		\item	$d_i = 0$ for observations under condition A
+		\item	$d_i=1$ for observations under condition B
+		\item	and $y_i$ is the response variable (measurement).
 	\end{itemize}
 	
 	\vspace{12pt}
@@ -104,7 +104,7 @@
 
 	Why {\color{purple}{randomize}} experiments?
 	\begin{itemize}
-		\item	Prevent {\color{purple}{\textbf{\emph{unmeasured}}}}, and {\color{purple}{\textbf{\emph{uncontrollable}}}} disturbances affecting $y$
+		\item	Prevent {\color{purple}{\textbf{\emph{unmeasured}}}}, and {\color{purple}{\textbf{\emph{uncontrollable}}}} disturbances affecting $y$ {\color{gray}[\emph{more on this later}]}
 		\item	Guarantees independence in the data
 		\item	We can then use $t$-distributions (which require independence)
 	\end{itemize}
@@ -113,20 +113,20 @@
 		\item	Engineering example: A = TK104 and B = TK107
 		\begin{itemize}
 			\item	$n_A = 8$: [254, 440, 501, 368, 697, 476, 188, 525]
-			\item	$n_B = 9$: [338, 470, 558, 426, 733, 539, 240, 628, 517 ]
+			\item	$n_B = 9$: [338, 470, 558, 426, 733, 539, 240, 628, 517]
 		\end{itemize}
 		\item	Null hypothesis: there is no difference
 		\begin{itemize}
 			\item	Implies these numbers could have come from either A or B
 		\end{itemize}
 	\end{itemize}
-	{\color{myOrange}{Details of the analysis are given in the course textbook}}
+	{\color{myOrange}{\emph{Details of the analysis are given in the course textbook}}}
 \end{frame}
 
 \begin{frame}\frametitle{Importance of randomization}
 	\begin{itemize}
 		\item	$n_A = 8$: [254, 440, 501, 368, 697, 476, 188, 525]
-		\item	$n_B = 9$: [338, 470, 558, 426, 733, 539, 240, 628, 517 ]
+		\item	$n_B = 9$: [338, 470, 558, 426, 733, 539, 240, 628, 517]
 	\end{itemize}
 	\begin{itemize}
 		\item	Randomly assign ``A'' to any $n_A$ of the values and ``B'' to any $n_B$ of the values
@@ -138,9 +138,9 @@
 			\item	3: AAAAAAABBABBBBBBB
 			\item	\emph{etc}
 		\end{itemize}
-		\item	For each arrangement we calculate: $\bar{y}_A - \bar{y}_B$
+		\item	For each arrangement we calculate: $\overline{y}_B - \overline{y}_A$
 		\item	Plot a histogram of this \emph{difference of averages}
-		\item	Probability that the actual experiment could have come from chance?
+		\item	Compare to actual difference: $\overline{y}_B - \overline{y}_A = 494 - 431 = 63$
 	\end{itemize}
 	% Note that running the code for moderate size n's is prohibitive, even on modern computer hardware.
 \end{frame}
@@ -153,11 +153,11 @@
 		\includegraphics[width=0.7\textwidth]{\imagedir/doe/single-experiment-randomization.png}
 	\end{center}
 	\begin{itemize}
-		\item	79.6\% combinations have a lower value than actual difference
+		\item	$\mathbf{79.6}\%$ combinations have a lower value than actual difference
 		\item	Using standard group-to-group difference:
 		\begin{itemize}
 			\item	$z = 0.8435$
-			\item	$Pr(z<0.8435) = 79.3\%$ (DOF = $n_A + n_B - 2$)
+			\item	$Pr(z<0.8435) = \mathbf{79.3}\%$ (DOF = $n_A + n_B - 2$)
 		\end{itemize}
 	\end{itemize}
 	\begin{itemize}
@@ -211,8 +211,9 @@
 \end{frame}
 
 \begin{frame}\frametitle{Terminology: {\color{purple}{Factors}}}
-	{\color{purple}{Factor}}: the thing that is being changed.
+	{\color{purple}{Factor}}: \textbf{the thing that is being changed}.
 	
+	\vspace{12pt}
 	\begin{itemize}
 		\item	growing plants? 
 			\begin{itemize}
@@ -234,12 +235,14 @@
 \end{frame}
 
 \begin{frame}\frametitle{Terminology: {\color{purple}{Response}}}
-	{\color{purple}{Response}}: the outcome that is being measured
+	{\color{purple}{Response}}: \textbf{the outcome that is being measured}
+
+	\vspace{12pt}
 	\begin{itemize}
 		\item	growing plants? 
 			\begin{itemize}
 				\item	e.g. height of plant after 10 days
-				\item	other outcomes are possible
+				\item	multiple outcomes can be measured: leaf width, stem diameters, leaf colour
 			\end{itemize}
 		\item	maximizing sales in a store? 
 			\begin{itemize}
@@ -253,7 +256,7 @@
 		\item	is usually (in almost every case) a continuous variable
 		\item	should be measured in the same manner for all experiments
 		\item	should be reproducibly measurable
-		\item	measure as many responses as you can to avoid repeating experiments later
+		\item	measure as many responses as you can from each experiment to avoid repeating experiments later
 	\end{itemize}	
 \end{frame}
 
@@ -295,7 +298,26 @@
 	\end{itemize}
 	\begin{itemize}
 		\item	Factors are: $T$ and $S$
-		\item	Number of experiments (runs): $2^k$; $k$ = number of factors
+	\end{itemize}
+	
+	\vfill
+	\vspace{4cm}
+\end{frame}
+
+\begin{frame}\frametitle{Factorial designs: by example}
+
+	Bioreactor example: aim is to maximize the $y$ = conversion [\%]
+	\begin{itemize}
+		\item	$T$: Temperature: $T_\text{low}$ = 338K and $T_\text{high}$ = 354K
+		\item	$S$: Substrate concn: $S_\text{low}$ = 1.25\,g/L and $S_\text{high}$ = 1.75\,g/L
+		\item	How is the range chosen?
+		\begin{itemize}
+			\item	About 25\% of typical operating range if no other prior knowledge. We will consider other criteria later also.
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Factors are: $T$ and $S$
+		\item	Number of experiments ({\color{purple}runs}): $2^k$; $k$ = number of factors
 		\item	{\color{purple}{Standard order}} vs {\color{purple}{Actual execution (run) order}}
 	\end{itemize}
 	\begin{center}
@@ -315,7 +337,8 @@
 		\item	we don't need to run an experiment at the {\color{purple}{baseline}} (it can be useful though)
 		\item	{\color{purple}{baseline}} at $T=\frac{1}{2}\left(338+354\right)$ and $S = \frac{1}{2}\left(1.25+1.75\right)$, i.e. \\
 		        {\color{purple}{baseline}} at (346K; 1.5g/L) = midpoint of the factorial
-		\item	if we had replicate experiments, then use the average of the response variable
+		\item	if we had replicate experiments, then use the average of the response variable at each combination
+		\item	\emph{More on replicates later} (there are better ways to spend your budget)
 	\end{itemize}
 \end{frame}
 
@@ -332,7 +355,7 @@
 
 \begin{frame}\frametitle{Analysis: Main effects}
 	\begin{itemize}
-		\item	Main effect: difference from high to low level
+		\item	Main effect: difference {\color{red}from high} {\color{orange}\emph{to low}} level
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/doe/factorial-two-levels-two-variables-with-analysis.png}
@@ -559,8 +582,8 @@
 		\begin{center}
 			$
 			\begin{array}{rcl}
-				y &= \beta_0 + \beta_Tx_T + \beta_S x_S + \beta_{TS} x_Tx_S + \varepsilon \\
-				y &= b_0 + b_Tx_T + b_S x_S + b_{TS} x_Tx_S + e
+				y &= \beta_0 + \beta_Tx_T + \beta_S x_S + \beta_{TS} x_Tx_S + \varepsilon  \quad\hfill {\color{myOrange}{\longleftarrow}\text{population model}}\\
+				y &= b_0 + b_Tx_T + b_S x_S + b_{TS} x_Tx_S + e \quad \hfill {\color{myOrange}{\longleftarrow}\text{statistical model}}
 			\end{array}
 			$
 		\end{center}
@@ -576,7 +599,7 @@
 	\textbf{Aim}: Write out the LS model equation for the 4 data points; stack them as rows in a matrix.
 	
 	\vspace{12pt}
-	For example, for the first experiment from the standard order table, which was run at low $T$ and low $S$:
+	For example, for the \textbf{first experiment} from the standard order table, which was run at low $T$ and low $S$:
 	
 	\begin{center}
 		$
@@ -614,7 +637,7 @@
 				e_2\\
 				e_3 \\
 				e_4
-			\end{bmatrix}
+			\end{bmatrix}\
 			\\
 			\\
 			\mathbf{y} &=& \mathbf{X} \mathbf{b} &+& \,\,\,\,\,\mathbf{e} \\
@@ -623,15 +646,16 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Visualizing the least squares modelling}
+% Fix up this illustration: use A and B, and it is not accurate if the AB interaction is added to the model
+\begin{frame}\frametitle{Visualizing the least squares model}
 	\begin{itemize}
-		\item	Least squares model for DOE in 2 factors
+		\item	Least squares model for DOE in 2 factors: $x_1$ and $x_2$
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{\imagedir/doe/two-factor-least-squares-interpretation.png}
 	\end{center}
 	\begin{itemize}
-		\item	Interaction term is small: blue plane is flat
+		\item	Interaction term is small: blue plane is relatively flat
 		\item	Interaction term is large: plane has curvature
 	\end{itemize}
 \end{frame}
@@ -785,7 +809,7 @@
 		\begin{itemize}
 			\item	$x_T$ is the change in {\color{purple}{\emph{normalized temperature}}} by 1 unit
 			\item	Changing $x_T$ from 0 to 1 implies $T_\text{actual}$ changes from 346K to 354K (baseline to high level)
-			\item	Changing $x_T$ from -1 to 0 implies $T_\text{actual}$ changes from 338K to 346K (low level to baseline)
+			\item	Changing $x_T$ from $-1$ to 0 implies $T_\text{actual}$ changes from 338K to 346K (low level to baseline)
 			\item	$-5$\% decrease in conversion for every 8K increase in temperature
 		\end{itemize}
 		\item	Now interpret $b_S = -3$?
@@ -1588,6 +1612,7 @@
 	{\color{myOrange}{Homework}}: repeat this now on the half-fraction generated by\\ \textbf{C = AB}.
 \end{frame}
 
+\begin{comment}
 \begin{frame}\frametitle{Saturated designs}
 
 	{\color{purple}{Saturated design}}: fewest number of runs as possible for a given number of factors
@@ -2442,3 +2467,6 @@
 		\includegraphics[width=\textwidth]{\imagedir/doe/mixture-design.png}
 	\end{center}
 \end{frame}
+
+
+\end{comment}
