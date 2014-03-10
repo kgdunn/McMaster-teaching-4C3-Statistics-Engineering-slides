@@ -1,3 +1,6 @@
+% DO NOT interleave the interaction vs no interaction example. Even in the textbook. Rework it.
+
+
 \begin{frame}\frametitle{Introduction}
 	\begin{exampleblock}{}
 		{\Huge When was the last time you ran an experiment ?}
@@ -1025,8 +1028,11 @@
 		\item	$2^4$ factorial: 15 parameters + intercept
 		\item	Bar plot: see code on course website. Bar colour indicates sign: blue are negative and orange are positive coefficients.
 	\end{itemize}
+	
+
+	\emph{For example}:
 	\begin{center}
-		\includegraphics[width=0.65\textwidth]{\imagedir/doe/pareto-plot-full-fraction.png}
+		\includegraphics[width=0.6\textwidth]{\imagedir/doe/pareto-plot-full-fraction.png}
 	\end{center}
 \end{frame}
 
@@ -1035,7 +1041,11 @@
 		\item	For normal L/S models: cannot compare coefficients in this way
 		\item	Why can we with a DOE model?
 		\item	$x_i = \dfrac{x_{\text{actual}, i}- \text{center point}}{\frac{1}{2} (\text{range of X})}$
-		\item	Caution: the \emph{range of X} should span a reasonable range
+
+		\begin{exampleblock}{}
+			{\color{myOrange}{Caution: the \emph{range of variable X} must have spanned a reasonable range to make the conclusion that an effect is not significant}}
+		\end{exampleblock}
+		
 	\end{itemize}
 	\begin{itemize}
 		\item	Caution: if an interaction is significant (e.g. \textbf{BC}), then no need to test the main effects, \textbf{B} and \textbf{C}
@@ -1420,7 +1430,7 @@
 
 \begin{frame}\frametitle{Half fractions}
 	\begin{itemize}
-		\item	Why did we choose those 4 runs? Why not some other combination?
+		\item	Why did we choose those 4 runs (closed circles)? Why not some other combination?
 	\end{itemize}
 	\vspace{-6pt}
 	\begin{center}
@@ -1435,7 +1445,7 @@
 
 \begin{frame}\frametitle{Factorial design tradeoffs}
 
-	Tradeoff table {\color{myOrange}{(\emph{bring a copy to the exam!})}}
+	{\color{red}\textbf{Tradeoff table}} {\color{myOrange}{(\emph{bring a copy to the exam!})}}
 	\begin{center}
 		\includegraphics[height=0.85\textheight]{\imagedir/doe/DOE-trade-off-table.png}
 	\end{center}
@@ -1457,7 +1467,7 @@
 		\begin{itemize}
 			\item	\textbf{A=BC}
 			\item	\textbf{B=AC}
-			\item	\textbf{C=AB} (this was intentional - from table)
+			\item	\textbf{C=AB} (this was intentional: read from the ``tradeoff'' table)
 			\item	\textbf{I=ABC}
 		\end{itemize}
 	\end{itemize}
@@ -1510,7 +1520,7 @@
 	Several problems:
 	\begin{itemize}
 		\item	$\mathrm{X}$ not orthogonal
-		\item	More unknowns than equations
+		\item	There are 8 unknowns and 4 equations: \emph{more unknowns}!
 	\end{itemize}
 	Model cannot be calculated.
 \end{frame}
@@ -1588,7 +1598,7 @@
 	\end{itemize}
 	
 	\vspace{12pt}
-	{\color{myOrange}{Homework}}: write out the half fraction design for a 4 factor experiment using the trade-off table (\emph{hint}: see next slide).
+	{\color{myOrange}{Homework}}: write out the half fraction design for a {\color{myOrange}\textbf{4 factor}} experiment using the trade-off table (\emph{hint}: see next slide).
 \end{frame}
 
 \begin{frame}\frametitle{Generators/Defining relationship}
