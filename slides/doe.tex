@@ -1,5 +1,5 @@
 % DO NOT interleave the interaction vs no interaction example. Even in the textbook. Rework it.
-% Can we mix up the signs in the generators listed in the tradeoff table when we plan saturated designs?
+% Can we mix up the signs in the generators listed in the tradeoff table when we plan saturated designs? Yes: I checked it by hand. Should be OK.
 
 \begin{frame}\frametitle{Introduction}
 	\begin{exampleblock}{}
@@ -1079,7 +1079,9 @@
 	\end{itemize}
 \end{frame}
 
+% OMit this slide
 \begin{frame}\frametitle{Significant? : Replicate runs}
+	
 	\begin{itemize}
 		\item	E.g replicated $2^3$ factorial: 8 + 8 runs
 		\item	$y_{i,1}$ and $y_{i,2}$ at condition i $(i=1, 2, \ldots, 8)$
@@ -1093,6 +1095,7 @@
 	\end{itemize}
 \end{frame}
 
+% Omit this slide
 \begin{frame}\frametitle{Significant? : Replicate runs}
 	\begin{itemize}
 		\item	Once we have $S_E \rightarrow S_E(b_i) \rightarrow$ confidence interval for $b_i$
@@ -1146,9 +1149,10 @@
 
 \begin{frame}\frametitle{Significant? : Replicate runs}
 	\begin{itemize}
-		\item	Add as many center points as you like: adds DOF
+		\item	Add as many center points as you like
 		\item	without changing orthogonality of $\mathrm{X}$
-		\item	decreases $S_E$
+		\item	adds DOF to calculate the $S_E$
+		\item	so you can estimate confidence intervals
 	\end{itemize}
 
 	But standard error for factor $b_i = S_E(b_i) = \sqrt{\dfrac{S_E^2}{\sum{x_i^2}}}$
@@ -1197,6 +1201,7 @@
 		\item	Interesting note: factors retained in the model keep same slope coefficient values
 		\begin{itemize}
 			\item	Why? We are only deleting \emph{columns} from the $\mathbf{X}$ matrix
+			\item	No effect on other columns, if $\mathbf{X}$ is orthogonal
 		\end{itemize}
 		\item	Now least squares model has residuals and DOF
 		\item	$S_E \neq 0$
@@ -1295,7 +1300,7 @@
 	But:
 	\begin{itemize}
 		\item	Enough material for only 4 runs at a time
-		\item	Material could affect response.
+		\item	Material could affect response\\ {\color{myOrange}\emph{but material is not a factor being investigated!}}
 		\item	How can we minimize that effect?
 	\end{itemize}
 \end{frame}
@@ -1308,7 +1313,7 @@
 		\includegraphics[width=\textwidth]{\imagedir/doe/table-blocking-3-factor-factorial-no-y.png}
 	\end{center}
 	\vspace{12pt}
-	{\color{myOrange}{Important note}}: you must still run your experiments in random order. Do \textbf{NOT} run all the batch 1, then all the batch 2 experiments.
+	{\color{myOrange}{Important note}}: you must still run your experiments in random order. Do \textbf{NOT} run all the batch 1, then all the batch 2 experiments, if at all possible.
 \end{frame}
 
 \begin{frame}\frametitle{Blocking and confounding}
@@ -1328,7 +1333,15 @@
 	e.g, $h$ = incremental, but \emph{unmeasurable} effect on $y$ due to batch 2 
 	
 	\vspace{12pt}
-	Disturbance bias cancels out. E.g. for $b_A$: $ \widehat{\beta}_A = -\widetilde{y}_1 + \mathring{y}_2 - \mathring{y}_3 + \widetilde{y}_4 - \mathring{y}_5 + \widetilde{y}_6 - \widetilde{y}_7 + \mathring{y}_8 $
+	Disturbance bias cancels out for all factors, except for $b_{ABC}$ \\
+	$
+	\begin{array}{rcl}
+		\widehat{\beta}_A     &=& -\widetilde{y}_1 + \mathring{y}_2 - \mathring{y}_3 + \widetilde{y}_4 - \mathring{y}_5 + \widetilde{y}_6 - \widetilde{y}_7 + \mathring{y}_8 \\
+		\widehat{\beta}_{ABC} &=& -\widetilde{y}_1 + \mathring{y}_2 + \mathring{y}_3 - \widetilde{y}_4 + \mathring{y}_5 - \widetilde{y}_6 - \widetilde{y}_7 + \mathring{y}_8
+	\end{array}
+	$
+	
+	
 \end{frame}
 
 \begin{frame}\frametitle{Blocking and confounding}
@@ -2024,7 +2037,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Foldover: de-aliasing}
+\begin{frame}\frametitle{Foldover: de-aliasing (not covered in 2014)}
 	\begin{itemize}
 		\item	Experiments are not a one-shot operation; always run sequential experiments
 		\item	How should we work with fractional factorials?
@@ -2045,7 +2058,7 @@
 	Switching the sign of a factor will de-alias its main effect and all its associated two-factor interactions.
 \end{frame}
 
-\begin{frame}\frametitle{Foldover: removing 2-fi confounding}
+\begin{frame}\frametitle{Foldover: removing 2-fi confounding (not covered in 2014)}
 	\begin{itemize}
 		\item	Run another fraction, but switch all the signs in the design table
 		\begin{itemize}
@@ -2111,7 +2124,24 @@
 	\end{itemize}
 \end{frame}
 
-\begin{comment}
+\begin{frame}\frametitle{Question (previous exam)}
+	In your start-up company you are investigating treatment options for reducing the contamination level of soil that has been soaked with hydrocarbon products. You have two different heaps of contaminated soil from two different sites. You expect your treatment method to work on any soil type though.
+	
+	\vspace{12pt}
+	Your limited line of credit allows only 9 experiments, even though you have identified at least 6 factors which you expect to have an effect on the treatment. 
+	
+	\begin{enumerate}
+		\item	Write out the set of experiments that you believe will allow you to learn the most relevant information. Explain your thinking, present your answer with 7 columns: 6 columns showing the settings for the 6 factors and one column for the heap from which the test sample should be taken. 
+		
+				\vspace{12pt}
+				There must be 9 rows in your table. Indicate the run order.
+				
+		\vspace{12pt}
+		\item	What is the projectivity and resolution of your design?
+
+	\end{enumerate}
+\end{frame}
+
 \begin{frame}\frametitle{Response surface methods}
 
 	Objective for the {\color{purple}{response surface method (RSM)}}: achieve the best response using sequential experimentation.
@@ -2512,4 +2542,4 @@
 \end{frame}
 
 
-\end{comment}
+
