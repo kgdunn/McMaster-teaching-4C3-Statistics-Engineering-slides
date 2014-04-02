@@ -17,18 +17,12 @@
 % In many cases, the PSA test may find prostate cancer that may not pose a serious threat to a man’s health. Some prostate cancers can be present for years without affecting a man’s health.
 % Unnecessary follow-up testing and treatment expose men to more risks, including potentially serious side effects.
 % Recent research has shown that 50% of cancers that are detected by the PSA test may never need to be treated. The majority of these men go on to have treatment, which is unnecessary in most cases.
-% 
-% 
-% 
 
 
 
 
-\iftoggle{hrymak}{}{\begin{frame}\frametitle{}
-	\begin{center}
-		\includegraphics[width=.7\textwidth]{\imagedir/monitoring/SPC-position-23-Jan-2013.png}
-	\end{center}
-\end{frame}}
+% Fix up around line 312
+
 
 \begin{frame}\frametitle{In context}
 
@@ -240,8 +234,8 @@
 		\item	\textbf{Thin line}: single process measurements have $\mu = 6$ and $\sigma = 2$
 		\item	\textbf{Thick line}: $\sigma_{\overline{x}} = 2/\sqrt{5}$ = 0.894, because $n=5$
 		\begin{itemize}
-			\item	Upper bound = $\mu + 3 \times \sigma_{\overline{x}} = 6 + 3\times 0.894 = 8.68$
-			\item	Lower bound = $\mu - 3 \times \sigma_{\overline{x}} = 6 - 3\times 0.894 = 3.318$
+			\item	Upper bound = $\mu + 3\sigma_{\overline{x}} = 6 + 3\times 0.894 = 8.68$
+			\item	Lower bound = $\mu - 3\sigma_{\overline{x}} = 6 - 3\times 0.894 = 3.318$
 		\end{itemize}
 	\end{itemize}
 
@@ -272,14 +266,14 @@
 
 	But, we don't know population parameters
 	\begin{itemize}
-		\item	For $\mu$: use $\overline{\overline{x}} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{ \overline{x}_k}$
+		\item	For $\mu$: use $\overline{\overline{x}} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{ \overline{x}_k}$; {\small where $K$ = number of phase 1 groups}
 		\item	For $\mu$: or just use known target value
 		\item	For $\mu$: or use the {\color{myOrange}{\textbf{median}}} of a long sequence of data
 		\item	For $\sigma$:
 		\begin{itemize}
 			\item	Define: $s_k$ = standard deviation of $n$ values
 			\item	Define: $\overline{S} = \dfrac{1}{K} \displaystyle \sum_{k=1}^{K}{s_k}$
-			\item	For $\sigma$: use $\dfrac{\overline{S}}{a_n}$, where $a_n$ is a correction factor:
+			\item	Then overall standard deviation is estimated from $\hat{\sigma} = \dfrac{\overline{S}}{a_n}$, where $a_n$ is a correction factor
 			
 				\vspace{6pt}
 				\begin{tabular}{|c|ccccccc|}\hline
@@ -293,7 +287,7 @@
 	
 	$$
 	\begin{array}{rcccl}
-		\text{LCL} = \overline{\overline{x}} - 3 \cdot \dfrac{\overline{S}}{a_n\sqrt{n}} && && \text{UCL} = \overline{\overline{x}} + 3 \cdot \dfrac{\overline{S}}{a_n\sqrt{n}}
+		\text{limits} = \overline{\overline{x}} \pm 3 \cdot \dfrac{\sigma}{\sqrt{n}}  && \text{LCL} = \overline{\overline{x}} - 3 \cdot \dfrac{\overline{S}}{a_n\sqrt{n}} &&  \text{UCL} = \overline{\overline{x}} + 3 \cdot \dfrac{\overline{S}}{a_n\sqrt{n}}
 	\end{array}
 	$$
 \end{frame}
@@ -305,7 +299,7 @@
 		\item	e.g. bale 1 raw values: [231, 251, 235, 241, 227]
 		\begin{itemize}
 			\item	$\bar{x}_1$ = 237 is our data point for the Shewhart chart
-			\item	$s_1 = 9.38$
+			\item	$s_1 = 9.38$ is the std dev for the 5 points
 		\end{itemize}
 		\item	e.g. bale 2 raw values: [252, 253, 247, 232, 244]
 		\begin{itemize}
@@ -313,7 +307,9 @@
 		\end{itemize}
 	\end{itemize}
 
-	Data from 20 such $\bar{x}_k$ calculations:
+	Data from 20 such $\bar{x}_k$ calculations {\footnotesize(the 20 $\times$ 5 raw values are not shown)}:
+
+	% Change first entry: to be 237, then 245, ....
 
 	\texttt{[245, 239, 239, 241, 241, 241, 238, 238, 236, 248, }
 
@@ -327,7 +323,7 @@
 			\textbf{Phase 1} workflow: {\color{myOrange}{\emph{build}}} the monitoring chart
 			\begin{itemize}
 				\item	Calculate: LCL and UCL
-				\item	Any points outside limits?
+				\item	Any $\bar{x}$ points outside limits?
 				\item	If so, exclude these outliers and recalculate limits.
 			\end{itemize}
 		\column{0.50\textwidth}
@@ -346,17 +342,50 @@
 	\begin{itemize}
 		\item	LCL = $238.8 - 3 \cdot \dfrac{9.28}{(0.94)(\sqrt{5})} = 225.6$
 		\item	UCL = $238.8 + 3 \cdot \dfrac{9.28}{(0.94)(\sqrt{5})} = 252.0$
-		\item	Sample with value of 253 exceeds these limits
+		
+		\vspace{6pt}
+		\item	Sample with value of $\bar{x}_i = 253$ exceeds these limits
+		
+		\begin{center}
+			\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/Bale-image-colour.png}
+		\end{center}
+		
+		
 		\item	After excluding it:
 		\begin{itemize}
 			\item	new $\bar{\bar{x}} = 238.0$, and new $\bar{S} = 9.68$
 			\item	new LCL = 224, new UCL = 252
 		\end{itemize}
 	\end{itemize}
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\imagedir/monitoring/Bale-image-colour.png}
-	\end{center}
+	
 \end{frame}
+
+
+\begin{frame}\frametitle{Back to the bigger picture}
+	
+	{\color{myOrange}We have covered this:}
+	\begin{itemize}
+		\item	\textbf{Phase 0}: decide what to monitor
+		\item	\textbf{Phase 1}: building and testing from off-line data
+		\begin{itemize}
+			\item	very iterative: remove outliers
+			\item	calculate limits, test if they are useful, repeat
+			\item	you will spend most of your time here
+		\end{itemize}
+	\end{itemize}
+	
+	\vspace{12pt}
+	{\color{myOrange}We are here now:}
+	\begin{itemize}
+		\item	\textbf{Phase 2}: using the control chart
+		\begin{itemize}
+			\item	on new, unseen data
+			\item	implemented with computer hardware and software
+			\item	usually for real-time display
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}\frametitle{Assessing the chart's performance: error probability}
 	\begin{itemize}
@@ -411,7 +440,7 @@
 		\item	Table is for $n=4$ and UCL and LCL at the $\pm 3 \sigma_{\bar{X}}$ limits
 		\item	\texttt{beta <- pnorm(3 - delta*sqrt(n)) \\
 		        - pnorm(-3 - delta*sqrt(n))}
-		\item	Interpretation: Shewhart chart not good at detecting a change in the location!
+		\item	Interpretation: Shewhart chart not good at detecting small to medium changes in the location!
 		\item	Surprising, given that we use Shewhart chart for this purpose.
 		\item	E.g: a $0.75\sigma$ only be detected around (1 - 0.9332) = 6.7\% of the time
 	\end{itemize}
