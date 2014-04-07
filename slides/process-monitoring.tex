@@ -23,6 +23,9 @@
 
 % Fix up around line 312
 
+% 2015: Put slides "EWMA derivation example" before the recursive version of EWMA. It makes more sense, since you've just covered MA, which is a function of the raw data.
+% 2015: also put in a derivation for the UCL and LCL of the MA chart.
+
 
 \begin{frame}\frametitle{In context}
 
@@ -307,7 +310,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	Data from 20 such $\bar{x}_k$ calculations {\footnotesize(the 20 $\times$ 5 raw values are not shown)}:
+	Data from 20 such $\bar{x}_k$ calculations {\footnotesize(the 20 $\times$ 5 raw data are not shown)}:
 
 	% Change first entry: to be 237, then 245, ....
 
@@ -360,7 +363,6 @@
 	
 \end{frame}
 
-
 \begin{frame}\frametitle{Back to the bigger picture}
 	
 	{\color{myOrange}We have covered this:}
@@ -385,7 +387,6 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
-
 
 \begin{frame}\frametitle{Assessing the chart's performance: error probability}
 	\begin{itemize}
@@ -456,6 +457,7 @@
 	\end{block}
 	Nothing makes a control chart more useless to operators than frequent false alarms.
 	\begin{itemize}
+		\item	Ideal goal: $\alpha \rightarrow 0$ \textbf{and} $\beta \rightarrow 0$
 		\item	$\alpha$: simply move LCL and UCL up and down (not incorrect to do this!)
 		\iftoggle{hrymak}{}{\item	$\beta$: as you increase UCL, $\alpha \rightarrow 0$, but $\beta \rightarrow 1$}
 		\item	But note that as you decrease type I error, your type II error will increase
@@ -564,8 +566,8 @@
 		\end{center}
 	\end{block}
 	\begin{itemize}
-		\item	For process shifts: we are adding $\Delta$ to every $x_t$
-		\item	Accumulates: creates a steep up or down slope
+		\item	When a process shifts by $\Delta$, then we are adding $\Delta$ to every $x_t$
+		\item	This accumulates: creates a steep up or down slope
 	\end{itemize}
 \end{frame}
 
@@ -580,7 +582,7 @@
 
 \begin{frame}\frametitle{CUSUM charts: ``out-of-control''}
 	\begin{itemize}
-		\item	Shift of 1.2 units starts at $t=150$, caught at around $t=180$
+		\item	Shift of 1.2 units $(1.2/3 = 0.4\sigma)$ starts at $t=150$, caught at around $t=180$; far earlier than a Shewhart chart
 	\end{itemize}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/monitoring/CUSUM-with-shift.png}
@@ -593,6 +595,12 @@
 		\item	Implemented by computers
 		\item	If a fault is detected, reset $S_t$ to a new value and restart chart
 	\end{itemize}
+	
+	\vspace{12pt}
+	CUSUM charts:
+	\begin{itemize}
+		\item	should be used when we require very sensitive monitoring around a \textbf{specified, fixed target}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{EWMA charts: what is a moving average?}
@@ -601,7 +609,7 @@
 		\item	CUSUM: infinite build up of errors, all the way back to $t=0$
 		\item	Moving average (MA) chart: has a ``window'' of memory:
 	\end{enumerate}
-	
+	\vspace{6pt}
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/monitoring/explain-moving-average-data-source.png}
 	\end{center}	
@@ -609,7 +617,7 @@
 	\begin{array}{rcl}
 		\\
 		\bar{x}_t &=& \dfrac{1}{n}x_{t-1} + \dfrac{1}{n}x_{t-2} + \ldots + \dfrac{1}{n}x_{t-n} \\
-		\bar{x}_t &=& 0.25x_{t-1} + 0.25x_{t-2} + 0.25x_{t-3} + 0.25x_{t-4} + 0\qquad \text{for n=4}\\
+		\bar{x}_t &=& 0.25x_{t-1} + 0.25x_{t-2} + 0.25x_{t-3} + 0.25x_{t-4} + 0\qquad \text{for} n=4\\
 	\end{array}
 	$$
 	\begin{itemize}
@@ -617,7 +625,8 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{EWMA derivation}
+\begin{frame}\frametitle{EWMA derivation example}
+	
 	\begin{itemize}
 		\item	{\color{purple}{Exponentially Weighted Moving Average}} = EWMA
 		\begin{itemize}
@@ -626,14 +635,46 @@
 			\item	small weights further back in time
 		\end{itemize}
 	\end{itemize}
+	
 
+	\begin{columns}[t]
+		\column{1.1\textwidth}
+			{\footnotesize
+			\begin{align*}
+					           && \hat{x}_{t+1} &=& {\color{purple}{\lambda}} x_t &+& {\color{purple}{\lambda(1-\lambda)}} x_{t-1} &+& {\color{purple}{\lambda(1-\lambda)^2}} x_{t-2} &+& {\color{purple}{\lambda(1-\lambda)^3}} x_{t-3} &+ \ldots\\
+				\lambda = 0.8: && \hat{x}_{t+1} &=& 0.8 x_t     &+& 0.16 x_{t-1}               &+& 0.032 x_{t-2}                &+& 0.006 x_{t-3} &+ \ldots      \\							   
+				\lambda = 0.6: && \hat{x}_{t+1} &=& 0.6 x_t     &+& 0.24 x_{t-1}               &+& 0.096 x_{t-2}                &+& 0.0384 x_{t-3} &+ \ldots      \\
+				\lambda = 0.2: && \hat{x}_{t+1} &=& 0.2 x_t     &+& 0.16 x_{t-1}               &+& 0.128 x_{t-2}                &+& 0.1024 x_{t-3} &+ \ldots       \\ \hline
+				\text{MA chart*}&& \hat{x}_{t+1} &=& 0.25 x_t    &+& 0.25 x_{t-1}               &+& 0.25 x_{t-2}                 &+& 0.25 x_{t-3}  &     
+			\end{align*}}
+
+		\column{0.01\textwidth}
+	\end{columns}
+
+	* MA chart with 4 samples per group: weight equals 1/4 = 0.25
+
+	\vspace{16pt}
+	\begin{itemize}
+		\item	As $\lambda \rightarrow 0$: smoother chart, uses more history, less current data
+		\item	As $\lambda \rightarrow 1$: chart uses more current data
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}\frametitle{EWMA derivation}
+	
+	We would rather use a recursive formula though (so we don't have to store all the raw $x_t$ values in memory)
+
+	\vspace{12pt}
 	$
 	\begin{array}{rcl}
-		x_t &=& \text{new data at time step } t\\
-		\hat{x}_t &=& \hat{x}_{t-1} + \lambda e_{t-1} \\
+		x_t &=& \text{raw data value at time step } t\\
+		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda e_{t} \\
 		e_t &=& x_t - \hat{x}_t \\
 		\\
-		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda e_{t} \\
+		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda e_{t} ={\color{myOrange} \hat{x}_{t}} + \lambda( {\color{myOrange} {x}_{t}} - {\color{myOrange} \hat{x}_{t}}) \\
 		\\
 	\end{array}
 	$
@@ -650,13 +691,16 @@
 			And: $0 \leq \lambda \leq 1$
 	\end{columns}
 	
+	\vspace{12pt}
+	Only store $x_t$ and $\hat{x}_t$ to calculate $x_{t+1}$
+	
 \end{frame}
 
-\begin{frame}\frametitle{EWMA derivation}
+\begin{frame}\frametitle{EWMA derivation: an alternative interpretation}
 
 	$$
 	\begin{array}{rcl}
-		x_t &=& \text{new data at time step } t\\
+		x_t &=& \text{raw data value at time step } t\\
 		\hat{x}_{t+1} &=& \hat{x}_{t} + \lambda e_{t} \\
 		e_t &=& x_t - \hat{x}_t \\
 		\\
@@ -673,6 +717,23 @@
 			\item	$x_t$: current point, weighted by $\lambda$
 			\item	$\hat{x}_{t}$: historical data, weighted by $\left(1-\lambda \right)$
 		\end{enumerate}
+	\end{itemize}
+	
+	\vspace{12pt}
+	\begin{itemize}
+		\item	As $\lambda \rightarrow 0$: smoother chart, uses more history, less current data (more CUSUM like)
+		\item	As $\lambda \rightarrow 1$: chart uses more current data (Shewhart-like)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{EWMA derivation example}
+	\begin{center}
+		\includegraphics[height=0.8\textheight]{\imagedir/monitoring/explain-weights-for-process-monitoring.png}
+	\end{center}
+	\vspace{-16pt}
+	\begin{itemize}
+		\item	As $\lambda \rightarrow 0$: smoother chart, uses more history, less current data
+		\item	As $\lambda \rightarrow 1$: chart uses more current data (Shewhart-like)
 	\end{itemize}
 \end{frame}
 
@@ -692,51 +753,13 @@
 	From: Hunter, ``\href{http://literature.connectmv.com/item/175/the-exponentially-weighted-moving-average}{The Exponentially Weighted Moving Average}'', \emph{Journal of Quality Technology}, \textbf{18}, p 203-210, 1986.
 \end{frame}
 
-\begin{frame}\frametitle{EWMA derivation example}
-	\begin{center}
-		\includegraphics[height=0.8\textheight]{\imagedir/monitoring/explain-weights-for-process-monitoring.png}
-	\end{center}
-	\vspace{-16pt}
-	\begin{itemize}
-		\item	As $\lambda \rightarrow 0$: smoother chart, uses more history, less current data
-		\item	As $\lambda \rightarrow 1$: chart uses more current data (Shewhart-like)
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{EWMA derivation example}
-	
-	An alternative interpretation of the EWMA:
-	
-	\vspace{12pt}
-	\begin{columns}[t]
-		\column{1.1\textwidth}
-			{\footnotesize
-			\begin{align*}
-					           && \hat{x}_{t+1} &=& {\color{purple}{\lambda}} x_t &+& {\color{purple}{\lambda(1-\lambda)}} x_{t-1} &+& {\color{purple}{\lambda(1-\lambda)^2}} x_{t-2} &+& {\color{purple}{\lambda(1-\lambda)^3}} x_{t-3} &+ \ldots\\
-				\lambda = 0.6: && \hat{x}_{t+1} &=& 0.6 x_t     &+& 0.24 x_{t-1}               &+& 0.096 x_{t-2}                &+& 0.0384 x_{t-3} &+ \ldots      \\
-				\lambda = 0.2: && \hat{x}_{t+1} &=& 0.2 x_t     &+& 0.16 x_{t-1}               &+& 0.128 x_{t-2}                &+& 0.1024 x_{t-3} &+ \ldots       \\
-				\text{MA chart*}&& \hat{x}_{t+1} &=& 0.25 x_t    &+& 0.25 x_{t-1}               &+& 0.25 x_{t-2}                 &+& 0.25 x_{t-3}  &     
-			\end{align*}}
-
-		\column{0.01\textwidth}
-	\end{columns}
-
-	* MA chart with 4 samples per group: weight equals 1/4 = 0.25
-
-	\vspace{16pt}
-	\begin{itemize}
-		\item	As $\lambda \rightarrow 0$: smoother chart, uses more history, less current data
-		\item	As $\lambda \rightarrow 1$: chart uses more current data (Shewhart-like)
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{EWMA visual example}
+\begin{frame}\frametitle{EWMA visual example (fault occurs at $t=150$)}
 	\begin{center}
 		\includegraphics[height=0.9\textheight]{\imagedir/monitoring/explain-EWMA-derivation-part1.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{EWMA visual example}
+\begin{frame}\frametitle{EWMA visual example (fault occurs at $t=150$)}
 	\begin{center}
 		\includegraphics[height=0.9\textheight]{\imagedir/monitoring/explain-EWMA-derivation-part2.png}
 	\end{center}
@@ -759,7 +782,7 @@
 	\begin{itemize}
 		\item	This gives you the usual Shewhart monitoring, but for a 
 		\item	slow-moving processes with long gaps between samples, 
-		\item	the EWMA helpfully gives a one-step ahead prediction
+		\item	the EWMA helpfully also gives a one-step ahead prediction
 	\end{itemize}
 \end{frame}
 
@@ -1166,6 +1189,9 @@
 	$\qquad$
 
 	Clearly state all assumptions you make during the calculations (median = $52.9 \mu m$, sd = $1.64 \mu m$)
+	
+	% Is is symmetric? No; it is closer to USL.
+	% Cpk = (USL-x)/(3sigma) = (59 - 52.9)/(3 x 1.64) = 1.24
 \end{frame}
 
 \begin{frame}\frametitle{Example}
