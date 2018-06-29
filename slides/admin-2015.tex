@@ -1,0 +1,439 @@
+\begin{frame}\frametitle{Acknowledgments -- sources of reference for this course}
+	\begin{itemize}
+		\item	Dr. John MacGregor, who taught this course since 1983
+		\item	McMaster Advanced Control Consortium (MACC)
+		\item	The many companies I've worked with over the past 12 years
+			\begin{itemize}
+				\item	their problems and data appear in the course, often in disguised form
+			\end{itemize}
+	\end{itemize}
+	
+	\vspace{30pt}
+	\textbf{{\color{myOrange}My objective}}
+
+	\vspace{6pt}
+	I hope to make this class \textbf{worthwhile} and \textbf{practically} applicable to you. Please let me know how I'm doing at any time; there will be anonymous course evaluations throughout the course for your feedback.
+\end{frame}
+
+\begin{frame}\frametitle{Let's meet your teaching assistants}
+	\vspace{12pt}
+	\begin{columns}[t]
+		\column{0.80\textwidth}
+			{\color{myGreen}{Masoud Kheradmandi}}
+			\begin{itemize}
+				\item	\url{stats4eng@gmail.com}
+				\item	JHE, room 370
+				\item	Currently doing his Ph.D with Prashant Mhaskar
+			\end{itemize}
+		\column{0.20\textwidth}
+			\vspace{-1cm}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/teaching/TA-photos/Masoud-Kheradmandi.png}}
+	\end{columns}		
+	
+	\vspace{24pt}
+	\begin{columns}[t]
+		\column{0.80\textwidth}
+			{\color{myGreen}{Hadi Shahnazari}}
+			\begin{itemize}
+				\item	\url{stats4eng@gmail.com}
+				\item	JHE, room 370A
+				\item	Currently doing his Ph.D with Prashant Mhaskar
+			\end{itemize}
+		\column{0.20\textwidth}
+		
+			\vspace{-0.5cm}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/teaching/TA-photos/Hadi-Shahnazari.png}}
+	\end{columns}
+	\vspace{24pt}
+
+	{\color{myOrange}{Office hours for both TAs are by email appointment}}
+\end{frame}
+
+\begin{frame}\frametitle{Office hours for the TAs and myself}
+	\begin{itemize}
+		\item	You can expect TAs and I to answer emails promptly
+		\item	If you have questions:
+		\begin{enumerate}
+			\item	Please email the TAs with CC to me \hfill {\tiny{\color{myOrange}{$\longleftarrow$ hopefully this solves your problem}}}
+			\item	Please send from your McMaster address
+			\item	Set up in-person meeting with TAs or myself
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Course text book (required) and recommended references}
+	\begin{itemize}
+		\item	All you require are the slides and ...
+		\begin{itemize}
+			\item	\textbf{Process Improvement using Data}
+			\item	Draft book; it gets updated every week while I'm teaching 4C3/6C3
+			\item	\textbf{\href{http://learnche.mcmaster.ca/pid}{http://learnche.mcmaster.ca/pid}}
+			\item	Use website to report errors; suggest improvements for slides and book
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{itemize}
+		\item	Some suggested books on the course website:
+		\begin{columns}[t]
+			\column{0.80\textwidth}
+				\begin{itemize}
+					\item	\emph{Recommended}: Box, Hunter and Hunter, ``Statistics for Experimenters: Design, Innovation, and Discovery'', 2nd edition
+					\item	Other references on course website (self-directed learning)
+				\end{itemize}
+			\column{0.20\textwidth}
+				\vspace{-1cm}
+				\begin{center}
+					\includegraphics[width=\textwidth]{\imagedir/statistics/flickr-Box-Hunter-Hunter-cover-3056749047_1c1f633fcb_o.jpg}
+				\end{center}
+		\end{columns}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Please keep submitting course feedback via the website}
+	
+	\href{http://learnche.mcmaster.ca/feedback-questions}{http://learnche.mcmaster.ca/feedback-questions}
+	\vspace{4pt}
+	\hrule
+	\begin{center}
+		\includegraphics[width=0.65\textwidth]{\imagedir/teaching/anonymous-feedback-2015.png}
+	\end{center}
+	\hrule
+	\begin{itemize}
+		\item	I might not have explained something clearly;
+		\item	You didn't get a chance to ask a question, \emph{etc}
+	\end{itemize}	
+\end{frame}
+
+\begin{frame}\frametitle{Course software that you've used before: R; and why it's good to keep using it}
+	\begin{itemize}
+		\item	Main software: R statistical computing language; we also support Python, Minitab and MATLAB
+	\end{itemize}
+	
+	\begin{itemize}
+		\item	Why use R?
+		\begin{itemize}
+			\item	Widely used: Google, Pfizer, Merck, Bank of America, the InterContinental Hotels Group, Shell.
+			\item	Runs on Windows, Linux and Mac computers
+			\item	Excellent add-on libraries available for almost anything related to data analysis
+			\item	Free (both for academic and commercial use): you can use it after you graduate
+			\item	Promotes good statistical practice: write self-documenting code
+		\end{itemize}
+	\end{itemize}
+	
+	\begin{itemize}
+		\item	A step-by-step R tutorial is available on the website
+		\item	How to install and use software
+		\item	Example of loading data, plotting, data analysis, etc
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The course software is well-known and widely used}
+	\includegraphics[height=\textheight]{\imagedir/statistics/New-York-Times-article-about-R.png}
+\end{frame}
+
+\begin{frame}\frametitle{What this course is about}
+	There are 6 main sections, spread over 12 weeks
+	\begin{enumerate}
+		\item	\emph{Visualization}: high-density, efficient graphics
+		\item	\emph{Univariate data analysis}: probability distributions, confidence intervals
+		\item	\emph{Least squares models}: correlation, covariance, ordinary and multiple least squares models
+		\item	Design and analysis of \emph{experimental data} and response surface methods to improve a process
+		\item	\emph{Process monitoring}: tracking process behaviour to detect abnormalities
+		\item	Introduction to \emph{latent variable methods}: a general overview
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{What can you do with this once you've graduated?}
+	
+	{\footnotesize Job posting from ABB, November 2014}
+	\begin{exampleblock}{Scientist/Senior Scientist at ABB Corporate Research Centre}
+		
+		
+		\small 
+		
+		As a part of
+		Control \& Optimization Group at ABB Corporate Research Centre ... focuses on the application of control,
+		optimization, data analytics, process design and modelling techniques for
+		solving problems of business interest.
+
+		\vspace{10pt}
+		You will be responsible for development of
+		Condition and Performance Monitoring techniques and their application to  .... chemicals, oil and gas, metals, pulp and paper and
+		cement ... 
+		
+		\vspace{10pt}
+		The work would require
+		analyzing large structured/unstructured data sets using data analytics and
+		machine learning algorithms to discover hidden trends.  Appropriate
+		visualization techniques would need to be developed to display the
+		findings to operators and engineers.
+
+		\textbf{Requirements}
+
+		Candidate with a PhD/MS/MTech degree ... in Chemical Engineering ...
+		
+		
+		Experience with engineering software like R and Matlab  ...
+	\end{exampleblock}
+	
+\end{frame}
+
+
+\begin{frame}\frametitle{We are surrounded by interesting data}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/mindmaps/data-sources.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{What prior students have said about this course}
+
+	\textbf{Extracting value from data}
+
+	\emph{Ankit} - student in 2010 - now at Oneira Corporation (Oakville):
+	\begin{itemize}
+		\item	\emph{Now, having worked for over a year, I find myself referring back to my notes all the time and appreciating the concepts about how to look at data and represent the data in the best possible manner, especially since on a daily basis I look at a gigantic amount of data and am required to make sense of it.}
+	\end{itemize}
+	\begin{itemize}
+		\item	\emph{I think what I loved most about the course was the emphasis on the} \textbf{\emph{thinking}} \emph{and} \textbf{\emph{process of getting to a solution}} \emph{instead of the the final solution itself which has been an important attribute to becoming a good engineer or a problem solver/troubleshooter.}
+	\end{itemize}
+
+	\vspace{12pt}
+	\emph{Tiffany} at PepsiCo, \emph{Ken} at Sanofi Pasteur, \emph{Adeel}, and many others
+\end{frame}
+
+\begin{frame}\frametitle{Section 1: data visualization}
+	\includegraphics[width=\textwidth]{\imagedir/visualization/visualization-subject-mapping.png}
+\end{frame}
+
+\begin{frame}\frametitle{Section 2: univariate concepts review}
+
+	\includegraphics[width=\textwidth]{\imagedir/mindmaps/univariate-section-mapping.png}
+\end{frame}
+
+\begin{frame}\frametitle{Section 3: least squares}
+
+	\includegraphics[width=\textwidth]{\imagedir/mindmaps/least-squares-section-mapping.png}
+\end{frame}
+
+\begin{frame}\frametitle{Section 4: design of experiments}
+
+	\includegraphics[width=\textwidth]{\imagedir/mindmaps/DOE-section-mapping.png}
+\end{frame}
+
+\begin{frame}\frametitle{Section 5: monitoring any process}
+	\includegraphics[width=\textwidth]{\imagedir/mindmaps/process-monitoring-section-mapping.png}
+\end{frame}
+
+\begin{frame}\frametitle{Section 6: intro to latent variable methods}
+
+	\includegraphics[width=\textwidth]{\imagedir/mindmaps/latent-variable-modelling-simple.png}
+\end{frame}
+
+\begin{frame}\frametitle{Enrichment topics that will be interspersed}
+	\begin{itemize}
+		\item	robust methods
+		\item	cross-validation
+		\item	nonparametric methods
+		\item	real-time applications of statistical methods
+		\item	missing data handling
+		\item	sequential statistics
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Important dates}
+	\begin{itemize}
+		\item	{\color{myRed} \textbf{09 February, midterm on Monday evening}} \\{\color{myOrange}{Notify me of clashes this week!}}
+		\item	01 April: course project due
+		\item	07 April: last, review class
+		\item	NN April: \textbf{Final-exam}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{How this course will be different in 2015}
+	\centerline{\includegraphics[width=.9\textwidth]{\imagedir/teaching/Coursera/Coursera-screenshot-05-Jan-2015.png}}
+\end{frame}
+
+\begin{frame}\frametitle{The purpose of video lectures}
+	%\begin{columns}[t]
+		%\column{0.50\textwidth}
+			\begin{itemize}
+				\item	Closed captioned
+				\item	Pause-rewind-replay
+				\item	Speed up video
+			\end{itemize}
+	%\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Example of the video widget}
+	\begin{exampleblock}{}
+		\centerline{\includegraphics[width=\textwidth]{\imagedir/teaching/Coursera/turn-on-closed-captioning.png}}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}\frametitle{Example of the video widget}
+	\begin{exampleblock}{}
+		\centerline{\includegraphics[width=\textwidth]{\imagedir/teaching/Coursera/with-closed-captioning.png}}
+	\end{exampleblock}
+\end{frame}
+
+
+
+
+		%You cannot sit back here and be spoken at
+		%Forums participation explained
+\begin{comment}
+\begin{frame}\frametitle{The course website is where everything important is announced and posted}
+
+	\begin{exampleblock}{}
+		\centering
+		\href{http://learnche.mcmaster.ca/4C3}{http://learnche.mcmaster.ca/4C3}
+	\end{exampleblock}
+	\begin{itemize}
+		\item	\emph{Not an Avenue website!}
+		\item	Slides will be added to the site before class
+		\item	Please print slides and bring to class
+		\item	Assignments and solutions will be posted there
+		\item	Data sets and many resources you will require are posted there
+	\end{itemize}
+	\vspace{12pt}
+	\textbf{ Website is the main reference for all things course-related}
+	\begin{itemize}
+		\item	expected to check it about 3 times per week {\tiny (top left)}
+		\item	and follow on Twitter to get updates: \href{https://twitter.com/stats4eng}{@stats4eng}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The course website}
+	\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/teaching/website-snapshots/4C3-2014-course-website.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Video and audio recordings will be available}
+	\begin{itemize}
+		\item	Video/audio recordings from 2010, 2011, 2012 and 2013 on website
+		\item	Purpose: for your review, and to prepare for assignments and exams
+		\item	Might be useful if you miss a class
+		\item	As long as feasible, I will try to video record all classes in 2014
+		\begin{itemize}
+			\item	Try to record just myself, the board and the projector
+			\item	Can't guarantee the quality will be very good (background noise, etc)
+			\item	Video should be available within 24 to 48 hours after the class
+		\end{itemize}
+		\item	Audio recordings will also be made available, when possible
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{What is our grading philosophy?}
+	What we look for in the grading is demonstration that you/group:
+	\begin{enumerate}
+		\item	understand the concept,
+		\item	have the ability to apply the concept to new instances,
+		\item	think creatively about problems,
+		\item	my questions are seldom ``plug-and-chug'',
+		\item	numerical accuracy,
+		\item	grammar and spelling.
+	\end{enumerate}
+
+	\vspace{12pt}
+	Not all questions will be engineering related:
+	\begin{itemize}
+		\item	mostly (chemical) engineering questions
+		\item	but also expect: current world events, public policy, bioengineering, anywhere there are data to analyze
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Grading policy in this course}
+	\begin{itemize}
+		\item	\emph{Appropriate} group work is highly encouraged
+		\begin{itemize}
+			\item	Up to 30\% of course grade (assignments and project)
+			\item	\emph{Learn with each other}
+			\item	Assignments done in groups of 2 or by yourself
+			\item	Hand-in assignments as one submission
+			\item	Extra credit for 4C3 students if you do the 6C3 questions (where indicated; not always)
+			\item	6C3 students: you are held to a higher level of quality
+		\end{itemize}
+		\item	Late grading
+		\begin{itemize}
+			\item	\( -30 \)\% per day
+			\item	2 ``late day'' credits for assignments
+			\item	solutions posted after $\approx 2$ days of due date
+		\end{itemize}
+		\item	Assignment grading:
+		\begin{itemize}
+			\item	No make-ups for assignments
+			\item	Assignments count {\color{myBlue}\textbf{20\%}} of course grade
+			\item	Best $N-1$ assignments ($N \approx 7$) will be used
+		\end{itemize}
+		\item	Assignment dates: see website
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Group-based assignments}
+	\begin{itemize}
+		\item	``Appropriate'' group work is highly encouraged (about 30\% of course)
+		\item	Learn with each other: groups of 2, no larger
+		\vspace{2pt}\hrule\vspace{2pt}
+		\item	Optimal group work: \emph{an example of one approach}
+			\begin{itemize}
+				\item	Sarah and Brad work on an assignment
+				\item	Both Sarah and Brad do {\color{myRed}{\textbf{all questions}}} in draft: quick notes at home, on the bus, \emph{etc}, $\pm 4$ days before assignment due
+				\pause
+				\item	Meet in the library next day and go over each other's notes
+				\item	Explain to the other why you disagree
+				\item	e.g. Sarah sees a mistaken interpretation in Brad's work
+				\begin{itemize}
+					\item	She explains why it is a mistake to Brad: Sarah learns
+					\item	Brad also learns: he's heard this in class, and from Sarah now
+					\item	If neither can resolve it? speak with TA or Kevin
+				\end{itemize}
+				\pause
+				\item	Write up a joint solution; e.g. Sarah Q1 and 2, Brad does Q3
+				\item	Both review it before submitting
+			\end{itemize}
+		\vspace{2pt}\hrule\vspace{2pt}
+		\pause
+		\item	Other approaches are possible: your group decides
+		\item	\color{myOrange}{What doesn't work}: Sarah does Q1 and Q2, Brad does Q3; staple and submit
+		\item	\textbf{Do not share files or written work} \emph{between} groups
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Grading for project and exams}
+	\begin{itemize}
+		\item	Midterm:
+		\begin{itemize}
+			\item	{\color{myBlue}\textbf{12\%}} of course grade
+			\item	\emph{optional}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Written final exam: {\color{myBlue}\textbf{45\%}}
+		\begin{itemize}
+			\item	Covers all material
+			\item	\textbf{{\color{myRed}{You must achieve 50\% or greater in final exam to pass 4C3/6C3}}}
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Midterm and final exam:
+		\begin{itemize}
+			\item	Open notes -- anything on paper is allowed
+			\item	No electronic devices unfortunately
+			\item	Any calculator
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item	Experimental report due on 31 March: {\color{myBlue}\textbf{10\%}}
+		\begin{itemize}
+			\item	Perform you own \emph{designed experiment}
+			\item	More details \href{http://learnche.mcmaster.ca/4C3/Designed_experiments_project_-_2014}{on the course website} already
+			\item	The earlier you start, the better (start early March)
+			\item	You can, and should, provide an outline of your experimental plan for me to review by 10 March
+			\item	Can collaborate, \textbf{but only within your group}: not between groups
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\end{comment}
