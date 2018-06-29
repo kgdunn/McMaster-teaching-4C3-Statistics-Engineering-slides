@@ -1,5 +1,3 @@
-% TODO: add the Confidence interval for the system on the slide "Method 2b: No reference set, internal σ"
-
 \begin{frame}\frametitle{Univariate data analysis: What we will cover}
 	\includegraphics[width=\textwidth]{\imagedir/mindmaps/univariate-section-mapping.png}
 \end{frame}
@@ -34,6 +32,12 @@
 	\begin{center}
 		\includegraphics[height=0.9\textheight]{\imagedir/mindmaps/univariate-section-concepts.png}
 	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Our goal with Engineering Statistics}
+	\begin{exampleblock}{We try to answer the question:}
+		``What happened?''
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}\frametitle{Variability: Life is pretty boring without variability}
@@ -80,12 +84,13 @@
 \end{frame}
 
 \begin{frame}\frametitle{The high cost of variability in your final product}
-	\begin{block}
-		{Assertion}
+	\begin{block}{\color{red} Assertion}
 		\begin{center}
-			Customers expect both uniformity and low cost when they buy your product. Variability defeats both objectives.
+			Customers expect both \textbf{\color{myGreen}uniformity} and \textbf{\color{myGreen}low cost} when they buy your product. Variability defeats both objectives.
 		\end{center}
 	\end{block}
+	
+	\pause
 	\begin{enumerate}
 		\item	Customer totally unable to use your product. Examples:
 		\begin{itemize}
@@ -93,11 +98,13 @@
 			\item	viscosity too high,
 			\item	oil that causes pump failure
 		\end{itemize}
+		\pause
 		\item	Your product leads to poor performance. Example:
 		\begin{itemize}
 			\item	customer must put in more energy than usual (melting point too high)
 			\item	longer reaction times for off-spec catalyst
 		\end{itemize}
+		\pause
 		\item	Your brand is diminished
 		\begin{itemize}
 			\item	Extreme example: Maple Leaf Foods (listeriosis outbreak in 2008)
@@ -125,55 +132,63 @@
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}\frametitle{The high cost of variability in your raw materials}
-	\begin{itemize}
-		\item	Flip it around: you receive highly variable raw materials:
-		\begin{itemize}
-			\item	That variability lands up in your product, or
-			\item	you incur additional cost (energy/time/materials) to process it
-		\end{itemize}
-	\end{itemize}
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\imagedir/concepts/variation/feedback-control-variance-reduction.png}
-	\end{center}
+\begin{frame}\frametitle{The cost of variability in your raw materials: it reaches your final product}
+	
+	\centerline{\includegraphics[height=0.9\textheight]{\imagedir/concepts/variation/feedback-control-variance-reduction.png}}
+	\begin{columns}[T]
+		\column{0.30\textwidth}
+		\vspace{-2.5cm}
+		\begin{exampleblock}{}
+			{\color{myGreen} Variability affects you: whether you are on the receiving end or supplying end.}
+		\end{exampleblock}	
+		\column{0.70\textwidth}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{This entire course is about variability}
 	\begin{enumerate}
-		\item	Visualizing: \emph{show} the variability
-		\item	This section: \emph{quantify} variability, then \emph{compare} variability
-		\item	Section 3: how variation in one variable \emph{affects} another (least squares)
-		\item	Section 4: we intentionally \emph{introduce} variation to learn more about the process (DOE)
-		\item	Section 5: construct monitoring charts to \emph{track} variability
+		\item	Visualization: \emph{\color{blue}show} the variability
+		\item	This section: \emph{\color{blue}quantify} variability, then \emph{\color{blue}compare} variability
+		\item	Section 3: how variation in one variable \emph{\color{blue}affects} another (least squares)
+		\item	Section 4: we intentionally \emph{\color{blue}introduce} variation to learn more about our process through designed experiments (DOE)
+		\item	Section 5: construct monitoring charts to \emph{\color{blue}track} variability
 		\item	Section 6: dealing with multiple variables, simultaneously extracting information (latent variables)
 	\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Histograms ask the reader to infer the long term expectation of a variable}
+	\begin{columns}
+		\column{0.8\textwidth}
+			\includegraphics[height=0.9\textheight]{\imagedir/univariate/simulate-CLT-dice-slides.png}
+		\column{0.3\textwidth}
+			\includegraphics[width=0.9\textwidth]{\imagedir/univariate/6sided_dice-Wikipedia.png}
+			
+			\see{Wikipedia}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{Histograms summarize variation in a measured variable}
 
 	Shows \emph{number} of samples that occur in a \emph{\textbf{category}}: called a {\color{purple}{\textbf{frequency distribution}}}
 	\begin{center}
-		\includegraphics[width=0.6\textwidth]{\imagedir/univariate/histogram-children-by-gender.png}
+		\includegraphics[width=0.5\textwidth]{\imagedir/univariate/histogram-children-by-gender.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Histograms for a \textbf{continuous} variable}
-	Continuous variables: create category bins (usually equal-size)
+\begin{frame}\frametitle{Histograms for a \textbf{continuous} variable use category bins (usually of equal size)}
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/histogram-package-mass.png}
+		\includegraphics[width=0.6\textwidth]{\imagedir/univariate/histogram-package-mass.png}
 	\end{center}
-	\begin{itemize}
-		\item	Overfilling to achieve the 1 kg spec. If we can reduce variation: \emph{boss gives us a raise!}
-	\end{itemize}
+	We are overfilling to achieve the 1 kg spec. If we can reduce variation: \emph{boss gives us a raise!}
+	
 \end{frame}
 
-\begin{frame}\frametitle{Histograms}
-	\textbf{In-class exercise}: plot your expectation of these histograms: \vspace{2cm}
+\begin{frame}\frametitle{Plot your expectation of these histograms:}
+	 \vspace{2cm}
 	
 	\begin{columns}
 		\column{0.8\textwidth}
 			\begin{itemize}
-				\item	numbers thrown from a 6-sided dice
 				\item	repeated lab measurement to measure \\$g$ (9.81 $m/s^2$)
 				\item	this class's grades for a really easy test
 				\item	annual income for people in Canada
@@ -191,7 +206,7 @@
 	\textbf{Other examples:}
 	\begin{itemize}
 		\item	Next throw on a die? A fair die has a 16.67\% chance of showing each number.
-		\item	What is the batch yield tomorrow? Long term average $160 g/L \pm 20 g/L$
+		\item	What is the batch yield tomorrow? Long term average $160~\text{g.L}^{-1} \pm 20~\text{g.L}^{-1}$
 		\item	Boy or a girl? Canada's sex ratio at birth 1.06:1 (boy:girl)
 		\item	Age at death? Canadian life tables: e.g. in 2002, for females:
 		\begin{itemize}
@@ -199,6 +214,45 @@
 			\item	have a 77.5\% chance of reaching age 75
 		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Frequency distribution}
+
+	See the printed notes for detailed steps to construct a frequency distribution.
+	\begin{itemize}
+		\item	Categorical variables
+		\item	Continuous variable: with and without quantization
+	\end{itemize}
+
+	Main steps are:
+	\begin{enumerate}
+		\item	Decide what you are measuring
+		\item	Resolution for the measurement ($x$) axis
+		\item	Find number of observations in each bin
+		\item	Plot it as a bar plot.
+	\end{enumerate}
+
+	If you divide bin count by $N$, then you are plotting the \emph{relative frequency}.
+\end{frame}
+
+\begin{frame}\frametitle{Data from a reactor: production yield, measured in g/L}
+	\begin{columns}
+		\column{0.6\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/batch-yields-time-series.png}
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/batch-yields-slides.png}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Data from a reactor: production yield, measured in g/L}
+	\begin{columns}
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/batch-yields-good-slides.png}
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[width=0.9\textwidth]{\imagedir/univariate/batch-yields-poor-slides.png}
+			}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{Frequency distribution: you can also use a relative frequency}
@@ -214,49 +268,97 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Frequency distribution}
-
-	See the printed notes for detailed steps to construct a frequency distribution.
-	\begin{itemize}
-		\item	Categorical variable
-		\item	Continuous variable: with and without quantization
-	\end{itemize}
-
-	Main steps are:
-	\begin{enumerate}
-		\item	Decide what you are measuring
-		\item	Resolution for the measurement ($x$) axis
-		\item	Find number of observations in each bin
-		\item	Plot it as a bar plot.
-	\end{enumerate}
-
-	If you divide bin count by $N$, then you are plotting the \emph{relative frequency}.
+\begin{frame}\frametitle{Unpaid housework in two cities: fair comparison are harder with frequency data alone}
+	\begin{columns}
+		\column{0.5\textwidth}
+			\includegraphics[width=0.9\textwidth]{\imagedir/univariate/histogram-housework-hamilton.png}
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[width=0.9\textwidth]{\imagedir/univariate/histogram-housework-hamilton-relative.png}
+			}
+	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Review of nomenclature you are already comfortable with}
+\begin{frame}\frametitle{Unpaid housework in two cities: fair comparison are harder with frequency data alone}
+	\begin{columns}
+		\column{0.5\textwidth}
+			\includegraphics[width=0.9\textwidth]{\imagedir/univariate/histogram-housework-hamilton.png}
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[width=0.9\textwidth]{\imagedir/univariate/histogram-housework-toronto.png}
+			}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Unpaid housework in two cities: easier comparison with {\color{myOrange} \emph{relative}} frequency data}
+	\begin{columns}
+		\column{0.5\textwidth}
+			\includegraphics[width=0.9\textwidth]{\imagedir/univariate/histogram-housework-hamilton-relative.png}
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[width=0.9\textwidth]{\imagedir/univariate/histogram-housework-toronto-relative.png}
+			}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Income of people in Ontario, 2008}
+	\begin{columns}
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/Income-Ontario-2008.png}\
+			
+			\onslide+<2->{
+			
+			\hfill Rotated here for better reading $\longrightarrow$
+			}
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[height=0.9\textheight]{\imagedir/univariate/Income-Ontario-2008-rotated.png}
+			}
+		
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Histogram creation in R is very straightforward}
+	\includegraphics[height=0.7\textheight]{\imagedir/univariate/furnace-data-analysis.png}
+\end{frame}
+
+\begin{frame}\frametitle{We introduce many concepts in this module; many of which you know already}
+	\vspace{-16pt}
+	\begin{center}
+		\includegraphics[height=0.9\textheight]{\imagedir/mindmaps/univariate-section-concepts.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Review of terminology you are already comfortable with}
 	{\color{purple}{\textbf{Population}}}
 
 	Large collection of \emph{potential} measurements (not necessary to be infinite, a large $N$ works well)
 
+	\onslide+<2->{
 	{\color{purple}{\textbf{Sample}}}
 
 	Collection of observations that have actually occurred ($n$ samples)
 
 	In engineering: usually have plenty of data; that often is our population.
+	}
 
+\onslide+<3->{
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/univariate/batch-yields.png}
+		\includegraphics[width=.8\textwidth]{\imagedir/univariate/batch-yields.png}
 	\end{center}
+}
 \end{frame}
 
-\begin{frame}\frametitle{Quick review of basic nomenclature}
+\begin{frame}\frametitle{Quick review of basic terminology}
 	{\color{purple}{\textbf{Probability}}}
 
 	Area under relative frequency distribution curve equals 1.
 
+	\vspace{24pt}
 	Probability is the fraction of the area under the curve.
 
-	For the previous histograms: mark the area:
+	\vspace{24pt}
+	{\color{myGreen}Construct histograms for yourself}, then mark the area:
 	\begin{itemize}
 		\item	Probability of grades less than 80\%
 		\item	Probability that number on dice is 1 or 2
@@ -264,7 +366,29 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Quick review of basic nomenclature}
+\begin{frame}\frametitle{Use of the area under a relative frequency histogram}
+	{\color{purple}{\textbf{Probability}}}
+
+	\begin{columns}
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/simulate-CLT-dice-slides.png}
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/batch-yields-slides.png}
+	\end{columns}	
+\end{frame}
+
+\begin{frame}\frametitle{Use of the area under a relative frequency histogram}
+	{\color{purple}{\textbf{Probability}}}
+
+	\begin{columns}
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/simulate-CLT-dice-slides-coloured.png}
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/batch-yields-slides-coloured.png}
+	\end{columns}	
+\end{frame}
+
+\begin{frame}\frametitle{Quick review of basic terminology}
 	{\color{purple}{\textbf{Parameter}}}
 	\begin{itemize}
 		\item	Value that describes the population's \emph{distribution} (fixed)
@@ -274,6 +398,8 @@
 	\begin{itemize}
 		\item	An estimate of one of the population's parameters (estimate implies that it varies)
 	\end{itemize}
+	
+	\onslide+<2->{
 
 	{\color{purple}{\textbf{Mean}}}
 	\begin{itemize}
@@ -290,95 +416,126 @@
 	\begin{itemize}
 		\item	Mean by itself is not sufficient to describe a (random) variable
 	\end{itemize}
+	}
 \end{frame}
 
-\begin{frame}\frametitle{Quick review of basic nomenclature}
+\begin{frame}\frametitle{Quick review of basic terminology}
 	{\color{purple}{\textbf{Variance (spread)}}}
 	\begin{itemize}
 		\item	Measure of spread, or variability
 		\item	Population variance:
-	\end{itemize}
-
 	$
 	\begin{array}{rcl}
 		\mathcal{V}\left\{x\right\} = \mathcal{E}\left\{ (x - \mu )^2\right\} &=& \sigma^2 \\
 		&=& \displaystyle \frac{1}{N}\sum{(x-\mu)^2} \\
 	\end{array}
 	$
+	\onslide+<2->{
+		\item	The population {\color{purple}standard deviation} $= \sigma$
+	}
+	\end{itemize}
 	\begin{itemize}
+		\onslide+<3->{
 		\item	Sample variance:
+		$
+		\begin{array}{rcl}
+			s^2 &=& \displaystyle \frac{1}{n-1}\sum_{i=1}^{n}{(x_i - \bar{x})^2}
+		\end{array}
+		$
+		}
+		\onslide+<4->{
+		
+		\item	The sample {\color{purple}standard deviation} $= s$
+		}
 	\end{itemize}
-	$
-	\begin{array}{rcl}
-		s^2 &=& \displaystyle \frac{1}{n-1}\sum_{i=1}^{n}{(x_i - \bar{x})^2}
-	\end{array}
-	$
-
-	{\color{purple}{\textbf{Degrees of freedom}}}: the denominator term, $n-1$
+	\onslide+<5->{
+		{\color{purple}{\textbf{Degrees of freedom}}}: the denominator term, $n-1$
+	}
 \end{frame}
 
-\begin{frame}\frametitle{Quick review of basic nomenclature}
-	\begin{block}
-		{\color{purple}{{\textbf{Outlier}}}}
-		\begin{center}
-			\emph{A point that is unusual, given the context of the surrounding data}
-		\end{center}
-	\end{block}
-	\begin{itemize}
-		\item	4024, 5152, 2314, 6360, 4915, 9552, 2415, 6402, 6261
-		\item	4, 61, 12, 64, 4024, 52, -8, 67, 104, 24
-	\end{itemize}
-
-	\vspace{12pt}
-	\begin{itemize}
-		\item	$\bar{x} = 440.4$  and $s = 1260$
-		\item	Median = 56.5 and MAD = 57
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Quick review of basic nomenclature}
-	{\color{purple}{\textbf{Median (location)}}}
-	\begin{itemize}
-		\item	One alternative measure of location.
-		\item	Robust statistic: insensitive (robust) to outliers in the data
-		\item	The most robust estimator of sample location:
+\begin{frame}\frametitle{Quick review of basic terminology}
+	{\color{purple} \textbf{Outlier}}
+	\vspace{1cm}
+	
+	\onslide+<2->{
+		\begin{exampleblock}{}
+			\begin{center}
+				\emph{A point that is unusual, given the context of the surrounding data}
+			\end{center}
+		\end{exampleblock}
+	}
+	\onslide+<3->{
 		\begin{itemize}
-			\item	breakdown of 50\%: implies 50\% of the data contaminated before median breaks down
-			\item	breakdown of the mean: $1/n$\% - only 1 outlier required
+			\item	4024, 5152, 2314, 6360, 4915, 9552, 2415, 6402, 6261
+			\item	4, 61, 12, 64, 4024, 52, -8, 67, 104, 24
 		\end{itemize}
-	\end{itemize}
-	\begin{exampleblock}{Why should you care?}
-		Always use the median and MAD (described next) where possible.
-	\end{exampleblock}
+	}
+	\onslide+<4->{
+		\vspace{12pt}
+		Let's look at the sample statistics:
+		
+		\begin{itemize}
+			\item	{\color{myOrange}Regular:} \qquad$~\bar{x} = 440.4$ ~~~~\qquad $s = 1260$
+			\item	{\color{myOrange}Robust:}  Median = 56.5 \qquad MAD = 57
+		\end{itemize}
+	}
 \end{frame}
 
-\begin{frame}\frametitle{Some newer terms?}
-	{\color{purple}{\textbf{Median absolute deviation, MAD (spread)}}}
+\begin{frame}\frametitle{Outliers are not only univariate; we also have multivariate outliers}
+	\centerline{\includegraphics[height=0.9\textheight]{\imagedir/univariate/multivariate-outliers.png}}
+\end{frame}
+
+\begin{frame}\frametitle{Quick review of basic terminology}
+	{\color{purple}{\textbf{Median (location)}}}
+		
+	\begin{itemize}
+		\onslide+<2->{
+			\item	One alternative measure of central tendency.
+			\item	Robust statistic: insensitive (robust) to outliers in the data
+			\item	The mean is extremely sensitive to outliers
+		}
+		\onslide+<3->{
+			\item	The most robust estimator of sample location:
+			\begin{itemize}
+				\item	breakdown of 50\%: implies 50\% of the data contaminated before median breaks down
+				\item	breakdown of the mean is $1/n$\%:  only 1 outlier required
+			\end{itemize}
+		}
+	\end{itemize}
+	\onslide+<4->{
+		\begin{exampleblock}{Why should you care?}
+			Always use the median and MAD (described next) where possible.
+		\end{exampleblock}
+	}
+\end{frame}
+
+\begin{frame}\frametitle{{\color{purple}{\textbf{Median absolute deviation, MAD (spread)}}}}
+	
 	\begin{itemize}
 		\item	A robust measure of spread
 	\end{itemize}
 	$ \qquad\qquad \text{mad}\left\{ x_i \right\} = c \cdot \text{median}\left\{ \| x_i - \text{median}\left\{ x_i \right\} \| \right\} $
+	\onslide+<2->{
+		\begin{itemize}
+			\item	The constant $c = 1.4826$ makes MAD consistent with the standard deviation if $x_i$ are normally distributed.
+			\item	Breakdown of MAD: 50\%
+			\item	Breakdown of standard deviation: $1/n$\%
+		\end{itemize}
+	}
+	\onslide+<3->{
 	\begin{itemize}
-		\item	The constant $c = 1.4826$ makes MAD consistent with the standard deviation if $x_i$ are normally distributed.
-		\item	Breakdown of MAD: 50\%
-		\item	Breakdown of standard deviation: $1/n$\%
-	\end{itemize}
-	\begin{itemize}
-		\item	Read the paper by Rousseeuw (especially grad students):
-		\iftoggle{hrymak}{
+		\item	Read the paper by Rousseeuw {\scriptsize (especially 600-level and graduate students)}:
+		
 			\begin{itemize}
-				\item	\href{http://literature.connectmv.com/item/173}{http://literature.connectmv.com/item/173}
+				\item	\href{http://yint.org/robust-tutorial}{http://yint.org/robust-tutorial}
 			\end{itemize}
-		}{
-			\begin{itemize}
-				\item	\href{http://learnche.mcmaster.ca/media/mcmaster/Rousseeuw-tutorial.pdf}{http://learnche.mcmaster.ca/media/mcmaster/Rousseeuw-tutorial.pdf}
-			\end{itemize}
-		}
-	\end{itemize}
-	\begin{itemize}
-		\item	Another robust estimate of spread: the IQR (inter-quartile range)
-		\item	but not as robust as the MAD
-	\end{itemize}
+
+		\end{itemize}
+	
+		\begin{itemize}
+			\item	Another robust estimate of spread is the IQR (inter-quartile range), but not as robust as the MAD
+		\end{itemize}
+	}
 \end{frame}
 
 \begin{frame}\frametitle{We will take a look at some basic distributions next}
@@ -417,11 +574,11 @@
 
 	Probability distribution for an event with 4 possible outcomes:
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{\imagedir/univariate/histogram-4-cuts.png}
+		\includegraphics[width=0.4\textwidth]{\imagedir/univariate/histogram-4-cuts.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{The \textbf{normal} distribution}
+\begin{frame}\frametitle{Introduction to the \textbf{normal} distribution}
 
 	We need to look at two topics first:
 	\begin{enumerate}
@@ -431,48 +588,68 @@
 \end{frame}
 
 \begin{frame}\frametitle{Central limit theorem, \textbf{and} the important assumptions that go with it}
-	\begin{block}
-		{\color{purple}{Central limit theorem}}
-		\begin{center}
-			The average of a sequence of values from \emph{any distribution} will approach the normal distribution, provided the original distribution has finite variance.
-		\end{center}
-	\end{block}
-
-	\includegraphics[width=0.9\textwidth]{\imagedir/univariate/CLT-derivation.png}
-
-	\textbf{Assumption}: the samples used to compute the average are independent.
+	\begin{exampleblock}{\color{purple}{Central limit theorem}}
+		
+		
+			The average of a sequence of independent values from \emph{any distribution} will approximate the normal distribution, provided the original distribution has finite variance.
+		
+	\end{exampleblock}
+	\onslide+<2->{
+		\includegraphics[width=0.9\textwidth]{\imagedir/univariate/CLT-derivation.png}
+		
+		\textbf{Assumption}: the samples used to compute the average are independent.
+	}
+	
 	\vspace{4pt}
-	\hrule
-	\vspace{4pt}
-	How is this theorem relevant with engineering data?
-	\begin{itemize}
-		\item	In many cases we are using averages from our raw data
-		\item	These raw data are almost never normally distributed
-		\item	But using the assumption that these averages are normally distributed is powerful
-	\end{itemize}
+	\onslide+<3->{
+		\hrule
+		\vspace{4pt}
+		How is this theorem relevant with engineering data?
+		\begin{itemize}
+			\item	In many cases we are using averages from our raw data
+			\item	These raw data are almost never normally distributed
+			\item	But using the assumption that these averages are normally distributed is powerful
+		\end{itemize}
+	}
 \end{frame}
 
-\begin{frame}\frametitle{Central limit theorem: throwing dice {\color{myGreen}{(independent events)}}}
+\begin{frame}\frametitle{}
+	\vspace{-5.8cm}
 	\includegraphics[width=\textwidth]{\imagedir/univariate/simulate-CLT.png}
+	
+	\vspace{-9cm}
+	\hfill \includegraphics[width=0.1\textwidth]{\imagedir/univariate/6sided_dice-Wikipedia.png}
 \end{frame}
 
 \begin{frame}\frametitle{The assumption of \textbf{independence} is widely used}
 
-	It is a condition for the central limit theorem.
+	It is a condition for the Central Limit Theorem.
 	\begin{block}
 		{\color{purple}{Independence}}
 		\begin{center}
-			The samples are \emph{randomly} taken from a population. If two samples are independent, there is no possible relationship between them.
+			The samples are \emph{randomly} taken from a population. If two samples are independent, there is no possible relationship between any two samples.
 		\end{center}
 	\end{block}
+	\onslide+<2->{
 
-	We frequently violate this assumption in engineering work. Discuss these examples:
+		\vspace{12pt}
+		{\color{myOrange}We frequently violate this assumption in engineering work. }
+	}
+	
+	\onslide+<3->{
+		\vspace{6pt}
+		Discuss these examples:
+	}
 	\begin{itemize}
-		\item	A questionnaire is given to students. Are the answers independent if students discuss the questionnaire prior to handing it in?
-		\item	The snowfall, recorded in inches, for the last 30 days.
-		\item	Snowfall, recorded on 3 January for every year since 1976: independent or not?
-		\item	The impurity values in the last 10 batches of product produced.
-		\item	Exercise in the notes about independence (pump failures).
+		\onslide+<3->{
+			\item	The snowfall, recorded in millimetres, every 6 hours, for 1 week.
+			\item	Snowfall, recorded on 15 January for every year since 1976: independent or not?
+		}
+		\onslide+<4->{
+			\item	A questionnaire is given to students. Are the answers independent if students discuss the questionnaire prior to handing it in?
+			\item	The impurity values in the last 10 batches of product produced.
+			\item	See the exercise in the notes about independence (pump failures).
+		}
 	\end{itemize}
 \end{frame}
 
@@ -488,142 +665,345 @@
 	% The first ine is weakly positively autocorrelated
 \end{frame}
 
-\begin{frame}\frametitle{We seldom use the normal distribution's equation directly}
 
-	$ p(x) = \displaystyle \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{\displaystyle (x-\mu)^2}{\displaystyle 2\sigma^2}} $
+\begin{frame}\frametitle{Recap of the central limit theorem from the prior video}
+	%\includegraphics[width=0.9\textwidth]{\imagedir/univariate/CLT-derivation-part1.png}
+	\includegraphics[width=0.9\textwidth]{\imagedir/univariate/CLT-derivation-part2.png}
+\end{frame}
+
+\begin{frame}\frametitle{The basic normal distribution for a standardized variable}
 	\begin{center}
-		\includegraphics[width=0.85\textwidth]{\imagedir/univariate/normal-distribution-standardized.png}
+		\includegraphics[width=0.85\textwidth]{\imagedir/univariate/normal-distribution-standardized-z.png}
 	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{The basic normal distribution for a standardized variable}
+	\begin{center}
+		\includegraphics[width=0.85\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-coloured.png}
+		%\includegraphics[width=0.85\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-coloured-right.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{The ammonia dataset: the raw data and the effect of centering the data}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/Ammonia-histograms-1.png}
+			
+			The raw data: $x$
+			
+			The mean ammonia concentration is $ \overline{x}=36$.
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[width=\textwidth]{\imagedir/univariate/Ammonia-histograms-2.png}
+			
+				The raw data after centering: $x - \overline{x}$
+			}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{The ammonia dataset: the centered data and the effect of scaling}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/Ammonia-histograms-2.png}
+			
+			These are the centered  data: $x - \overline{x}$
+			
+			The standard deviation $ s=8.5$.
+			
+			\vspace{12pt}
+			Note: the parameter, $\sigma$, is unknown.
+			
+			The statistic, $s=8.5$ is an estimate of $\sigma$.
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[width=\textwidth]{\imagedir/univariate/Ammonia-histograms-3.png}
+			
+				These are the data after scaling: $\dfrac{x - \overline{x}}{s}$
+				
+				\vspace{12pt}
+				$\dfrac{x - \overline{x}}{s} = \dfrac{1}{s}\cdot\left(x - \overline{x}\right)$
+			}
+	\end{columns}
+\end{frame}
+
+% \begin{frame}\frametitle{The ammonia dataset: the centered data and the effect of scaling}
+% 	\begin{columns}[T]
+% 		\column{0.5\textwidth}
+% 			\includegraphics[width=\textwidth]{\imagedir/univariate/Ammonia-histograms-2.png}
+%
+% 			These are the centered  data: $x - \overline{x}$
+%
+% 			The standard deviation $ s=8.5$.
+%
+% 			\vspace{12pt}
+% 			Note: the parameter, $\sigma$, is unknown.
+%
+% 			The statistic, $s=8.5$ is an estimate of $\sigma$.
+% 		\column{0.5\textwidth}
+%
+% 				\includegraphics[width=\textwidth]{\imagedir/univariate/Ammonia-histograms-3.png}
+%
+% 				If we had population variables, we write: \[z = \dfrac{x - \mu}{\sigma}\]
+%
+% 	\end{columns}
+% \end{frame}
+
+\begin{frame}\frametitle{The {\color{purple}{standard form}} definition}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+		For \emph{\color{myGreen}parameters}: 
+			
+			\[z = \dfrac{x - \mu}{\sigma}\]
+		\column{0.5\textwidth}
+		For \emph{\color{myGreen}statistics}: 
+			
+			\[z = \displaystyle \frac{x - \overline{x}}{s}\]
+	\end{columns}
+	
+	\vspace{36pt}
 	\begin{itemize}
-		\item	$x$: variable of interest
-		\item	$p(x)$ probability of obtaining that $x$
-		\item	$\mu$ population mean for variable $x$
-		\item	$\sigma$ population standard deviation (positive)
-		\item	the distribution is symmetric about $\mu$
+		\item	They are both the same structure.
+		%\item	${\color{red} \mathbf{x}} \sim \mathcal{N}(\mu, \sigma^2)$ \hfill {\color{myOrange}{$\longleftarrow$ do not use the standard deviation, use $\sigma^2$}}
+		%\item	$z \sim \mathcal{N}(0.0, 1.0)$ after standardization
+		\item	The units are removed by cancellation.
+		\item	Standardization allows us to straightforwardly compare 2 variables that have different means and spreads
+		%\item	{\color{red}{Recommendation}}: make sure you can read a statistical table (see end of Chapter 2)
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{But we do use the properties of the normal distribution frequently}
-	\begin{enumerate}
-		\item	The maximum value of $p(x)$ occurs at $x = \mu$
-		\item	What happens to the shape of $p(x)$ as $\sigma$ gets larger ?
-		\item	What happens to the shape of $p(x)$ as $\sigma \rightarrow 0$ ?
-		\item	Fill out this table:
-	\end{enumerate}
+\begin{frame}\frametitle{Two approximate rules you must remember: 70\% rule}
 	\begin{center}
-		\begin{tabular}{|c|c|c|c|}\hline
-			$\mu$		&	$\sigma$ 	&	$x$		&	$p(x)$\\ \hline
-			0 			&  	1			& 	0 		&		  \\ \hline
-			0 			&	1			& 	1		&  		  \\ \hline
-			0 			&	1			& 	-1		&  		  \\ \hline
-		\end{tabular}
-
+		\includegraphics[width=0.85\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-labels-70-percent-area.png}
 	\end{center}
-	Some rules of thumb:
-	\begin{itemize}
-		\item	$\sigma$ is the distance from the mean to the point of inflection
-		\item	the area from $-\sigma$ to $\sigma$ is about 70\% (68.3\% exactly) of the distribution, with about 15\% outside the $\pm \sigma$ tails
-		\item	the tail area outside $\pm 2\sigma$ is about 5\% (2.275 outside each tail)
-	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{And derive values from the (unit) normal distribution in tables}
+\begin{frame}\frametitle{Two approximate rules you must remember: 95\% rule}
+	\begin{center}
+		\includegraphics[width=0.85\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-labels-95-percent-area.png}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{The {\color{purple}{standard form}} definition}
+	\begin{columns}[T]
+		\column{\textwidth}
+		
+			
+			\[z = \dfrac{x - \mu}{\sigma}\]
+		
+	\end{columns}
+	
+	\vspace{36pt}
 	\begin{itemize}
-		\item	Used for tables of normal distribution, and cumulative area
-		\item	We will use software instead in the course
-		\item	The {\color{purple}{standard form}} is defined as $ z = \displaystyle \frac{x - \mu}{\sigma} $
 		\item	${\color{red} \mathbf{x}} \sim \mathcal{N}(\mu, \sigma^2)$ \hfill {\color{myOrange}{$\longleftarrow$ do not use the standard deviation, use $\sigma^2$}}
 		\item	$z \sim \mathcal{N}(0.0, 1.0)$ after standardization
-		\item	Units of $z$ if $x$ were measured in \texttt{kg}, for example?
-		\item	Standardization allows us to straightforwardly compare 2 variables that have different means and spreads
-		\item	{\color{red}{Recommendation}}: make sure you can read a statistical table (see end of Chapter 2)
+
+		
+		\vspace{36pt}
+		\onslide+<2->{
+			\item	Height of Australians = $h \sim \mathcal{N}(180\,\text{cm}, 36\,\text{cm}^2)$
+		}
+
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Integrating the areas under the curve}
+	%\centerline{	\includegraphics[width=\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-labels.png}	}
+	%\centerline{	\includegraphics[width=\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-labels-total-area.png}	}
+	\centerline{	\includegraphics[width=\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-labels-area-50-percent.png}	}
 \end{frame}
 
 \begin{frame}\frametitle{Statistical tables (graphical)}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/univariate/Statistical-tables/show-pnorm-and-qnorm.png}
-	\end{center}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+			\includegraphics[width=\textwidth]{\imagedir/univariate/Statistical-tables/show-pnorm-and-qnorm-left.png}
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[width=\textwidth]{\imagedir/univariate/Statistical-tables/show-pnorm-and-qnorm-right.png}
+			}
+	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Statistical tables (tabular)}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/univariate/Statistical-tables/cumulative-normal-table.png}
-	\end{center}
+\begin{frame}\frametitle{Statistical tables (tabular form)}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+			\includegraphics[width=0.85\textwidth]{\imagedir/univariate/Statistical-tables/cumulative-normal-table-left.png}
+		\column{0.5\textwidth}
+			\onslide+<2->{
+				\includegraphics[width=0.85\textwidth]{\imagedir/univariate/Statistical-tables/cumulative-normal-table-right.png}
+			}
+	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{In-class exercise}
-	\begin{enumerate}
-		\item	Assume x = biological activity of a drug, $x \sim \mathcal{N}(26.9, 9.3)$. Probability of $x \leq 30.0$?
-		\vspace{24pt}
-		\item	Assume x = yield from batch process:
-				$$x \sim \mathcal{N}(85 \text{~g/L}, 16\, \text{g}^2\text{.L}^{-2})$$
-				What is the proportion of yield values between 77 and 93 g/L?
-	\end{enumerate}
+\begin{frame}\frametitle{Inverse cumulative distribution (graphical and tabular form)}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+			\includegraphics[width=0.85\textwidth]{\imagedir/univariate/Statistical-tables/show-pnorm-and-qnorm-right.png}
+		\column{0.5\textwidth}
+			\includegraphics[width=0.85\textwidth]{\imagedir/univariate/Statistical-tables/cumulative-normal-table-right.png}
+	\end{columns}
+	Make sure you can use both R (left) or tables (right).
+\end{frame}
+
+\begin{frame}\frametitle{Integrating the areas under the curve between two points}
+	\centerline{	\includegraphics[width=\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-labels-area-up-to-minus-1.png}	}
 	
-	% Q1: sigma = 3 units; mean = 27; so at 30, we cover all the area between +/- 1sigma, which is 70%. Then add the area from -Inf to -1Sigma = 15%, to 70% + 15% = 85% (or read it from the tables where z=+1)
-	% Q2: sigma = 4 units; mean = 85; z = (77-85)/4 = -2;   z=(93 - 85)/4 = 8/4 =2; so area between -2 and +2 = 95%
+	\emph{Left point}
 \end{frame}
 
-\begin{frame}\frametitle{Checking for normality. Is this sample normally distributed?}
-	\begin{center}
-		\includegraphics[width=0.85\textwidth]{\imagedir/univariate/check-if-normal.png}
-	\end{center}
-	``Normally distributed'' is a widely used assumption. How do we check for it? Use a \textbf{q-q plot}
+\begin{frame}\frametitle{Integrating the areas under the curve between two points}
+	\centerline{	\includegraphics[width=\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-labels-area-up-to-plus-1.png}	}
+	
+	\emph{Right point}
+\end{frame}
+
+\begin{frame}\frametitle{Integrating the areas under the curve between two points}
+	\centerline{	\includegraphics[width=\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-labels-area-up-to-plus-1-overlap.png}	}
+	
+	\emph{Subtract out the darker overlap region}
+\end{frame}
+
+\begin{frame}\frametitle{Integrating the areas under the curve between two points}
+	\centerline{	\includegraphics[width=\textwidth]{\imagedir/univariate/normal-distribution-standardized-z-no-label-plus-minus-one.png}	}
+	
+	\emph{Leaving the net result}
+\end{frame}
+
+\begin{frame}\frametitle{Two more worked examples to check your knowledge}
+	\begin{enumerate}
+		\item	Assume $x$ = biological activity of a drug, $x \sim \mathcal{N}(26.9, 9.3)$ 
+				
+				\vspace{12pt}
+				What is the probability of $x \leq 30.0$?
+	\end{enumerate}
+	\vspace{24pt}
+\onslide+<2->{	
+	\begin{itemize}
+		\item	First create $z$ variable: $z \approx \dfrac{30 - 27}{\sqrt{9}} = \dfrac{3}{3} = 1$
+		\item	Find the area under the standard normal distribution: $z \leq 1$
+		\onslide+<3->{
+			\item	So the area $\approx 84\%$
+		}
+	\end{itemize}
+}
+	% Q1: sigma = 3 units; mean = 27; so at 30, we cover all the area between +/- 1sigma, which is 70%. Then add the area from -Inf to -1Sigma = 15%, to 70% + 15% = 85% (or read it from the tables where z=+1)
+\end{frame}
+
+\begin{frame}\frametitle{Two more worked examples to check your knowledge}
+	\begin{columns}[T]
+		
+		\column{0.7\textwidth}
+			\begin{enumerate}
+					\setcounter{enumi}{1}
+		
+					\item	Assume $x$ = yield from batch process:
+						$$x \sim \mathcal{N}(85 \text{~g/L}, 16\, \text{g}^2\text{.L}^{-2})$$
+						What is the proportion of yield values between 77 and 93 g/L?
+			\end{enumerate}
+			% Q2: sigma = 4 units; mean = 85; z = (77-85)/4 = -2;   z=(93 - 85)/4 = 8/4 =2; so area between -2 and +2 = 95%
+			\vspace{24pt}
+			\begin{itemize}
+				\onslide+<2->{
+					\item	Create both $z$ variables: $z \approx \dfrac{x - 85}{\sqrt{16}}$
+					\item	We get $z$ values of $-2$ and $+2$			
+					\item	Area from $-\infty$ to $+2$ is 97.73\%
+					\item	Area from $-\infty$ to $-2$ is 2.27\%
+				}
+				\onslide+<3->{
+					\item	Find the area between $-2$ and $+2$ as $\approx 95\%$
+				}
+			\end{itemize}
+		\column{0.4\textwidth}
+
+			\includegraphics[width=\textwidth]{\imagedir/univariate/Statistical-tables/cumulative-normal-table-left.png}
+	\end{columns}
+	
+	
+\end{frame}
+
+\begin{frame}\frametitle{Checking for normality. Are these samples normally distributed?}
+	\begin{columns}[t]
+		\column{0.35\textwidth}
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Grades-TS.png}	}
+		\column{0.35\textwidth}
+			%\onslide+<2->{
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Furnace-TS.png}	}
+			%}
+		\column{0.35\textwidth}
+			%\onslide+<3->{
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Rand-TS.png}	}
+			%}
+	\end{columns}
+	\begin{columns}[t]
+		\column{0.35\textwidth}
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Grades-hist.png}	}
+		\column{0.35\textwidth}
+			%\onslide+<2->{
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Furnace-hist.png}	}
+			%}
+		\column{0.35\textwidth}
+			%\onslide+<3->{
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Rand-hist.png}	}
+			%}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{Inverse cumulative distribution function (inverse CDF)}
 	\begin{itemize}
 		\item	\textbf{Cumulative distribution}: area underneath the distribution function
 		\item	\textbf{Inverse cumulative distribution}: we know the area, but want to get back to the value along the $z$-axis.
-		\item	We use this to construct a q-q plot
 	\end{itemize}
 	\vspace{-4pt}
 	\begin{center}
-		\includegraphics[width=0.80\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
+		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
 	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Checking for normality using q-q plots}
+	\begin{columns}[t]
+		\column{0.35\textwidth}
+			\textbf{Approach}: {\color{myOrange}{compare properties}}
+			\begin{itemize}
+				\item	use data from the theoretical distribution 
+				\item	compare it with actual data.
+			\end{itemize}
+			
+			\vspace{24pt}
+			\onslide+<2->{
+				We will assume we have $N$ \emph{actual} observations to check.
+			}
+			
+		\column{0.65\textwidth}
+			\onslide+<3->{
+			1. Create $N$ observations that are normally distributed:
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm-qqplot.png}
+			\end{center}
+			}
+	\end{columns}
 
-	\textbf{Approach}: {\color{myOrange}{compare}}
-	\begin{itemize}
-		\item	the theoretical distribution against
-		\item	the actual data.
-	\end{itemize}
-	Let's say you have $N$ \emph{actual} observations you want to check.
-
-	\vspace{16pt}
-	1. Create $N$ theoretical observations that are normally distributed:
-	\begin{itemize}
-		\item	Sort from lowest to highest
-		\item	The first point is the 1/$N$ x 100 percentile
-		\item	The second point is the 2/$N$ x 100 percentile
-		\item	Mid-point: 0.5 x 100 = 50th percentile
-		\item	Last point: 1.0 x 100 = 100th percentile
-		\item	Calculate the theoretical points along the distribution function
-	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Checking for normality using q-q plots}
-
+	
+	This software code shows how you would do this in R:
+	
+	\vspace{24pt}
+	
 	\begin{lstlisting}[R]
 	N = 10
-	index <- seq(1, N)       #    1,    2, ...   10
-	P <- (index - 0.5) / N   # 0.05, 0.15, ... 0.95
+	index <- seq(1, N)            #    1,    2, ...   10
+	P <- (index - 0.5) / N        # 0.05, 0.15, ... 0.95
 	theoretical.quantity <- qnorm(P)
 	# [1] -1.64 -1.04 -0.674 -0.385 -0.126
 	#      0.125  0.385  0.6744 1.036  1.64
 	\end{lstlisting}
-	\begin{center}
-		\includegraphics[width=.7\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
-	\end{center}
+	
 \end{frame}
 
 \begin{frame}[fragile]\frametitle{Checking for normality using q-q plots}
-	2. Do the same now for the actual data points
+	2. Standardize the actual data points:
 	\begin{itemize}
-		\item	Standardize data first: subtract mean, divide by standard deviation
+		\item	subtract the mean, divide by standard deviation
 		\item	Sort the data from lowest to highest
 		\item	These points should now match the theoretical points from step 1 if they are normally distributed. \emph{{\color{myGreen}{Example}}}:
 	\end{itemize}
@@ -651,7 +1031,7 @@
 		\item	\small They should form a 45 degree line if truly from this distribution
 	\end{itemize}
 	\begin{center}
-		\includegraphics[width=0.69\textwidth]{\imagedir/univariate/qqplot-derivation.png}
+		\includegraphics[width=0.5\textwidth]{\imagedir/univariate/qqplot-derivation.png}
 	\end{center}
 \end{frame}
 
@@ -663,221 +1043,295 @@
 	\end{enumerate}
 	\vspace{-8pt}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/univariate/qqplot-from-R.png}
+		\includegraphics[width=0.9\textwidth]{\imagedir/univariate/qqplot-from-R.png}
 
-		\begin{columns}[t]
-			\column{0.35\textwidth}
-				\texttt{qqplot(...)}\\
-				\texttt{qqline(...)}
-			\column{0.35\textwidth}
-				\texttt{library(car)}\\
-				\texttt{qqPlot(...)}
-		\end{columns}
 	\end{center}
 
 \end{frame}
 
-\begin{frame}\frametitle{Example: the 4N4 exam grades from 2013}
-	\begin{center}
-		\includegraphics[height=.9\textheight]{\imagedir/univariate/qqplot-4N4-2013-grades.png}
-	\end{center}
+\begin{frame}\frametitle{Checking for normality. Are these samples normally distributed?}
+
+	\begin{columns}[t]
+		\column{0.35\textwidth}
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Grades-hist.png}	}
+		\column{0.35\textwidth}
+			%\onslide+<2->{
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Furnace-hist.png}	}
+			%}
+		\column{0.35\textwidth}
+			%\onslide+<3->{
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Rand-hist.png}	}
+			%}
+	\end{columns}
+	
+	\vspace{10pt}
+	\begin{columns}[t]
+		\column{0.35\textwidth}
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Grades-qqplot.png}	}
+		\column{0.35\textwidth}
+			%\onslide+<2->{
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Furnace-qqplot.png}	}
+			%}
+		\column{0.35\textwidth}
+			%\onslide+<3->{
+			\centerline{	\includegraphics[width=0.75\textwidth]{\imagedir/univariate/Rand-qqplot.png}	}
+			%}
+	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Summary so far}
 
-	Aim of this section: \emph{quantify} variability, then \emph{compare} variability
-	\begin{itemize}
-		\item	Location, Spread, Histograms (distributions)
-		\item	Populations and Samples
-		\item	Robustness: median and MAD
-		\item	Independence
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Recap}
-	\begin{itemize}
-		\item	Probability: cumulative area under the distribution curve
-		\item	Rules of thumb
-		\begin{itemize}
-			\item	Area from $-\sigma$ to $\sigma$ is about 70\%, with 15\% outside the $\pm \sigma$ tails
-			\item	Area outside $\pm 2\sigma$ is about 5\% (2.275 outside each tail)
-		\end{itemize}
-	\end{itemize}
-	\begin{center}
-		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/normal-distribution-standardized.png}
-	\end{center}
-	\vspace{-16pt}
-	\begin{itemize}
-		\item	Independence
-		\item	$z$-value: $z = \dfrac{x - \text{mean}}{\text{standard deviation}}$
-		\vspace{8pt}
-		\begin{itemize}
-			\item	\textbf{Does not} change the distribution's characteristics
-			\item	e.g. positive skew in $x$ will still show in $z$
-		\end{itemize}
-		\item	Testing for normality (q-q plot)
-	\end{itemize}
+\begin{frame}\frametitle{Recap of the prior material}
+	$z$-value for any variable $x$ is defined as: $z = \dfrac{x - \text{mean}}{\text{standard deviation}}$
+	
+	\vspace{18pt}
+	We were also able to derive confidence interval bounds in the prior class:
+	
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+			\begin{itemize}
+				\item	$\displaystyle - c_n < \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} < c_n$
+		
+				\vspace{10pt}
+				\item	$\displaystyle \bar{x} - c_n\frac{\sigma}{\sqrt{n}} < \mu < \bar{x} + c_n\frac{\sigma}{\sqrt{n}}$
+		
+				\vspace{10pt}
+				\item	$\displaystyle \text{LB} < \mu < \text{UB}$
+			\end{itemize}
+		\column{0.5\textwidth}
+			% nothing here
+	\end{columns}
+	
 \end{frame}
 
 \begin{frame}\frametitle{Central limit theorem: extended}
 
 	\includegraphics[width=\textwidth]{\imagedir/univariate/CLT-derivation.png}
 
-	\textbf{Assumes}: the samples used to compute the average are independent.
-	\begin{enumerate}
-		\item	Estimate of population mean: $\bar{x} = \displaystyle \dfrac{1}{n} \sum_i^{i=n}{x_i}$
-		\item	Estimate of population variance: $s^2 =\displaystyle \frac{1}{n-1}\sum_i^{i=n}{(x_i - \bar{x})^2}$
-		\item	\textbf{New:} $\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$  \hfill{\color{myGreen}{$\longleftarrow$ really powerful statement}}
-	\end{enumerate}
+	\vspace{18pt}
+	\textbf{New:} $\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$  \hfill{\color{myGreen}{$\longleftarrow$ really powerful statement}}
 
+	\vspace{18pt}
 	\emph{Interpretation}
 
-	Repeated estimates of mean are unbiased (tends towards $\mu$ {\color{myOrange}{$\leftarrow$ of the distribution sampled from!}}) and variance of that estimate is decreased. 
-	\emph{Computer demo.}
+	Repeated estimates of mean are unbiased (tends towards $\mu$ {\color{myOrange}{$\leftarrow$ of the distribution sampled from!}}) and variance of that estimate is decreased by a factor $n$. 
 	
-	% 
 \end{frame}
 
-\begin{frame}\frametitle{Central limit theorem: extended}
-	\begin{itemize}
-		\item	$x \sim \mathcal{N}\left(\mu, \sigma^2 \right)$
-		\item	$\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$
-	\end{itemize}
-	\includegraphics[width=\textwidth]{\imagedir/univariate/explain-confidence-interval.png}
+\begin{frame}\frametitle{If we have $x \sim \mathcal{N}\left(\mu, \sigma^2 \right)$ then we get $\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$}
+	\centerline{\includegraphics[width=0.83\textwidth]{\imagedir/univariate/explain-confidence-interval.png}}
 \end{frame}
 
-\begin{frame}\frametitle{Example}
+\begin{frame}\frametitle{Relaxing the requirement to know $\sigma$}
+	
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+			Our current approach:
+			\begin{itemize}
+				
+				\item	$z = \dfrac{\bar{x} - \mu}{{\color{blue}\sigma} / \sqrt{n}}$
+				
+				\onslide+<2->{
+				\vspace{10pt}
+				\item	$z \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$
+				}
+			\end{itemize}
+			\onslide+<3->{
+			\vspace{20pt}Raw data are from any distribution of finite variance.}
+			
+		\column{0.5\textwidth}
+			Our revised approach:
+			\begin{itemize}
+				
+				\item	$z = \dfrac{\bar{x} - \mu}{{\color{red}s}/ \sqrt{n}}$
+				
+				\onslide+<2->{
+				\vspace{10pt}
+				\item	$z \sim t\left(\nu=n-1 \right)$
+				}
+				
+				
+			\end{itemize}
+			\onslide+<3->{
+			\vspace{20pt}Additionally requires that the raw data are normally distributed.\hfill{\color{myGreen}{$\longleftarrow$  easy to verify}}}
+			
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Summary of our revised process}
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{\imagedir/univariate/t-distribution-derivation.png}
+	\end{center}
+	
+\end{frame}
+
+\begin{frame}\frametitle{The $t$-distribution is heavily used in this course: let's examine it a bit more}
+		\begin{center}
+		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison.png}
+	\end{center}
+	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom. Here $\nu=8$.
+\end{frame}
+
+% \begin{frame}\frametitle{The $t$-distribution is heavily used in this course: let's examine it a bit more}
+% 		\begin{center}
+% 		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison-3.png}
+% 	\end{center}
+% 	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom. Here $\nu=3$.
+% \end{frame}
+% \begin{frame}\frametitle{The $t$-distribution is heavily used in this course: let's examine it a bit more}
+% 		\begin{center}
+% 		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison-5.png}
+% 	\end{center}
+% 	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom. Here $\nu=5$.
+% \end{frame}
+% \begin{frame}\frametitle{The $t$-distribution is heavily used in this course: let's examine it a bit more}
+% 		\begin{center}
+% 		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison-7.png}
+% 	\end{center}
+% 	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom. Here $\nu=7$.
+% \end{frame}
+% \begin{frame}\frametitle{The $t$-distribution is heavily used in this course: let's examine it a bit more}
+% 		\begin{center}
+% 		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison-9.png}
+% 	\end{center}
+% 	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom. Here $\nu=9$.
+% \end{frame}
+% \begin{frame}\frametitle{The $t$-distribution is heavily used in this course: let's examine it a bit more}
+% 		\begin{center}
+% 		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison-13.png}
+% 	\end{center}
+% 	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom. Here $\nu=13$.
+% \end{frame}
+% \begin{frame}\frametitle{The $t$-distribution is heavily used in this course: let's examine it a bit more}
+% 		\begin{center}
+% 		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison-20.png}
+% 	\end{center}
+% 	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom. Here $\nu=20$.
+% \end{frame}
+
+\begin{frame}\frametitle{Relaxing the requirement to know $\sigma$}
+	
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+			Our current approach:
+			\begin{itemize}
+				
+				\item	$z = \dfrac{\bar{x} - \mu}{{\color{blue}\sigma} / \sqrt{n}}$
+				
+				\vspace{10pt}
+				\item	$z \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$
+				
+				\onslide+<2->{
+				\vspace{10pt}
+				\item	$\displaystyle -c_n \leq z \leq +c_n$
+				}
+				\onslide+<3->{
+				\vspace{10pt}
+				\item	$\displaystyle -c_n \leq  \dfrac{\bar{x} - \mu}{{\color{blue}\sigma} / \sqrt{n}} \leq +c_n$
+				
+				\vspace{10pt}
+				\item	$\displaystyle \bar{x} - c_n\frac{{\color{blue}\sigma}}{\sqrt{n}} \leq \mu \leq \bar{x} + c_n\frac{{\color{blue}\sigma}}{\sqrt{n}}$
+				}
+				
+				\onslide+<4->{
+				\vspace{10pt}
+				\item	$17.7 \leq \mu \leq 22.3$
+				}
+				
+			\end{itemize}
+			
+		\column{0.5\textwidth}
+			Our revised approach:
+			\begin{itemize}
+				
+				\item	$z = \dfrac{\bar{x} - \mu}{{\color{red}s}/ \sqrt{n}}$
+				
+				
+				\vspace{10pt}
+				\item	$z \sim t\left(\nu=n-1 \right)$
+				
+				\onslide+<2->{
+				\vspace{10pt}
+				\item	$\displaystyle -c_t \leq z \leq +c_t$
+				}
+				\onslide+<3->{
+				\vspace{10pt}
+				\item	$\displaystyle -c_t \leq  \dfrac{\bar{x} - \mu}{{\color{red}s} / \sqrt{n}} \leq +c_t$
+				
+				\vspace{10pt}
+				\item	$\displaystyle \bar{x} - c_t\frac{{\color{red}s}}{\sqrt{n}} \leq \mu \leq \bar{x} + c_t\frac{{\color{red}s}}{\sqrt{n}}$
+				}
+				
+				\onslide+<4->{
+				\vspace{10pt}
+				\item	$17.1 \leq \mu \leq 22.9$
+				}
+			\end{itemize}
+			
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Reading values from a table of the $t$-distribution}
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/univariate/Statistical-tables/t-distribution-table.png} }
+\end{frame}
+
+\begin{frame}\frametitle{Example (continued from the prior videos)}
 
 	Large bale of polymer composite: 9 independent samples taken and sent to lab. The samples are independent estimates of the bale's entire (population) viscosity.
 	\begin{itemize}
 		\item	$x$ = \texttt{23, 19, 17, 18, 24, 26, 21, 14, 18}
 		\item	$\bar{x} = 20.0$
 		\item	$s=3.81$
-		\item	Assume we know the population $\sigma=3.5$
 	\end{itemize}
 	\myhrule
-	1. Distribution of the sample mean? Parameters of that distribution?
-	\begin{itemize}
-		\item$\bar{x} \sim \mathcal{N}\left(\mu, \sigma^2/n \right)$
-	\end{itemize}
-	2. Construct a $z$-value for $\bar{x} $
-	\begin{itemize}
-		\item	This seems strange at first, but remember $z = \dfrac{x - \text{mean}}{\text{standard deviation}}$
-		\item	$z = \dfrac{\bar{x} -\mu}{\sigma/\sqrt{n}}$
-	\end{itemize}
-\end{frame}
+	
+	The $z$-value is \emph{not known} (we do not know $\mu$): find critical lower and upper bounds that will contain 95\% of all possible $z$-values.
+	
+	\[-c_t \leq z leq +c_t\]
+	
+	What would the $\pm c_t$ value be for this example?
+	
+	\vspace{12pt}
+	\begin{columns}[t]
+		\column{0.8\textwidth}
 
-\begin{frame}\frametitle{Example}
-	3. The $z$-value is \emph{not known} (why?). So rather find lower and upper bounds that will contain 95\% of all possible $z$-values.
-	\begin{itemize}
-		\item	$-c_n < z < +c_n$
-		\item	$c_n$ = \texttt{qnorm(1-0.05/2)}       \qquad\# $c_n$ is 1.96
-	\end{itemize}
-	\begin{center}
-		\includegraphics[width=0.80\textwidth]{\imagedir/univariate/show-pnorm-and-qnorm.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{Example}
-	4. Unpack the $z$-value inside those bounds, solving for the unknown population mean, $\mu$
-	\begin{itemize}
-		\item	$\displaystyle - c_n < \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} < c_n$
-		\item	$\displaystyle \bar{x} - c_n\frac{\sigma}{\sqrt{n}} < \mu < \bar{x} + c_n\frac{\sigma}{\sqrt{n}}$
-		\item	$\displaystyle \text{LB} < \mu < \text{UB}$
-	\end{itemize}
-
-	This interval contains, with 95\% confidence, the population mean of the bale's viscosity.
-	\begin{itemize}
-		\item	Substitute in $\sigma = 3.5$, $c_n$ = \texttt{qnorm(1 - 0.05/2)} = 1.96
-		\item	$17.71 < \mu < 22.29$
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{What about the variance, $\sigma$?}
-
-	What if we do not know $\sigma$ (more realistic case)?
-
-	We use $s$ as an estimate of $\sigma$.
-	\begin{itemize}
-		\item	Create $z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}}$.
-		\item	This $z$ value follows the $t$-distribution:
-		\begin{itemize}
-			\item	because we have used an \emph{estimate} of $\sigma$
-			\vspace{6pt}
-			\item	Note: $z = \dfrac{\bar{x} - \mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(\mu, \sigma^2/n)$
-			\vspace{6pt}
-			\item	However: $z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}} \sim t\left(\nu\right)$
-			\vspace{6pt}
-			\item	\textbf{\color{myOrange}but we must make a new assumption} if we use $s$: the $x_i$ (raw data) values are normally distributed
-		\end{itemize}
-		\item	Note that we use $s/\sqrt{n}$ instead of $\sigma/\sqrt{n}$ in the equation for $z$
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{The $t$-distribution is heavily used in this course}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/univariate/t-distribution-comparison.png}
-	\end{center}
-	It has one parameter: $z \sim t\left(\nu\right)$, where $\nu = n-1$ = degrees of freedom.
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{\imagedir/univariate/t-distribution-derivation.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{Bale example: applying the $t$-distribution}
-	\begin{enumerate}
-		\item	Construct the $z$-value for the sample average, assuming we don't know $\sigma$
-		\begin{itemize}
-			\item	$z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}}$
-		\end{itemize}
-		\item	What distribution does this $z$-value follow? Be specific.
-		\begin{itemize}
-			\item	$t$-distribution, with 8 degrees of freedom
-		\end{itemize}
-		\item	Check that $x_i$ raw data follow a normal distribution (assumption)
-		\item	Find lower and upper bounds for interval that spans 95\% of the area of this distribution.
-		\begin{itemize}
-			\item	\texttt{qt(0.025, df=8) = - 2.31} and \texttt{qt(0.975, df=8) = +2.31}
-		\end{itemize}
-		\item	Substitute the $z$-value into the interval. What is the interval for the population mean this time?
-		\begin{itemize}
-			\item	$\bar{x} - c_t\dfrac{s}{\sqrt{n}} < \mu < \bar{x} + c_t\dfrac{s}{\sqrt{n}}$
-		\end{itemize}
-		\item	Compare the two intervals (one with $\sigma$, one with $s$)
-		\begin{itemize}
-			\item	Using $\sigma$: $17.71 < \mu < 22.29$
-			\item	Using $s$: $17.06 < \mu < 22.93$
-		\end{itemize}
-	\end{enumerate}
+		\column{0.3\textwidth}
+			\onslide+<2->{
+				\texttt{qt(0.975, df=8)}
+			}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{Confidence Intervals: we have to be \textbf{very} comfortable with this concept}
 
-	\textbf{Example}: a customer is evaluating your product: want a confidence interval (CI) for the impurity level in your sulphuric acid.
+	\textbf{Example}: a customer is evaluating your product: they want a confidence interval (CI) for the impurity level in your sulphuric acid over the past year.
 
-	$\qquad$
+	\vspace{12pt}
 
-	\emph{Response}: the range from 429ppm to 673ppm contains the true impurity level with 95\% confidence.
-
-	$\qquad$
+	\onslide+<2->{
+	{\color{myOrange}\emph{Response}}: the range from 429ppm to 673ppm contains the true impurity level with 95\% confidence.
+	
+	\vspace{12pt}
 
 	This is a compact representation of the impurity level.
-
+	}
+	
+	\onslide+<3->{
 	$\qquad$
 
 	\emph{Alternatively} you could have said:
 	\begin{itemize}
-		\item	the sample mean from the last year of data is 532 ppm
-		\item	the sample standard deviation from the last year of data is 102 ppm [can be back-calculated if we were told $n$]
+		\item	the sample mean from the last year of data is 551 ppm
+		\item	the sample standard deviation from the last year [can be back-calculated if we were told $n$]
 		\item	the last year of data are normally distributed
 	\end{itemize}
 
 	A CI conveys this information equally well, and in a useful manner.
+	}
 \end{frame}
 
-\begin{frame}\frametitle{Confidence Intervals}
+\begin{frame}\frametitle{Summary: confidence interval derivation for the case where the variance, $\sigma^2$, is not known}
 
-	Previous example: the interval that contains the population viscosity was:
+	%Previous example: the interval that contains the population viscosity was:
 
 	$
 	\begin{array}{rcccl}
@@ -886,104 +1340,158 @@
 		\text{LB} &\leq& \mu &\leq& \text{UB}
 	\end{array}
 	$
+	
+	\vspace{20pt}
+	$
+	\begin{array}{rcl}
+		\text{LB} &= \bar{x} - c_t \displaystyle \frac{s}{\sqrt{n}}\\
+		\text{UB} &= \bar{x} + c_t \displaystyle \frac{s}{\sqrt{n}}
+	\end{array}
+	$
+	
+	\vspace{20pt}
+	Do you recall the important assumptions that lead to these results?
+\end{frame}
+
+\begin{frame}\frametitle{Interpreting the {\color{purple}{confidence interval (CI)}} {\color{red} incorrectly}}
+	
 	\begin{itemize}
+		\item	$x$ = \texttt{23, 19, 17, 18, 24, 26, 21, 14, 18}
+		\item	$\bar{x} = 20.0$
+		\item	$s=3.81$
 		\item	$c_t = 2.31$ for the 95\% confidence interval with 8 degrees of freedom
 		\item	LB = $20.0 - 2.92 = 17.1$
 		\item	UB = $20.0 + 2.92 = 22.9$
 	\end{itemize}
+	
+	\myhrule
+	\begin{itemize}
+		\onslide+<2->{
+			\item	The CI {\color{myOrange}{\textbf{does not imply}}} that $\bar{x}$ lies in the interval from LB to UB, i.e. the CI is not about $\bar{x}$; it's about $\mu$
+		}
+		\onslide+<3->{
+			\item	{\color{red}\textbf{Incorrect}} to say: (sample) average viscosity is 20 units and lies inside the range of 17.1 to 22.9 with a 95\% probability
+		}
+
+	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Interpreting the {\color{purple}{confidence interval (CI)}}}
+\begin{frame}\frametitle{Interpreting the {\color{purple}{confidence interval (CI)}} {\color{blue} correctly}}
+	
 	\begin{itemize}
-		\item	The CI {\color{myOrange}{\textbf{does not imply}}} that $\bar{x}$ lies in the interval from LB to UB, i.e. the CI is not about $\bar{x}$; it's about $\mu$
-		\item	\textbf{Incorrect} to say: (sample) average viscosity is 20 units and lies inside the range of 17.1 to 22.9 with a 95\% probability
-		\item	The CI \textbf{does imply} that $\mu$ is expected to lie within that interval with a given level of confidence
-		\item	The {\color{myGreen}{\textbf{CI is a range}}} of possible values for $\mu$, not for $\bar{x}$
-		\item	UB and LB are a function of the data sample
-		\item	If we take a different sample of data, we will get different bounds
-		\item	How should the confidence level (probability) be interpreted?
+		\item	LB = $20.0 - 2.92 = 17.1$
+		\item	UB = $20.0 + 2.92 = 22.9$
+	\end{itemize}
+	
+	\myhrule
+	\begin{itemize}
+		\item	The CI \textbf{does imply} that $\mu$ is expected to lie within that interval, with the given level of confidence
+		
+		\onslide+<2->{
+			\item	The {\color{myGreen}{\textbf{CI is a range}}} of possible values for $\mu$, not for $\bar{x}$.
+		}
+		\onslide+<3->{
+			\item	UB and LB are a function of the data sample
+			\item	If we take a different sample of data, we will get different bounds
+		}
+		\onslide+<4->{
 		\begin{itemize}
-			\item	\textbf{IT IS}: Probability that the \emph{CI range} contains the true population viscosity, $\mu$
-			\item	\textbf{IT IS NOT}: Probability that the true population viscosity, $\mu$ is within the given range {\color{myOrange}{[{\scriptsize $\mu$ doesn't have a probability; it is 100\% fixed}]}}
 			\item	If confidence level is 95\%, then 5\% of the time the interval \emph{will not contain} the true mean
 			\item	Collect 20 sets of samples, 19 times out of 20 the CI range will contain the true mean
+			\onslide+<5->{
+				\item	\textbf{IT IS NOT}: Probability that the true population viscosity, $\mu$ is within the given range {\color{myOrange}{[{\scriptsize $\mu$ doesn't have a probability; it is 100\% fixed}]}}
+				\item	\textbf{IT IS}: Probability that the \emph{CI range} contains the true population viscosity, $\mu$
+			}
 		\end{itemize}
+		}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Interpreting the confidence interval at different \% values}
+\begin{frame}\frametitle{Interpreting the confidence interval by altering the sample, process, or confidence level}
 
-	\begin{center}
-		\begin{tabular}{c|cc}
-			\textbf{Confidence level} & \textbf{LB} & \textbf{UB}\\ \hline
-			90\%	& 17.6	&	22.4\\
-			95\%	& 17.1	&	22.9\\
-			99\%	& 15.7	&	24.2\\
-		\end{tabular}
-	\end{center}
+	\[
+		\begin{array}{rcccl}
+			\bar{x} - c_t \dfrac{s}{\sqrt{n}} &\leq& \mu &\leq& \bar{x} + c_t\dfrac{s}{\sqrt{n}} \\
+		\end{array}
+	\]
 	\begin{itemize}
-		\item	What happens if the level of confidence is 100\%?
-		\begin{itemize}
-			\item	The confidence interval is then infinite.
-			\item	We are 100\% certain this infinite range contains the population mean, however this is not a useful interval.
-		\end{itemize}
-		\item	What happens if we increase the value of $n$?
-		\begin{itemize}
-			\item	As $n$ increases, the confidence interval range decreases
-			\item	but with diminishing returns (intuitively expected)
-		\end{itemize}
+		\item	As $n$ increases, the confidence interval range decreases
+		\item	but with diminishing returns (intuitively expected)
 	\end{itemize}
+	
+	\vspace{10pt}
+	\onslide+<2->{
+		\begin{itemize}
+			\item	We could have adjusted $s$ as well.
+		\end{itemize}
+	}
+	\onslide+<3->{
+		\begin{itemize}
+			\item	We can arbitrarily select our level of confidence:
+		\end{itemize}
+		\begin{center}
+			\begin{tabular}{c|cc}
+				\textbf{Confidence level} & \textbf{LB} & \textbf{UB}\\ \hline
+				90\%	& 17.6	&	22.4\\
+				95\%	& 17.1	&	22.9\\
+				99\%	& 15.7	&	24.2\\
+			\end{tabular}
+		\end{center}
+	}
+	\onslide+<4->{
+		\begin{itemize}
+			\item	What happens if the level of confidence is 100\%?
+			\begin{itemize}
+				\item	The confidence interval is then infinite.
+			\end{itemize}
+		\end{itemize}
+	}
 \end{frame}
 
-\begin{frame}\frametitle{Summary: CI for a mean}
-
-	Make 2 assumptions about the raw data: (\emph{always check these}!)
-	\begin{enumerate}
-		\item	$n$ independent points \hfill {\color{myOrange}{$\longleftarrow$ this assumption is always required}}
-		\item	from the normal distribution \hfill {\color{myOrange}{$\longleftarrow$ not required if $\sigma$ known}}
-	\end{enumerate}
-
+\begin{frame}\frametitle{Summary: confidence for interval for the parameter $\mu$, the mean}
+	Make an assumption about the raw data:
+	\begin{itemize}
+		\item	$n$ independent points \qquad {\color{myOrange}{$\longleftarrow$ this assumption is always required}}
+	\end{itemize}
+	
 	\vspace{12pt}
+	
 
-	There are 2 cases:
-	\begin{enumerate}
-		\item[(a)]	$\sigma$ is known, $\bar{x} \sim \mathcal{N}(\mu, \sigma^2/n)$, only requires assumption 1
-		\item[(b)]	$\sigma$ unknown, use $s$, and if both assumptions are met, then $\bar{x} \sim t(\nu = n-1)$
-	\end{enumerate}
-\end{frame}
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+			\textbf{We know the population $\sigma$}
+			\[
+			 	z = \dfrac{\bar{x} - \mu}{\sigma/\sqrt{n}}
+			 \]			
+			 
+			 \vspace{20pt}
 
-\begin{frame}\frametitle{Confidence interval calculations when the \textbf{variance is known}}
-	\begin{itemize}
-		\item	$z = \dfrac{\bar{x} - \mu}{\sigma/\sqrt{n}}$
-		\item	z is normally distributed \textbf{if} the $x_i$ used to calculate $\bar{x}$ are independent
-	\end{itemize}
-
-	$
-	\begin{array}{rcccl}
-		- c_n &\leq& \displaystyle \frac{\bar{x} - \mu}{\sigma/\sqrt{n}} &\leq & +c_n\\
-		\bar{x} - c_n \dfrac{\sigma}{\sqrt{n}} &\leq& \mu &\leq& \bar{x} + c_n\dfrac{\sigma}{\sqrt{n}} \\
-		\text{LB} &\leq& \mu &\leq& \text{UB}
-	\end{array}
-	$
-
-	$c_n$: from \texttt{qnorm(1 - 0.05/2) = 1.96} when at the 95\% confidence level
-\end{frame}
-
-\begin{frame}\frametitle{Confidence interval calculations when the \textbf{variance not known}}
-	\begin{itemize}
-		\item	$z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}}$
-		\item	$z$ is $t$-distributed \textbf{if} the $x_i$ used to calculate $\bar{x}$ are independent \textbf{and} normal
-	\end{itemize}
-
-	$
-	\begin{array}{rcccl}
-		- c_t &\leq& \displaystyle \frac{\bar{x} - \mu}{s/\sqrt{n}} &\leq & +c_t\\
-		\bar{x} - c_t \dfrac{s}{\sqrt{n}} &\leq& \mu &\leq& \bar{x} + c_t\dfrac{s}{\sqrt{n}} \\
-		\text{LB} &\leq& \mu &\leq& \text{UB}
-	\end{array}
-	$
-
-	$c_t$: from \texttt{qt(1 - 0.05/2, df=...)} when at the 95\% confidence level
+			\begin{itemize}
+				\item	$\bar{x} \sim \mathcal{N}(\mu, \sigma^2/n)$
+								
+				\vspace{12pt}
+				\item	$\displaystyle \bar{x} - c_n\frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{x} + c_n\frac{\sigma}{\sqrt{n}}$
+				
+				\vspace{12pt}
+				\item	\texttt{qnorm(0.975)} when at the 95\% confidence level
+			\end{itemize}
+		\column{0.5\textwidth}
+			\textbf{We do not know the population $\sigma$}
+			\[
+				 z = \dfrac{\bar{x} - \mu}{s/\sqrt{n}}
+			\]
+			\begin{itemize}
+				\item	{\color{myGreen}Also, we require $x \sim \mathcal{N}(\mu, \sigma^2/n)$}
+				\item	$\bar{x} \sim t(\nu = n-1)$
+				
+				\vspace{12pt}
+				\item	$\displaystyle \bar{x} - c_t\frac{s}{\sqrt{n}} \leq \mu \leq \bar{x} + c_t\frac{s}{\sqrt{n}}$
+				
+				\vspace{12pt}
+				
+				\item	\texttt{qt(0.975, df=...)} when at the 95\% confidence level
+			\end{itemize}
+	\end{columns}
 \end{frame}
 
 \begin{frame}\frametitle{Comparison between the two cases: how does it matter?}
@@ -999,7 +1507,7 @@
 
 \begin{frame}\frametitle{Many other confidence intervals exist}
 	\begin{itemize}
-		\item	They exist for population variances: $\text{LB} < \sigma^2 < \text{UB}$
+		\item	They exist for population variances: $\text{LB} \leq \sigma^2 \leq \text{UB}$
 		\begin{itemize}
 			\item	ratio of two variances: \emph{do these 2 samples have same variance}?
 		\end{itemize}
@@ -1013,57 +1521,115 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Tests for differences and similarity}
-	\begin{itemize}
-		\item	Test a cheaper material, B. Does it work as well as A?
-		\item	We want to introduce a new catalyst B. Does it improve our product properties over the current catalyst A?
-		\item	Does the 407 route save time going home vs going to work?
-	\end{itemize}
-	\begin{itemize}
-		\item	Sometimes we really don't need a test:
-	\end{itemize}
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/system-comparison-boxplot-plots-obvious.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{Tests for differences and similarity}
-
-	\textbf{Example}
-
-	An engineer (\emph{you}) needs to verify that new feedback controller (B) on a batch reactor leads to improved yields. Compare with yields from feedback controller A.
-	\begin{itemize}
-		\item	There are 10 sequential runs with system A, then 10 runs with system B.
-		\item	System B will cost us \$400,000 to install, and \$40,000 in annual software license fees.
-		\item	A significant difference means \textbf{long-run implementation} of B will lead to an improved yield (not due to chance)
-	\end{itemize}
-
-	At the end of the trials \textbf{you} must make a recommendation to your engineering group: \textbf{A or B}. 
+\begin{frame}\frametitle{A worked example}
+	Your manager is asking for the average viscosity of a product that you produce in a batch process. 
 	
-	\vspace{12pt}
-	You don't want the reputation as the engineer that recommended an expensive system that doesn't work.
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+			\vspace{10pt}
+			Recorded below are the 12 most recent values, taken from consecutive batches. State any assumptions, and clearly show the calculations which are required to estimate a 95\% confidence interval for the mean. 
+	
+			\vspace{10pt}
+			Interpret that confidence interval for your manager, who is not sure what a confidence interval is.
+	
+			\vspace{10pt}
+			13.7, 14.9, 15.7, 16.1, 14.7, 15.2, 
+			
+			13.9, 13.9, 15.0, 13.0, 16.7, 13.2
+		\column{0.4\textwidth}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/batch/flickr-batch-reactor-2516220152_074fbbb489_o.jpg} }
+			\see{\href{http://www.flickr.com/photos/polapix/2516220152/}{Flickr: 2516220152}}
+	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Example for testing differences: the raw data acquired}
+\begin{frame}\frametitle{A worked example: what assumptions are being made?}
+	\begin{itemize}
+		\item	We can assume the sample average $\bar{x} \sim \mathcal{N}$
+		\onslide+<2->{
+			\item	We don't know $\sigma$; so we must estimate it. 
+		}
+		\onslide+<3->{
+			\item	That means $z = \dfrac{\bar{x} - \mu}{s / \sqrt{n}} \sim t(\nu)$
+		}
+		\onslide+<4->{
+			\item	which in turn requires us to assume the raw data, $x_i \sim \mathcal{N}$
+		}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A worked example: lets do the calculations and interpret the result}
+	\begin{itemize}
+		\item	$\displaystyle \bar{x} - c_t\frac{s}{\sqrt{n}} \leq \mu \leq \bar{x} + c_t\frac{s}{\sqrt{n}}$
+		\item	$s =$ \onslide+<2->{1.16}
+		\item	$c_t =$ \onslide+<2->{2.2}
+		
+		\vspace{12pt}
+		\onslide+<3->{
+			\item	$14.67 - \dfrac{2.2 \times 1.16}{\sqrt{12}} \leq \mu \leq 14.67 + \dfrac{2.20 \times 1.16}{\sqrt{12}} $
+			\item	$13.9 \leq \mu \leq 15.4$
+		}
+		\vspace{24pt}
+		\onslide+<4->{
+			\item	\textbf{Interpretation}: the range has a 95\% probability of containing the true viscosity.
+		}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{A worked example: a caution}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+			
+			We also need to clean the batch reactor properly between every use. 
+			
+			\vspace{12pt}
+			There are other ways that independence can be violated: what about raw material lots and operators running the batch?
+			
+			\vspace{12pt}
+			In practice, we will definitely violate this assumption to some extent.
+		\column{0.4\textwidth}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/batch/flickr-batch-reactor-2516220152_074fbbb489_o.jpg} }
+			\see{\href{http://www.flickr.com/photos/polapix/2516220152/}{Flickr: 2516220152}}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{The batch yield feedback case study}
+	Your manager is asking for the average viscosity of a product that you produce in a batch process. 
+	
+	\begin{columns}[T]
+		\column{0.53\textwidth}
+			
+			\begin{itemize}
+				\item	Most recent 10 batches run, using the existing system (A): average yield is $\bar{x}_A =$ {\color{blue}79.9\%}
+				
+				\vspace{18pt}
+				\onslide+<2->{
+					\item	Put on a prototype control system (B) and run 10 batches: $\bar{x}_B =$ {\color{blue}82.9\%}
+				}
+				\vspace{18pt}
+				\onslide+<3->{
+					\item	$\bar{x}_B - \bar{x}_A = 82.93 - 79.89 = 3.04\%$
+				}
+				\vspace{18pt}
+				\onslide+<4->{
+					\item	Was this just lucky, or is this a permanent improvement? What's the risk we are wrong?
+				}
+			\end{itemize}
+		\column{0.4\textwidth}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/batch/flickr-batch-reactor-2516220152_074fbbb489_o.jpg} }
+			\see{\href{http://www.flickr.com/photos/polapix/2516220152/}{Flickr: 2516220152}}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Let's look at the raw data: table form}
 	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-wikitable.png}
-
-	\vspace{12pt}
-	$\bar{x}_B - \bar{x}_A = 82.93 - 79.89 = 3.04$
-	
-	\vspace{12pt}
-	Assume this 3\% is worth \$1 million in annual savings. Do you recommend the new system?
-	
 \end{frame}
 
-\begin{frame}\frametitle{Example for testing differences: visualizing that data}
+\begin{frame}\frametitle{Let's look at the raw data: box plot of the data}
 	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-boxplot-plots.png}
 \end{frame}
 
-\begin{frame}\frametitle{Example for testing differences: look at the data in context}
-	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-sequence-plot.png}
-
-	\vspace{0pt}
-	Always request contextual data, if available: extremely valuable. {\color{myOrange}{Let's see why.}}
+\begin{frame}\frametitle{Let's look at the raw data: given the context of prior batches}
+	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-sequence-plot-slides.png}
 \end{frame}
 
 \begin{frame}\frametitle{One approach: compare the data to a reference set}
@@ -1079,29 +1645,52 @@
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}\frametitle{One approach: compare the data to a reference set}
+\begin{frame}\frametitle{The question we want to answer}
+	Let's assume the new system B is no different. 
+	
+	We assume that 3\% increase was pure luck.
+	
+	\vspace{36pt}
+	\begin{exampleblock}{}
+		{\color{myOrange} How many times, in the past, did we observe 3\% improvements between two sets of 10 consecutive batches?}
+	\end{exampleblock}
+	
+	If our assumption at the top of the slide is correct, we should not see many 3\% improvements.
 
-	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-dotplot-grouped.png}
-	\begin{itemize}
-		\item	31 historical differences out of 281 had a difference value higher than 3.04
-		\item	11\% of historical batches had a better difference, by chance, not due to the feedback controller change.
-		\item	Is this good enough?
-	\end{itemize}
-
-	\textcolor{red}{No assumption of independence, nor any form of distribution assumed!}
+	
 \end{frame}
 
-\begin{frame}\frametitle{One approach: compare the data to a reference set}
+\begin{frame}\frametitle{A good visualization tool: the dot plot}
 
-	Data are not independent, they are autocorrelated.
-	\begin{itemize}
-		\item	$x_{k+1} = \phi x_{k} + a_k$
-		\item	$\phi = -0.3$
-		\item	$a_k \sim \mathcal{N}\left(\mu=0, \sigma^2=6.7^2\right)$
-	\end{itemize}
-	\begin{center}
-		\includegraphics[width=0.6\textwidth]{\imagedir/univariate/system-comparison-autocorrelation-scatterplot.png}
-	\end{center}
+	\includegraphics[width=\textwidth]{\imagedir/univariate/system-comparison-dotplot-grouped.png}
+	
+	\onslide+<2->{
+		\begin{itemize}
+			\item	31 historical differences out of 281 had a difference value higher than 3.04
+			\item	11\% of historical batches had a better difference, by chance, not due to the feedback controller change.
+		\end{itemize}
+	}
+	\onslide+<3->{
+		\textcolor{red}{No assumption of independence, nor any form of distribution assumed!}
+	}
+	
+	\vspace{5pt}
+	\onslide+<4->{
+		\textcolor{myGreen}{Advanced students}: plot a time-series plot of these data, for an even greater insight to what is occurring here.
+	}
+\end{frame}
+
+\begin{frame}\frametitle{Has a significant change occurred in the system?}
+	\begin{exampleblock}{}
+		Our key focus this time: \textbf{we have limited data.} We say, 
+		
+		\qquad ``\emph{there is no external reference set available}''.
+	\end{exampleblock}
+	
+	\vspace{24pt}
+	In the prior example, we have plenty of historical data:
+	
+	\includegraphics[width=0.6\textwidth]{\imagedir/univariate/system-comparison-sequence-plot-slides.png}
 \end{frame}
 
 \begin{frame}\frametitle{Second approach: when no reference data is available}
@@ -1112,10 +1701,11 @@
 
 	\textbf{Aim}: is $\mu_B > \mu_A$ ? In other words, is $\mu_B - \mu_A > 0$?
 	\begin{enumerate}
-		\item	Assume data for case A and for case B are normally distributed
+		\item	Assume data for case A is normally distributed: A $\sim \mathcal{N}\left(\mu_A, \sigma^2_A\right)$
+		
+		\item	Assume data for case B is normally distributed: B $\sim \mathcal{N}\left(\mu_B, \sigma^2_B\right)$
 		\item	Assume data for sample A and sample B have $\sigma_A = \sigma_B = \sigma$
-		\item	Define: sample A is from $\mathcal{N}\left(\mu_A, \sigma^2\right)$; sample B is from $\mathcal{N}\left(\mu_B, \sigma^2\right)$
-		\item	From CLT (assumes data in A and data in B are independent):  {\color{myOrange}{\small $\longleftarrow$ but, but ... we know that's not true here!}}
+		\item	From CLT (assumes data in A and data in B are independent)%:  {\color{myOrange}{\small $\longleftarrow$ but, but ... we know that's not true here!}}
 			\begin{itemize}
 				\item	$\mathcal{V}\left\{\bar{x}_A\right\} = \dfrac{\sigma^2_A}{n_A}$
 				\item	$\mathcal{V}\left\{\bar{x}_B\right\} = \dfrac{\sigma^2_B}{n_B}$
@@ -1125,108 +1715,31 @@
 
 \begin{frame}\frametitle{Second approach: when no reference data is available}
 
-	5. Assume: $\bar{x}_A$ and $\bar{x}_B$ are independent [likely true in many cases], then from your prior stats course you should know that ...
+	5. Assume: $\bar{x}_A$ and $\bar{x}_B$ are independent [\emph{likely true in many cases}] %, then from your prior stats course you should know that ...
 	\begin{itemize}
 		\item	$\mathcal{V}\left\{\bar{x}_B - \bar{x}_A\right\} = \dfrac{\sigma^2}{n_A} + \dfrac{\sigma^2}{n_B} = \sigma^2 \left(\dfrac{1}{n_A} + \dfrac{1}{n_B}\right)$
 	\end{itemize}
 
-	6. Create $z$-value:
+	6. Create a $z$-value:
+	
+	\vspace{10pt}
 	\begin{itemize}
-		\item	$z = \dfrac{(\bar{x}_B - \bar{x}_A) - (\mu_B - \mu_A)}{\sqrt{\sigma^2 \left(\dfrac{1}{n_A} + \dfrac{1}{n_B}\right)}}$
+		\item	$z = \dfrac{\left(\text{variable ``$x$''}\right) - \left(\text{``location''}\right)}{\text{``spread''}} = \dfrac{(\bar{x}_B - \bar{x}_A) - (\mu_B - \mu_A)}{\sqrt{\sigma^2 \left(\dfrac{1}{n_A} + \dfrac{1}{n_B}\right)}}$
 	\end{itemize}
 
-	\textbf{Question}: what is the probability of getting a $z$ \textbf{\emph{smaller}} than this?
+	7. Create a confidence interval for $z$
+	
+	\vspace{10pt}
+	{${\color{blue} (\bar{x}_B - \bar{x}_A) - c_n \sqrt{\sigma^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B}\right)}  } < {\color{red} \mu_B - \mu_A} < {\color{blue} (\bar{x}_B - \bar{x}_A) + c_n \sqrt{\sigma^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B} \right)} }$}
+	
+	
 \end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
-
-	Testing a new coating, B, to repel moisture. Coating is applied to packaging sheets to enhance the moisture barrier property. We take 1 sheet, divide into 16 squares, apply coating A and coating B as shown. Are 16 measured hydrophobicity values independent?
-	\begin{center}
-		\includegraphics[width=0.65\textwidth]{\imagedir/univariate/sheet-coating-application.png}
-	\end{center}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Coating example. Independent?}
-	\begin{itemize}
-		\item	Sheet may not be uniform
-		\begin{itemize}
-			\item	\textbf{Randomly} assign blocks A and B on the packaging sheet
-		\end{itemize}
-		\item	Is the sheet representative?
-		\begin{itemize}
-			\item	Use sheets from different lots from the sheet supplier. Randomly apply A and B to different sheets.
-		\end{itemize}
-		\item	Couldn't we just measure $\text{B} - \text{A}$ (cancels out non-uniformity)?
-		\begin{itemize}
-			\item	Yes - paired experiment.
-			\item	Note that $\bar{x}_A$ and $\bar{x}_B$ are not independent (violates step 5)
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
-
-	Aim: Testing an alternative, cheaper raw material in our process. Do not want the final product to change.
-	\begin{itemize}
-		\item	The dispensing system must be modified for raw material B, requiring production line to be shut down for 15 hours.
-	\end{itemize}
-	\begin{itemize}
-		\item	The new supplier has given us 8 representative batches to test; each test takes 3 hours. Run these 8 batches over the weekend: set up dispenser on Friday night (15 hours), run tests from Saturday noon to Sunday noon (8 x 3 = 24hrs), then return the line back to normal for Monday's shift.
-	\end{itemize}
-	\begin{itemize}
-		\item\textbf{\emph{How}} do we violate the assumptions of independence when comparing 8 batches of material A (taken from Thursday and Friday) to the 8 batches from material B (Saturday and Sunday)?
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} Cheaper raw material. Independent?}
-	\begin{itemize}
-		\item	The 8 tests are run sequentially; \emph{any changes} in conditions between these 8 runs and the 8 runs from material A will be confounded
-		\begin{itemize}
-			\item	Staff running the equipment on the weekend
-			\item	Dispenser change may have modified the process
-			\item	Dispenser might be the improvement, not the new material
-			\item	Samples waiting to be analyzed on Monday
-		\end{itemize}
-	\end{itemize}
-	\begin{itemize}
-		\item	Expensive and impractical to randomize in this case.
-		\item	Suboptimal: Run \texttt{A A A A B B B B A A A A B B B B}
-		\begin{itemize}
-			\item	Run \texttt{A A A A B B B B} once
-			\item	Run \texttt{B B B B A A A A} next
-		\end{itemize}
-		\item	Use a split-plot experimental design
-	\end{itemize}
-
-	\textcolor{red}{Randomization is the insurance (cost) we require to avoid being misled.}
-\end{frame}
-
-\begin{frame}\frametitle{{\color{myOrange}{Side discussion:}} What happens if the samples are not independent? [600-level]}
-	Actual engineering data often violate the assumption of independence.
-
-	Simulate sequences of lag-1 autocorrelated data, $x_{k+1} = \phi x_{k} + a_k$ with $a_k \sim \mathcal{N}\left(\mu=0, \sigma^2 = 25.0 \right)$ with length of $n=100$ samples
-	\begin{itemize}
-		\item[A]	Positively correlated: use $\phi = 0.7$
-		\item[B]	Negatively correlated: use $\phi = -0.6$
-		\item[C]	No correlation, i.e. totally independent data: $\phi = 0.0$
-	\end{itemize}
-
-	What happens to the standard deviation of $\bar{x}$? (simulate many sequences; calculate $\bar{x}$ then stddev, $s$, of these $\bar{x}$ values)
-
-	\myhrule
-	\emph{Solution}
-	\begin{itemize}
-		\item[A]	estimate of $s = 1.66$
-		\item[B]	estimate of $s = 0.32$
-		\item[C]	estimate of $s = 0.52$ {\color{myOrange}{{\scriptsize (close to the theoretical $\sqrt{\sigma^2/n} = \sqrt{25/100} = 0.5$)}}}
-	\end{itemize}
-\end{frame} 
 
 \begin{frame}\frametitle{Back to method 2 for testing differences}
 
 	\textbf{Aim}: is $\mu_B > \mu_A$ ? In other words, is $\mu_B - \mu_A > 0$?
 
-	1. Assume sample A $\sim \mathcal{N}\left(\mu_A, \sigma^2_A\right)$; assume B $\sim \mathcal{N}\left(\mu_B, \sigma^2_B\right)$
+	1. Assume sample A
 
 	2. Assume equal variance: $\sigma_A = \sigma_B = \sigma$
 
@@ -1245,36 +1758,7 @@
 		\item$z = \dfrac{(\bar{x}_B - \bar{x}_A) - (\mu_B - \mu_A)}{\sqrt{\sigma^2 \left(\dfrac{1}{n_A} + \dfrac{1}{n_B}\right)}}$
 	\end{itemize}
 
-	7. Create a confidence interval. Ask: does is span zero?
 	
-
-	{\small
-	
-		 \hspace{-0.5cm} \fbox{${\color{blue} (\bar{x}_B - \bar{x}_A) - c_n \sqrt{\sigma^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B}\right)}  } < {\color{red} \mu_B - \mu_A} < {\color{blue} (\bar{x}_B - \bar{x}_A) + c_n \sqrt{\sigma^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B} \right)} }$}
-	
-	}
-\end{frame}
-
-\begin{frame}\frametitle{Method 2a: No reference set, external $\sigma$}
-
-	If we have some \textbf{population estimate} for $\sigma$ (external estimate)
-
-	$
-	\begin{array}{rcl}
-		z &=& \dfrac{(\bar{x}_B - \bar{x}_A) - (\mu_B - \mu_A)}{\sqrt{\sigma^2 \left( \dfrac{1}{n_A} + \dfrac{1}{n_B}\right)}} \\
-		z &=& \dfrac{(82.93-79.89) - (\mu_B - \mu_A)}{\sqrt{6.61^2 \left( \dfrac{1}{10} + \dfrac{1}{10}\right)}} \genfrac{}{}{0pt}{0}{}{\genfrac{}{}{0pt}{0}{}{{\color{myOrange}{\leftarrow \,\text{used 300 samples for ``$\sigma$''}}}}} \\
-		z &=& \dfrac{3.04 - 0}{2.956} = 1.03
-	\end{array}
-	$
-
-	Probability of $z < 1.03$? The area from $-\infty$ up to 1.03 is 84.8\% using the \textbf{\emph{normal distribution}}.
-
-	Chance of $\bar{x}_B - \bar{x}_A > 3.04$ is about 15\%. System B's performance could have been obtained by pure luck in 15\% of cases.
-	\begin{itemize}
-		\item	Confidence interval at 95\% level:
-		\item	$3.04 - 1.96 \sqrt{6.61^2 \times \frac{2}{10}} < \mu_B - \mu_A < 3.04 - 1.96 \sqrt{6.61^2 \times \frac{2}{10}}$
-		\item	{\color{myOrange}{$-2.75 < \mu_B - \mu_A < 8.83$}}
-	\end{itemize}
 \end{frame}
 
 \begin{frame}\frametitle{Method 2b: No reference set, internal $\sigma$}
@@ -1286,7 +1770,7 @@
 
 	$
 	\begin{array}{rcccl}
-		s_P^2 &=& \dfrac{(n_A -1) s_A^2 + (n_B-1)s_B^2}{n_A - 1 + n_B - 1} \\
+		s_P^2 &=& \dfrac{(n_A -1) s_A^2 + (n_B-1)s_B^2}{n_A - 1 + n_B - 1} \\ \\ 
 		s_P^2 &=& \dfrac{9\times 6.81^2 + 9 \times 6.70^2}{18} = 45.63
 	\end{array}
 	$
@@ -1294,325 +1778,407 @@
 	\vspace{8pt}
 	$
 	\begin{array}{rcccl}
-		z &=& \dfrac{(82.93 - 79.89) - (\mu_B - \mu_A)}{\sqrt{s_P^2 \left(\dfrac{1}{10} + \dfrac{1}{10}\right)}} \\
+		z &=& \dfrac{\left(\bar{x}_B - \bar{x}_A\right)- (\mu_B - \mu_A)}{\sqrt{s_P^2 \left(\dfrac{1}{10} + \dfrac{1}{10}\right)}} \\
+		\\
 		z &=& \dfrac{3.04 - 0}{\sqrt{45.63 \times 2/10}} = 1.01
 	\end{array}
 	$
-
+	
+	
 	\vspace{8pt}
 	Probability of $z < 1.01$? The area from $-\infty$ up to 1.01 is 83.7\% using the \textbf{\emph{t distribution}}.
 
 	Chance of $\bar{x}_B - \bar{x}_A > 3.04$ is about 16\%. System B's performance could have been obtained by pure luck in 16\% of cases.
 \end{frame}
 
-\begin{frame}\frametitle{Summary of the second method: when no reference data is available}
-	\begin{itemize}
-		\item	Start with the definition for z, but use either an external or internal value estimate for $\sigma$
-		\item	No external data required, only \textbf{strong} assumptions
-		\begin{itemize}
-			\item	Variances of A and B are comparable (allows us to pool them - method 2b)
-			\item	Assume independence within each sample (not usually true in many practical cases)
-			\item	Assume independence between the samples (more likely: data from A does not affect B)
-			\item	Each sample, A and B, is assumed to be normally distributed
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Summary of comparing for differences}
-
-	Compare the 3 estimates (method 1, 2a, 2b): does controller B have better long-term performance than A?
-	\begin{itemize}
-		\item	\textbf{\emph{Base-case}}: controller B has no long-term effect; we need to prove - convincingly - it does.
-	\end{itemize}
-
-	What is the probability we are wrong is stating $\mu_B > \mu_A$?
-	\begin{itemize}
-		\item	1. Using only reference data: 11\% (about 1 in 10)
-		\item	2a. Using 20 experimental runs with external estimate of $\sigma$: 15.2\% (about 1 in 7)
-		\item	2b. Using 20 experimental runs with internal estimate of $\sigma$: 16.3\% (about 1 in 6)
-	\end{itemize}
-
-	Controller B could have been taken from historical data with a chance of 11\% \textbf{if the reference data are appropriate}
-
-	Method 2 used only experimental (recent) data, but requires randomization (insurance policy - not always cheap)
+\begin{frame}\frametitle{title}
+	\vspace{10pt}
+	{${\color{blue} (\bar{x}_B - \bar{x}_A) - c_t \sqrt{s_P^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B}\right)}  } < {\color{red} \mu_B - \mu_A} < {\color{blue} (\bar{x}_B - \bar{x}_A) + c_t \sqrt{s_P^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B} \right)} }$}
+	
 \end{frame}
 
 \begin{frame}\frametitle{Example of testing for differences: impellers}
 
-	Axial and Radial impellers give different mixing times. The objective is to have the \emph{shortest} mixing times possible.
-	\begin{center}
-		\includegraphics[width=0.55\textwidth]{\imagedir/univariate/Mixing_-_flusso_assiale_e_radiale.jpg}
-	\end{center}
+	
+	% \begin{center}
+	% 		\includegraphics[width=0.55\textwidth]{\imagedir/univariate/Mixing_-_flusso_assiale_e_radiale.jpg}
+	% 	\end{center}
 	\vspace{-6pt}
-	For these two different cases
+	Try these cases:
+	
+	\begin{itemize}
+		\item	$43 \,\text{min} < \mu_\text{Axial} - \mu_\text{Radial} < 95\, \text{min} $
+		\item	$-95 \,\text{min} < \mu_\text{Radial} - \mu_\text{Axial} < -43\, \text{min} $
+		\item	$-12 \,\text{min} < \mu_\text{Axial} - \mu_\text{Radial} < -7\, \text{min} $
+		\item	$-453 \,\text{min} < \mu_\text{Axial} - \mu_\text{Radial} < 284\, \text{min} $
+		\item	$-21 \,\text{min} < \mu_\text{Axial} - \mu_\text{Radial} < 187\, \text{min} $
+	\end{itemize}
 
-	(a) $-453 \text{min} < \mu_\text{Axial} - \mu_\text{Radial} < 284 \text{min} $
-
-	(b) $-21 \text{min} < \mu_\text{Axial} - \mu_\text{Radial} < 187 \text{min} $
-
-	what is your recommendation for choosing the one impeller over the other?
+\vspace{24pt}
+	What is your recommendation for choosing the one impeller over the other?
+	
+	\vspace{12pt}
 
 	Consider the case of \emph{statistical difference} vs \emph{engineering difference}
 \end{frame}
 
-\begin{frame}\frametitle{Example: BOD}
-	A system is assumed to have constant BOD during a time when multiple samples were taken using two different methods:
-	\begin{center}
-		\scalebox{0.80}{
-				\begin{tabular}{c|c}
-					\textbf{Dilution method} & \textbf{Manometric method}\\
-					11 &             25\\
-					26 &             3\\
-					18 &             27\\
-					16 &             30\\
-					20 &             33\\
-					12 &             16\\
-					8  &             28\\
-					26 &             27\\
-					12 &             12\\
-					17 &             32\\
-					14 &             16\\
-				\end{tabular}
-		}
-	\end{center}
-	\begin{columns}[t]
-		\column{0.50\textwidth}
-			BOD via \textbf{Dilution method}:
-			\begin{itemize}
-				\item	$\bar{x}_D = 16.4$
-				\item	$s_D = 5.9$
-				\item	$n_D$ = 11 samples
-			\end{itemize}
-		\column{0.50\textwidth}
-			BOD via \textbf{Manometric method}:
-			\begin{itemize}
-				\item	$\bar{x}_M = 22.6$
-				\item	$s_M = 9.5$
-				\item	$n_M$ = 11 samples
-			\end{itemize}
-	\end{columns}
-	\vspace{6pt}
-	\emph{Verify that there is no difference between the two methods}
-		
-	% s^2_p = 62.53 = (10*(5.9)^2 + 10*(9.5)^2)/20
-	%   s_p = 7.908
-	% DOF = 20
+\begin{frame}\frametitle{General principle when testing for significant differences}
+	\begin{exampleblock}{}
+		Keep everything as constant as possible, except the feature under investigation
+	\end{exampleblock}
 	
-	% Confidence interval: (xM,bar-xD,bar) = (22.6 - 16.4) 
-	% Confidence interval: c_t with 20 DOF at 95\% level = qt(0.975, 20) = 2.085963
-	% Confidence interval: stddev = sqrt(sp^2*(1/nM + 1/nD)) = sqrt(7.908^2 * (1/11+1/11)) = 3.37
-	% CI lower bound =  (xM,bar-xD,bar) - c_t * stddev = (22.6 - 16.4) - 2.086*3.37 = -0.83
-	% CI upper bound =  (xM,bar-xD,bar) + c_t * stddev = (22.6 - 16.4) + 2.086*3.37 = 13.2
+	\onslide+<2->{
+		\vspace{12pt}
+		In the section on ``Designed Experiments'' we will vary more than 1 item.
+	}
+	\onslide+<3->{
+		\begin{columns}[T]
+			\column{0.6\textwidth}
+				\includegraphics[width=1.1\textwidth]{\imagedir/univariate/system-comparison-boxplot-plots.png}
+				
+			\column{0.05\textwidth}				
+			\column{0.35\textwidth}
+				\centerline{\includegraphics[width=\textwidth]{\imagedir/batch/flickr-batch-reactor-2516220152_074fbbb489_o.jpg} }
+				\see{\href{http://www.flickr.com/photos/polapix/2516220152/}{Flickr: 2516220152}}
+
+		\end{columns}
+	}
+	
+	
 \end{frame}
 
-\begin{frame}\frametitle{Example of testing for differences: BOD}
+\begin{frame}\frametitle{The key equation derived in the prior videos on confidence intervals}
+	
+	\[
+		\begin{array}{rcccl}
+			{\color{blue} (\bar{x}_B - \bar{x}_A) - c_t \sqrt{s_P^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B}\right)}  } &\leq& {\color{red} \mu_B - \mu_A} &\leq& {\color{blue} (\bar{x}_B - \bar{x}_A) + c_t \sqrt{s_P^2 \left(\tfrac{1}{n_A} + \tfrac{1}{n_B} \right)} } \\ \\
+			\text{lower bound} &\leq& {\color{red} \mu_B - \mu_A} &\leq& \text{upper bound}
+		\end{array}
+	\]
+
 	\vspace{12pt}
-
-	\hspace{-0.75cm}\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-raw-data-alternative.png}
+	$s_P \triangleq$ the pooled standard deviation
 \end{frame}
 
-\begin{frame}\frametitle{Example of testing for differences: BOD}
-	\begin{center}
-		\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-raw-data.png}
-	\end{center}
+\begin{frame}\frametitle{}
+	\begin{columns}[T]
+		\column{0.53\textwidth}
+			{\color{myOrange}4 000 L reactor}
+			
+			\vspace{-12pt}
+			\includegraphics[height=\textheight]{\imagedir/univariate/Wikipedia-Agitated_vessel.svg.png}
+			
+			\onslide+<2->{
+				\vspace{-20pt}
+				\see{Image credits: \href{http://en.wikipedia.org/wiki/Baffle_(heat_transfer)}{Wikipedia} (left) and \href{https://www.flickr.com/photos/adavey/13193170764/in/photostream/}{Flickr: 13193170764} (right)}
+			}
+			
+		\column{0.4\textwidth}
+			
+			\onslide+<2->{
+				{\color{myOrange}Raw material size: 8 000 L}
+				\includegraphics[height=0.95\textheight]{\imagedir/univariate/flickr-13193170764_49d81746c3_k.jpg}
+			}
+	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Paired tests: when are they used}
+\begin{frame}\frametitle{For paired testing: always be clear on your goal}
+	
+	\begin{exampleblock}{}
+		\color{myGreen}In this example: \emph{what is the effect on conversion, either with baffles or without baffles}?
+	\end{exampleblock}
+	
+	\onslide+<2->{
+	\vspace{12pt}
+	Our hope for this test (these data are guesses; we have not done the work yet)
+	
+	\vspace{12pt}
+	\vspace{12pt}
+	\begin{columns}[T]
+		\column{0.0\textwidth}
+		\column{0.3\textwidth}
+			\centerline{{\color{myOrange}Without baffles} [4 000 L]}
+			
+			\vspace{12pt}
+			\begin{enumerate}
+				\setcounter{enumi}{1}
+				\item	conversion: 72\%
+			\end{enumerate}
+			\begin{enumerate}
+				\setcounter{enumi}{3}
+				\onslide+<4->{\item	conversion: 74\%}
+			\end{enumerate}
+			\begin{enumerate}
+				\setcounter{enumi}{5}
+				\onslide+<5->{\item	conversion: 70\%}
+			\end{enumerate}
+			
+			
+		\column{0.3\textwidth}
+			\centerline{{\color{myOrange}With baffles} [4 000 L]}
+			
+			\vspace{12pt}
+			\begin{enumerate}
+				\setcounter{enumi}{0}
+				\item	conversion: 78\%
+			\end{enumerate}
+			\begin{enumerate}
+				\setcounter{enumi}{2}
+				\onslide+<4->{\item	conversion: 78\%}
+			\end{enumerate}
+			\begin{enumerate}
+				\setcounter{enumi}{4}
+				\onslide+<5->{\item	conversion: 75\%}
+			\end{enumerate}
 
-	Recall that the usual approach to test for differences is to keep all conditions as constant as possible and randomize experiments.
 
-	$\quad$
 
-	e.g. adjustable halogen lighting to maximize sales in a store
-	\begin{itemize}
-		\item	\textbf{A} = soft and dim lighting
-		\item	\textbf{B} = brighter lighting (e.g. florescent)
-	\end{itemize}
+		\column{0.3\textwidth}
+			\centerline{{\color{myOrange}Difference in results}}
+			
+			\vspace{12pt}
+			\begin{description}
+			  \onslide+<3->{\item[Batch $1 - 2$:\quad] 6\%}
+			\end{description}
+			
+			\vspace{0pt}
+			\begin{description}
+			  \onslide+<4->{\item[Batch $3 - 4$:\quad] 4\%}
+			\end{description}
+			
+			\vspace{0pt}
+			\begin{description}
+			 \onslide+<5->{ \item[Batch $5 - 6$:\quad] 5\%}
+			\end{description}
 
-	e.g. raw material \textbf{A} or \textbf{B}
-	\begin{itemize}
-		\item	randomized choice of \textbf{A} or \textbf{B} is tough to implement
-		\item	keeping all process conditions similar is next to impossible
-	\end{itemize}
-
-	$\quad$
-
-	Requiring ``keep conditions as constant as possible'' leads to strange/impossible experiments:
-
-	$\quad$
-
-	e.g. drug trials for actual (\textbf{A}) vs placebo (\textbf{B})
-	\begin{itemize}
-		\item	you'd have to run all experiments on same person in random order
-	\end{itemize}
+	\end{columns}
+	}
+	
+	\vspace{15pt}
+	\onslide+<6->{\emph{\color{myGreen}We are going to analyze our actual data like this, later on.}}
 \end{frame}
 
-\begin{frame}\frametitle{Paired tests: how to recognize it when you come across it}
-
-	A paired test: run experiment twice on the same object/batch/area. Also called {\color{purple}"two treatments''}.
+\begin{frame}\frametitle{Why should we go to all this trouble of setting up the experiments?}
+	
+	The effect of raw materials is consistent; we want to cancel it out.
 	
 	\vspace{24pt}
-	\begin{itemize}
-		\item	Drug trial: each person randomly receives placebo or drug for 3 weeks; later they receive the opposite, for another 3 weeks.
-		\begin{itemize}
-			\item	e.g. use blood pressure \textbf{difference} as the value
-		\end{itemize}
-		\item	Testing two additives, A and B, which is added to a base lubricant. Split base lubricant into 2 halves, for A and B
-		\begin{itemize}
-			\item	e.g. use difference of kinematic viscosity as the value
-		\end{itemize}
-		\item	Testing a paper coating to repel moisture. Coating is applied to randomly selected sheets
-		\begin{itemize}
-			\item	e.g. measure the repellent property difference as the value
-		\end{itemize}
-	\end{itemize}
+	Assume the raw materials have an effect of $h$\onslide+<3->{; we will use a value of $h=3\%$ here.}
+	
+	\vspace{24pt}
+	\begin{columns}[T]
+		\column{0.03\textwidth}
+		\column{0.4\textwidth}
+			\onslide+<2->{
+			\centerline{{\color{myOrange}Without baffles} }
+			}
+			\vspace{12pt}
+			\begin{itemize}
+				\setcounter{enumi}{1}
+			\onslide+<2->{
+				\item	True conversion = 71\%
+			}
+			\onslide+<3->{
+				\item	Bias of $+h$ = 3\%
+			}
+			\onslide+<4->{	
+				\item	Conversion recorded = 74\%
+			}
+			\end{itemize}
+		
+		
+		\column{0.4\textwidth}
+		\onslide+<5->{	
+			\centerline{{\color{myOrange}With baffles}}
+			\vspace{12pt}
+			\begin{itemize}
+				\setcounter{enumi}{1}
+				\item	True conversion = 75\%
+				\item	Bias of $+h$ = 3\%
+				\item	Conversion recorded = 78\%
+			\end{itemize}
+		}
+
+		\column{0.3\textwidth}
+		\onslide+<6->{
+			\centerline{{\color{myOrange}Difference in results}}
+			
+			
+			
+			\vspace{46pt}
+			\begin{itemize}
+				\item	$78 - 74 = 4\%$
+				
+						$(75+h)- (71+h)$
+						
+						$75 - 71 +h- h$
+						
+						$ = 4\%$
+			\end{itemize}
+		}
+	\end{columns}
+	
+	\onslide+<7->{
+		\vspace{6pt}
+		
+		{\color{myGreen}A common, constant source of variation is removed, \\
+		and we don't need to know the constant!}
+	}
 \end{frame}
 
-\begin{frame}\frametitle{Paired tests: when should you use one?}
+\begin{frame}\frametitle{When should you use a paired test?}
 
-	A paired test is appropriate when there is something in common within pairs of samples in group A and B.
+	\begin{exampleblock}{}
+			A paired test is appropriate when there is something in common {\color{red}\emph{within}} pairs of samples in group A and B.
+			
+			\vspace{12pt}
+			But the commonality is not {\color{red}\emph{between}} the pairs.
+	\end{exampleblock}
+	
 
-	But the commonality is not between the pairs.
+	\onslide+<2->{
+		\vspace{12pt}
+		In our example:
+		\begin{itemize}
+			\item	{\color{red}\emph{within}}-pair commonality is the raw material
+		\end{itemize}
+	}
 
-	$\qquad$
-
-	Example: we want to test process \textbf{A} vs \textbf{B} to see if we get a lower energy usage:
-
-	$ \left.
-	\begin{array}{r}
-		\text{Material 1}\\
-		\text{Material 2}\\
-		\text{Material 3}\\
-		\text{Material 4}\\
-		\text{Material 5}
-	\end{array}
-	\right\} \text{only enough material for 2 expts per batch of material} $
-
-	$\qquad$
-
-	So a total of 10 experiments. How to allocate materials to runs \textbf{A} and \textbf{B}?
 \end{frame}
 
-\begin{frame}\frametitle{Paired tests: a comparison}
+\begin{frame}\frametitle{How \textbf{not} to run paired experiments}
 
 	1. \textbf{Sequentially assign A and B} {\color{myOrange}{(don't ever do this!)}}
 
+	\vspace{12pt}
 	$
 	\begin{array}{cccccccccc}
 		\text{A} & \text{A} & \text{A} & \text{A} & \text{A} & \text{B} & \text{B} & \text{B} & \text{B} & \text{B} \\
 		1 & 1 & 2 & 2 & 3 & 3 & 4 & 4 & 5 & 5\\
 	\end{array}
 	$
-
-	$\qquad$
-
-	2. \textbf{Randomly assign A and B} {\color{myOrange}{(commonality between pairs won't cancel)}}
-
-	$
-	\begin{array}{cccccccccc}
-		\text{A} & \text{A} & \text{B} & \text{B} & \text{B} & \text{A} & \text{A} & \text{B} & \text{A} & \text{B} \\
-		1 & 1 & 2 & 2 & 3 & 3 & 4 & 4 & 5 & 5\\
-	\end{array}
-	$
-
-	$\qquad$
-
-	3. \textbf{Paired assignment of A and B} (but, run the 10 expts in random order!)
-
-	$
-	\begin{array}{cccccccccc}
-		\text{A} & \text{B} & \text{A} & \text{B} & \text{A} & \text{B} & \text{A} & \text{B} & \text{A} & \text{B} \\
-		1 & 1 & 2 & 2 & 3 & 3 & 4 & 4 & 5 & 5\\
-	\end{array}
-	$
-
-	$\qquad$
-
-	How many DOF will you have for procedure 1 or 2 if you followed the regular $\text{LB} \leq \mu_A - \mu_B \leq \text{UB}$?
-
-	Procedure for 3 shown next. How many DOF?
-\end{frame}
-
-\begin{frame}\frametitle{Paired tests}
-
-	\textbf{Advantages}:
-	\begin{itemize}
-		\item	systematic (consistent) error from something that should be constant is cancelled out
+	
+	\onslide+<2->{
 		\begin{itemize}
-			\item	person is constant between \textbf{A} vs \textbf{B}
-			\item	lubricant in constant between additive \textbf{A} vs \textbf{B}
-			\item	sheet is constant between coating \textbf{A} vs \textbf{B}
+			\item	{\color{myGreen}This will certainly lead to confounding with an unintentional factor}
 		\end{itemize}
-		\item	measurement bias is cancelled out
-		\item	only the paired differences must be normally distributed, not the raw data
-		\item	we only have to ensure the pairs are independent of each other
-	\end{itemize}
+	}
 
-	$\quad$ \textbf{Disadvantage}: we loose degrees of freedom
+	\vspace{24pt}
+	
+	\onslide+<3->{
+		2. \textbf{Randomly assign A and B} {\color{myOrange}{(commonality between pairs won't cancel)}}
+
+		\vspace{12pt}
+		$
+		\begin{array}{cccccccccc}
+			\text{A} & \text{A} & \text{B} & \text{B} & \text{B} & \text{A} & \text{A} & \text{B} & \text{A} & \text{B} \\
+			1 & 1 & 2 & 2 & 3 & 3 & 4 & 4 & 5 & 5\\
+		\end{array}
+		$
+	}
 \end{frame}
 
 \begin{frame}\frametitle{Paired tests: so how do I analyze data from such a test?}
 
-	\textbf{Question}: is the difference significant, or is it essentially zero?
+	
 	\begin{enumerate}
-		\item	Calculate the $n$ differences: $w = [w_1, w_2, \ldots, w_n]$
+	
+		\item	Calculate the differences: $w = [w_1, w_2, \ldots, w_n]$
 		\begin{itemize}
+	 		\item	There are $n$ differences (and $2n$ experiments that were done)
 			\item	$w_i = x_{A,i} - x_{B,i}$  \qquad\emph{or}\qquad $w_i = x_{B,i} - x_{A,i}$
 			\item	just be consistent in your calculation \emph{and} then your interpretation
-		\end{itemize}
-		\item	Assume (check!) these $n$ differences are independent
-		\item	Calculate the mean difference, $\overline{w}$, and standard deviation $s_{\overline{w}}$
-		\item	$\overline{w}$ should be normally distributed (CLT): $\overline{w} \sim \mathcal{N}\left(\mu_w, \sigma_w^2/n \right)$
-		\item	We are testing:
+	 		\item	\textbf{Our main goal}: are the differences significant, or are they essentially zero?
+	 		\item	This is something that confidence intervals do well
+	 	\end{itemize}
+	\pause
+
+		\vspace{12pt}
+	 	\item	Calculate the mean difference, $\overline{w}$
+		
+	\pause
+		\vspace{12pt}
+	 	\item	$\overline{w}$ should be normally distributed (CLT): $\overline{w} \sim \mathcal{N}\left(\mu_w, \sigma_w^2/n \right)$
+				\begin{itemize}
+		 			\item	$\mu_w = \mu_A - \mu_B$  (if you calculated $w_i = x_{A,i} - x_{B,i}$)
+		 			\item	$\mu_w = \mu_B - \mu_A$  (if you calculated $w_i = x_{B,i} - x_{A,i}$)
+		 		\end{itemize}
+
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}\frametitle{Paired tests: so how do I analyze data from such a test?}
+	\begin{enumerate}
+		\setcounter{enumi}{3}
+		\item	Calculate the $z$-value for the confidence interval. 
+		
 		\begin{itemize}
-			\item	$\mu_w = \mu_A - \mu_B$  (if you calculated $w_i = x_{A,i} - x_{B,i}$)
-			\item	$\mu_w = \mu_B - \mu_A$  (if you calculated $w_i = x_{B,i} - x_{A,i}$)
+			\item	Use the sample standard deviation (implies $t$-distribution)
+			\item	standard deviation = $s_{\overline{w}}$
+			
+			\vspace{12pt}
+			\item	$z = \dfrac{\overline{w} - \mu_w}{s_{\overline{w}} / \sqrt{n}}$
+			\vspace{6pt}
+			\item	$z \sim t(\nu=n-1)$
 		\end{itemize}
+		
+		\pause
+		\item	\[-c_t \leq z \leq + c_t\]
+		\begin{itemize}
+			\item	$c_t$ critical value from $t$-distribution with $n-1$ DOF at the level of confidence you want.
+			\item	Use \texttt{qt(...)} function to find $c_t$
+		\end{itemize}
+		
+		\pause
+		\item	\[\overline{w} - c_t \dfrac{s_{\overline{w}}}{\sqrt{n}} \leq \mu_w \leq \overline{w} + c_t \dfrac{s_{\overline{w}}}{\sqrt{n}}\]
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}\frametitle{Paired tests: so how do I analyze data from such a test?}
-
-	Calculate the $z$-value, then confidence interval. Use the sample standard deviation (implies $t$-distribution)
+\begin{frame}\frametitle{Results from the example}
 	\begin{itemize}
-		\item	$z = \dfrac{\overline{w} - \mu_w}{s_{\overline{w}} / \sqrt{n}}$
+		\item	$\overline{w} =  -1.6$
+		\item	$c_t = 2.78$
+		\item	$s_{\overline{w}} = 4.28$
+		\item	$n=5$
+		
+			\[\overline{w} - c_t \dfrac{s_{\overline{w}}}{\sqrt{n}} \leq \mu_w \leq \overline{w} + c_t \dfrac{s_{\overline{w}}}{\sqrt{n}}\]
+			\[-1.6 - 2.78 \dfrac{4.28}{\sqrt{5}} \leq \mu_w \leq -1.6 + 2.78 \dfrac{4.28}{\sqrt{5}}\]
+			\[-1.6 - 5.3 \leq \mu_w \leq -1.6 +5.3\]
+			
+			\[-6.9 \leq \mu_w \leq +3.7\]
 	\end{itemize}
-	\begin{itemize}
-		\item	$\overline{w} - c_t \dfrac{s_{\overline{w}}}{\sqrt{n}} < \mu_w < \overline{w} + c_t \dfrac{s_{\overline{w}}}{\sqrt{n}}$
-	\end{itemize}
-	\begin{itemize}
-		\item	$c_t$: critical value from $t$-distribution with $n-1$ DOF at the required level of confidence. Use \texttt{qt(...)} function to find $c_t$
-	\end{itemize}
+	
+	\onslide+<2->{
+		$\mu_w = \mu_B - \mu_A$	
+	}
 \end{frame}
 
-\begin{frame}\frametitle{Back to the BOD example: there are 10 pairs of differences}
-
-	Now assume the BOD samples were originally split in half and analyzed by each method.
-
+\begin{frame}\frametitle{Going beyond the statistics}
+	Changes and improvements to a process often impact other outcomes.
+	
+	\begin{exampleblock}{}
+		Always consider the secondary effects of the change you made.
+	\end{exampleblock}
+	
 	\vspace{12pt}
-	Why is a paired test appropriate?
 	\begin{itemize}
-		\item	E.g. contaminants in the sample affect both methods
-		\item	E.g. delays from sample to analysis might influence BOD
+		\item	A result of ``{\color{blue}not significant change}'' can be a good thing sometimes.
+		\item	It means you can ignore what you originally were testing for, and make other improvements.
 	\end{itemize}
-	\begin{itemize}
-		\item	$\overline{w} = +6.27$ (when $w$ = Manometric $-$ Dilution)
-		\item	$s_{\overline{w}} = 11.77$
-		\item	$n$ = 11 samples, so the degrees of freedom = $11 - 1= 10$
-	\end{itemize}
-
-	\emph{Verify that there is no difference between the two methods}
 \end{frame}
 
-\begin{frame}\frametitle{Back to the BOD example}
-	\begin{center}
-		\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-plot-flipped.png}
-	\end{center}
-\end{frame}
+\begin{frame}\frametitle{Paired tests: some important assumptions required }
 
-\begin{frame}\frametitle{Example of testing for differences: BOD}
-	\begin{center}
-		\includegraphics[height=.9\textheight]{\imagedir/univariate/BOD-comparison-raw-data.png}
-	\end{center}
+	\begin{itemize}
+		\item	the $n$ paired differences must be normally distributed, not the raw data
+		\item	we only have to ensure the pairs are independent of each other
+	\end{itemize}
+
+\onslide+<2->{
+	\vspace{12pt}
+	Paired tests must be intentionally planned. You cannot retroactively analyze data as if they were paired.
+}
 \end{frame}
 
