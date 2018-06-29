@@ -11,20 +11,11 @@
 			\item	understand more about the time-trends in the past 3 year? 
 			\item	efficiently summarize the yield from all batches run in 2010?
 		\end{itemize}
-		\item	\emph{Manager}: effectively summarize the (a) number and (b) types of defects on 17 aluminum grades for the past 12 months \pause 
+		\item	\emph{Manager}: effectively summarize the (a) number and (b) types of defects on 17 aluminum grades for the past 12 months 
 		\item	\emph{Yourself}: 24 different variables being measured \emph{vs} time (5 readings per minute, over 300 minutes) for each batch we produce; how can we visualize these 36,000 data points? 
 		\begin{itemize}
 			\item	see next slides
 		\end{itemize}
-	\end{itemize}
-	\hrule
-	
-	\vspace{6pt}
-	You asked for:
-	\begin{itemize}
-		\item	``how to visualize more than 3 variables'' [6]
-		\item	``type of analysis to visualize different data'' [5]
-		\item	``how to visualize large data sets'' [3]
 	\end{itemize}
 \end{frame}
 
@@ -32,11 +23,11 @@
 	\begin{columns}[t]
 		\column{0.50\textwidth}
 			\begin{center}
-				\includegraphics[width=\textwidth]{\imagedir/batch/batch-system.png}
+				\includegraphics[width=.8\textwidth]{\imagedir/batch/batch-system.png}
 			\end{center}
 			\see{From Cecilia Rodrigues' M.A.Sc thesis, 2006, McMaster University, used with permission}
 			
-		\column{0.50\textwidth}
+		\column{0.45\textwidth}
 			\begin{center}
 				\includegraphics[width=\textwidth]{\imagedir/batch/flickr-batch-reactor-2516220152_074fbbb489_o.jpg}
 			\end{center}
@@ -54,7 +45,7 @@
 		\column{0.40\textwidth}
 			Data from many batches
 			\begin{center}
-				\includegraphics[width=\textwidth]{\imagedir/examples/fmc/unaligned-data.png}
+				\includegraphics[width=.8\textwidth]{\imagedir/examples/fmc/unaligned-data.png}
 			\end{center}
 	\end{columns}
 \end{frame}
@@ -74,41 +65,44 @@
 	
 	This class might seem too easy; too obvious. It is!
 	\begin{itemize}
-		\item	The human eye and brain are excellent at pattern recognition, sorting through signal and noise. \pause 
-		\item	We can easily cope with bad plots; but good plots save time and show a clearer, more honest picture. 
+		\item	The human eye and brain are excellent at pattern recognition, sorting through signal and noise.
+		\item	We can easily cope with bad plots; but good plots save time and show a clearer, more honest picture.   \pause 
 		\item	Cliches: ``Let the data speak for themselves'', ``Plot the data'' 
-		\item	We will look at: \textbf{how} and show examples of bad plots
+	\end{itemize}
+	 \pause 
+	
+	\vspace{12pt}
+	\begin{exampleblock}{}
+		{\color{myGreen}\textbf{Strong suggestion:}} find a bad plot (journal publications, an old lab report that you have written); upload it to the forums and criticize the plot. Why is it bad?
+	\end{exampleblock}
+	
+\end{frame}
+
+\begin{frame}\frametitle{We need good plots to make decisions quickly, correctly, and confidently} 
+	
+	\vspace{6pt}
+	\centerline{\includegraphics[width=.78\textwidth]{\imagedir/visualization/flickr-7848902570_cde4f30ac0_o.jpg}}
+	\see{Flickr: \href{https://www.flickr.com/photos/twosevenoneonenineeightthreesevenatenzerosix/7848902570/in/photostream/player/}{\#7848902570}}
+	
+	
+\end{frame}
+
+\begin{frame}\frametitle{Time-series plots show a univariate piece of information in 2 dimensions}
+		\begin{itemize}
+			\item	(usually) have the horizontal $x$-axis show time or sequence order 
+			\item	the other axis: the data values 
+		\end{itemize}
+		\centerline{\includegraphics[width=.78\textwidth]{\imagedir/monitoring/flotation-feedrate-EWMA-time.png}}
+	\pause
+	\begin{itemize}
+		\item	Our eyes can deal with high data density, sinusoids, spikes, patterns, can separate noise from signal, and recognize outliers.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Time-series plots}
-	\begin{itemize}
-		\item	It is a 2-dimensional plot: 
-		\begin{itemize}
-			\item	(usually) horizontal x-axis: time or sequence order 
-			\item	other axis: the data values 
-		\end{itemize}
-		\item	Univariate plot 
-	\end{itemize}
-	\begin{itemize}
-		\item	Our eyes can deal with high data density: 
-		\begin{itemize}
-			\item	sinusoids 
-			\item	spikes 
-			\item	outliers 
-			\item	separate noise from signal 
-		\end{itemize}
-	\end{itemize}
-\end{frame}
+\begin{frame}\frametitle{An example of a bad time-series plot; what problems can you identify?}
 
-\begin{frame}\frametitle{Time-series plots}
 	
-	Good, automated labelling is important.
-	
-	Here's an example of bad labelling
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/CPU-temperature_-_from_www_aw_org_on_26_Dec_2009.png}
-	\end{center}
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/CPU-temperature_-_from_www_aw_org_on_26_Dec_2009.png}}
 	(and bad axis scaling and colour choices)
 	
 	% Terrible x-axis: repeated "Saturday"; no context (e.g. is it 2008, 2009?)
@@ -118,132 +112,159 @@
 \end{frame}
 
 \begin{frame}\frametitle{Notice how the plot's ``message'' is entirely different now}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/CPU-temperature_-_from_www_aw_org_on_26_Dec_2009-fixed}
-	\end{center}
+	\includegraphics[width=\textwidth]{\imagedir/visualization/CPU-temperature_-_from_www_aw_org_on_26_Dec_2009-fixed}
+	
 	A first attempt at fixing the prior visualization
 \end{frame}
 
-\begin{frame}\frametitle{Time-series plots}
+\begin{frame}\frametitle{Poor plots; default settings in plotting software create cluttered plots}
+	\vspace{2pt}
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/3_correlated_variables_-_badly_displayed_in_Numbers.png}}
 	\begin{itemize}
-		\item	Multiple lines (trajectories): should not cross and jumble 
+		\item	The plot has been slightly improved here:
 	\end{itemize}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/3_correlated_variables_-_badly_displayed_in_Numbers.png}
-	\end{center}
-	\begin{itemize}
-		\item	Colours and markers help only slightly 
-	\end{itemize}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/3_correlated_variables_-_slightly_better.png}
-	\end{center}
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/3_correlated_variables_-_slightly_better.png}}
 \end{frame}
 
-\begin{frame}\frametitle{Time-series plots}
-	Use separate, parallel axes rather; and minimal ink 
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/3_correlated_variables_-_better.png}
-	\end{center}
-	These non-default settings can take a long time to set (10 minutes for this example)
+\begin{frame}\frametitle{Use separate, parallel axes rather to compare plots (and minimal data ink)}
+	
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/3_correlated_variables_-_better.png}}
+	
+	\vspace{12pt}
+	\color{myOrange}{These non-default settings can take a long time to set (10 minutes for this example)}
 \end{frame}
 
-\begin{frame}\frametitle{Time-series plots}
-	\textbf{Sparklines}
+\begin{frame}\frametitle{Sparklines are a type of time-series plot}
+	
 	\begin{itemize}
-		\item	Read more about them from \href{http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR}{this website} (link also in the notes) 
+		\item	except, we omit the horizontal and vertical axes (they are implicit)
+		\item	Read more about them from \href{http://yint.org/sparklines}{http://yint.org/sparklines}
 	\end{itemize}
-	\begin{center}
-		\includegraphics[width=1in]{\imagedir/visualization/3-correlated-variables-as-sparklines.png}
-	\end{center}
+	
+	\begin{exampleblock}{}
+		\centerline{\includegraphics[width=1in]{\imagedir/visualization/3-correlated-variables-as-sparklines.png}}
+	\end{exampleblock}
+	
+	
 	\begin{itemize}
-		\item	Used for financial trends (see Google Finance, for example) 
+		\item	Useful for financial trends 
 		\item	Built into Excel 2010 
-		\item	Good for iPods, cell phones, tablet computers: 
+		\item	Great for iPods, cell phones, tablet computers
 		\begin{itemize}
-			\item	high density, small size. 
+			\item	because they are of high density and small size
 		\end{itemize}
-		\item	Our eye: 250 dots (points) per linear inch and 650 points per square inch.
+		\item	Our eye can detect 250 dots (points) per linear inch and 650 points per square inch.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Time-series plots}
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/Google-sparklines.png}
-	\end{center}
-	Google's stock representation, as on 08 January 2014
+\begin{frame}\frametitle{Sparklines are used on various websites now to show high-density graphics}
+
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/Google-sparklines.png}}
+	\begin{columns}[T]
+		
+		\column{0.5\textwidth}
+			{\scriptsize Screenshot from Google Finance 08 January 2014}	
+
+			\vspace{5pt}
+			Notice how you clearly detect correlations in stock prices (stocks that move together).
+			
+		
+		\column{0.5\textwidth}
+			\vspace{-12pt}
+			\centerline{\includegraphics[width=.6\textwidth]{\imagedir/visualization/Drupal-bug-tracking.png}}
+			{\scriptsize  Screenshot from Drupal website to track software bugs.}
+	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Time-series plots}
-	Example of sparklines in everyday use:
+\begin{frame}\frametitle{Example of sparklines in everyday use}
+	
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/classification/12leadECG.jpg}
 	\end{center}
 	\see{\href{http://en.wikipedia.org/wiki/File:12leadECG.jpg}{Wikipedia: File:12leadECG.jpg}}
 \end{frame}
 
-\begin{frame}\frametitle{Time-series plots}
+\begin{frame}\frametitle{Keep the x-axis spacing constant on time-series plots: helps interpretation}
 	
 	\begin{itemize}
-		\item	Keep the x-axis spacing constant: helps interpretation 
-		\begin{itemize}
-			\item	Keep constant spacing on a time-axis (months)
-			\item	Don't use magnifying glass concept; rather show a second plot (e.g. below the original)
-		\end{itemize}
+		\item	Use another plot (e.g. below the original) to zoom in on details 
 	\end{itemize}
-	\begin{center}
-		\includegraphics[width=.8\textwidth]{\imagedir/visualization/magnifying-sciencedirect-10.1016-j.apgeochem.2008.05.006.jpg}
-	\end{center}
+
+	\centerline{\includegraphics[width=.7\textwidth]{\imagedir/visualization/magnifying-sciencedirect-10.1016-j.apgeochem.2008.05.006.jpg}}
+
 	\vspace{-14pt}
 	\see{DOI: 10.1016/j.apgeochem.2008.05.006}
 \end{frame}
 
-\begin{frame}\frametitle{Time-series plots}
-	\begin{itemize}
-		\item	Adjust for inflation when plotting money values against time 
-		\begin{itemize}
-			\item	sales of polymer to DuPont over the past 10 years 
-			\item	example of car sales: \href{http://www.duke.edu/~rnau/411infla.htm}{http://www.duke.edu/$\sim$rnau/411infla.htm} 
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Time-series plots}
+\begin{frame}\frametitle{Provide an honest message to your viewer}
 	
-	Show reasonable amount of data for context 
-	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/AAPL-stock-prices.png}
-	\end{center}
+	Adjust for inflation when plotting money values against time.
+	
+	\centerline{\includegraphics[width=.7\textwidth]{\imagedir/visualization/Google-Finance-stock-prices.png}}
+	{\scriptsize Screenshot from Google Finance.}
+	
+	
+	\pause
+	\vspace{12pt}
+	\begin{itemize}
+		\item	Example of car sales: \href{http://www.duke.edu/~rnau/411infla.htm}{http://www.duke.edu/$\sim$rnau/411infla.htm} 
+	\end{itemize}
+	
 \end{frame}
 
-\begin{frame}\frametitle{Bar plots}
+\begin{frame}\frametitle{Show a reasonable amount of historical data for context}
+	\centerline{\includegraphics[width=.85\textwidth]{\imagedir/visualization/AAPL-stock-prices.png}}
+\end{frame}
+
+\begin{frame}\frametitle{Important learning points from time-series plots}
+	
 	\begin{itemize}
-		\item	A univariate plot on a two dimensional axis. 
-		\item	Has a \emph{category axis} and \emph{value axis} 
+		\item	avoid using colour as your message
+		\item	use honest scaling on your $x$-axis and $y$-axis
+		\item	the human eye (and brain) can deal with vast quantities of data: exploit it
 	\end{itemize}
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{\imagedir/visualization/barplot-example-expenses.png}
-	\end{center}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Bar plots are univariate plots, on a 2-D axis}
+	\centerline{\includegraphics[width=0.9\textwidth]{\imagedir/visualization/barplot-example-expenses.png}}
 	\vspace{-8pt}
-	Use a bar plot when: 
-	\begin{itemize}
-		\item	many categories 
-		\item	interpretation does not change if category axis is reordered 
-	\end{itemize}
+	
+	\pause
+	{\color{myOrange}Use a bar plot when you have many categories, and the literal interpretation does not depend on category order.}
 \end{frame}
 
-\begin{frame}\frametitle{Bar plots}
+\begin{frame}\frametitle{Very different messages come across, even though the data are identical}
+	\begin{columns}[b]
+		
+		\column{0.5\textwidth}
+			There's no direct message here 
+			
+			\vspace{12pt}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/barplot-example-expenses-unordered.png}}
+			
+		
+		\column{0.5\textwidth}
+			\onslide+<2->{
+			This message is more clear: the reader can quickly see their greatest expenses 
+			
+			\vspace{12pt}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/barplot-example-expenses-label-removed.png}}
+			}
+		
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{You should not use a bar plot to show time-series data}
 	
-	Rather use a time-series plot if the data have a sequence: 
+	Rather use a time-series plot, which is much less wasteful and shows the trends more clearly.
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/quarterly-profit-barplot-vs-lineplot.png}
+		\includegraphics[width=.9\textwidth]{\imagedir/visualization/quarterly-profit-barplot-vs-lineplot.png}
 	\end{center}
-	You can see the trends more clearly.
 \end{frame}
 
-\begin{frame}\frametitle{Bar plots}
+\begin{frame}\frametitle{Bar plots can be wasteful as each data point is repeated several times:}
 	
-	Bar plots can be wasteful as each data point is repeated several times:
-	\vspace{-8pt}
 	\begin{columns}[c]
 		\column{6cm} 
 			\begin{center}
@@ -261,93 +282,97 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Bar plots}
-	\begin{exampleblock}{Maximize data ink ratio within reason}
+\begin{frame}\frametitle{A general plotting principle: ``Maximize thee data ink ratio'', within reason}
+	\begin{exampleblock}{}
 		\begin{center}
 			\[
 				\begin{array}{rl}
-					\text{Maximize data ink ratio} 	&= \dfrac{\text{total ink for data}}{{\text{total ink for graphics}}} \\
+					\text{Maximize data ink ratio} 	&= \dfrac{\text{total ink for data}}{{\text{total ink for graphics}}} \\ \\
 													&= 1 - \text{proportion of ink that can be erased} \\
 													&\qquad\qquad \text{without loss of data information} 
 			\end{array}
 			\]
 		\end{center}
 	\end{exampleblock}
-	\begin{itemize}
-		\item	Rather {\color{myOrange}{use a table}} for a handful of data points: 
-	\end{itemize}
+	For example, rather {\color{myOrange}{use a table}} for a handful of data points: 
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/visualization/profit-by-region.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Bar plots}
-	\begin{itemize}
-		\item	Don't use cross-hatching, textures, or unusual shading in the plots: it creates visual vibrations 
-	\end{itemize}
+\begin{frame}\frametitle{Don't use cross-hatching, textures, or unusual shading in the plots: it creates visual vibrations }
+
 	\begin{center}
-		\includegraphics[height=0.75\textheight]{\imagedir/visualization/hatched-barplot.png}
+		\includegraphics[height=0.9\textheight]{\imagedir/visualization/hatched-barplot.png}
 	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Worst bar plot ever?}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/worst-examples/worst-bar-plot.jpg}
+		\includegraphics[width=.9\textwidth]{\imagedir/visualization/worst-examples/worst-bar-plot.jpg}
 	\end{center}
 	Actual example from a ``production report'' board at a company.
 \end{frame}
 
-\begin{frame}\frametitle{Bar plots}
-	\begin{itemize}
-		\item	Use horizontal bars if: 
+\begin{frame}\frametitle{Bar plots often benefit from a horizontal presentation, especially if}
 		\begin{itemize}
 			\item	there is a some ordering to the categories 
-			\item	the labels do not fit side-by-side\pause 
+			\item	the labels do not fit side-by-side
 		\end{itemize}
-	\end{itemize}
-	\begin{itemize}
-		\item	You can place the labels inside the bars\pause 
-	\end{itemize}
-	\begin{itemize}
-		\item	You should usually start the non-category axis at zero 
-	\end{itemize}
+		\begin{columns}[c]
+			\column{0.70\textwidth}
+				\centerline{\includegraphics[height=.8\textheight]{\imagedir/visualization/bar-plot-example-expenses-in-bar-labels.png}}
+			\column{0.30\textwidth}
+				
+				{\color{myGreen} You can place the labels inside the bars
+				
+				\vspace{24pt}
+				You should usually start the non-category axis at zero.}
+		\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Box plots}
-	
-	A graphical display of the ``5-number summary'' for 1 variable 
+\begin{frame}\frametitle{Unnecessary plot embellishments are not required}
 	\begin{itemize}
-		\item	whisker = minimum sample value [\emph{or}: median $- 1.5\cdot\text{IQR}$]
-		\item	25th percentile (1st quartile) 
-		\item	50th percentile (median) 
-		\item	75th percentile (3rd quartile) 
-		\item	whisker = maximum sample value [\emph{or}: median $+ 1.5\cdot\text{IQR}$]
+		\item	Avoid unnecessary ``extras'' to enliven the plot 
+		\item	``\emph{If the statistics are boring, then you've got the wrong numbers}'' [Tufte]
 	\end{itemize}
+	\begin{center}
+		\includegraphics[height=0.60\textheight]{\imagedir/visualization/Toronto-Star-Mortgage-Rates.png}
+		\see{Toronto Star, 2010}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Consider a vector of temperature data }
+	For example, this is the weather in Hamilton, Ontario, on 8 January 2015
 	
-	\emph{Notes}: 
-	\begin{enumerate}
-		\item	25th percentile is the value below which 25 percent of the observations in the sample are found 
-		\item	distance from 3rd to 1st quartile = interquartile range (IQR) 
-	\end{enumerate}
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/weather-data-Hamilton-Canada-08-Jan-2015.png}}
+\end{frame}
+
+\begin{frame}\frametitle{Fences and outliers illustrated on a box plot}
 	
-	Box plots are effective for comparing similar variables (same units of measurement)
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/boxplot-outliers-outside-fence.png}}
+	
+	\vspace{24pt}
+	Outliers will be defined later: they are unusual data points that are far away from the ``bulk'' of the data.
 \end{frame}
 
 \begin{frame}\frametitle{Box plots: compared to a pure normal distribution}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/wikipedia-Boxplot_vs_PDF.svg.png}
+		\includegraphics[width=.67\textwidth]{\imagedir/visualization/wikipedia-Boxplot_vs_PDF.svg.png}
 	\end{center}
 	\vspace{-16pt}
-	\see{\href{http://en.wikipedia.org/wiki/File:Boxplot_vs_PDF.svg}{Wikipedia} has some really great illustrations to explain statistical concepts}
+	\see{\href{http://en.wikipedia.org/wiki/File:Boxplot_vs_PDF.svg}{Wikipedia} has some really great illustrations to explain statistical concepts, such as this plot}
 \end{frame}
 
-\begin{frame}\frametitle{Box plots}
+\begin{frame}\frametitle{Case study: lumber cutting}
 	\begin{columns}[c]
 		\column{0.30\textwidth}
-			Video of data source: sawmill in Québec
-			\begin{itemize}
-				\item	4 degrees of rotation of log as it moves through the saws
-			\end{itemize}
+			
+			The log is completely scanned by lasers, and a few seconds later a computer determines lumber cuts that will maximize the  economic value per log.
+			
+			\vspace{12pt}
+			The log is rotated and guided into rigid saw blades to achieve the predicted result.
+			
 		\column{0.70\textwidth}
 			\vspace{-24pt}
 			\begin{center}
@@ -356,27 +381,27 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Box plots}
+\begin{frame}\frametitle{Case study: lumber cutting}
 	
-	Thickness measured at 6 locations; target = 1680 mils
+	After cutting, the thickness is measured at 6 locations; target = 1680 mils
 	\begin{center}
 		\includegraphics[width=\textwidth]{\imagedir/examples/board-thickness/board_measurement_locations.png}
 	\end{center}
 	\vfill
-	Actual 2x6 thickness = 1500 mils; extra for the lumber to dry out
+	Actual thickness of a 2x6 is = 1500 mils; a little extra is added to compensate for the lumber drying out
 \end{frame}
 
-\begin{frame}\frametitle{Box plots}
+\begin{frame}\frametitle{Box plots are very effective for comparing similar variables (in the same units of measurement)}
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{\imagedir/visualization/boxplot-for-two-by-six-100-boards.png}
+		\includegraphics[height=0.8\textheight]{\imagedir/visualization/boxplot-for-two-by-six-100-boards.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Box plots}
+\begin{frame}\frametitle{Box plots: some alternatives you might see in practice}
 	
-	Some variations:
+	There is no agreed on definition:
 	\begin{itemize}
-		\item	use the mean instead of the median 
+		\item	can use the mean instead of the median 
 		\item	outliers shown as dots, where an outlier is most commonly defined as any point 1.5 IQR distance units above and below the median. 
 		\item	use the 2nd percentile (instead of $\text{median} - 1.5\cdot\text{IQR}$) 
 		\item	use the 98th percentile (instead of $\text{median} + 1.5\cdot\text{IQR}$) 
@@ -387,18 +412,26 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Box plot variation: violin plot}
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\imagedir/univariate/violin-plot.png}
-	\end{center}
+\begin{frame}\frametitle{Variations on a theme: the violin plot as an alternative to the box plot}
+	
+	\vspace{-5pt}
+	\centerline{\includegraphics[width=0.6\textwidth]{\imagedir/univariate/violin-plot.png}}
 \end{frame}
 
-\begin{frame}\frametitle{Scatter plots}
-	\begin{itemize}
-		\item	Used to help understand the relationship between two variables: a bivariate plot 
-		\item	Collection of points in the 2 axes 
-		\item	Each point is the intersection of the values on each axis 
-	\end{itemize}
+\begin{frame}\frametitle{Scatter plots help understand the relationship between two variables}
+	\begin{columns}[c]
+		\column{0.50\textwidth}
+			\begin{itemize}
+				\item	It is a two dimensional plot of two variables (vectors). \pause
+				\item	Each marker is the intersection of the values from the data vectors.
+			\end{itemize}
+		\column{0.60\textwidth}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/explain-scatterplot-R.png}}
+				% Video animation also used these two other .PNG files
+				 	% explain-scatterplot-R-no-arrows.png}}
+					% explain-scatterplot-R-no-labels.png}}
+	\end{columns}
+		
 	\begin{block}
 		{Intention of a scatter plot} 
 		\begin{center}
@@ -407,10 +440,12 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}\frametitle{Scatter plots}
+\begin{frame}\frametitle{A scatter plot showing a cause-and-effect relationship}
 	\begin{center}
 		\includegraphics[height=0.85\textheight]{\imagedir/visualization/scatterplot-temperature-vs-vapour-pressure.png}
 	\end{center}
+	\vspace{-24pt}
+	{\color{myOrange}And in many cases, that causal relationship actually exists.}
 \end{frame}
 
 \begin{frame}\frametitle{Scatter plots}
@@ -418,92 +453,167 @@
 	\begin{center}
 		\includegraphics[height=0.75\textheight]{\imagedir/visualization/scatterplot-white-hairs-vs-BMD.png}
 	\end{center}
+	\pause
 	\vspace{-12pt}
-	Student 2013, Hawra: {\small ``Although scatter plots may imply a cause and effect relationship exists, it is not a `tool' to test the existence of a possible relationship.''}
+	{\color{myOrange}Student 2013, Hawra: {\small ``Although scatter plots may imply a cause and effect relationship exists, it is not a `tool' to test the existence of a possible relationship.''}}
 \end{frame}
+
+\begin{frame}\frametitle{Three variables: so 3 scatter plot combinations could have been drawn. Which are correlations, and which are actually cause-and-effect?}
+	\begin{center}
+		\includegraphics[height=0.75\textheight]{\imagedir/doe/yield-pressure-impurity-correlation.png}
+	\end{center}
+	
+	\vspace{-6pt}
+	\color{blue}{We will answer the question in the Experiments section.}
+\end{frame}
+
 
 \begin{frame}\frametitle{Scatter plots: is there cause and effect here?}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/scatterplot-GDP-working-hours.png}
+		\includegraphics[width=.8\textwidth]{\imagedir/visualization/scatterplot-GDP-working-hours.png}
 	\end{center}
-	\see{\href{http://www.economist.com/blogs/freeexchange/2013/09/working-hours}{http://www.economist.com/blogs/freeexchange/2013/09/working-hours}}
+	\href{http://www.economist.com/blogs/freeexchange/2013/09/working-hours}{http://yint.org/working-hours} explains the relationship and the data source.
 \end{frame}
 
 % But there are several cases where they do: lead in water vs number of crimes committed
 
-\begin{frame}\frametitle{Scatter plots}
-	Strive for graphical excellence by:
+\begin{frame}\frametitle{Scatter plots can be greatly improved from the software defaults by:}
 	\begin{itemize}
 		\item	making each axis as tight as possible 
-		\item	avoid heavy grid lines 
+		\item	avoiding heavy grid lines 
 		\item	use the least amount of ink 
-		\item	do not distort the axes 
+		\item	not distorting the axes 
 	\end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Scatter plots}
-	There is an unfounded fear that others won't understand your 2D scatter plot. 
+\begin{frame}\frametitle{Note the tight axes, low amount of data ink: scatter plots are efficient.}
+	\begin{columns}[T]
+		\column{0.33\textwidth}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/scatterplot-temperature-vs-vapour-pressure.png}}
+			
+		\column{0.33\textwidth}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/scatterplot-white-hairs-vs-BMD.png}}
+			
+		\column{0.33\textwidth}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/scatterplot-GDP-Hours-reduced.png}}
+	\end{columns}
+	
+\end{frame}
+
+
+\begin{frame}\frametitle{There is an unfounded fear that others won't understand your scatter plot}
+	
 	\begin{itemize}
-		\item	Tufte study (VDQI): no scatter plots in a sample (1974 to 1980) of Western dailies 
-		\item	12 year olds can interpret such plots. 
-		\item	Japanese newspapers frequently use scatterplots 
 		\item	Plant control room: seldom see scatter plots. 
+
+		\item	Tufte study (VDQI, \href{http://yint.org/vdqi}{http://yint.org/vdqi}): no scatter plots in a sample of Western daily newspapers (1974 to 1980)
+		\item	Japanese newspapers frequently use scatterplots 
+		\item	He shows 12 year olds can interpret such plots. 
 	\end{itemize}
+	
+	\pause
 	\begin{block}
 		{Key point} 
 		\begin{center}
-			The producers of charts must assume their audience is capable of interpreting them. Rather, assume that if you can understand the plot, so will your audience. 
+			The producers of charts must assume their audience is capable of interpreting them. 
+			
+			\vspace{12pt}
+			{\color{red}Rather, assume that if you can understand the plot, so will your audience. }
 		\end{center}
 	\end{block}
 \end{frame}
 
-\begin{frame}\frametitle{Here's an example (January 2013 publication)}
-	\begin{columns}[t]
-		\column{0.60\textwidth}
-			\begin{center}
-				\includegraphics[width=\textwidth]{\imagedir/visualization/MotherJones-Lead-Crime-correlation.png}
-			\end{center}
-		\column{0.40\textwidth}
-			\begin{itemize}
-				\item	Why did the author use a time-series plot to show correlation?
-				\item	Would the plot be more informative as 2D-scatter plot?
-				\item	What if you were to repeat this analysis for multiple regions/countries/cities. How would you show (visualize) the correlations effectively?
-			\end{itemize}
-			\hrule
-			\vspace{4pt}
-			{\hfill Pb(CH$_2$CH$_3$)$_4$}
-	\end{columns}
-	\vspace{-8pt}
-	\see{Read the full story for more interesting details and geographic visualizations: \href{http://www.motherjones.com/environment/2013/01/lead-crime-link-gasoline}{http://www.motherjones.com/environment/2013/01/lead-crime-link-gasoline}}
+\begin{frame}\frametitle{Take a diversion to watch this YouTube video \href{http://www.youtube.com/v/jbkSRLYSojo}{http://yint.org/rosling-video}}
+	\vspace{2pt}
+	\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/Rosling-YouTube-screenshot.png}}
+	
+	Watch a video explanation of these data: \href{http://www.youtube.com/v/jbkSRLYSojo}{http://yint.org/rosling-video} 
 \end{frame}
 
-\begin{frame}\frametitle{Scatter plots}
-	\begin{itemize}
-		\item	Add box plots or histograms to assist interpretation: 
-	\end{itemize}
+\begin{frame}\frametitle{Hans Rosling has used these to great effect to illustrate issues related to International Health}
+	\begin{columns}[T]
+		\column{0.60\textwidth}
+			\centerline{\includegraphics[width=\textwidth]{\imagedir/visualization/scatterplot-with-2-extra-dimensions.png}}
+			
+		\column{0.45\textwidth}
+			Variables shown in the figure:
+			\begin{enumerate}
+				\item	$x$-axis: income per person
+				\item	$y$-axis: children per woman
+				\item	marker area: population
+				\item	colour: life-expectancy \scriptsize{[20 to 80]}
+				\item	time-based animation: on the GapMinder website you can ``play''the graph over time  
+			\end{enumerate}
+			The \href{http://gapminder.org}{http://gapminder.org} site allows you to select many interesting variables on the axes.
+	\end{columns}
+	
+	\vspace{10pt}
+	Watch a video explanation of these data: \href{http://www.youtube.com/v/jbkSRLYSojo}{http://yint.org/rosling-video} 
+\end{frame}
+
+\begin{frame}\frametitle{3D glasses used to visualize process data in 6-dimensions?}
+	It would be possible with 3D glasses.
+	
+	\centerline{\includegraphics[height=.8\textheight]{\imagedir/visualization/flickr-3D-glasses-8443551051_3d746ac359_o.jpg}}
+	\see{Flickr: \href{https://www.flickr.com/photos/smieyetracking/8443551051}{\#8443551051}}
+	
+\end{frame}
+
+
+\begin{frame}\frametitle{Scatter plots lose density information: recover it with some jitter}
+	\includegraphics[width=\textwidth]{\imagedir/visualization/scatterplots-with-jitter.png}
+	
+	\vspace{-12pt}
+	R code:
+	\begin{columns}[T]
+		\column{0.50\textwidth}
+			 {\scriptsize \texttt{~~~~~~~~~~~plot(education, vocabulary)}}
+			 
+			
+			
+		\column{0.50\textwidth}
+			{\scriptsize \texttt{plot(jitter(education), jitter(vocabulary))}}
+	\end{columns}
+	
+\end{frame}
+
+\begin{frame}\frametitle{Recover distribution and spread information with box plots}
+	\includegraphics[width=\textwidth]{\imagedir/visualization/scatterplot-figures-with-regression-lines.png}
+	
+	Used the \texttt{scatterplot(...)} function from the \texttt{library(car)} in R to create these.
+\end{frame}
+
+\begin{frame}\frametitle{Consider adding histograms when you are exploring the data to learn about the system}
 	\begin{center}
 		\includegraphics[height=0.80\textheight]{\imagedir/visualization/scatterplot-with-histograms.png}
 	\end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Scatter plots}
-	\begin{itemize}
-		\item	Add a 3rd variable: different marker sizes 
-		\item	Add a 4th variable: use colour or grayscale shading 
-	\end{itemize}
-	\begin{center}
-		\includegraphics[height=0.60\textheight]{\imagedir/visualization/scatterplot-with-2-extra-dimensions.png}
-	\end{center}
-	\begin{itemize}
-		\item	The GapMinder website allows you to ``play''the graph over time (the 5th variable) 
-	\end{itemize}
+\begin{frame}\frametitle{Investigate this plot in your own time}
+	\begin{columns}[T]
+		\column{0.50\textwidth}
+			\vspace{-12pt}
+			\begin{center}
+				\includegraphics[width=\textwidth]{\imagedir/visualization/MotherJones-Lead-Crime-correlation.png}
+			\end{center}
+		\column{0.55\textwidth}
+			\begin{itemize}
+				\item	Why did the author use a time-series plot to show correlation?
+				\item	Would the plot be more informative as 2D-scatter plot?
+				\item	Redraw a rough version of this plot as a scatter plot instead.
+				\item	What if you were to repeat this analysis for multiple regions/countries/cities. How would you show (visualize) the correlations effectively?
+				\item	Read the full article for details: \href{http://www.motherjones.com/environment/2013/01/lead-crime-link-gasoline}{http://yint.org/lead-and-crime}
+			\end{itemize}
+			\hrule
+			\vspace{4pt}
+			%{\hfill Pb(CH$_2$CH$_3$)$_4$}
+	\end{columns}
 \end{frame}
 
-\begin{frame}\frametitle{Scatter plots}
-	\begin{itemize}
-		\item	Web-based demo from \href{http://gapminder.org}{http://gapminder.org} 
-		\item	\href{http://www.youtube.com/v/jbkSRLYSojo}{Demo by Hans Rosling} (requires internet access) 
-	\end{itemize}
+\begin{frame}\frametitle{Some data visualization blogs worth reading}
+	\begin{center}
+		\includegraphics[height=0.9\textheight]{\imagedir/visualization/data-visualization-blogs.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}\frametitle{Tables}
@@ -528,7 +638,7 @@
 		\item	Categorical variables appear in the \textbf{rows} and \textbf{columns} here
 	\end{itemize}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/table-defect-counts.png}
+		\includegraphics[width=.7\textwidth]{\imagedir/visualization/table-defect-counts.png}
 	\end{center}
 	\vspace{-12pt}
 	\begin{itemize}
@@ -553,11 +663,9 @@
 \end{frame}
 
 \begin{frame}\frametitle{Tables}
-	Three common pitfalls:
-	
-	1. using pie charts when tables will do 
+	Common pitfalls: using pie charts when tables will do 
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/where-MACC-alumni-work.png}
+		\includegraphics[width=.8\textwidth]{\imagedir/visualization/where-MACC-alumni-work.png}
 	\end{center}
 	\hrule
 	\vspace{4pt}
@@ -613,13 +721,13 @@
 
 \begin{frame}\frametitle{Tables}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/tables-recast-as-plots-both.png}
+		\includegraphics[width=.7\textwidth]{\imagedir/visualization/tables-recast-as-plots-both.png}
 	\end{center}	
 \end{frame}
 
 \begin{frame}\frametitle{Sankey diagrams}
 	\begin{center}
-		\includegraphics[width=\textwidth]{\imagedir/visualization/Sankey-diagram-Canada-energy-flows.png}
+		\includegraphics[width=.67\textwidth]{\imagedir/visualization/Sankey-diagram-Canada-energy-flows.png}
 	\end{center}
 	\see{\href{http://gnewton.ca/gn/sankey/sankey_canada_energy_flow_2007.html}{http://gnewton.ca/gn/sankey/sankey\_canada\_energy\_flow\_2007.html}}
 \end{frame}
@@ -692,4 +800,8 @@
 		\end{enumerate}
 		\item	Maximize data density: 250 data points per linear inch, and 625 data points per square inch. 
 	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{General summary}
+	Good plotting is not difficult. It just takes time and thought.
 \end{frame}
