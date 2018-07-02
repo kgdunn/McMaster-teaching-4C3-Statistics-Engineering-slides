@@ -1,12 +1,14 @@
 \usepackage[latin1]{inputenc}  % allows direct input of Unicode characters
-% %\usepackage[utf8x]{inputenc}   % allows direct input of Unicode characters
+% \usepackage[utf8x]{inputenc}   % allows direct input of Unicode characters
 \inputencoding{utf8} %<--- try this next time
 %\usepackage{textcomp}
 \usepackage{amsmath,amssymb,amsfonts,euscript,mathrsfs,wasysym,textcomp}
 \usepackage{array}
+\usepackage{transparent} 		% to get alpha channel in "\color"
 \usepackage{multirow}
 \usepackage{multimedia}
 \usepackage{fancybox}
+\usepackage{mathtools}
 \usepackage{psfrag}
 \usepackage{listings}
 \usepackage{hyperref}
@@ -18,6 +20,7 @@
 %\usepackage{rotating}			% Rotated text
 \usepackage{etoolbox}			% For selective compiling: figure sources might be on different machines
 \usepackage{tabulary}			% Better package for tables?
+\usepackage{upquote,textcomp}	% Better straight quotes in code: https://stackoverflow.com/questions/1662037/how-to-write-programming-code-containing-the-character-in-latex
 
 \providetoggle{internal}
 \settoggle{internal}{false}      % set "true" when the PDF is for internal use; use "false" when publishing it publically, on-line
@@ -40,8 +43,6 @@
 	\newcommand{\imagedir}{C:/Figures}
 }
 
-%\newcommand{\angstrom}{\mbox{\normalfont\AA}}
-% \tiny\scriptsize\footnotesize\small\normalsize\large\Large\LARGE\huge\Huge
 
 \usetheme{default} 
 \setbeamertemplate{navigation symbols}{}          % suppress all navigation symbols
@@ -75,7 +76,7 @@
  			pdftitle          = {Kevin Dunn},
  			pdfsubject        = {Kevin Dunn},
  			pdfauthor         = {Kevin Dunn},
- 			pdfproducer       = {LaTeX, wiki2beamer, beamercolorboxamer, BeamerPDF},    
+ 			pdfproducer       = {LaTeX, BeamerPDF},    
  			pdfkeywords       = https://learnche.org/,
  		}
 \usepackage{pgfpages}
