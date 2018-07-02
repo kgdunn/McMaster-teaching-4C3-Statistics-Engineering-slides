@@ -989,13 +989,13 @@
 	
 	\vspace{24pt}
 	
-	\begin{lstlisting}[R]
-	N = 10
-	index <- seq(1, N)            #    1,    2, ...   10
-	P <- (index - 0.5) / N        # 0.05, 0.15, ... 0.95
-	theoretical.quantity <- qnorm(P)
-	# [1] -1.64 -1.04 -0.674 -0.385 -0.126
-	#      0.125  0.385  0.6744 1.036  1.64
+	\begin{lstlisting}[language=R]
+N = 10
+index <- seq(1, N)            #    1,    2, ...   10
+P <- (index - 0.5) / N        # 0.05, 0.15, ... 0.95
+theoretical.quantity <- qnorm(P)
+# [1] -1.64 -1.04 -0.674 -0.385 -0.126
+#      0.125  0.385  0.6744 1.036  1.64
 	\end{lstlisting}
 	
 \end{frame}
@@ -1008,19 +1008,19 @@
 		\item	These points should now match the theoretical points from step 1 if they are normally distributed. \emph{{\color{myGreen}{Example}}}:
 	\end{itemize}
 
-	\begin{lstlisting}[R]
-	yields <- c(86.2, 85.7, 71.9, ... 86.9, 78.4)
-	mean.yield <- mean(yields)          # 80.0
-	sd.yield <- sd(yields)              # 8.35
+	\begin{lstlisting}[language=R]
+yields <- c(86.2, 85.7, 71.9, ... 86.9, 78.4)
+mean.yield <- mean(yields)          # 80.0
+sd.yield <- sd(yields)              # 8.35
 
-	yields.z <- (yields - mean.yield)/sd.yield
-	#[1] 0.734  0.674 -0.978  1.82 ... -0.140 0.818 -0.2
+yields.z <- (yields - mean.yield)/sd.yield
+#[1] 0.734  0.674 -0.978  1.82 ... -0.140 0.818 -0.2
 
-	yields.z.sorted <- sort(yields.z)
-	#[1] -1.34 -1.04  -0.978 -0.355 ... 0.734 0.818  1.82
+yields.z.sorted <- sort(yields.z)
+#[1] -1.34 -1.04  -0.978 -0.355 ... 0.734 0.818  1.82
 
-	theoretical.quantity   # see prior slide
-	#[1] -1.64 -1.04  -0.674 -0.385 ... 0.674 1.036  1.64
+theoretical.quantity   # see prior slide
+#[1] -1.64 -1.04  -0.674 -0.385 ... 0.674 1.036  1.64
 	\end{lstlisting}
 \end{frame}
 
